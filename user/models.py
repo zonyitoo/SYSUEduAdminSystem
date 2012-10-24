@@ -1,10 +1,10 @@
 #-*- coding:utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
-from school.models import Profession, Department
+from school.models import Speciality, Department
 
 class StudentMinor(models.Model):
-    minor_profession = models.ManyToManyField(Profession)
+    minor_speciality = models.ManyToManyField(Speciality)
     pubcourse_credit = models.PositiveIntegerField(default=0)
     pubelective_credit = models.PositiveIntegerField(default=0)
     procourse_credit = models.PositiveIntegerField(default=0)
@@ -23,7 +23,7 @@ class StudentMeta(models.Model):
     req_pubelective = models.PositiveIntegerField(default=0)
     req_procourse = models.PositiveIntegerField(default=0)
     req_proelective = models.PositiveIntegerField(default=0)
-    major = models.ForeignKey(Profession)
+    major = models.ForeignKey(Speciality)
     
 
 class Student(User):
