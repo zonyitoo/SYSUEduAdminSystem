@@ -1,5 +1,4 @@
-from django.db import models
-from django.contrib.comments.models import Comment
+#from django.db import models
+#from django.contrib.comments.models import Comment
 
-class AssessmentComment(Comment):
-
+# NO MODELS

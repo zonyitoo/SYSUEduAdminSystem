@@ -9,7 +9,7 @@ class Department(models.Model):
     addr = models.CharField(max_length=120)
     school = models.ForeignKey(School)
 
-class Profession(models.Model):
+class Speciality(models.Model):
     name = models.CharField(max_length=30)
     department = models.ForeignKey(Department)
     
