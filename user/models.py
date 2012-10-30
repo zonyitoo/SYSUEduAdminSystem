@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from school.models import Speciality, Department
 
 class StudentMinor(models.Model):
-    minor_speciality = models.ManyToManyField(Speciality)
+    minor_speciality = models.ForeignKey(Speciality)
     pubcourse_credit = models.PositiveIntegerField(default=0)
     pubelective_credit = models.PositiveIntegerField(default=0)
     procourse_credit = models.PositiveIntegerField(default=0)
@@ -32,8 +32,8 @@ class Student(User):
     pubelective_credit = models.PositiveIntegerField(default=0)
     procourse_credit = models.PositiveIntegerField(default=0)
     proelective_credit = models.PositiveIntegerField(default=0)
-    grade_point = models.DecimalField(max_digits=2, decimal_places=1)
-    student_meta = models.ManyToManyField(StudentMeta)
+    grade_point = models.DecimalField(max_digits=2, decimal_places=1, default=0)
+    student_meta = models.ForeignKey(StudentMeta)
     student_minor = models.ManyToManyField(StudentMinor)
 
 class Teacher(User):
