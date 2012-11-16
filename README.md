@@ -4,7 +4,7 @@
 ## Members
 * [叶晓军](https://github.com/iphkwan)
 * [杨曦华](https://github.com/19thhell)
-* 钟宇腾
+* [钟宇腾](https://github.com/zonyitoo)
 * [柯毅豪](https://github.com/sheepke)
 
 ## 数据库

@@ -1,4 +1,5 @@
 # Django settings for EduAdminSystem project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -56,7 +57,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -67,6 +68,12 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    'static', 
+    'user/static/', 
+    'assessment/static/', 
+    'course/static/',
+    'school/static/',
+    'take/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -87,6 +94,15 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -102,13 +118,16 @@ ROOT_URLCONF = 'EduAdminSystem.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'EduAdminSystem.wsgi.application'
 
-import os
-PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     #PROJECT_PATH + '/templates/'
+    os.path.join(os.path.dirname(__file__), 'user/templates/'), 
+    os.path.join(os.path.dirname(__file__), 'assessment/templates/'),
+    os.path.join(os.path.dirname(__file__), 'course/templates/'),
+    os.path.join(os.path.dirname(__file__), 'school/templates/'),
+    os.path.join(os.path.dirname(__file__), 'take/templates/'),
 )
 
 INSTALLED_APPS = (

@@ -1,6 +1,14 @@
 from django.http import HttpResponse
 from user.controller import *
 from school.models import *
+from django.template import Template, Context, RequestContext
+from django.shortcuts import render_to_response
+
+def login(request):
+    return render_to_response('login.html', {}, context_instance=RequestContext(request))
+
+def show_pic(request):
+    return render_to_response('login.html', {}, context_instance=RequestContext(request))
 
 def add_user(request):
     number = request.GET.get('number', '')
