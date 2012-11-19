@@ -3,9 +3,18 @@ from user.controller import *
 from school.models import *
 from django.template import Template, Context, RequestContext
 from django.shortcuts import render_to_response
+from django.core.context_processor import csrf
 
 def login(request):
-    return render_to_response('login.html', {}, context_instance=RequestContext(request))
+    return render_to_response('login.html', csrf(request), context_instance=RequestContext(request))
+
+def dologin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        return HttpResponse('username=%s,password=%s' % (username, password))
+    else:
+        return HttpResponse('Invalid method, Current Method is %s' % request.method)
 
 def show_pic(request):
     return render_to_response('login.html', {}, context_instance=RequestContext(request))
