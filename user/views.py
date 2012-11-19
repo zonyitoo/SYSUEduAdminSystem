@@ -3,7 +3,7 @@ from user.controller import *
 from school.models import *
 from django.template import Template, Context, RequestContext
 from django.shortcuts import render_to_response
-from django.core.context_processor import csrf
+from django.core.context_processors import csrf
 
 def login(request):
     return render_to_response('login.html', csrf(request), context_instance=RequestContext(request))
