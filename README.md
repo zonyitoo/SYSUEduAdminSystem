@@ -21,7 +21,7 @@ sudo pip install django
 ```python
 >>> import django
 >>> django.VERSION
-(1, 4, 2, 'final', 0)  # You may glad to see this.
+(1, 4, 2, 'final', 0)  # You may be glad to see this.
 >>>
 ```
 
@@ -36,6 +36,10 @@ grant all privileges on eduadminsystemdb.* to eduadminsystem@localhost identifie
 ```
 
 ## Trouble Shooting
+* 怎么运行？
+
+直接在根目录执行`python manage.py runserver`，若看到出错信息，先保证你已安装好Django，安装方向见上。
+
 * 看起来css或js用的不是最新的代码？
 
 在根目录执行`python manage.py collectstatic`然后再`runserver`就可以了。
