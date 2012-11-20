@@ -17,7 +17,8 @@ def create_student(number, name, password, edutype, year, speciality):
         meta = StudentMeta(type_name=edutype, year=year, major=speciality)
         meta.save()
 
-    newstudent = Student(username=number, student_name=name, password=password, student_meta=meta)
+    newstudent = Student.objects.create(username=number, student_name=name, student_meta=meta)
+    newstudent.set_password(password)
     newstudent.save()
 
     group.user_set.add(newstudent)

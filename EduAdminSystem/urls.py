@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^test/', 'EduAdminSystem.views.helloworld'), 
     url(r'^user/', include('user.urls')), 
-    url(r'^$', 'user.views.login'), 
+    url(r'^$', 'EduAdminSystem.views.index'), 
+    url(r'^student/$', 'user.views.student_page'), 
 )

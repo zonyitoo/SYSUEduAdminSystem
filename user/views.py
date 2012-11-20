@@ -1,20 +1,30 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from user.controller import *
 from school.models import *
 from django.template import Template, Context, RequestContext
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
+from django.contrib.auth import authenticate
 
 def login(request):
-    return render_to_response('login.html', csrf(request), context_instance=RequestContext(request))
-
-def dologin(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render_to_response('login.html', csrf(request), context_instance=RequestContext(request))
+    elif request.method == 'POST':
         username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
-        return HttpResponse('username=%s,password=%s' % (username, password))
+        password = request.POST.get('passwd', '')
+        user = authenticate(username=username, password=password)
+        if user is None:
+            return HttpResponseBadRequest('Invalid username or password')
+        else:
+            return HttpResponseRedirect('/student')
     else:
-        return HttpResponse('Invalid method, Current Method is %s' % request.method)
+        return HttpResponseBadRequest('Invalid method')
+
+def student_page(request):
+    if request.method == 'GET':
+        return render_to_response('student.html', {},
+                    context_instance=RequestContext(request))
+
 
 def show_pic(request):
     return render_to_response('login.html', {}, context_instance=RequestContext(request))

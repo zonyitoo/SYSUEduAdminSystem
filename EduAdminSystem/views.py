@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.template import Template, Context
 
 def helloworld(request):
@@ -9,3 +9,8 @@ def helloworld(request):
 def copyright(request):
     return HttpResponse("Copyrighted by iphkwan, the19thell, zonyitoo, sheepke.")
 
+def index(request):
+    if request.method == "GET":
+        return HttpResponseRedirect('/user/login/')
+    else:
+        return HttpResponseForbidden('Invalid method')

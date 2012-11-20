@@ -46,7 +46,7 @@
       <div class="page-header">
           <h1>登录</h1>
       </div>
-      <form id="userform" action="" method="post">{% csrf_token %}
+      <form id="userform" action="/user/login/" method="post">{% csrf_token %}
         <div class="control-group">
           <input name="username" type="text" id="username" placeholder="用户名  e.g.10301001"/>
         </div>

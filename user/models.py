@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserManager
 from school.models import Speciality, Department
 
 class StudentMinor(models.Model):
@@ -35,6 +35,8 @@ class Student(User):
     grade_point = models.DecimalField(max_digits=2, decimal_places=1, default=0)
     student_meta = models.ForeignKey(StudentMeta)
     student_minor = models.ManyToManyField(StudentMinor)
+    
+    objects = UserManager()
 
 class Teacher(User):
     teacher_name = models.CharField(max_length=30)

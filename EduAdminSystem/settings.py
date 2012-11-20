@@ -128,6 +128,7 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'course/templates/'),
     os.path.join(os.path.dirname(__file__), 'school/templates/'),
     os.path.join(os.path.dirname(__file__), 'take/templates/'),
+    os.path.join(os.path.dirname(__file__), 'templates/'), 
 )
 
 INSTALLED_APPS = (
