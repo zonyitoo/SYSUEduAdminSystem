@@ -1,24 +1,19 @@
 from user.models import *
 from school.models import Speciality
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 
 def create_student(number, name, password, edutype, year, speciality):
-    try:
-        group = Group.objects.get(name='student')
-    except Group.DoesNotExist:
-        group = Group(name='student')
-        group.save()
-        
+    group = Group.objects.get_or_create(name='Student')[0] 
     speciality = Speciality.objects.get(name=speciality)
+    meta = StudentMeta.objects.get_or_create(type_name=edutype, year=year,
+            major=speciality)[0]
 
-    try:
-        meta = StudentMeta.objects.get(type_name=edutype, year=year, major=speciality)
-    except StudentMeta.DoesNotExist:
-        meta = StudentMeta(type_name=edutype, year=year, major=speciality)
-        meta.save()
-
-    newstudent = Student.objects.create(username=number, student_name=name, student_meta=meta)
-    newstudent.set_password(password)
+    user = User.objects.create(username=number)
+    user.set_password(password)
+    user.save()
+    newstudent = Student.objects.create(student_name=name, student_meta=meta,
+            user=user)
     newstudent.save()
 
-    group.user_set.add(newstudent)
+    group.user_set.add(user)
+    group.save()

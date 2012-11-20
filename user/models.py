@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User, UserManager
+from django.contrib.auth.models import User
 from school.models import Speciality, Department
 
 class StudentMinor(models.Model):
@@ -26,7 +26,7 @@ class StudentMeta(models.Model):
     major = models.ForeignKey(Speciality)
     
 
-class Student(User):
+class Student(models.Model):
     student_name = models.CharField(max_length=30)
     pubcourse_credit = models.PositiveIntegerField(default=0)
     pubelective_credit = models.PositiveIntegerField(default=0)
@@ -35,10 +35,9 @@ class Student(User):
     grade_point = models.DecimalField(max_digits=2, decimal_places=1, default=0)
     student_meta = models.ForeignKey(StudentMeta)
     student_minor = models.ManyToManyField(StudentMinor)
-    
-    objects = UserManager()
+    user = models.OneToOneField(User, related_name='student')
 
-class Teacher(User):
+class Teacher(models.Model):
     teacher_name = models.CharField(max_length=30)
     TITLE_LECTURER = 'L'
     TITLE_ASSOCIATE_PROFESSOR = 'AP'
@@ -52,3 +51,4 @@ class Teacher(User):
     img_addr = models.URLField(null=True)
     site = models.URLField(null=True)
     department = models.ForeignKey(Department)
+    user = models.OneToOneField(User, related_name='teacher')

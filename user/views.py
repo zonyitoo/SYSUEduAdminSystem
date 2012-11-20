@@ -1,14 +1,17 @@
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from user.controller import *
 from school.models import *
-from django.template import Template, Context, RequestContext
+from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 
-def login(request):
+loginRedirectURL = None
+def login_page(request):
     if request.method == 'GET':
-        return render_to_response('login.html', csrf(request), context_instance=RequestContext(request))
+        args = {'next': request.GET.get('next', '/')}
+        args.update(csrf(request))
+        return render_to_response('login.html', args, context_instance=RequestContext(request))
     elif request.method == 'POST':
         username = request.POST.get('username', '')
         password = request.POST.get('passwd', '')
@@ -16,7 +19,9 @@ def login(request):
         if user is None:
             return HttpResponseBadRequest('Invalid username or password')
         else:
-            return HttpResponseRedirect('/student')
+            login(request, user)
+            #return HttpResponseRedirect('/')
+            return HttpResponseRedirect(request.POST.get('next', '/'))
     else:
         return HttpResponseBadRequest('Invalid method')
 

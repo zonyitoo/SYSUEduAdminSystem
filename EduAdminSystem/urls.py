@@ -17,5 +17,4 @@ urlpatterns = patterns('',
     url(r'^test/', 'EduAdminSystem.views.helloworld'), 
     url(r'^user/', include('user.urls')), 
     url(r'^$', 'EduAdminSystem.views.index'), 
-    url(r'^student/$', 'user.views.student_page'), 
 )
