@@ -1,10 +1,5 @@
 form{
-/*	background:#f7f7f7;
-	background:-moz-linear-gradient(90deg, #ccc, #fff); 
-	background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
-	-moz-box-shadow:3px 3px 10px rgba(0,0,150,0.5);
-	-webkit-box-shadow:3px 3px 10px rgba(0,0,150,0.5);*/
-	padding:20px;
+    margin-left:50px;
 	width:440px;
 }
 form p{

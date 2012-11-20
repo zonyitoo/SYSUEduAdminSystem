@@ -2,13 +2,13 @@
 <html lang="en">
   
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>
     中山大学本科生教务系统
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="中山大学本科生教务系统">
-    <meta name="author" content="宇騰" >
+    <meta name="author" content="叶晓军，杨曦华，钟宇腾，柯毅豪" >
     <meta name="keywords" content="中山大学,中大,本科,教务,系统,选课,退课,成绩">
     <!-- Le styles -->
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
@@ -21,8 +21,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
       </script>
     <![endif]-->
-    <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/scripts-index.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/bootstrap.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/login.js" type="text/javascript"></script>
@@ -35,8 +34,6 @@
   </head>
   
   <body onLoad=detectBrowser()>
-  <h1 class="title">中山大学本科生教务系统</h1>
-  
   <div class="wrapper">
         <ul class="menu" rel="sam1">
             <li class="active"><a href="#"><span>首页</span></a></li>
@@ -44,36 +41,21 @@
             <li><a href=""><span>联系我们</span></a></li>
             <li><a href=""><span>关于</span></a></li>         
         </ul>
-        <div style="clear:both"></div> 
     </div>
     <div class="container">
       <div class="page-header">
-        <h3>
-        <small>
-          本系统包含选课退课，查看课表，教学评分，成绩报告等功能，支持移动终端访问，兼容Chrome，Safari，Firefox，不支持IE8.0及以前的版本
-        </small>
-        </h3>
+          <h1>登录</h1>
       </div>
       <form id="userform" action="" method="post">{% csrf_token %}
         <div class="control-group">
-        <!--
-          <label for="username">
-            账号:
-          </label>
-        !-->
-          <input name="username" type="text" id="username" placeholder="用户名"/>
+          <input name="username" type="text" id="username" placeholder="用户名  e.g.10301001"/>
         </div>
         <div class="control-group">
-        <!--
-          <label for="passwd">
-            密码:
-          </label>
-        -->
-          <input name="passwd" type="password" id="passwd" placeholder="密码"/>
+          <input name="passwd" type="password" id="passwd" placeholder="密码  e.g.123456"/>
         </div>
         </fieldset>
         <div class="control-group">
-        	<button id="submit" class="btn btn-primary btn-large">登录</button> 
+        	<button id="submit" class="btn btn-primary btn-large">确认</button> 
         </div>
       </form>
       <hr>

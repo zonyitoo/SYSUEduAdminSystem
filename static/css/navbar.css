@@ -4,9 +4,8 @@
     background : #464646;
 	background : -webkit-gradient(linear, left top, left bottom, from(rgb(39,39,39)), to(rgb(0,0,0)));
     background : -moz-linear-gradient(top, rgb(168,168,168), rgb(69,69,69));
-    border-top: 2px solid #939393;
     position: absolute;
-    margin-bottom: 20px;
+    margin-bottom: 80px;
 }
 
 .title {
@@ -151,4 +150,8 @@ ul.vertical[rel=ver1] li a{
 
 ul.vertical[rel=ver1] li a:hover{
     background: transparent none;
+}
+
+.page-header {
+    margin-top:50px;
 }
