@@ -13,11 +13,6 @@ function detectBrowser()
 	}
 }
 
-function login()
-{
-	alert("You have logged in!");
-}
-
 $(document).ready(function() {
 	$("ul#nav li a").addClass("js");
 	$("ul#nav li a").hover(
