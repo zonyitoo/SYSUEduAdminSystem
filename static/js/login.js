@@ -1,10 +1,8 @@
 // JavaScript Document
 $(document).ready(function(){ 
-    $("#logout-section").hide();
-	$("#login").mousedown(function(){ 
-		login(); //点击ID为submit"的按钮后触发函数 login(); 
-        $("#login-section").hide();
-        $("#logout-section").show();
+    $("#login-alert").hide();
+	$("#login").click(function(){
+        login(); //点击ID为submit"的按钮后触发函数 login(); 
 	}); 
 
   var csrftoken = getCookie('csrftoken');
@@ -52,6 +50,20 @@ function sameOrigin(url) {
               !(/^(\/\/|http:|https:).*/.test(url));
 }
 
+function validate()
+{
+    var username = $("#username").val();
+    var passwd = $("#passwd").val();
+    if (username == "")
+    {
+        $("#alert-content").append("请输入用户名！");
+        alert("请输入用户名！");
+        $("#username")[0].focus();
+        return false;
+    }
+    else return true;
+}
+
 function login()
 {
 	$.ajax({
@@ -64,7 +76,6 @@ function login()
 		},
 		success: function (msg)
 		{//访问成功时调用的函数,这里的msg是login.php返回的值
-            $(".user-id").append($("#username").val());
 			$(".container").load(msg);
 			$("#comic").hide();
 		}

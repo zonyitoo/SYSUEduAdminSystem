@@ -152,11 +152,11 @@ ul.vertical[rel=ver1] li a:hover {
     margin-top:4px;
 }
 
-#logout-section{
+#status{
     float:right;
 }
 
-#logout-section .badge{
+#status .badge{
     margin-top: 5px;
 }
 

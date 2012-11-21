@@ -34,23 +34,12 @@
   <body>
   <div class="wrapper">
         <ul class="menu" rel="sam1">
-            <li class="active"><a href="#"><span>首页</span></a></li>
-            <li><a href=""><span>新闻</span></a></li>
-            <li><a href=""><span>联系我们</span></a></li>
-            <li><a href=""><span>关于</span></a></li> 
-            <div class="span3" id="logout-section">
-                <fieldset>
-                    <span class="badge badge-success user-id" id="information">学号</span>
-                    <span class="badge badge-success user-name" id="information">姓名</span>
-                    <button id="logout" class="btn btn-inverse">退出</button>
-                </fieldset>
-            </div>
             <div class="span6" id="login-section">
             <form class="form-horizontal" id="loginform" action="/user/login/" method="post">{% csrf_token %}
                 <fieldset>
                     <input class="disabled" type="text" id="username" placeholder="用户名  e.g.10301001">
                     <input type="password" id="passwd" placeholder="密码  e.g.123456">
-                    <button id="login" class="btn btn-inverse">登录</button> 
+                    <button id="login" class="btn btn-primary">登录</button> 
                 </fieldset>
             </form>
             </div>
@@ -58,6 +47,14 @@
     </div>
     <hr>
     <div class="container">
+        <div class="alert alert-error" id="login-alert">
+            <a class="close" data-dismiss="alert">×</a>
+            <p id="alert-content"></p>
+        </div>
+        <div class="hero-unit">
+            <h1>中山大学本科生教务系统</h1>
+            <p>I solemnly swear that I am up to no good.</p>
+        </div>
     </div>
     <hr>
   <div class="copyright">
@@ -65,6 +62,6 @@
   		©Copyright SYSUCodeFarmers
     </a>
   </div>
-  <img id="comic" src="http://www.caimai.cc/cover/medium/201201/42489-1327871515.jpg" style="float:right;margin-right: 50px;">
+  <img id="comic" src="{{ STATIC_URL }}img/label.jpg" style="float:right;margin-right: 50px;height: 100px;width: 100px;">
   </body>
 </html>
