@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>
+    中山大学本科生教务系统
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="中山大学本科生教务系统">
+    <meta name="author" content="叶晓军，杨曦华，钟宇腾，柯毅豪" >
+    <meta name="keywords" content="中山大学,中大,本科,教务,系统,选课,退课,成绩">
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/navbar.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script language="javascript" src="{{ STATIC_URL }}js/scripts-index.js" type="text/javascript"></script>
+    <script language="javascript" src="{{ STATIC_URL }}js/bootstrap.js" type="text/javascript"></script>
+    <script language="javascript" src="{{ STATIC_URL }}js/login.js" type="text/javascript"></script>
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <body>
+  <div class="wrapper">
+        <ul class="menu" rel="sam1">
+            <li class="active"><a href="#"><span>首页</span></a></li>
+            <li><a href=""><span>新闻</span></a></li>
+            <li><a href=""><span>联系我们</span></a></li>
+            <li><a href=""><span>关于</span></a></li> 
+            <div class="span3" id="status">
+                <fieldset>
+                    <span class="badge badge-success user-id" id="information">学号</span>
+                    <span class="badge badge-success user-name" id="information">姓名</span>
+                    <button id="logout" class="btn btn-inverse">退出</button>
+                </fieldset>
+            </div>
+        </ul>
+    </div>
+    <hr>
+    <div class="container"> 
+    </div>
+    <hr>
+  <div class="copyright">
+  	<a href="https://github.com/zonyitoo/EduAdminSystem">
+  		©Copyright SYSUCodeFarmers
+    </a>
+  </div>
+  <img id="comic" src="{{ STATIC_URL }}img/label.jpg" style="float:right;margin-right: 50px;height: 100px;width: 100px;">
+  </body>
+</html>

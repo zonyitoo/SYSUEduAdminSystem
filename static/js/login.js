@@ -1,6 +1,5 @@
 // JavaScript Document
 $(document).ready(function(){ 
-    $("#login-alert").hide();
 	$("#login").click(function(){
         login(); //点击ID为submit"的按钮后触发函数 login(); 
 	}); 
@@ -56,7 +55,6 @@ function validate()
     var passwd = $("#passwd").val();
     if (username == "")
     {
-        $("#alert-content").append("请输入用户名！");
         alert("请输入用户名！");
         $("#username")[0].focus();
         return false;
