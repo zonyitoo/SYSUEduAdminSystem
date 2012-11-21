@@ -37,8 +37,8 @@
             <div class="span6" id="login-section">
             <form class="form-horizontal" id="loginform" action="/user/login/" method="post">{% csrf_token %}
                 <fieldset>
-                    <input class="disabled" type="text" id="username" placeholder="用户名  e.g.10301001">
-                    <input type="password" id="passwd" placeholder="密码  e.g.123456">
+                    <input name="username" type="text" id="username" placeholder="用户名  e.g.10301001">
+                    <input name="passwd" type="password" id="passwd" placeholder="密码  e.g.123456">
                     <button id="login" class="btn btn-primary">登录</button> 
                 </fieldset>
             </form>
