@@ -20,8 +20,11 @@ def login_page(request):
             return HttpResponseBadRequest('Invalid username or password')
         else:
             login(request, user)
+	    if user.is_staff :
+		return HttpResponseRedirect("/admin/")
             #return HttpResponseRedirect('/')
             return HttpResponseRedirect(request.POST.get('next', '/'))
+	    #return student_page(request)
     else:
         return HttpResponseBadRequest('Invalid method')
 

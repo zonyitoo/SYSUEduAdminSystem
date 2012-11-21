@@ -43,3 +43,11 @@ grant all privileges on eduadminsystemdb.* to eduadminsystem@localhost identifie
 * 看起来css或js用的不是最新的代码？
 
 在根目录执行`python manage.py collectstatic`然后再`runserver`就可以了。
+
+* 管理员帐号的创建？
+
+在根目录执行`python manage.py syncdb`然后按提示创建管理员帐号。（e.g. admin@admin）
+
+## 11.21 update
+利用django自带的后台，创建管理员帐号，即可在:`127.0.0.1：8000/admin/`中进行帐号/组管理。
+—— By iphkwan
