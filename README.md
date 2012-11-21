@@ -48,3 +48,12 @@ create database eduadminsystemdb character set utf8;
 * 看起来css或js用的不是最新的代码？
 
 在根目录执行`python manage.py collectstatic`然后再`runserver`就可以了。
+
+## 项目提交日期和方法
+* Jan 3, 2013 23:00
+* Mail to 杨腾飞
+* 学号（后两位）名...项目
+* xxx.doc/xxx.tex  打印一份
+* 3~5min 视频
+* /CODE 文件夹装代码
+* 其它
