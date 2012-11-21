@@ -13,8 +13,6 @@
     <!-- Le styles -->
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/navbar.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="{{ STATIC_URL }}css/forms.css" rel="stylesheet" type="text/css" media="screen"/>
-    
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -33,33 +31,35 @@
     <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
   </head>
   
-  <body onLoad=detectBrowser()>
+  <body>
   <div class="wrapper">
         <ul class="menu" rel="sam1">
             <li class="active"><a href="#"><span>首页</span></a></li>
             <li><a href=""><span>新闻</span></a></li>
             <li><a href=""><span>联系我们</span></a></li>
-            <li><a href=""><span>关于</span></a></li>         
+            <li><a href=""><span>关于</span></a></li> 
+            <div class="span3" id="logout-section">
+                <fieldset>
+                    <span class="badge badge-success user-id" id="information">学号</span>
+                    <span class="badge badge-success user-name" id="information">姓名</span>
+                    <button id="logout" class="btn btn-inverse">退出</button>
+                </fieldset>
+            </div>
+            <div class="span6" id="login-section">
+            <form class="form-horizontal" id="loginform" action="/user/login/" method="post">{% csrf_token %}
+                <fieldset>
+                    <input class="disabled" type="text" id="username" placeholder="用户名  e.g.10301001">
+                    <input type="password" id="passwd" placeholder="密码  e.g.123456">
+                    <button id="login" class="btn btn-inverse">登录</button> 
+                </fieldset>
+            </form>
+            </div>
         </ul>
     </div>
+    <hr>
     <div class="container">
-      <div class="page-header">
-          <h1>登录</h1>
-      </div>
-      <form id="userform" action="/user/login/" method="post">{% csrf_token %}
-        <div class="control-group">
-          <input name="username" type="text" id="username" placeholder="用户名  e.g.10301001"/>
-        </div>
-        <div class="control-group">
-          <input name="passwd" type="password" id="passwd" placeholder="密码  e.g.123456"/>
-        </div>
-        </fieldset>
-        <div class="control-group">
-        	<button id="submit" class="btn btn-primary btn-large">确认</button> 
-        </div>
-      </form>
-      <hr>
     </div>
+    <hr>
   <div class="copyright">
   	<a href="https://github.com/zonyitoo/EduAdminSystem">
   		©Copyright SYSUCodeFarmers
