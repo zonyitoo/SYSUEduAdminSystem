@@ -35,6 +35,11 @@ grant all privileges on eduadminsystemdb.* to eduadminsystem@localhost identifie
 "eduadminsystem";
 ```
 
+* 创建数据库时要设置字符集为UTF-8
+```sql
+create database eduadminsystemdb character set utf8;
+```
+
 ## Trouble Shooting
 * 怎么运行？
 

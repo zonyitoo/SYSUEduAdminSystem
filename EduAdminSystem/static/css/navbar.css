@@ -3,10 +3,9 @@
     height: 50px;
     background : #464646;
 	background : -webkit-gradient(linear, left top, left bottom, from(rgb(39,39,39)), to(rgb(0,0,0)));
-    background : -moz-linear-gradient(top, rgb(168,168,168), rgb(69,69,69));
-    border-top: 2px solid #939393;
+    background : -moz-linear-gradient(top, rgb(39,39,39), rgb(0,0,0));
     position: absolute;
-    margin-bottom: 20px;
+    margin-bottom: 80px;
 }
 
 .title {
@@ -74,7 +73,7 @@ ul.menu li {
 
 .wrapper ul[rel=sam1] li a {
     background : -webkit-gradient(linear, left top, left bottom, from(rgb(0,0,0)), to(rgb(39,39,39)));
-    background : -moz-linear-gradient(top, rgb(168,168,168), rgb(69,69,69));
+    background : -moz-linear-gradient(top, rgb(0,0,0), rgb(39,39,39));
 }
 
 .wrapper ul[rel=sam1] li a:hover {
@@ -149,6 +148,10 @@ ul.vertical[rel=ver1] li a{
     background: #606060;
 }
 
-ul.vertical[rel=ver1] li a:hover{
+ul.vertical[rel=ver1] li a:hover {
     background: transparent none;
+}
+
+.page-header {
+    margin-top:50px;
 }
