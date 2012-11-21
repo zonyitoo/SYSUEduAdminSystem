@@ -22,11 +22,20 @@ def helloworld(request):
 def copyright(request):
     return HttpResponse("Copyrighted by iphkwan, the19thell, zonyitoo, sheepke.")
 
-@login_required(login_url='/user/login/')
+@login_required
 def index(request):
     if request.method == "GET":
+        return render_to_response('index.html', {},
+            context_instance=RequestContext(request))
+
+@login_required
+def index_getview(request):
+    if request.method == "GET":
         if hasattr(request.user, 'student'):
-            return render_to_response('student.html', {},
+            student = Student.objects.get(user=request.user)
+            attr = {'name' : student.student_name, 
+                    'number' : request.user.username}
+            return render_to_response('student.html', attr,
                 context_instance=RequestContext(request))
         elif hasattr(request.user, 'teacher'):
             pass
@@ -34,3 +43,4 @@ def index(request):
             return HttpResponseForbidden('Admin User??' + request.user.username)
     else:
         return HttpResponseForbidden('Invalid method')
+

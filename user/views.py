@@ -18,7 +18,8 @@ def login_page(request):
         password = request.POST.get('passwd', '')
         user = authenticate(username=username, password=password)
         if user is None:
-            return HttpResponseBadRequest('Invalid username or password')
+            return HttpResponseBadRequest('Invalid username or password. POST\
+                    username=%s,passwd=%s' % (username, password))
         else:
             login(request, user)
 	    if user.is_staff :
