@@ -36,6 +36,7 @@ grant all privileges on eduadminsystemdb.* to eduadminsystem@localhost identifie
 ```
 
 * 创建数据库时要设置字符集为UTF-8
+
 ```sql
 create database eduadminsystemdb character set utf8;
 ```
