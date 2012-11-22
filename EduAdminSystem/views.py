@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from user.controller import create_student
 from school.models import *
+from user.models import Student
 
 def helloworld(request):
     sist = School(name='SIST', addr='FUCK')
@@ -20,7 +21,7 @@ def helloworld(request):
     return HttpResponse('Inserted 10383007, password is 123456')
 
 def copyright(request):
-    return HttpResponse("Copyrighted by iphkwan, the19thell, zonyitoo, sheepke.")
+    return HttpResponse("Copyright by iphkwan, 19thell, zonyitoo, sheepke.")
 
 @login_required
 def index(request):

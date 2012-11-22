@@ -20,9 +20,9 @@
       </script>
     <![endif]-->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script language="javascript" src="{{ STATIC_URL }}js/scripts-index.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/bootstrap.js" type="text/javascript"></script>
-    <script language="javascript" src="{{ STATIC_URL }}js/login.js" type="text/javascript"></script>
+    <script language="javascript" src="{{ STATIC_URL }}js/getview.js" type="text/javascript"></script>
+    <script language="javascript" src="{{ STATIC_URL }}js/logoff.js" type="text/javascript"></script>
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
@@ -42,20 +42,20 @@
                 <fieldset>
                     <span class="badge badge-success user-id" id="information">学号</span>
                     <span class="badge badge-success user-name" id="information">姓名</span>
-                    <button id="logout" class="btn btn-inverse">退出</button>
+                    <button id="logoff" class="btn btn-primary">注销</button>
                 </fieldset>
             </div>
         </ul>
     </div>
     <hr>
-    <div class="container"> 
+    <div class="container" id="content"> 
     </div>
     <hr>
   <div class="copyright">
   	<a href="https://github.com/zonyitoo/EduAdminSystem">
-  		©Copyright SYSUCodeFarmers
+  		©SYSUCodeFarmers. All rights reserved.
     </a>
   </div>
-  <img id="comic" src="{{ STATIC_URL }}img/label.jpg" style="float:right;margin-right: 50px;height: 100px;width: 100px;">
+  <img id="logo" src="{{ STATIC_URL }}img/label.jpg" style="float:right;margin-right: 50px;height: 100px;width: 100px;">
   </body>
 </html>

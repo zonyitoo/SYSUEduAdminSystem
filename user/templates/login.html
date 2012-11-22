@@ -20,7 +20,7 @@
       </script>
     <![endif]-->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script language="javascript" src="{{ STATIC_URL }}js/scripts-index.js" type="text/javascript"></script>
+    <script language="javascript" src="{{ STATIC_URL }}js/checkbrowser.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/bootstrap.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/login.js" type="text/javascript"></script>
     <!-- Le fav and touch icons -->
@@ -47,6 +47,10 @@
     </div>
     <hr>
     <div class="container">
+        <div class="alert alert-error" id="alert">
+            <a class="close" data-dismiss="alert">×</a>
+            <p id="alert-content"></p>
+        </div>
         <div class="hero-unit">
             <h1>中山大学本科生教务系统</h1>
             <p>I solemnly swear that I am up to no good.</p>
@@ -55,9 +59,9 @@
     <hr>
   <div class="copyright">
   	<a href="https://github.com/zonyitoo/EduAdminSystem">
-  		©Copyright SYSUCodeFarmers
+  		©SYSUCodeFarmers. All rights reserved.
     </a>
   </div>
-  <img id="comic" src="{{ STATIC_URL }}img/label.jpg" style="float:right;margin-right: 50px;height: 100px;width: 100px;">
+  <img id="logo" src="{{ STATIC_URL }}img/label.jpg" style="float:right;margin-right: 50px;height: 100px;width: 100px;">
   </body>
 </html>
