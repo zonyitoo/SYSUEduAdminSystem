@@ -1,6 +1,5 @@
 // JavaScript Document
 $(document).ready(function(){ 
-    $("#alert").hide();
 	$("#loginform").submit(function(){
         login(); //点击ID为submit"的按钮后触发函数 login(); 
 	}); 

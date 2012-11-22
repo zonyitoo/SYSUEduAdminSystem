@@ -9,7 +9,7 @@ function logout()
             alert("链接服务器错误！");
         },
         success: function(msg) {
-            $("html").html(msg);
+            window.location = '/user/login/';
         }
     });
 }
