@@ -24,9 +24,8 @@
     <script language="javascript" src="{{ STATIC_URL }}js/getview.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/logoff.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/bootstrap-modal.js" type="text/javascript"></script>
-    <script language="javascript" src="{{ STATIC_URL }}js/bootstrap-transition.js" type="text/javascript"></script>
+
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
@@ -40,7 +39,7 @@
       <li><a target="_blank" href="http://jwc.sysu.edu.cn/">教务新闻</a></li>
 
       <!-- modal content -->
-	<div class="modal hide" id="myModal">
+	<div class="modal fade" id="myModal">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">&times;</button>
 	    <h3>中大校历</h3>
@@ -57,11 +56,12 @@
 
       <li><a data-toggle="modal" href="#myModal" data-backdrop="true">中大校历</a></li>
       <li><a target="_blank" href="mailto:zonyitoo@gmail.com">联系我们</a></li>
+
             <div class="span3" id="status">
                 <fieldset>
-                  <span class="badge badge-success user-id" id="information">{{ student_number }}</span>
-                  <span class="badge badge-success user-name" id="information">{{ student_name }}</span>
-                  <button id="logout" onclick="location.href='/user/logout/'" class="btn btn-primary">注销</button>
+                  <span class="badge badge-success user-id" id="information">{{ account }}</span>
+                  <span class="badge badge-success user-name" id="information">{{ name }}</span>
+                  <button id="logout" onclick="logout()" class="btn btn-primary"><i class="icon-share-alt icon-white"></i> 注销</button>
                 </fieldset>
             </div>
         </ul>
