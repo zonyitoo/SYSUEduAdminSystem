@@ -19,12 +19,13 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
       </script>
     <![endif]-->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.js"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/bootstrap.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/getview.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/logoff.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/bootstrap-modal.js" type="text/javascript"></script>
-
+    <script language="javascript" src="{{ STATIC_URL }}js/logout.js" type="text/javascript"></script>
     <!-- Le fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
@@ -65,6 +66,15 @@
                 </fieldset>
             </div>
         </ul>
+    </div>
+    <div id="about" class="active modal hide fade">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>关于</h3>
+        </div>
+        <div class="modal-body">
+            Sectumsempra
+        </div>
     </div>
     <hr>
     <div class="container" id="content"> 
