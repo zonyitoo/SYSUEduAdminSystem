@@ -1,6 +1,6 @@
 $(document).ready(function (){
     $("#logout").click(function (){
-        //logout();
+        logout();
     })
 });
 
@@ -10,5 +10,9 @@ function logout()
         url: '/user/logout/',
 		    data: 'username=' + $("#user-id").val() + "&rid=" + Math.random(),
         type: 'get',
+        success: function(msg) {
+          alert(msg);
+          window.location = msg;
+        }
     });
 }

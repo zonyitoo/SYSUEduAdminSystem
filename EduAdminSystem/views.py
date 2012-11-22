@@ -26,17 +26,17 @@ def copyright(request):
 @login_required
 def index(request):
     if request.method == "GET":
-        return render_to_response('index.html', {},
+        student = Student.objects.get(user=request.user)
+        attr = {'student_name' : student.student_name, 
+                'student_number' : request.user.username}
+        return render_to_response('index.html', attr,
             context_instance=RequestContext(request))
 
 @login_required
 def index_getview(request):
     if request.method == "GET":
         if hasattr(request.user, 'student'):
-            student = Student.objects.get(user=request.user)
-            attr = {'name' : student.student_name, 
-                    'number' : request.user.username}
-            return render_to_response('student.html', attr,
+            return render_to_response('student.html', {},
                 context_instance=RequestContext(request))
         elif hasattr(request.user, 'teacher'):
             pass
