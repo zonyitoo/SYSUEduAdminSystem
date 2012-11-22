@@ -9,6 +9,10 @@ from django.contrib.auth import authenticate, login, logout
 def login_page(request):
     if request.method == 'GET':
         args = {'next': request.GET.get('next', '/')}
+        # If has login
+        if not request.user.is_anonymous():
+            return HttpResponseRedirect(args['next'])
+
         args.update(csrf(request))
         return render_to_response('login.html', args, 
                 context_instance=RequestContext(request))
