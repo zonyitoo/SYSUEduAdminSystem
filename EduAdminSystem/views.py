@@ -1,7 +1,7 @@
 #-*- coding=utf-8 -*-
 
-from django.http import HttpResponse, HttpResponseForbidden
-from django.template import Template, Context, RequestContext
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from user.controller import create_student
@@ -26,11 +26,17 @@ def copyright(request):
 @login_required
 def index(request):
     if request.method == "GET":
-        student = Student.objects.get(user=request.user)
-        attr = {'student_name' : student.student_name, 
-                'student_number' : request.user.username}
-        return render_to_response('index.html', attr,
-            context_instance=RequestContext(request))
+        if hasattr(request.user, 'student'):
+            student = Student.objects.get(user=request.user)
+            attr = {'student_name' : student.student_name, 
+                    'student_number' : request.user.username}
+            return render_to_response('index.html', attr,
+                context_instance=RequestContext(request))
+        elif hasattr(request.user, 'teacher'):
+            pass
+        else:
+            # 暂时先logoff
+            return HttpResponseRedirect('/user/logout')
 
 @login_required
 def index_getview(request):
