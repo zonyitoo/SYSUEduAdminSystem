@@ -33,7 +33,7 @@ class Student(models.Model):
     proelective_credit = models.PositiveIntegerField(default=0)
     grade_point = models.DecimalField(max_digits=2, decimal_places=1, default=0)
     student_meta = models.ForeignKey(StudentMeta)
-    student_minor = models.ManyToManyField(StudentMinor)
+    student_minor = models.ManyToManyField(StudentMinor, null=True, blank=True)
     user = models.OneToOneField(User, related_name='student')
 
     def __unicode__(self):
@@ -50,8 +50,8 @@ class Teacher(models.Model):
             (TITLE_PROFESSOR, u'教授'), 
         )
     title = models.CharField(max_length=2, choices=TITLE)
-    img_addr = models.URLField(null=True)
-    site = models.URLField(null=True)
+    img_addr = models.URLField(null=True, blank=True)
+    site = models.URLField(null=True, blank=True)
     department = models.ForeignKey(Department)
     user = models.OneToOneField(User, related_name='teacher')
 
