@@ -45,3 +45,6 @@ class Course(models.Model):
     department = models.ForeignKey(Department)
     assessment_avgscore = models.DecimalField(max_digits=5, decimal_places=2)
     assessment_num = models.IntegerField(default=0)
+    
+    def __unicode__(self):
+        return self.name

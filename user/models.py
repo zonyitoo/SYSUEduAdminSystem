@@ -24,7 +24,6 @@ class StudentMeta(models.Model):
     req_procourse = models.PositiveIntegerField(default=0)
     req_proelective = models.PositiveIntegerField(default=0)
     major = models.ForeignKey(Speciality)
-    
 
 class Student(models.Model):
     student_name = models.CharField(max_length=30)
@@ -36,6 +35,9 @@ class Student(models.Model):
     student_meta = models.ForeignKey(StudentMeta)
     student_minor = models.ManyToManyField(StudentMinor)
     user = models.OneToOneField(User, related_name='student')
+
+    def __unicode__(self):
+        return self.student_name
 
 class Teacher(models.Model):
     teacher_name = models.CharField(max_length=30)
@@ -52,3 +54,6 @@ class Teacher(models.Model):
     site = models.URLField(null=True)
     department = models.ForeignKey(Department)
     user = models.OneToOneField(User, related_name='teacher')
+
+    def __unicode__(self):
+        return self.teacher_name

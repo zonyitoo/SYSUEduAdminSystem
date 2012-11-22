@@ -1,0 +1,6 @@
+from django.contrib import admin
+from course.models import *
+
+admin.site.register(CourseMeta)
+admin.site.register(CourseType)
+admin.site.register(Course)
