@@ -1,10 +1,8 @@
 // JavaScript Document
 $(document).ready(function(){ 
     $("#alert").hide();
-	$("#login").click(function(){
-        if (validate())
-            login(); //点击ID为submit"的按钮后触发函数 login(); 
-        else (this).stop();
+	$("#loginform").submit(function(){
+        login(); //点击ID为submit"的按钮后触发函数 login(); 
 	}); 
 
   var csrftoken = getCookie('csrftoken');

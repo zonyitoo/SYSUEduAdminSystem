@@ -1,14 +1,18 @@
 $(document).ready(function (){
-    $("#logout").click(function (){
-        //logout();
+    $("#logoff").click(function (){
+        //logoff();
     })
 });
 
-function logout()
+function logoff()
 {
     $.ajax({
-        url: '/user/logout/',
+        url: '/user/logoff/',
 		    data: 'username=' + $("#user-id").val() + "&rid=" + Math.random(),
         type: 'get',
+        success: function(msg) {
+            alert(msg);
+            window.location = msg;
+        }
     });
 }

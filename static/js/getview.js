@@ -54,7 +54,7 @@ function getView()
 		type: 'get', //传值的方式
 		error: function ()
 		{//访问失败时调用的函数
-			alert("尼玛");
+			alert("链接服务器错误！");
 		},
 		success: function (msg)
 		{//访问成功时调用的函数,这里的msg是getview.php返回的值
