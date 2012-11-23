@@ -1,8 +1,5 @@
 // JavaScript Document
 $(document).ready(function(){ 
-	$("#loginform").submit(function(){
-        login(); //点击ID为submit"的按钮后触发函数 login(); 
-	}); 
 
   var csrftoken = getCookie('csrftoken');
 //  alert("CSRF Token: " + csrftoken);
@@ -55,27 +52,36 @@ function validate()
     var passwd = $("#passwd").val();
     if (username == "")
     {
+        $("#prompt").hide();
         $("#alert").show();
-        $("#alert").append("请输入用户名！");
+        $("#alert").text("请输入用户名！");
         $("#username")[0].focus();
         return false;
     }
-    else return true;
-}
-
-function login()
-{
-	$.ajax({
-		url: '/user/login/', //访问路径
-		data: 'username=' + $("#username").val() + "&password=" + $("#passwd").val(), //需要验证的参数
-		type: 'post', //传值的方式
-		error: function ()
-		{//访问失败时调用的函数
-			alert("链接服务器错误！");
-		},
-		success: function (msg)
-		{//访问成功时调用的函数,这里的msg是login.php返回的值
-            $(".container").load(msg);
-		}
-	});
+    else 
+    {
+        $.ajax({
+            url: "/user/login/", //访问路径
+            data: "username=" + $("#username").val() + "&password=" + $("#passwd").val(), //需要验证的参数
+            type: "post", //传值的方式
+            error: function ()
+            {//访问失败时调用的函数
+                alert("链接服务器错误！");
+            },
+            success: function (msg)
+            {//访问成功时调用的函数,这里的msg是login.php返回的值
+                alert("OK");
+                var valid = msg.valid;
+                var next = msg.next;
+                if (valid == false)
+                {
+                    $("#alert").show();
+                    $("#alert").text("用户名或密码错误！");
+                    return false;
+                }
+                else window.location = next;
+                return true;
+            }
+        });
+    }
 }
