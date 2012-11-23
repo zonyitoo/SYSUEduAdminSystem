@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, login, logout
+from django.utils import simplejson
 
 def login_page(request):
     if request.method == 'GET':
@@ -40,5 +41,9 @@ def student_page(request):
                     context_instance=RequestContext(request))
    
 def do_logout(request):
+    if request.user.is_anonymous():
+        return HttpResponse('nimabi')
+
+    tojson = {'url': '/user/login/', 'logoutaccount': request.user.username}
     logout(request)
-    return HttpResponseRedirect('/user/login/')
+    return HttpResponse(simplejson.dump(tojson), mimetype='application/json')
