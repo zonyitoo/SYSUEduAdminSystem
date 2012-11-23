@@ -46,4 +46,4 @@ def do_logout(request):
 
     tojson = {'url': '/user/login/', 'logoutaccount': request.user.username}
     logout(request)
-    return HttpResponse(simplejson.dump(tojson), mimetype='application/json')
+    return HttpResponse(simplejson.dumps(tojson), mimetype='application/json')
