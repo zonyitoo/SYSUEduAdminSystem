@@ -39,6 +39,7 @@ function sameOrigin(url) {
   var host = document.location.host;
   var protocol = document.location.protocol;
   var sr_origin = '//' + host;
+  var origin = protocol + sr_origin;
   // Allow absolute or scheme relative URLs to same origin
        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
                (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
@@ -62,26 +63,27 @@ function validate()
     {
         $.ajax({
             url: "/user/login/", //访问路径
-            data: "username=" + $("#username").val() + "&password=" + $("#passwd").val(), //需要验证的参数
+            data: "username=" + $("#username").val() + "&passwd=" + $("#passwd").val(), //需要验证的参数
             type: "post", //传值的方式
+            async: false,
             error: function ()
             {//访问失败时调用的函数
                 alert("链接服务器错误！");
             },
             success: function (msg)
             {//访问成功时调用的函数,这里的msg是login.php返回的值
-                alert("OK");
                 var valid = msg.valid;
                 var next = msg.next;
                 if (valid == false)
                 {
+                    $("#prompt").hide();
                     $("#alert").show();
                     $("#alert").text("用户名或密码错误！");
-                    return false;
                 }
-                else window.location = next;
-                return true;
+                else
+                    window.location = next;
             }
         });
+        return false;
     }
 }
