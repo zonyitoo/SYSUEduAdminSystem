@@ -20,7 +20,7 @@ def login_page(request):
             args['logoutaccount'] = logoutaccount
 
         args.update(csrf(request))
-        return render_to_response('login.html', args, 
+        return render_to_response('login_extern.html', args, 
                 context_instance=RequestContext(request))
     # do login
     elif request.method == 'POST':
@@ -49,11 +49,7 @@ def login_page(request):
     else:
         return HttpResponseBadRequest('Invalid method')
 
-def student_page(request):
-    if request.method == 'GET':
-        return render_to_response('student.html', {},
-                    context_instance=RequestContext(request))
-   
+  
 def do_logout(request):
     tojson = {'url': '/user/login/'}
     if not request.user.is_anonymous():

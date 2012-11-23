@@ -1,6 +1,6 @@
 from django.db import models
 from course.models import Course
-from user.models import Student
+from student.models import Student
 
 class Takes(models.Model):
     course = models.ForeignKey(Course)

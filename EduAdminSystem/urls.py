@@ -14,8 +14,11 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^test/', 'EduAdminSystem.views.helloworld'), 
+    #url(r'^test/', 'EduAdminSystem.views.helloworld'), 
     url(r'^user/', include('user.urls')), 
+    url(r'^take/', include('take.urls')), 
+    url(r'^student/', include('student.urls')),
+    url(r'^teacher/', include('teacher.urls')), 
     url(r'^$', 'EduAdminSystem.views.index'), 
     url(r'^getview/$', 'EduAdminSystem.views.index_getview'), 
 )

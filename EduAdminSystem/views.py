@@ -4,10 +4,10 @@ from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirec
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from user.controller import create_student
 from school.models import *
-from user.models import Student, Teacher
-
+from student.models import Student
+from teacher.models import Teacher
+"""
 def helloworld(request):
     sist = School(name='SIST', addr='FUCK')
     sist.save()
@@ -22,7 +22,7 @@ def helloworld(request):
 
 def copyright(request):
     return HttpResponse("Copyright by iphkwan, 19thell, zonyitoo, sheepke.")
-
+"""
 @login_required
 def index(request):
     if request.method == "GET":

@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.db import models
-from user.models import Teacher
+from teacher.models import Teacher
 from school.models import Department
 
 class CourseMeta(models.Model):
