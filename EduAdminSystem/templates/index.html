@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block js %}
+<script language="javascript" src="{{ STATIC_URL }}js/logout.js" type="text/javascript"></script>
+<script language="javascript" src="{{ STATIC_URL }}js/getview.js" type="text/javascript"></script>
+<script language="javascript" src="{{ STATIC_URL }}js/modify.js" type="text/javascript"></script>
+{% endblock %}
+
 {% block content %}
   <body>
     <div class="wrapper" id="bottomNav">
@@ -49,7 +55,7 @@
 	    <h3>修改密码</h3>
 	  </div>
 	  <div class="modal-body">
-        <form id="modifyform" method="POST" onsubmit="return check();">
+        <form id="modifyform" method="POST" onsubmit="return check();">{% csrf_token %}
             <center><fieldset>
                 <div class="control-group">
                     <div class="controls">
