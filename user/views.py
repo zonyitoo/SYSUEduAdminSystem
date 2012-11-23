@@ -69,3 +69,5 @@ def modify_pwd(request):
         else:
             request.user.set_password(newpasswd)
             return HttpResponse(simplejson.dumps({'valid': True}))
+    else:
+        return HttpResponseBadRequest()
