@@ -36,6 +36,7 @@ function check()
             success: function (msg)
             {
                 var valid = msg.valid;
+                alert(valid);
                 if (valid == false)
                 {
                     $("#success").hide();

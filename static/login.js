@@ -18,7 +18,6 @@ function validate()
             url: "/user/login/", //访问路径
             data: "username=" + $("#username").val() + "&passwd=" + $("#passwd").val(), //需要验证的参数
             type: "post", //传值的方式
-            async: false,
             error: function ()
             {//访问失败时调用的函数
                 alert("链接服务器错误！");
