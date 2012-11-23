@@ -1,3 +1,4 @@
+<script language="javascript" src="{{ STATIC_URL }}js/getcourse.js" type="text/javascript"></script>
 <div class="container">
     <div id="content">
         <div class="tabbable">
@@ -13,9 +14,9 @@
           <div class="form-horizontal">
               <span class="span6">
                 <div class="control-group">
-                  <label class="control-label" for="cultivate">培养类别</label>
+                  <label class="control-label" for="cultivate-1">培养类别</label>
                   <div class="controls">
-                    <select class="span2" name="cultivate" id="cultivate">
+                    <select class="span2" name="cultivate" id="cultivate-1">
                       <option>主修</option>
                       <option>辅修</option>
                       <option>双学位</option>
@@ -24,13 +25,13 @@
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="course-type">课程类别</label>
+                  <label class="control-label" for="course-type-1">课程类别</label>
                   <div class="controls">
-                    <div class="btn-group active" data-toggle="buttons-checkbox">
-                      <button class="btn btn-primary">公选</button>
-                      <button class="btn btn-primary">公必</button>
-                      <button class="btn btn-primary">专选</button>
-                      <button class="btn btn-primary">专必</button>
+                    <div class="btn-group active" data-toggle="buttons-checkbox" id="course-type-1">
+                      <button id="po" class="btn btn-primary">公选</button>
+                      <button id="pr" class="btn btn-primary">公必</button>
+                      <button id="mo" class="btn btn-primary">专选</button>
+                      <button id="mr" class="btn btn-primary">专必</button>
                     </div>
                   </div>
                 </div>
@@ -50,9 +51,9 @@
           <div class="form-horizontal">
               <span class="span6">
                 <div class="control-group">
-                  <label class="control-label" for="cultivate">培养类别</label>
+                  <label class="control-label" for="cultivate-2">培养类别</label>
                   <div class="controls">
-                    <select class="span2" name="cultivate" id="cultivate">
+                    <select class="span2" name="cultivate" id="cultivate-2">
                       <option>主修</option>
                       <option>辅修</option>
                       <option>双学位</option>
@@ -75,9 +76,9 @@
         <div class="tab-pane" id="tabs-3">
           <div class="form-horizontal">
             <div class="control-group">
-              <label class="control-label" for="school-year">学年</label>
+              <label class="control-label" for="school-year-3">学年</label>
               <div class="controls">
-                <select class="span2" name="school-year" id="school-year">
+                <select class="span2" name="school-year" id="school-year-3">
                   <option>2005-2006</option>
                   <option>2006-2007</option>
                   <option>2007-2008</option>
@@ -98,9 +99,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="school-term">学期</label>
+              <label class="control-label" for="school-term-3">学期</label>
               <div class="controls">
-                <select class="span2" name="school-term" id="school-term">
+                <select class="span2" name="school-term" id="school-term-3">
                   <option>上学期</option>
                   <option>下学期</option>
                   <option>小学期</option>
@@ -130,9 +131,9 @@
         <div class="tab-pane" id="tabs-5">
           <div class="form-horizontal">
             <div class="control-group">
-              <label class="control-label" for="school-year">学年</label>
+              <label class="control-label" for="school-year-5">学年</label>
               <div class="controls">
-                <select class="span2" name="school-year" id="school-year">
+                <select class="span2" name="school-year" id="school-year-5">
                   <option>2005-2006</option>
                   <option>2006-2007</option>
                   <option>2007-2008</option>
@@ -153,9 +154,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="school-term">学期</label>
+              <label class="control-label" for="school-term-5">学期</label>
               <div class="controls">
-                <select class="span2" name="school-term" id="school-term">
+                <select class="span2" name="school-term" id="school-term-5">
                   <option>上学期</option>
                   <option>下学期</option>
                   <option>小学期</option>

@@ -1,12 +1,12 @@
 //JavaScript Document
 $(document).ready(function(){
     $("#calendar").on('show', function(){
-        $(document).keypress(function(){
+        $(document).keydown(function(){
             $("#calendar").modal('hide');
         });
     });
     $("#about").on('show', function(){
-        $(document).keypress(function(){
+        $(document).keydown(function(){
             $("#about").modal('hide');
         });
     });
