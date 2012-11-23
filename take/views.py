@@ -1,13 +1,6 @@
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
-def getTakes(request):
-    """
-    get all takes
-    @params: semester, academic year, 
-    """
+@login_required
+def get_take_courses(request):
     pass
-
-def take(request):
-    pass
-
-def 
