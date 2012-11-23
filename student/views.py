@@ -1,9 +1,11 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-#def student_page(request):
-#    if request.method == 'GET':
-#        return render_to_response('student.html', {},
-#                    context_instance=RequestContext(request))
- 
+@login_required
+def select_courses(request):
+    pass
+
+@login_required
+def redrawal_courses(request):
+    pass
