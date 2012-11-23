@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block login %}
+{% block content %}
 <body onload="detectBrowser()">
   <div class="wrapper">
         <ul class="menu" rel="sam1">
             <div class="span6" id="login-section">
-            <form class="form-horizontal" id="loginform" method="POST" onsubmit="return validate()">{% csrf_token %}
+            <form class="form-horizontal" id="loginform" method="POST" onsubmit="return validate()">
                 <fieldset>
                     <input name="username" type="text" id="username" placeholder="用户名  e.g.10301001">
                     <input name="passwd" type="password" id="passwd" placeholder="密码  e.g.123456">
