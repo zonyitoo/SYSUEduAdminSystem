@@ -12,10 +12,12 @@ coursetype = {
         }
 
 @login_required
-def get_avaliable_list(request):
+def get_available_list(request):
     if request.method == 'GET':
         caltivate = request.GET.get('cultivate', 0)
         ct = coursetype[request.GET.get('', 'po')]
+        academic_year = request.GET.get('academic_year', '2005-2006')
+        sem = request.GET.get('sem', 1)
         
         ## JUST for test, return from get
         return HttpResponse(simplejson.dumps(request.GET),

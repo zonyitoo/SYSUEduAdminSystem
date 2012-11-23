@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('', 
-    url('getAvaliableList/$', 'course.views.get_avaliable_list'), 
+    url('getAvailableList/$', 'course.views.get_available_list'), 
 )
