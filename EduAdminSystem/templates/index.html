@@ -78,7 +78,7 @@
 	    <h3>修改密码</h3>
 	  </div>
 	  <div class="modal-body">
-        <form id="modifyform" method="POST" onsubmit="return check();">{% csrf_token %}
+        <form id="modifyform" method="POST" onsubmit="return check()">{% csrf_token %}
             <center><fieldset>
                 <div class="control-group">
                     <div class="controls">
@@ -87,7 +87,7 @@
                 </div>
                 <div class="control-group">
                     <div class="controls">
-                        <input name="newpasswd" type="password" id="newpasswd" placeholder="新密码">
+                        <input name="newpasswd" type="password" id="newpasswd" placeholder="新密码（不少于6位）">
                     </div>
                 </div>
                 <div class="control-group">
