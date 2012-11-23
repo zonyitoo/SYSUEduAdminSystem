@@ -12,7 +12,7 @@ coursetype = {
         }
 
 @login_required
-def get_avliable_list(request):
+def get_avaliable_list(request):
     if request.method == 'GET':
         caltivate = request.GET.get('cultivate', 0)
         ct = coursetype[request.GET.get('', 'po')]
