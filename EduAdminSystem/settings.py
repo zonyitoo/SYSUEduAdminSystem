@@ -76,6 +76,8 @@ STATICFILES_DIRS = (
     'course/static/',
     'school/static/',
     'take/static/',
+    'student/static/', 
+    'teacher/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -131,6 +133,8 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'school/templates/'),
     os.path.join(os.path.dirname(__file__), 'take/templates/'),
     os.path.join(os.path.dirname(__file__), 'templates/'), 
+    os.path.join(os.path.dirname(__file__), 'student/templates/'),
+    os.path.join(os.path.dirname(__file__), 'teacher/templates/'), 
 )
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -150,6 +154,8 @@ INSTALLED_APPS = (
     'school',
     'take', 
     'user',
+    'student',
+    'teacher', 
 )
 
 # A sample logging configuration. The only tangible logging
