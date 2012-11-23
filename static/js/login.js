@@ -1,5 +1,9 @@
 // JavaScript Document
 $(document).ready(function(){ 
+    $("#login").click(function(){
+        validate();
+    });
+});
 
   var csrftoken = getCookie('csrftoken');
 //  alert("CSRF Token: " + csrftoken);
@@ -61,9 +65,13 @@ function validate()
     else 
     {
         $.ajax({
-            url: "/user/login/", //访问路径
-            data: "username=" + $("#username").val() + "&password=" + $("#passwd").val(), //需要验证的参数
-            type: "post", //传值的方式
+            url: '/user/login/', //访问路径
+            data: {
+                'username': $("#username").val(),
+                'passwd': $("#passwd").val(),
+            }, //需要验证的参数
+            type: "POST", //传值的方式
+            dataType: "json",
             error: function ()
             {//访问失败时调用的函数
                 alert("链接服务器错误！");
@@ -83,5 +91,6 @@ function validate()
                 return true;
             }
         });
+        return false;
     }
 }

@@ -23,7 +23,6 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.js"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/bootstrap.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/getview.js" type="text/javascript"></script>
-    <script language="javascript" src="{{ STATIC_URL }}js/bootstrap-transition.js" type="text/javascript"></script>
     <script language="javascript" src="{{ STATIC_URL }}js/logout.js" type="text/javascript"></script>
     <!-- Le fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
@@ -38,28 +37,30 @@
       <li><a href="#">中山大学本科生教务系统</a></li>
       <li><a target="_blank" href="http://jwc.sysu.edu.cn/">教务新闻</a></li>
       <li><a target="_blank" href="mailto:zonyitoo@gmail.com">联系我们</a></li>
-      <li><a href="#calendar" data-toggle="modal">查看校历</a></li>
-      <li><a href="#about" data-toggle="modal">关于</a></li>
+      <li><a href="#calendar" data-toggle="modal" data-keyboard="true">查看校历</a></li>
+      <li><a href="#about" data-toggle="modal" data-keyboard="true">关于</a></li>
 
-      <div class="span3" id="status">
+      <div class="span4" id="status">
           <fieldset>
             <span class="badge badge-success user-id" id="information">{{ account }}</span>
             <span class="badge badge-success user-name" id="information">{{ name }}</span>
+            <button id="modifypasswd" class="btn btn-danger" href="#modify" data-toggle="modal" data-keyboard="true"><i class="icon-cog icon-white"></i> 修改密码</button>
             <button id="logout" onclick="logout()" class="btn btn-primary"><i class="icon-share-alt icon-white"></i> 注销</button>
           </fieldset>
       </div>
     </ul>
   </div>
-  <div class="modal hide fade" id="calendar" style="width: 640px;">
+  <div class="modal hide fade" id="calendar" style="width: 60%;">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">&times;</button>
 	    <h3>中山大学校历</h3>
 	  </div>
 	  <div class="modal-body">
-          <img src="{{ STATIC_URL }}img/school_schedule.jpg"></img>
-		  <img src="{{ STATIC_URL }}img/school_schedule2.jpg"></img>
+          <center><img src="{{ STATIC_URL }}img/school_schedule.jpg"></img></center>
+          <center><img src="{{ STATIC_URL }}img/school_schedule2.jpg"></img></center>
       </div>
   </div>
+
   <div class="modal hide fade" id="about">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -69,6 +70,40 @@
           do<br>&nbsp&nbsp&nbsp&nbspprintf("Forever alone\n");<br>while(true);
       </div>
   </div>
+
+  <div class="modal hide fade" id="modify">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <h3>修改密码</h3>
+	  </div>
+	  <div class="modal-body">
+        <form id="modifyform" method="POST">{% csrf_token %}
+            <center><fieldset>
+                <div class="control-group">
+                    <div class="controls">
+                        <input name="oldpasswd" type="password" id="oldpasswd" placeholder="旧密码">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <input name="newpasswd" type="password" id="newpasswd" placeholder="新密码">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <input name="comfirmpasswd" type="password" id="confirmpasswd" placeholder="确认新密码">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" id="login" class="btn btn-primary">提交</button> 
+                    </div>
+                </div>
+            </fieldset></center>
+        </form>
+      </div>
+  </div>
+
   <hr>
   <div class="container" id="content"> 
   </div>
