@@ -50,7 +50,6 @@ def login_page(request):
     else:
         return HttpResponseBadRequest('Invalid method')
 
-  
 def do_logout(request):
     tojson = {'url': '/user/login/'}
     if not request.user.is_anonymous():
@@ -65,9 +64,12 @@ def modify_pwd(request):
         oldpasswd = request.POST['oldpasswd']
         newpasswd = request.POST['newpasswd']
         if not request.user.check_password(oldpasswd):
-            return HttpResponse(simplejson.dumps({'valid': False}), mimetype='application/json')
+            return HttpResponse(simplejson.dumps({'valid': False}), 
+                mimetype='application/json')
         else:
             request.user.set_password(newpasswd)
-            return HttpResponse(simplejson.dumps({'valid': True}), mimetype='application/json')
+            request.user.save()
+            return HttpResponse(simplejson.dumps({'valid': True}), 
+                    mimetype='application/json')
     else:
         return HttpResponseBadRequest()
