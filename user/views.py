@@ -13,6 +13,11 @@ def login_page(request):
         # If has login
         if not request.user.is_anonymous():
             return HttpResponseRedirect(args['next'])
+        
+        # if logout
+        if 'logoutid' in request.GET:
+            logoutaccount = request.GET['logoutid']
+            args['logoutaccount'] = logoutaccount
 
         args.update(csrf(request))
         return render_to_response('login.html', args, 
@@ -22,16 +27,25 @@ def login_page(request):
         username = request.POST.get('username', '')
         password = request.POST.get('passwd', '')
         user = authenticate(username=username, password=password)
+        retjson = {}
         if user is None:
-            return HttpResponseBadRequest('Invalid username or password. POST\
-                    username=%s,passwd=%s' % (username, password))
+            retjson['valid'] = False
+            return HttpResponse(simplejson.dumps(retjson),
+                mimetype='applicaton/json')
         else:
             login(request, user)
-	    if user.is_staff :
-		return HttpResponseRedirect("/admin/")
-            #return HttpResponseRedirect('/')
-            return HttpResponseRedirect(request.POST.get('next', '/'))
-	    #return student_page(request)
+            retjson['valid'] = True
+
+        # Admin User (for test)
+        if user.is_staff:
+            retjson['next'] = '/admin/'
+            return HttpResponse(simplejson.dumps(retjson),
+                mimetype='application/json')
+        
+        # Normal User
+        retjson['next'] = request.POST.get('next', '/')
+        return HttpResponse(simplejson.dumps(retjson),
+            mimetype='application/json')
     else:
         return HttpResponseBadRequest('Invalid method')
 
@@ -41,9 +55,9 @@ def student_page(request):
                     context_instance=RequestContext(request))
    
 def do_logout(request):
-    if request.user.is_anonymous():
-        return HttpResponse('nimabi')
+    tojson = {'url': '/user/login/'}
+    if not request.user.is_anonymous():
+        tojson['logoutaccount'] = request.user.username
 
-    tojson = {'url': '/user/login/', 'logoutaccount': request.user.username}
     logout(request)
     return HttpResponse(simplejson.dumps(tojson), mimetype='application/json')
