@@ -11,57 +11,65 @@
         <div class="tab-content">
         <div class="active tab-pane" id="tabs-1">
           <div class="form-horizontal">
-            <div class="control-group">
-              <label class="control-label" for="cultivate">培养类别</label>
-              <div class="controls">
-                <select class="span2" name="cultivate" id="cultivate">
-                  <option>主修</option>
-                  <option>辅修</option>
-                  <option>双学位</option>
-                  <option>交换生</option>
-                </select>
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label" for="course-type">课程类别</label>
-              <div class="controls">
-                <div class="btn-group active" data-toggle="buttons-checkbox">
-                  <button class="btn btn-primary">公选</button>
-                  <button class="btn btn-primary">公必</button>
-                  <button class="btn btn-primary">专选</button>
-                  <button class="btn btn-primary">专必</button>
+              <span class="span6">
+                <div class="control-group">
+                  <label class="control-label" for="cultivate">培养类别</label>
+                  <div class="controls">
+                    <select class="span2" name="cultivate" id="cultivate">
+                      <option>主修</option>
+                      <option>辅修</option>
+                      <option>双学位</option>
+                      <option>交换生</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="course-type">课程类别</label>
+                  <div class="controls">
+                    <div class="btn-group active" data-toggle="buttons-checkbox">
+                      <button class="btn btn-primary">公选</button>
+                      <button class="btn btn-primary">公必</button>
+                      <button class="btn btn-primary">专选</button>
+                      <button class="btn btn-primary">专必</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <div class="controls">
+                      <button class="btn btn-primary" id="view-course-btn"><i class="icon-search icon-white"></i> 查看课程</button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="control-group">
-              <div class="controls">
-                  <button class="btn btn-primary" id="view-course-btn"><i class="icon-search icon-white"></i> 查看课程</button>
-              </div>
-            </div>
-          </div>
-          <div id="course-result"></div>
+          </span>
+          <span>
+              <div id="course-result"></div>
+          </span>
         </div>
 
         <div class="tab-pane" id="tabs-2">
           <div class="form-horizontal">
-            <div class="control-group">
-              <label class="control-label" for="cultivate">培养类别</label>
-              <div class="controls">
-                <select class="span2" name="cultivate" id="cultivate">
-                  <option>主修</option>
-                  <option>辅修</option>
-                  <option>双学位</option>
-                  <option>交换生</option>
-                </select>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="controls">
-                  <button class="btn btn-primary" id="view-course-btn"><i class="icon-search icon-white"></i> 查看教学计划</button>
-              </div>
-            </div>
+              <span class="span6">
+                <div class="control-group">
+                  <label class="control-label" for="cultivate">培养类别</label>
+                  <div class="controls">
+                    <select class="span2" name="cultivate" id="cultivate">
+                      <option>主修</option>
+                      <option>辅修</option>
+                      <option>双学位</option>
+                      <option>交换生</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <div class="controls">
+                      <button class="btn btn-primary" id="view-plan-btn"><i class="icon-search icon-white"></i> 查看教学计划</button>
+                  </div>
+                </div>
+            </span>
+            <span>
+                <div id="plan-result"></div>
+            </span>
           </div>
-          <div id="course-result"></div>
         </div>
 
         <div class="tab-pane" id="tabs-3">
@@ -101,7 +109,7 @@
             </div>
             <div class="control-group">
               <div class="controls">
-                  <button class="btn btn-primary" id="view-course-btn"><i class="icon-search icon-white"></i> 查看课表</button>
+                  <button class="btn btn-primary" id="view-schedule-btn"><i class="icon-search icon-white"></i> 查看课表</button>
               </div>
             </div>
           </div>
@@ -112,7 +120,7 @@
           <div class="form-horizontal">
             <div class="control-group">
               <div class="controls">
-                  <button class="btn btn-primary" id="view-course-btn"><i class="icon-search icon-white"></i> 查看未评教课程</button>
+                  <button class="btn btn-primary" id="view-toevaluate-btn"><i class="icon-search icon-white"></i> 查看未评教课程</button>
               </div>
             </div>
           </div>
@@ -156,7 +164,7 @@
             </div>
             <div class="control-group">
               <div class="controls">
-                  <button class="btn btn-primary" id="view-course-btn"><i class="icon-search icon-white"></i> 查看成绩</button>
+                  <button class="btn btn-primary" id="view-score-btn"><i class="icon-search icon-white"></i> 查看成绩</button>
               </div>
             </div>
           </div>

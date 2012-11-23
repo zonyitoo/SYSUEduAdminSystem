@@ -34,7 +34,7 @@
   <body onload="detectBrowser()">
   <div class="wrapper">
         <ul class="menu" rel="sam1">
-            <div class="span6" id="login-section">
+            <span id="login-section">
             <form class="form-horizontal" id="loginform" method="POST" onsubmit="return validate()">{% csrf_token %}
                 <fieldset>
                     <input name="username" type="text" id="username" placeholder="用户名  e.g.10301001">
@@ -42,7 +42,7 @@
                     <button type="submit" id="login" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i> 登录</button> 
                 </fieldset>
             </form>
-            </div>
+            </span>
         </ul>
     </div>
     <hr>
@@ -61,11 +61,11 @@
         </div>
     </div>
     <hr>
-  <div class="copyright">
+  <span class="copyright">
   	<a href="https://github.com/zonyitoo/EduAdminSystem">
   		©SYSUCodeFarmers. All rights reserved.
     </a>
-  </div>
-  <img id="logo" src="{{ STATIC_URL }}img/label.jpg" style="float:right;margin-right: 50px;height: 100px;width: 100px;">
+    <img id="logo" src="{{ STATIC_URL }}img/label.jpg" style="float:right;margin-right: 50px;height: 100px;width: 100px;">
+  </span>
   </body>
 </html>

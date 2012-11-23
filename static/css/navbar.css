@@ -163,3 +163,12 @@ ul.vertical[rel=ver1] li a:hover {
     text-align: left;
     vertical-align: baseline;
 }
+
+#bottomNav {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: visible;
+}
