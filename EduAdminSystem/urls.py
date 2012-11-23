@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^take/', include('take.urls')), 
     url(r'^student/', include('student.urls')),
     url(r'^teacher/', include('teacher.urls')), 
+    url(r'^course/', include('course.urls')), 
     url(r'^$', 'EduAdminSystem.views.index'), 
     url(r'^getview/$', 'EduAdminSystem.views.index_getview'), 
 )
