@@ -31,7 +31,7 @@ def login_page(request):
         if user is None:
             retjson['valid'] = False
             return HttpResponse(simplejson.dumps(retjson),
-                mimetype='applicaton/json')
+                mimetype='application/json')
         else:
             login(request, user)
             retjson['valid'] = True
