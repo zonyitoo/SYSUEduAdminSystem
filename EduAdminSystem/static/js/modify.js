@@ -1,4 +1,16 @@
 //JavaScript Document
+$(document).ready(function(){
+    $("#calendar").on('show', function(){
+        $(document).keypress(function(){
+            $("#calendar").modal('hide');
+        });
+    });
+    $("#about").on('show', function(){
+        $(document).keypress(function(){
+            $("#about").modal('hide');
+        });
+    });
+});
 
 function check()
 {
