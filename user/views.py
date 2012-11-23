@@ -20,7 +20,7 @@ def login_page(request):
             args['logoutaccount'] = logoutaccount
 
         args.update(csrf(request))
-        return render_to_response('login.html', args, 
+        return render_to_response('login_extern.html', args, 
                 context_instance=RequestContext(request))
     # do login
     elif request.method == 'POST':

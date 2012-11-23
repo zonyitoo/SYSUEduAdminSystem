@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block login %}
+<body onload="detectBrowser()">
+  <div class="wrapper">
+        <ul class="menu" rel="sam1">
+            <div class="span6" id="login-section">
+            <form class="form-horizontal" id="loginform" method="POST" onsubmit="return validate()">{% csrf_token %}
+                <fieldset>
+                    <input name="username" type="text" id="username" placeholder="用户名  e.g.10301001">
+                    <input name="passwd" type="password" id="passwd" placeholder="密码  e.g.123456">
+                    <button type="submit" id="login" class="btn btn-primary"><i class="icon-chevron-right icon-white"></i> 登录</button> 
+                </fieldset>
+            </form>
+            </div>
+        </ul>
+    </div>
+    <hr>
+    <div class="container">
+        {% if logoutaccount %}
+        <div class="alert alert-info", id="prompt">
+          <strong id="alert-content">{{ logoutaccount }} 已成功登出</strong>
+        </div>
+        {% endif %}
+        <div class="alert alert-error hide" id="alert">
+          <strong id="alert-content"></strong>
+        </div>
+        <div class="hero-unit">
+            <h1>中山大学本科生教务系统</h1>
+            <p>I solemnly swear that I am up to no good.</p>
+        </div>
+    </div>
+    <hr>
+{% endblock %}
