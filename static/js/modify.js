@@ -1,4 +1,5 @@
 //JavaScript Document
+
 function check()
 {
     var oldpasswd = $("#oldpasswd").val();
