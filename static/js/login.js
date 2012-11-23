@@ -75,7 +75,7 @@ function login()
 		},
 		success: function (msg)
 		{//访问成功时调用的函数,这里的msg是login.php返回的值
-			$(".container").load(msg);
+            $(".container").load(msg);
 		}
 	});
 }
