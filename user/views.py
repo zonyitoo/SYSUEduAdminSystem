@@ -64,10 +64,12 @@ def modify_pwd(request):
         oldpasswd = request.POST['oldpasswd']
         newpasswd = request.POST['newpasswd']
         if not request.user.check_password(oldpasswd):
-            return HttpResponse(simplejson.dumps({'valid': False}))
+            return HttpResponse(simplejson.dumps({'valid': False}), 
+                mimetype='application/json')
         else:
             request.user.set_password(newpasswd)
             request.user.save()
-            return HttpResponse(simplejson.dumps({'valid': True}))
+            return HttpResponse(simplejson.dumps({'valid': True}), 
+                    mimetype='application/json')
     else:
         return HttpResponseBadRequest()
