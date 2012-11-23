@@ -156,13 +156,19 @@ ul.vertical[rel=ver1] li a:hover {
     float:right;
 }
 
-#status .badge{
-    margin-top: 5px;
-}
-
 #information{
+    margin-top: 5px;
     height: 25px;
     line-height: 25px;
     text-align: left;
     vertical-align: baseline;
+}
+
+#bottomNav {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: visible;
 }

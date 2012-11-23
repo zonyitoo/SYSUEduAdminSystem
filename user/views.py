@@ -3,6 +3,7 @@ from user.controller import *
 from school.models import *
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, login, logout
 from django.utils import simplejson
@@ -57,3 +58,14 @@ def do_logout(request):
 
     logout(request)
     return HttpResponse(simplejson.dumps(tojson), mimetype='application/json')
+
+@login_required
+def modify_pwd(request):
+    if request.method == 'POST':
+        oldpasswd = request.POST['oldpasswd']
+        newpasswd = request.POST['newpasswd']
+        if not request.user.check_password(oldpasswd):
+            return HttpResponse(simplejson.dumps({'valid':False}))
+        else:
+            request.user.set_password(newpasswd)
+            return HttpResponse(simplejson.dumps({'valid':True}))
