@@ -1,6 +1,9 @@
 #-*- coding=utf-8 -*-
 
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.http import (
+    HttpResponse, HttpResponseForbidden,
+    HttpResponseRedirect, HttpResponseBadRequest
+)
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
@@ -41,6 +44,8 @@ def index(request):
         return render_to_response('index.html', attr,
                 context_instance=RequestContext(request))
 
+    else:
+        return HttpResponseBadRequest('Invalid Method')
 
 @login_required
 def index_getview(request):

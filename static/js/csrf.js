@@ -1,4 +1,5 @@
 //JavaScript Document
+
 $(document).ready(function(){ 
   var csrftoken = getCookie('csrftoken');
 //  alert("CSRF Token: " + csrftoken);
