@@ -10,18 +10,21 @@ function check()
         $("#success").hide();
         $("#error").show();
         $("#error-content").text("确认密码必须与新密码相同！");
+        alert("1");
     }
     else if (oldpasswd.length < 6)
     {
         $("#success").hide();
         $("#error").show();
-        $("#error-content").text("旧密码错误！");
+        $("#error-content").text("旧密码错误a！");
+        alert("2");
     }
     else if (newpasswd.length < 6)
     {
         $("#success").hide();
         $("#error").show();
         $("#error-content").text("密码不得少于6位！");
+        alert("3");
     }
     else
     {

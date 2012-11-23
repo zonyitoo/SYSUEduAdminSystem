@@ -29,6 +29,7 @@ function check()
             url: "/user/modifypwd/", //访问路径
             data: "oldpasswd=" + $("#oldpasswd").val() + "&newpasswd=" + $("#newpasswd").val(), //需要验证的参数
             type: 'post', //传值的方式
+            async: false,
             error: function ()
             {//访问失败时调用的函数
                 alert("链接服务器错误！");
