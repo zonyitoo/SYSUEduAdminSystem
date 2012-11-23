@@ -49,11 +49,7 @@ def login_page(request):
     else:
         return HttpResponseBadRequest('Invalid method')
 
-def student_page(request):
-    if request.method == 'GET':
-        return render_to_response('student.html', {},
-                    context_instance=RequestContext(request))
-   
+  
 def do_logout(request):
     tojson = {'url': '/user/login/'}
     if not request.user.is_anonymous():
