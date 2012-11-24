@@ -14,13 +14,6 @@ coursetype = {
         'mr': CourseType.PRO_COURSE
         }
 
-courseTypeToUnicode = {
-            CourseType.PUB_COURSE: u'公共必修课',
-            CourseType.PUB_ELECTIVE: u'公共选修课', 
-            CourseType.PRO_COURSE: u'专业必修课',
-            CourseType.PRO_ELECTIVE: u'专业选修课'
-        }
-
 @login_required
 def get_available_list(request):
     if request.method == 'GET':
@@ -54,7 +47,7 @@ def get_available_list(request):
             courseObj['capacity'] = course.capacity
             courseObj['exam_method'] = course.exam_method
             courseObj['course_type'] =\
-                courseTypeToUnicode[course.course_type.type_name]
+                CourseType.get_coursetype(course.course_type)
             courseObj['department'] = course.department.name
             
             courseArr.append(courseObj)

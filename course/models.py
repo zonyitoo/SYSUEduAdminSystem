@@ -18,7 +18,20 @@ class CourseType(models.Model):
             (PRO_COURSE, u'专业必修课'), 
             (PRO_ELECTIVE, u'专业选修课'),
         )
+    courseTypeToUnicode = {
+            PUB_COURSE: u'公共必修课',
+            PUB_ELECTIVE: u'公共选修课', 
+            PRO_COURSE: u'专业必修课',
+            PRO_ELECTIVE: u'专业选修课'
+        }
+
     type_name = models.CharField(max_length=4, choices=COURSE_TYPE)
+
+    def get_coursetype(self, obj):
+        return self.courseTypeToUnicode[obj.type_name]
+    
+    def __unicode__(self):
+        return self.courseTypeToUnicode[self.type_name]
 
 class Course(models.Model):
     name = models.CharField(max_length=30)
@@ -41,8 +54,8 @@ class Course(models.Model):
     capacity = models.PositiveIntegerField()
     exam_method = models.CharField(max_length=20)
     course_type = models.ForeignKey(CourseType)
-    course_meta = models.ForeignKey(CourseMeta)
-    department = models.ForeignKey(Department)
+    course_meta = models.ForeignKey(CourseMeta, blank=True, null=True)
+    department = models.ForeignKey(Department, default=0)
     assessment_avgscore = models.DecimalField(max_digits=5, decimal_places=2)
     assessment_num = models.IntegerField(default=0)
     
