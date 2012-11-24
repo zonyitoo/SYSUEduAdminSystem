@@ -41,6 +41,26 @@ grant all privileges on eduadminsystemdb.* to eduadminsystem@localhost identifie
 create database eduadminsystemdb character set utf8;
 ```
 
+如果已经创建过数据库，那么要先把原有的数据库DROP掉，可以直接执行`db.sql`，执行方法是在`sqlshell`中输入
+
+```sql
+source db.sql
+```
+
+以上会把原有的`eduadminsystemdb`重新创建，那么接下来就要运行
+
+```bash
+python manage.py runserver
+```
+
+来创建系统所要用到的表，接下来就执行`createTestData.py`来生成一些测试数据
+
+```bash
+python createTestData.py
+```
+
+`createTestData.py`如果执行出错请自行Debug，请大家一起往里面加测试数据吧
+
 ## Trouble Shooting
 * 怎么运行？
 
@@ -58,7 +78,7 @@ create database eduadminsystemdb character set utf8;
 
 * 修改了一些js/css后没有反应？
 
-**Don't try to modify /static/\* **，这个文件夹是由`collectstatic`自动聚集各模块中的static文件，修改应进入特定模块修改，并执行`collectstatic`使其生效。
+Don't try to modify /static/\*，这个文件夹是由`collectstatic`自动聚集各模块中的static文件，修改应进入特定模块修改，并执行`collectstatic`使其生效。
 
 ## 项目提交日期和方法
 * Jan 3, 2013 23:00
