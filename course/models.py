@@ -27,8 +27,8 @@ class CourseType(models.Model):
 
     type_name = models.CharField(max_length=4, choices=COURSE_TYPE)
 
-    def get_coursetype(self, obj):
-        return self.courseTypeToUnicode[obj.type_name]
+    def get_coursetype(self):
+        return self.courseTypeToUnicode[self.type_name]
     
     def __unicode__(self):
         return self.courseTypeToUnicode[self.type_name]

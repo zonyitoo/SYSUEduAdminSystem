@@ -55,8 +55,11 @@ students = [
         ]
 
 for student in students:
-    user = User.objects.get_or_create(**student['user'])[0]
-    user.save()
+    try:
+        user = User.objects.get(username=student['user']['username'])
+    except User.DoesNotExist:
+        user = User.objects.create_user(**student['user'])
+        user.save()
     stud = Student.objects.get_or_create(user=user, **student['student'])[0]
     stud.save()
 
@@ -77,8 +80,11 @@ teachers = [
         ]
 
 for teacher in teachers:
-    user = User.objects.get_or_create(**teacher['user'])[0]
-    user.save()
+    try:
+        user = User.objects.get(username=teacher['user']['username'])
+    except User.DoesNotExist:
+        user = User.objects.create_user(**teacher['user'])
+        user.save()
     teac = Teacher.objects.get_or_create(user=user, **teacher['teacher'])[0]
     teac.save()
     
@@ -91,7 +97,7 @@ courses = [
         {
             'name': '计算机图形学',
             'academic_year': '2012-2013',
-            'semester': Course.SEMESTER[0][0],
+            'semester': 1,
             'from_week': 1,
             'to_week': 20,
             'course_time': 'DE',
@@ -101,7 +107,7 @@ courses = [
             'capacity': 9999,
             'exam_method': '考查',
             'course_type':
-                CourseType.objects.get(type_name=CourseType.COURSE_TYPE[0][0]),
+                CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
             'department': cs
             } 
     ]
