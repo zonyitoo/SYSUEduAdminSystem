@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-
+from take.models import Takes
 from student.models import Student
 from course.models import Course, CourseType
 from django.utils import simplejson
@@ -32,7 +32,7 @@ def get_take_courses(request):
             courseObj['location'] = take.course.location
             courseObj['capacity'] = take.course.capacity
             courseObj['exam_method'] = take.course.exam_method
-            courseObj['course_type'] = take.courseTypeToUnicode[course.course_type.type_name]
+            courseObj['course_type'] = CourseType.get_coursetype(take.course.course_type)
             courseObj['department'] = take.course.department.name
             
             courseArr.append(courseObj)
