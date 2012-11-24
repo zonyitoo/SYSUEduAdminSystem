@@ -5,54 +5,119 @@ from django.core.management import setup_environ
 setup_environ(settings)
 from django.contrib.auth.models import User
 
+"""
+    This script just for generating test data.
+    If you get runtime errors, you can
+        1. Drop eduadminsystemdb database and recreate it
+        2. Debug this script
+"""
 ## Schools
 from school.models import School, Department, Speciality
 
-sist = School.objects.get_or_create(name='SIST')[0]
-sist.save()
-cs = Department.objects.get_or_create(name='CS', school=sist)[0]
-cs.save()
-cst = Speciality.objects.get_or_create(name='CST', department=cs)[0]
-cst.save()
+schools = [
+    {
+        'name': 'SIST'
+        },
+    {
+        'name': 'SS'
+        }
+]
+
+for s in schools:
+    obj = School.objects.get_or_create(**s)
+    if not obj[1]:
+        print 'School', s['name'], 'exists'
+    else:
+        print 'Creating School', s['name']
+        obj[0].save()
+
+departments = [
+    {
+        'name': 'CS',
+        'school': School.objects.get(name='SIST')
+        }        
+]
+
+for d in departments:
+    obj = Department.objects.get_or_create(**d)
+    if not obj[1]:
+        print 'Department', d['name'], 'exists'
+    else:
+        print 'Creating Department', d['name']
+        obj[0].save()
+
+
+
+specialities = [
+    {
+        'name': 'CST',
+        'department': Department.objects.get(name='CS')
+        }        
+]
+
+for s in specialities:
+    obj = Speciality.objects.get_or_create(**s)
+    if not obj[1]:
+        print 'Speciality', s['name'], 'exists'
+    else:
+        print 'Creating Speciality', s['name']
+        obj[0].save()
+
 
 # Students
 from student.models import Student, StudentMeta
 
-stuMeta = StudentMeta.objects.get_or_create(type_name='UG', year='2010',
-        major=cst)[0]
+studentMetas = [
+    {
+        'type_name': StudentMeta.UNGRADUATED,
+        'year': '2010',
+        'major': Speciality.objects.get(name='CST')
+    }        
+]
+
+for sm in studentMetas:
+    obj = StudentMeta.objects.get_or_create(**sm)
+    if not obj[1]:
+        print 'StudentMeta', sm, 'exists'
+    else:
+        print 'Creating StudentMeta', sm
+        obj[0].save()
 
 students = [
-        {
-            'user': {
-                    'username': '10383001',
-                    'password': '123456'
-                },
-            'student': {
-                'student_name': 'ABC',
-                'student_meta': StudentMeta.objects.get(year=2010)
-                }
-            },
-        {
-            'user': {
-                'username': '10383002',
-                'password': '123456',
-                },
-            'student': {
-                'student_name': 'BCD',
-                'student_meta': StudentMeta.objects.get(year=2010)
-                }
-            },
-        {
-            'user': {
-                'username': '10383067',
-                'password': 'zonyitoo',
-                },
-            'student': {
-                'student_name': '钟宇腾',
-                'student_meta': StudentMeta.objects.get(year=2010)
-                }
-            }
-        ]
+    {
+    "user": {
+        "username": "10383001",
+        "password": "123456"
+    },
+    "student": {
+        "student_name": "ABC",
+        "student_meta": StudentMeta.objects.get(
+            major=Speciality.objects.get(name='CST'), year=2010)
+        }
+    },
+    {
+    "user": {
+        "username": "10383002",
+        "password": "123456",
+        },
+    "student": {
+        "student_name": "BCD",
+        "student_meta": StudentMeta.objects.get(
+            major=Speciality.objects.get(name='CST'), year=2010)
+        }
+    },
+    {
+    "user": {
+        "username": "10383067",
+        "password": "zonyitoo",
+        },
+    "student": {
+        "student_name": "钟宇腾",
+        "student_meta": StudentMeta.objects.get(
+             major=Speciality.objects.get(name='CST'), year=2010)
+        }
+    }
+]
 
 for student in students:
     try:
@@ -60,8 +125,13 @@ for student in students:
     except User.DoesNotExist:
         user = User.objects.create_user(**student['user'])
         user.save()
-    stud = Student.objects.get_or_create(user=user, **student['student'])[0]
-    stud.save()
+
+    obj = Student.objects.get_or_create(user=user, **student['student'])
+    if not obj[1]:
+        print 'Student', obj[0].student_name, 'exists'
+    else:
+        print 'Creating Student', obj[0].student_name
+        obj[0].save()
 
 ## Teachers
 from teacher.models import Teacher
@@ -77,7 +147,7 @@ teachers = [
                 'department': Department.objects.get(name='CS')
                 }
             }    
-        ]
+    ]
 
 for teacher in teachers:
     try:
@@ -85,8 +155,12 @@ for teacher in teachers:
     except User.DoesNotExist:
         user = User.objects.create_user(**teacher['user'])
         user.save()
-    teac = Teacher.objects.get_or_create(user=user, **teacher['teacher'])[0]
-    teac.save()
+    teac = Teacher.objects.get_or_create(user=user, **teacher['teacher'])
+    if not teac[1]:
+        print 'Teacher', teac[0].teacher_name, 'exists'
+    else:
+        print 'Creating Teacher', teac[0].teacher_name
+        teac.save()
     
 ## Courses
 from course.models import CourseType, Course
@@ -108,9 +182,27 @@ courses = [
             'exam_method': '考查',
             'course_type':
                 CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
-            'department': cs
-            } 
+            'department': Department.objects.get(name='CS')
+            }
     ]
 
 for c in courses:
-    Course.objects.get_or_create(**c)[0].save()
+    obj = Course.objects.get_or_create(**c)
+    if not obj[1]:
+        print "Course", obj[0].name, 'exists'
+    else:
+        print "Creating Course", obj[0].name
+        obj[0].save()
+
+## Takes
+from take.models import Takes
+takes = [
+            
+    ]
+
+for t in takes:
+    obj = Takes.objects.get_or_create(**t)
+    if not obj[1]:
+        pass
+    else:
+        obj[0].save()
