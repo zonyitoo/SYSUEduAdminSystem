@@ -50,6 +50,7 @@ def get_available_list(request):
 
             for course in courses:
                 courseObj = {}
+                courseObj['id'] = course.id
                 courseObj['name'] = course.name
                 courseObj['academic_year'] = course.academic_year
                 courseObj['semester'] = course.semester
