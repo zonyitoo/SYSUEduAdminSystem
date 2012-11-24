@@ -118,6 +118,9 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+SESSION_COOKIE_AGE = 600
+SESSION_SAVE_EVERY_REQUEST = True
+
 ROOT_URLCONF = 'EduAdminSystem.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
