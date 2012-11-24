@@ -15,7 +15,7 @@ coursetype = {
         }
 
 courseTypeToUnicode = {
-            CourseType.PUB.COURSE: u'公共必修课',
+            CourseType.PUB_COURSE: u'公共必修课',
             CourseType.PUB_ELECTIVE: u'公共选修课', 
             CourseType.PRO_COURSE: u'专业必修课',
             CourseType.PRO_ELECTIVE: u'专业选修课'
@@ -24,7 +24,7 @@ courseTypeToUnicode = {
 @login_required
 def get_available_list(request):
     if request.method == 'GET':
-        caltivate = request.GET.get('cultivate', 0)
+        cultivate = request.GET.get('cultivate', 0)
         ct = coursetype[request.GET.get('course-type-1', 'po')]
         academic_year = request.GET.get('academic_year', '2005-2006')
         sem = request.GET.get('sem', 1)
@@ -32,7 +32,7 @@ def get_available_list(request):
         courseType = CourseType.objects.get(type_name=ct)
         student = Student.objects.get(user=request.user)
         # it only work for major now.
-        if caltivate == 0:
+        if cultivate == 0:
             department = student.student_meta.major.department
         
         courses = Course.objects.filter(academic_year=academic_year,
