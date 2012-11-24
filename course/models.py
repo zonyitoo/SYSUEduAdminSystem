@@ -35,7 +35,7 @@ class CourseType(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=30)
-    academic_year = models.CharField(max_length=4)
+    academic_year = models.CharField(max_length=9)
     SEM_FIRST = 1
     SEM_SECOND = 2
     SEM_THIRD = 3
@@ -56,7 +56,8 @@ class Course(models.Model):
     course_type = models.ForeignKey(CourseType)
     course_meta = models.ForeignKey(CourseMeta, blank=True, null=True)
     department = models.ForeignKey(Department, default=0)
-    assessment_avgscore = models.DecimalField(max_digits=5, decimal_places=2)
+    assessment_avgscore = models.DecimalField(max_digits=5, decimal_places=2,
+            default=0)
     assessment_num = models.IntegerField(default=0)
     
     def __unicode__(self):
