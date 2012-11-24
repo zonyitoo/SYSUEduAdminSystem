@@ -56,6 +56,10 @@ create database eduadminsystemdb character set utf8;
 
 利用django自带的后台，创建管理员帐号，即可在:`127.0.0.1：8000/admin/`中进行帐号/组管理。
 
+* 修改了一些js/css后没有反应？
+
+**Don't try to modify /static/\* **，这个文件夹是由`collectstatic`自动聚集各模块中的static文件，修改应进入特定模块修改，并执行`collectstatic`使其生效。
+
 ## 项目提交日期和方法
 * Jan 3, 2013 23:00
 * Mail to 杨腾飞
