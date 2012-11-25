@@ -159,12 +159,12 @@ textarea {
 }
 
 body {
-	margin: 0;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	line-height: 20px;
-	color: #333333;
-	background-color: #ffffff;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  background-color: #ffffff;
 }
 
 a {
@@ -719,7 +719,6 @@ h4 small {
 }
 
 .page-header {
-  padding-top: 30px;
   padding-bottom: 9px;
   margin: 20px 0 30px;
   border-bottom: 1px solid #eeeeee;
@@ -1899,8 +1898,8 @@ table {
 .table td {
   padding: 8px;
   line-height: 20px;
-  text-align: center;
-  vertical-align: middle;
+  text-align: left;
+  vertical-align: top;
   border-top: 1px solid #dddddd;
 }
 
@@ -4974,9 +4973,10 @@ input[type="submit"].btn.btn-mini {
 .modal {
   position: fixed;
   top: 50%;
+  left: 50%;
   z-index: 1050;
-  width: 60%;
-  margin: -288px 0 0 20%;
+  width: 560px;
+  margin: -250px 0 0 -280px;
   background-color: #ffffff;
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -5020,7 +5020,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal-body {
-  max-height: 500px;
+  max-height: 400px;
   padding: 15px;
   overflow-y: auto;
 }
@@ -5890,8 +5890,4 @@ a.badge:hover {
 
 .affix {
   position: fixed;
-}
-
-.copyright {
-	margin-left: 50px;
 }
