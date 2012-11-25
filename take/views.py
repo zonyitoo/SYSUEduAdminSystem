@@ -59,7 +59,7 @@ def get_take_plan(request):
         if cultivate == 0:
             department = student.student_meta.major.department
 
-        take = Takes.objects.filter(student__user__exact = user,
+        takes = Takes.objects.filter(student__user__exact = user,
                 course__department__exact = department)
             
         courseArr = []

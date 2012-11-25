@@ -160,7 +160,7 @@ for teacher in teachers:
         print 'Teacher', teac[0].teacher_name, 'exists'
     else:
         print 'Creating Teacher', teac[0].teacher_name
-        teac.save()
+        teac[0].save()
     
 ## Courses
 from course.models import CourseType, Course
