@@ -19,13 +19,13 @@ def get_available_list(request):
     if request.method == 'GET':
         cultivate = int(request.GET.get('cultivate', 0))
         ct = []
-        if request.GET['po']:
+        if request.GET['po'] == 'true':
             ct.append(coursetype['po'])
-        if request.GET['pr']:
+        if request.GET['pr'] == 'true':
             ct.append(coursetype['pr'])
-        if request.GET['mo']:
+        if request.GET['mo'] == 'true':
             ct.append(coursetype['mo'])
-        if request.GET['mr']:
+        if request.GET['mr'] == 'true':
             ct.append(coursetype['mr'])
         academic_year = request.GET.get('academic_year', '2012-2013')
         sem = request.GET.get('sem', 1)
