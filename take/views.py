@@ -17,24 +17,31 @@ def get_take_courses(request):
         takes = Takes.objects.filter(student__user__exact=user,
                 course__academic_year__exact=year,
                 course__semester__exact=sem)
-
+           
         courseArr = []
         for take in takes:
             courseObj = {}
+            courseObj['id'] = take.course.id
             courseObj['name'] = take.course.name
             courseObj['academic_year'] = take.course.academic_year
             courseObj['semester'] = take.course.semester
             courseObj['from_week'] = take.course.from_week
             courseObj['to_week'] = take.course.to_week
-            courseObj['course_time'] = take.course.course_time
-            courseObj['teacher'] = take.course.teacher.teacher_name
+            courseObj['course_time'] = [{'week': t.week, 'time': t.time}
+                    for t in take.course.course_time.all()]
+            courseObj['teacher'] = {
+                        'teacher_name': take.course.teacher.teacher_name,
+                        'title': take.course.teacher.get_title_unicode(),
+                        'img_addr': take.course.teacher.img_addr,
+                        'site': take.course.teacher.site,
+                        'department': take.course.teacher.department.name
+                    }
             courseObj['credit'] = take.course.credit
             courseObj['location'] = take.course.location
             courseObj['capacity'] = take.course.capacity
             courseObj['exam_method'] = take.course.exam_method
             courseObj['course_type'] = CourseType.get_coursetype(take.course.course_type)
-            courseObj['department'] = take.course.department.name
-            
+
             courseArr.append(courseObj)
 
         retJson = {'courses': courseArr, 
@@ -65,13 +72,21 @@ def get_take_plan(request):
         courseArr = []
         for take in takes:
             courseObj = {}
+            courseObj['id'] = take.course.id
             courseObj['name'] = take.course.name
             courseObj['academic_year'] = take.course.academic_year
             courseObj['semester'] = take.course.semester
             courseObj['from_week'] = take.course.from_week
             courseObj['to_week'] = take.course.to_week
-            courseObj['course_time'] = take.course.course_time
-            courseObj['teacher'] = take.course.teacher.teacher_name
+            courseObj['course_time'] = [{'week': t.week, 'time': t.time}
+                    for t in take.course.course_time.all()]
+            courseObj['teacher'] = {
+                        'teacher_name': take.course.teacher.teacher_name,
+                        'title': take.course.teacher.get_title_unicode(),
+                        'img_addr': take.course.teacher.img_addr,
+                        'site': take.course.teacher.site,
+                        'department': take.course.teacher.department.name
+                    }
             courseObj['credit'] = take.course.credit
             courseObj['location'] = take.course.location
             courseObj['capacity'] = take.course.capacity

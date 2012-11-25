@@ -45,10 +45,10 @@ function getCourse()
                 var courseName = list[i].name;
                 var courseType = list[i].course_type;
                 var credit = list[i].credit;
-                var teacher = list[i].teacher;
+                var teacher = list[i].teacher.teacher_name;
                 var exam = list[i].exam_method;
                 var period = list[i].from_week + "~" + list[i].to_week + "周";
-                var time = list[i].course_time;
+                var time = list[i].course_time.time;
                 var capacity = list[i].capacity;
                 $("#course-result").empty();
                 $("#course-result").append("<table class='table table-bordered table-condensed'><thead><tr><th>序号</th><th width='200'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th width='100'>剩余容量</th><th>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
