@@ -33,6 +33,13 @@ class CourseType(models.Model):
     def __unicode__(self):
         return self.courseTypeToUnicode[self.type_name]
 
+class CourseTime(models.Model):
+    week = models.PositiveSmallIntegerField()
+    time = models.CharField(max_length=15)
+
+    def __unicode__(self):
+        return str(self.week)
+
 class Course(models.Model):
     name = models.CharField(max_length=30)
     academic_year = models.CharField(max_length=9)
@@ -47,7 +54,7 @@ class Course(models.Model):
     semester = models.PositiveSmallIntegerField(choices=SEMESTER)
     from_week = models.PositiveSmallIntegerField()
     to_week = models.PositiveSmallIntegerField()
-    course_time = models.CharField(max_length=5)
+    course_time = models.ManyToManyField(CourseTime)
     teacher = models.ForeignKey(Teacher)
     credit = models.PositiveSmallIntegerField()
     location = models.CharField(max_length=10)
@@ -62,3 +69,4 @@ class Course(models.Model):
     
     def __unicode__(self):
         return self.name
+

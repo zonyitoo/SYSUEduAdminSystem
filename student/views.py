@@ -8,11 +8,11 @@ from course.models import Course
 from models import Student
 
 @login_required
-def select_courses(request):
+def select_course(request):
     pass
 
 @login_required
-def redrawal_courses(request):
+def withdrawal_course(request):
     if request.method == 'POST':
         course_id = request.POST['id']
         course = None
@@ -26,11 +26,10 @@ def redrawal_courses(request):
             
             take = Takes.objects.get(course=course, student=student)
             take.delete()
-
-            return HttpResponse(simplejson.dumps({'valid': True}), mimetype='application/json')
         except:
-            return HttpResponse(simplejson.dumps({'valid': False, 'error_msg':
-                '未选该课程'}), mimetype='application/json')
+            pass
+        
+        return HttpResponse(simplejson.dumps({'valid': True}), mimetype='application/json')
 
     else:
         return HttpResponseBadRequest('Invalid Method')

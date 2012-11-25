@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from course.models import CourseType, Course
 from student.models import Student
 from django.utils import simplejson
-from django.db.models import Q
 
 coursetype = {
         'po': CourseType.PUB_ELECTIVE, 
@@ -56,8 +55,15 @@ def get_available_list(request):
                 courseObj['semester'] = course.semester
                 courseObj['from_week'] = course.from_week
                 courseObj['to_week'] = course.to_week
-                courseObj['course_time'] = course.course_time
-                courseObj['teacher'] = course.teacher.teacher_name
+                courseObj['course_time'] = [{'week': t.week, 'time': t.time}
+                        for t in course.course_time.all()]
+                courseObj['teacher'] = {
+                            'teacher_name': course.teacher.teacher_name,
+                            'title': course.teacher.get_title_unicode(),
+                            'img_addr': course.teacher.img_addr,
+                            'site': course.teacher.site,
+                            'department': course.teacher.department.name
+                        }
                 courseObj['credit'] = course.credit
                 courseObj['location'] = course.location
                 courseObj['capacity'] = course.capacity

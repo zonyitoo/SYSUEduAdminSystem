@@ -13,6 +13,7 @@ class Teacher(models.Model):
             (TITLE_ASSOCIATE_PROFESSOR, u'副教授'), 
             (TITLE_PROFESSOR, u'教授'), 
         )
+    titleToUnicode = {t:u for t, u in TITLE}
     title = models.CharField(max_length=2, choices=TITLE)
     img_addr = models.URLField(null=True, blank=True)
     site = models.URLField(null=True, blank=True)
@@ -21,3 +22,6 @@ class Teacher(models.Model):
 
     def __unicode__(self):
         return self.teacher_name
+
+    def get_title_unicode(self):
+        return self.titleToUnicode[self.title]

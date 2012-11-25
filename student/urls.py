@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('', 
-    url('selectCourses/$', 'student.views.select_courses'),
-    url('redrawalCourses/$', 'student.views.redrawal_courses'),
+    url('selectCourse/$', 'student.views.select_course'),
+    url('withdrawalCourse/$', 'student.views.withdrawal_course'),
 )

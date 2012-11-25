@@ -160,38 +160,47 @@ for teacher in teachers:
         print 'Teacher', teac[0].teacher_name, 'exists'
     else:
         print 'Creating Teacher', teac[0].teacher_name
-        teac.save()
+        teac[0].save()
     
 ## Courses
-from course.models import CourseType, Course
+from course.models import CourseType, Course, CourseTime
 for t in CourseType.COURSE_TYPE:
     CourseType.objects.get_or_create(type_name=t[0])[0].save()
 
 courses = [
         {
-            'name': '计算机图形学',
-            'academic_year': '2012-2013',
-            'semester': 1,
-            'from_week': 1,
-            'to_week': 20,
-            'course_time': 'DE',
-            'teacher': Teacher.objects.get(teacher_name='纪庆革'),
-            'credit': 2,
-            'location': 'addr',
-            'capacity': 9999,
-            'exam_method': '考查',
-            'course_type':
-                CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
-            'department': Department.objects.get(name='CS')
+            'time': [
+                {
+                    'week': 2,
+                    'time': 'DE',
+                    }
+                ],
+            'course': {
+                'name': '计算机图形学',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 1,
+                'to_week': 20,
+                'teacher': Teacher.objects.get(teacher_name='纪庆革'),
+                'credit': 2,
+                'location': 'addr',
+                'capacity': 9999,
+                'exam_method': '考查',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'department': Department.objects.get(name='CS')
+                }
             }
     ]
 
 for c in courses:
-    obj = Course.objects.get_or_create(**c)
+    obj = Course.objects.get_or_create(**c['course'])
     if not obj[1]:
         print "Course", obj[0].name, 'exists'
     else:
         print "Creating Course", obj[0].name
+        obj[0].course_time = [CourseTime.objects.get_or_create(**ti)[0] 
+                for ti in c['time']]
         obj[0].save()
 
 ## Takes
