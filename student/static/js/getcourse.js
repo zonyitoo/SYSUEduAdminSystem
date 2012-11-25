@@ -4,7 +4,6 @@ $(document).ready(function(){
     $("#view-course-btn").click(function(){
         getCourse();
     });
-    $("[rel='popover']").popover();
 });
 
 function toggleCourse(n)
@@ -45,8 +44,12 @@ function getCourse()
         success: function(msg)
         {
             var i = 0;
+            var j = 0;
             var list = msg.courses;
             var total = list.length;
+            var week_map = new Array("周日","周一","周二","周三","周四","周五","周六");
+            $("#course-result").empty();
+            $("#course-result").append("<table class='table table-bordered table-condensed'><thead><tr><th>序号</th><th width='200'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th width='100'>剩余容量</th><th>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
             for (i = 0;i < total;i++)
             {
                 var index = i + 1;
@@ -57,15 +60,20 @@ function getCourse()
                 var teacher = list[i].teacher;
                 var exam = list[i].exam_method;
                 var period = list[i].from_week + "~" + list[i].to_week + "周";
-                var week = list[i].course_time[0].week;
-                var time = list[i].course_time[0].time;
+                var course_time = list[i].course_time;
                 var capacity = list[i].capacity;
-                $("#course-result").empty();
-                $("#course-result").append("<table class='table table-bordered table-condensed'><thead><tr><th>序号</th><th width='200'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th width='100'>剩余容量</th><th>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
-                $("#course-list").append("<tr class='" + index + "'><td>" + index + "</td><td id='"+ id + "'>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td><a rel='popover' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<br>学系：" + teacher.department + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td>" + exam + "</td><td>" + period + "</td><td>" + week + time + "</td><td>" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
+                $("#course-list").append("<tr class='" + index + "'><td>" + index + "</td><td id='"+ id + "'>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td><a class='withajaxpopover' rel='popover' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " style=float:right><br>学系：" + teacher.department + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td>" + exam + "</td><td>" + period + "</td><td id='course-time-1'></td><td>" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
+                for (j = 0;j < course_time.length;j++)
+                {
+                    var week = week_map[course_time[j].week];
+                    var time = course_time[j].time;
+                    $("#course-time-1").append(week + " " + time + "节<br>");
+                }
             }
+            $("#course-result").append("<div id='msg-area'></div>");
         }
     });
+    $("[rel = 'popover']").popover();
 }
 
 function sendRequest(course_id)
@@ -73,7 +81,7 @@ function sendRequest(course_id)
     var flag = false;
     $.ajax({
         url: '/student/withdrawalCourse/',
-        data: 'id=' + course_id,
+        data: 'course_id=' + course_id,
         datatype: 'json',
         type: 'post',
         async: false,
@@ -87,11 +95,16 @@ function sendRequest(course_id)
             var valid = msg.valid;
             if (valid == false)
             {
-                alert("选/退课失败！");
+                $("#msg-area").empty();
+                $("#msg-area").show();
+                $("#msg-area").append("<div class='alert alert-error'><strong>对<" + $('td#' + course_id).text() + ">操作失败！</strong></div>");
                 flag = false;
             }
             else
             {
+                $("#msg-area").empty();
+                $("#msg-area").show();
+                $("#msg-area").append("<div class='alert alert-success'><strong>对<" + $('td#' + course_id).text() + ">操作成功！</strong></div>");
                 flag = true;
             }
         }
