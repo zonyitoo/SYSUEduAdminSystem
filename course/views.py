@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 
 from course.models import CourseType, Course
+from take.models import Takes
 from student.models import Student
 from django.utils import simplejson
 
@@ -70,6 +71,12 @@ def get_available_list(request):
                 courseObj['exam_method'] = course.exam_method
                 courseObj['course_type'] = course.course_type.get_coursetype()
                 courseObj['department'] = course.department.name
+
+                try:
+                    Takes.objects.get(course=course, student=student)
+                    courseObj['take'] = True
+                except:
+                    courseObj['take'] = False
                 
                 courseArr.append(courseObj)
 
