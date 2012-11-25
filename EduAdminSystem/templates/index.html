@@ -12,19 +12,32 @@
     <ul class="menu" rel="sam1">
       <li><a href="#">中山大学本科生教务系统</a></li>
       <li><a target="_blank" href="http://jwc.sysu.edu.cn/">教务新闻</a></li>
-      <li><a target="_blank" href="http://weibo.com/19thhell">联系我们</a></li>
+      <li><a href="#contact" data-toggle="modal" data-keyboard="true">联系我们</a></li>
       <li><a href="#calendar" data-toggle="modal" data-keyboard="true">查看校历</a></li>
       <li><a href="#about" data-toggle="modal" data-keyboard="true">关于</a></li>
 
       <span id="status">
           <fieldset>
-            <span class="badge badge-success user-id" id="information">{{ account }}</span>
-            <span class="badge badge-success user-name" id="information">{{ name }}</span>
+            <span class="badge badge-success user-information" id="information">{{ account }}({{ name }})</span>
             <button id="modifypasswd" onclick="refresh()" class="btn btn-danger" href="#modify" data-toggle="modal" data-keyboard="true"><i class="icon-cog icon-white"></i> 修改密码</button>
             <button id="logout" onclick="logout()" class="btn btn-primary"><i class="icon-share-alt icon-white"></i> 注销</button>
           </fieldset>
       </span>
     </ul>
+  </div>
+
+  <div class="modal hide fade" id="contact">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <h3>联系我们</h3>
+	  </div>
+	  <div class="modal-body">
+          <li><a href="http://weibo.com/iphkwan/" target="_blank">月亮脸</a></li>
+          <li><a href="http://weibo.com/19thhell/" target="_blank">虫尾巴</a></li>
+          <li><a href="http://weibo.com/zonyitoo/" target="_blank">尖头叉子</a></li>
+          <li><a href="http://weibo.com/keyihao/" target="_blank">大脚板</a></li>
+      </div>
+	  <div class="modal-footer"></div>
   </div>
 
   <div class="modal hide fade" id="calendar" style="width: 60%;">

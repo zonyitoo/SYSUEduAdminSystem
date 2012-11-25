@@ -58,16 +58,31 @@ function getCourse()
                 var courseType = list[i].course_type;
                 var credit = list[i].credit;
                 var teacher = list[i].teacher;
+                if (teacher.img_addr == null)
+                  teacher.img_addr = "/static/img/default_user.jpg";
+                if (teacher.site == null)
+                  teacher.site = "#";
                 var exam = list[i].exam_method;
                 var period = list[i].from_week + "~" + list[i].to_week + "周";
                 var course_time = list[i].course_time;
                 var capacity = list[i].capacity;
-                $("#course-list").append("<tr class='" + index + "'><td>" + index + "</td><td id='"+ id + "'>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td><a class='withajaxpopover' rel='popover' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " style=float:right><br>学系：" + teacher.department + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td>" + exam + "</td><td>" + period + "</td><td id='course-time-1'></td><td>" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
+                var take = list[i].take;
+                $("#course-list").append("<tr class='" + index + "'><td>" + index + "</td><td id='"+ id + "'>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td><a target='_blank' href='" + teacher.site + "' class='withajaxpopover' rel='popover' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " style=float:right;width:30%;height:30%;><br>学系：" + teacher.department + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td>" + exam + "</td><td>" + period + "</td><td id='course-time-1'></td><td>" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
                 for (j = 0;j < course_time.length;j++)
                 {
                     var week = week_map[course_time[j].week];
                     var time = course_time[j].time;
                     $("#course-time-1").append(week + " " + time + "节<br>");
+                }
+                if (take == false)
+                {
+                    $("." + index + ".btn").removeClass("btn-danger").addClass("btn-primary");
+                    $("." + index + ".btn").val("选课");
+                }
+                else
+                {
+                    $("." + index + ".btn").removeClass("btn-primary").addClass("btn-danger");
+                    $("." + index + ".btn").val("退课");
                 }
             }
             $("#course-result").append("<div id='msg-area'></div>");
