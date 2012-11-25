@@ -54,7 +54,7 @@ function getCourse()
                 var courseName = list[i].name;
                 var courseType = list[i].course_type;
                 var credit = list[i].credit;
-                var teacher = list[i].teacher;
+                var teacher = list[i].teacher.teacher_name;
                 var exam = list[i].exam_method;
                 var period = list[i].from_week + "~" + list[i].to_week + "周";
                 var week = list[i].course_time[0].week;
