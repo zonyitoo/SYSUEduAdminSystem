@@ -1,5 +1,10 @@
 //JavaScript Document
 $(document).ready(function(){
+    $("#contact").on('show', function(){
+        $(document).keydown(function(){
+            $("#contact").modal('hide');
+        });
+    });
     $("#calendar").on('show', function(){
         $(document).keydown(function(){
             $("#calendar").modal('hide');

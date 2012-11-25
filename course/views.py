@@ -66,7 +66,7 @@ def get_available_list(request):
                             'department': course.teacher.department.name
                         }
                 courseObj['credit'] = course.credit
-                courseObj['location'] = course.location
+                courseObj['place'] = course.location
                 courseObj['capacity'] = course.capacity
                 courseObj['exam_method'] = course.exam_method
                 courseObj['course_type'] = course.course_type.get_coursetype()

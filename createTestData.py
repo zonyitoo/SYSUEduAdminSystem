@@ -183,7 +183,7 @@ courses = [
                 'to_week': 20,
                 'teacher': Teacher.objects.get(teacher_name='纪庆革'),
                 'credit': 2,
-                'location': 'addr',
+                'location': 'C501',
                 'capacity': 9999,
                 'exam_method': '考查',
                 'course_type':
