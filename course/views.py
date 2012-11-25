@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 
 from course.models import CourseType, Course

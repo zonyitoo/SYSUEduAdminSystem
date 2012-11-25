@@ -206,12 +206,16 @@ for c in courses:
 ## Takes
 from take.models import Takes
 takes = [
-            
+            {
+                'course': Course.objects.get(name='计算机图形学'),
+                'student': Student.objects.get(student_name='ABC')
+            }
     ]
 
 for t in takes:
     obj = Takes.objects.get_or_create(**t)
     if not obj[1]:
-        pass
+        print "Take", t, "exists"
     else:
+        print "Creating Take", t
         obj[0].save()
