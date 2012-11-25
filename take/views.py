@@ -9,7 +9,7 @@ from django.utils import simplejson
 @login_required
 def get_take_courses(request):
     if request.method == 'GET':
-        year = request.GET.get('year', '2005-2006')
+        year = request.GET.get('year', '2012-2013')
         sem = request.GET.get('sem', 1)
 
         user = request.user
