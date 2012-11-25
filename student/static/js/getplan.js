@@ -7,7 +7,7 @@ $(document).ready(function(){
 });
 
 function getPlan(){
-    var cultivate = document.getElementById("cultivate-2").seletedIndex;
+    var cultivate = document.getElementById("cultivate-2").selectedIndex;
     $.ajax({
         url: '/take/getTakePlan',
         data: 'cultivate=' + cultivate,
