@@ -50,7 +50,7 @@ source db.sql
 以上会把原有的`eduadminsystemdb`重新创建，那么接下来就要运行
 
 ```bash
-python manage.py runserver
+python manage.py syncdb
 ```
 
 来创建系统所要用到的表，接下来就执行`createTestData.py`来生成一些测试数据
