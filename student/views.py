@@ -14,16 +14,19 @@ def select_course(request):
 @login_required
 def withdrawal_course(request):
     if request.method == 'POST':
-        course_id = request.POST['id']
+        course_id = request.POST['course_id']
         course = None
         try:
             course = Course.objects.get(id=int(course_id))
         except:
             return HttpResponse(simplejson.dumps({'valid': False, 'error_msg':
                 '该课程不存在'}), mimetype='application/json')
+
+        if not hasattr(request.user, 'student'):
+            return HttpResponseBadRequest('Only Student can withdrawal')
+
         student = Student.objects.get(user=request.user)
         try:
-            
             take = Takes.objects.get(course=course, student=student)
             take.delete()
         except:
