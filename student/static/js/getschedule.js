@@ -69,11 +69,10 @@ function getSchedule()
                 var exam = list[i].exam_method;
                 var period = list[i].from_week + "~" + list[i].to_week + "周";
                 var course_time = list[i].course_time;
-                var course_place = list[i].place;
                 var capacity = list[i].capacity;
                 for (j = 0;j < course_time.length;j++)
                 {
-                    var place = course_place[j].place;
+                    var place = course_time[j].place;
                     var week = course_time[j].week;
                     var time = course_time[j].time;
                     for (k = 1;k < time.length;k++)
