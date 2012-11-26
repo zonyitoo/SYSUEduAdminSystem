@@ -203,7 +203,7 @@ courses = [
                 'to_week': 20,
                 'teacher': Teacher.objects.get(teacher_name='纪庆革'),
                 'credit': 2,
-                'location': 'C501',
+                'location': '东C501',
                 'capacity': 9999,
                 'exam_method': '考查',
                 'course_type':
@@ -219,14 +219,14 @@ courses = [
                     }
                 ],
             'course': {
-                'name': '软件工程',
+                'name': '软件工程导论及实践',
                 'academic_year': '2012-2013',
                 'semester': 1,
                 'from_week': 1,
                 'to_week': 20,
                 'teacher': Teacher.objects.get(teacher_name='衣扬'),
                 'credit': 3,
-                'location': 'A302',
+                'location': '东A302',
                 'capacity': 9999,
                 'exam_method': '考查',
                 'course_type':
