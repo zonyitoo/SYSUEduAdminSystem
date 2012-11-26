@@ -1,4 +1,6 @@
-from django.http import HttpResponseNotAllowed, HttpResponseRedirect
+from django.http import (
+    HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse
+)
 from user.controller import *
 from school.models import *
 from django.template import RequestContext

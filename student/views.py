@@ -10,7 +10,7 @@ from ajaxutils.decorators import ajax
 def select_course(request):
     pass
 
-@ajax(login_required=True, request_POST=True)
+@ajax(login_required=True, require_POST=True)
 def withdrawal_course(request):
     if not hasattr(request.user, 'student'):
         return HttpResponseForbidden('Only Student can withdrawal')
