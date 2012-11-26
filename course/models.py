@@ -66,6 +66,7 @@ class Course(models.Model):
     assessment_avgscore = models.DecimalField(max_digits=5, decimal_places=2,
             default=0)
     assessment_num = models.IntegerField(default=0)
+    screened = models.BooleanField(default=False)
     
     def __unicode__(self):
         return self.name

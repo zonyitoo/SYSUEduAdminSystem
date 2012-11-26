@@ -73,10 +73,14 @@ def get_available_list(request):
                 courseObj['department'] = course.department.name
 
                 try:
-                    Takes.objects.get(course=course, student=student)
-                    courseObj['take'] = True
+                    t = Takes.objects.get(course=course, student=student)
+                    if course.screened:
+                        if t.screened: courseObj['take'] = 1
+                        else: courseObj['take'] = 2
+                    else:
+                        courseObj['take'] = 3
                 except:
-                    courseObj['take'] = False
+                    courseObj['take'] = 0 # The Student has not take this course
                 
                 courseArr.append(courseObj)
 
