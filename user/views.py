@@ -52,7 +52,7 @@ def login_page(request):
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
 
-@ajax(require_POST=True)
+@ajax(login_required=True, require_POST=True)
 def do_logout(request):
     tojson = {}
     if not request.user.is_anonymous():
