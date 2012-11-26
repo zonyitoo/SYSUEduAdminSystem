@@ -3,6 +3,7 @@
 $(document).ready(function(){
     $("#view-course-btn").click(function(){
         getCourse();
+        $("#view-schedule-btn").trigger("click");
     });
 });
 
@@ -15,7 +16,7 @@ function toggleCourse(n)
       state = 1;
     if (sendRequest(n,course_id,state))
     {
-        if (state = 1)
+        if (state == 1)
         {
             $("." + n + ".btn").removeClass("btn-primary").removeClass("btn-btn-danger").removeClass("btn-success").addClass("btn-inverse");
             $("." + n + ".btn").val("退课(待筛选)");
@@ -90,6 +91,7 @@ function getCourse()
                 var exam = list[i].exam_method;
                 var period = list[i].from_week + "~" + list[i].to_week + "周";
                 var course_time = list[i].course_time;
+                var course_place = list[i].place;
                 var capacity = list[i].capacity;
                 var take = list[i].take;
                 var hastaken = list[i].hastaken;
@@ -98,7 +100,7 @@ function getCourse()
                 {
                     var week = week_map[course_time[j].week];
                     var time = course_time[j].time;
-                    var place = list[i].place;
+                    var place = course_place[j].place;
                     $("." + index + ".course-time-1").append(week + " " + time);
                     $("." + index + ".course-locate-1").append(place);
                 }
