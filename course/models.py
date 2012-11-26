@@ -36,16 +36,11 @@ class CourseType(models.Model):
 class CourseTime(models.Model):
     week = models.PositiveSmallIntegerField()
     time = models.CharField(max_length=15)
+    location = models.CharField(max_length=10)
 
     def __unicode__(self):
         return str(self.week)
     
-class CourseLocation(models.Model):
-    location = models.CharField(max_length=10)
-
-    def __unicode__(self):
-        return str(self.place)
-
 class Course(models.Model):
     name = models.CharField(max_length=30)
     academic_year = models.CharField(max_length=9)
@@ -63,7 +58,6 @@ class Course(models.Model):
     course_time = models.ManyToManyField(CourseTime)
     teacher = models.ForeignKey(Teacher)
     credit = models.PositiveSmallIntegerField()
-    location = models.ManyToManyField(CourseLocation)
     capacity = models.PositiveIntegerField()
     exam_method = models.CharField(max_length=20)
     course_type = models.ForeignKey(CourseType)

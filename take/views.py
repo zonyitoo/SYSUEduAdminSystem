@@ -24,7 +24,12 @@ def get_take_courses(request):
         courseObj['semester'] = take.course.semester
         courseObj['from_week'] = take.course.from_week
         courseObj['to_week'] = take.course.to_week
-        courseObj['course_time'] = [{'week': t.week, 'time': t.time}
+        courseObj['course_time'] = [
+                {
+                    'week': t.week, 
+                    'time': t.time,
+                    'place': t.location
+                }
                 for t in take.course.course_time.all()]
         courseObj['teacher'] = {
                     'teacher_name': take.course.teacher.teacher_name,
@@ -34,7 +39,6 @@ def get_take_courses(request):
                     'department': take.course.teacher.department.name
                 }
         courseObj['credit'] = take.course.credit
-        courseObj['place'] = take.course.location
         courseObj['capacity'] = take.course.capacity
         courseObj['exam_method'] = take.course.exam_method
         courseObj['course_type'] = CourseType.get_coursetype(take.course.course_type)
@@ -71,7 +75,12 @@ def get_take_plan(request):
         courseObj['semester'] = take.course.semester
         courseObj['from_week'] = take.course.from_week
         courseObj['to_week'] = take.course.to_week
-        courseObj['course_time'] = [{'week': t.week, 'time': t.time}
+        courseObj['course_time'] = [
+                {
+                    'week': t.week, 
+                    'time': t.time,
+                    'place': t.location
+                }
                 for t in take.course.course_time.all()]
         courseObj['teacher'] = {
                     'teacher_name': take.course.teacher.teacher_name,
@@ -81,7 +90,6 @@ def get_take_plan(request):
                     'department': take.course.teacher.department.name
                 }
         courseObj['credit'] = take.course.credit
-        courseObj['location'] = take.course.location
         courseObj['capacity'] = take.course.capacity
         courseObj['exam_method'] = take.course.exam_method
         courseObj['course_type'] = CourseType.get_coursetype(take.course.course_type)

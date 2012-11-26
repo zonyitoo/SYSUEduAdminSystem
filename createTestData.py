@@ -183,7 +183,7 @@ for teacher in teachers:
         teac[0].save()
     
 ## Courses
-from course.models import CourseType, Course, CourseTime, CourseLocation
+from course.models import CourseType, Course, CourseTime
 for t in CourseType.COURSE_TYPE:
     CourseType.objects.get_or_create(type_name=t[0])[0].save()
 
@@ -193,10 +193,6 @@ courses = [
                 {
                     'week': 2,
                     'time': 'DE',
-                    }
-                ],
-            'location': [
-                {
                     'location': '东C501'
                     }
                 ],
@@ -220,10 +216,6 @@ courses = [
                 {
                     'week': 3,
                     'time': 'GHI',
-                    }
-                ],
-            'location': [
-                {
                     'location': '东A302'
                     }
                 ],
@@ -253,8 +245,6 @@ for c in courses:
         print "Creating Course", obj[0].name
         obj[0].course_time = [CourseTime.objects.get_or_create(**ti)[0] 
                 for ti in c['time']]
-        obj[0].location = [CourseLocation.objects.get_or_create(**lo)[0]
-                for lo in c['location']]
         obj[0].save()
 
 ## Takes
