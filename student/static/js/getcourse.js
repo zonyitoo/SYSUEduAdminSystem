@@ -49,7 +49,7 @@ function getCourse()
             var total = list.length;
             var week_map = new Array("世界末日","周一","周二","周三","周四","周五","周六","周日");
             $("#course-result").empty();
-            $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>序号</th><th width='200'>课程名称</th><th width='120'>类别</th><th>学分</th><th width='80'>任课教师</th><th>考核方式</th><th width='80'>起止时间</th><th width='100'>上课时段</th><th width='120'>上课地点</th><th width='70'>当前人数</th><th>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
+            $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>序号</th><th>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th>当前人数</th><th>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
             for (i = 0;i < total;i++)
             {
                 var index = i + 1;
@@ -79,21 +79,23 @@ function getCourse()
                 }
                 if (take == 0)
                 {
-                    $("." + index + ".btn").removeClass("btn-danger").removeClass("btn-success").addClass("btn-primary");
+                    $("." + index + ".btn").removeClass("btn-danger").removeClass("btn-inverse").removeClass("btn-success").addClass("btn-primary");
                     $("." + index + ".btn").val("选课");
                 }
                 else if (take == 1)
                 {
-                    $("." + index + ".btn").removeClass("btn-primary").removeClass("btn-success").addClass("btn-danger");
+                    $("." + index + ".btn").removeClass("btn-primary").removeClass("btn-inverse").removeClass("btn-success").addClass("btn-danger");
                     $("." + index + ".btn").val("退课");
+                }
+                else if (take == 2)
+                {
+                    $("." + index + ".btn").removeClass("btn-primary").removeClass("btn-danger").removeClass("btn-inverse").addClass("btn-success");
+                    $("." + index + ".btn").val("补选");
                 }
                 else
                 {
-                    $("." + index + ".btn").removeClass("btn-primary").removeClass("btn-danger").addClass("btn-success");
-                    if (take == 2)
-                        $("." + index + ".btn").val("补选");
-                    else
-                        $("." + index + ".btn").val("待筛选");
+                    $("." + index + ".btn").removeClass("btn-primary").removeClass("btn-danger").removeClass("btn-success").addClass("btn-inverse");
+                    $("." + index + ".btn").val("退课(待筛选)");
                 }
             }
             $("#course-result").append("<div id='msg-area'></div>");

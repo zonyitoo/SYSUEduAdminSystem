@@ -10,7 +10,7 @@ function getSchedule()
 {
     $.ajax({
         url: '/take/getTakeCourses/',
-        data: 'school-year=' + $("#school-year-3").val() + '&school-term=' + document.getElementById("school-term-3").selectedIndex,
+        data: 'school-year=' + $("#school-year-3").val() + '&school-term=' + (document.getElementById("school-term-3").selectedIndex + 1),
         type: 'get',
         async: false,
         error: function()
