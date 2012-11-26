@@ -8,31 +8,27 @@ from ajaxutils.decorators import ajax
 
 @ajax(login_required=True, require_POST=True)
 def select_course(request):
-    if request.method == 'POST':
-        if not hasattr(request.user, 'student'):
-            return HttpResponseBadRequest('Only Student can select course')
+    if not hasattr(request.user, 'student'):
+        return HttpResponseBadRequest('Only Student can select course')
 
-        course_id = request.POST['course_id']
-        course = None
-        try:
-            course = Course.objects.get(id=int(course_id))
-        except:
-            return HttpResponse(simplejson.dumps({'valid':False,  'error_msg':
-                '该课程不存在'}), mimetype='application/json')
+    course_id = request.POST['course_id']
+    course = None
+    try:
+        course = Course.objects.get(id=int(course_id))
+    except:
+        return HttpResponse(simplejson.dumps({'valid':False,  'error_msg':
+            '该课程不存在'}), mimetype='application/json')
 
-        student = Student.objects.get(user=request.user)
-        try:
-            take = Takes.objects.create(course=course,student=student)
-            take.save()
-        except:
-            pass
+    student = Student.objects.get(user=request.user)
+    try:
+        take = Takes.objects.create(course=course,student=student)
+        take.save()
+    except:
+        pass
 
-        return HttpResponse(simplejson.dumps({'valid': True,
-            'hastaken':Takes.objects.filter(course=course,student=student).count()}),
-            mimetype='application/json')
-
-    else:
-        return HttpResponseBadRequest('Invalid Method')
+    return HttpResponse(simplejson.dumps({'valid': True,
+        'hastaken':Takes.objects.filter(course=course,student=student).count()}),
+        mimetype='application/json')
 
 @ajax(login_required=True, require_POST=True)
 def withdrawal_course(request):
