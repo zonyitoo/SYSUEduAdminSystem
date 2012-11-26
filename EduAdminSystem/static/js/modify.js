@@ -49,15 +49,36 @@ function check()
     else
     {
         $.ajax({
-            url: "/user/modifypwd/", //访问路径
-            data: "oldpasswd=" + $("#oldpasswd").val() + "&newpasswd=" + $("#newpasswd").val(), //需要验证的参数
-            type: 'post', //传值的方式
+            url: '/user/modifypwd/',
+            data: 'oldpasswd=' + $("#oldpasswd").val() + '&newpasswd=' + $("#newpasswd").val(), 
+            type: 'post',
             async: false,
-            error: function ()
-            {//访问失败时调用的函数
-                alert("链接服务器错误！");
+            error: function(jqXHR,textStatus,errorThrown)
+            {
+                switch(jqXHR.status)
+                {
+                    case 400:
+                        alert("网络状态异常，请刷新后重试");
+                        break;
+                    case 401:
+                        alert("当前用户已过期，请重新登录");
+                        window.location = '/user/login/';
+                        break;
+                    case 403:
+                        alert("页面无法访问，请刷新后重试");
+                        break;
+                    case 404:
+                        alert("页面不存在，请刷新后重试");
+                        break;
+                    case 500:
+                        alert("服务器傲娇");
+                        break;
+                    default:
+                        alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
+                        break;
+                }
             },
-            success: function (msg)
+            success: function(msg,textStatus,jqXHR)
             {
                 var valid = msg.valid;
                 if (valid == false)

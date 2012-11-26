@@ -13,11 +13,32 @@ function getSchedule()
         data: 'school-year=' + $("#school-year-3").val() + '&school-term=' + (document.getElementById("school-term-3").selectedIndex + 1),
         type: 'get',
         async: false,
-        error: function()
+        error: function(jqXHR,textStatus,errorThrown)
         {
-            alert("链接服务器错误！");
+            switch(jqXHR.status)
+            {
+                case 400:
+                    alert("网络状态异常，请刷新后重试");
+                    break;
+                case 401:
+                    alert("当前用户已过期，请重新登录");
+                    window.location = '/user/login/';
+                    break;
+                case 403:
+                    alert("页面无法访问，请刷新后重试");
+                    break;
+                case 404:
+                    alert("页面不存在，请刷新后重试");
+                    break;
+                case 500:
+                    alert("服务器傲娇");
+                    break;
+                default:
+                    alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
+                    break;
+            }
         },
-        success: function(msg)
+        success: function(msg,textStatus,jqXHR)
         {
             var i = 0;
             var j = 0;

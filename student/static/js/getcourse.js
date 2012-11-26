@@ -9,14 +9,18 @@ $(document).ready(function(){
 function toggleCourse(n)
 {
     var course_id = $("tr." + n + " td:eq(1)").attr("id");
-    if (sendRequest(course_id))
+    var current = $("." + n + ".btn").val();
+    var state = 0;
+    if (current == "选课" || current == "补选")
+      state = 1;
+    if (sendRequest(n,course_id,state))
     {
-        if ($("." + n + ".btn").val() == "选课" || $("." + n + ".btn").val() == "补选")
+        if (state = 1)
         {
             $("." + n + ".btn").removeClass("btn-primary").removeClass("btn-btn-danger").removeClass("btn-success").addClass("btn-inverse");
             $("." + n + ".btn").val("退课(待筛选)");
         }
-        else if ($("." + n + ".btn").val() == "退课" || $("." + n + ".btn").val() == "退课(待筛选)")
+        else
         {
             $("." + n + ".btn").removeClass("btn-danger").removeClass("btn-success").removeClass("btn-inverse").addClass("btn-primary");
             $("." + n + ".btn").val("选课");
@@ -37,11 +41,32 @@ function getCourse()
         datatype: 'json',
         type: 'get',
         async: false,
-        error: function()
+        error: function(jqXHR,textStatus,errorThrown)
         {
-            alert("链接服务器错误！");
+            switch(jqXHR.status)
+            {
+                case 400:
+                    alert("网络状态异常，请刷新后重试");
+                    break;
+                case 401:
+                    alert("当前用户已过期，请重新登录");
+                    window.location = '/user/login/';
+                    break;
+                case 403:
+                    alert("页面无法访问，请刷新后重试");
+                    break;
+                case 404:
+                    alert("页面不存在，请刷新后重试");
+                    break;
+                case 500:
+                    alert("服务器傲娇");
+                    break;
+                default:
+                    alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
+                    break;
+            }
         },
-        success: function(msg)
+        success: function(msg,textStatus,jqXHR)
         {
             var i = 0;
             var j = 0;
@@ -49,7 +74,7 @@ function getCourse()
             var total = list.length;
             var week_map = new Array("世界末日","周一","周二","周三","周四","周五","周六","周日");
             $("#course-result").empty();
-            $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>序号</th><th>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th>当前人数</th><th>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
+            $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>序号</th><th class='very-wide-block'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th>当前人数</th><th class='wide-block'>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
             for (i = 0;i < total;i++)
             {
                 var index = i + 1;
@@ -104,35 +129,62 @@ function getCourse()
     $("[rel = 'popover']").popover();
 }
 
-function sendRequest(course_id)
+function sendRequest(n,course_id,state)
 {
     var flag = false;
     $.ajax({
-        url: '/student/withdrawalCourse/',
-        data: 'course_id=' + course_id,
+        url: '/student/toggleCourse/',
+        data: 'course_id=' + course_id + '&state=' + state,
         datatype: 'json',
         type: 'post',
         async: false,
-        error: function()
+        error: function(jqXHR,textStatus,errorThrown)
         {
-            alert("链接服务器错误！");
+            switch(jqXHR.status)
+            {
+                case 400:
+                    alert("网络状态异常，请刷新后重试");
+                    break;
+                case 401:
+                    alert("当前用户已过期，请重新登录");
+                    window.location = '/user/login/';
+                    break;
+                case 403:
+                    alert("页面无法访问，请刷新后重试");
+                    break;
+                case 404:
+                    alert("页面不存在，请刷新后重试");
+                    break;
+                case 500:
+                    alert("服务器傲娇");
+                    break;
+                default:
+                    alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
+                    break;
+            }
             flag = false;
         },
-        success: function(msg)
+        success: function(msg,textStatus,jqXHR)
         {
             var valid = msg.valid;
+            var hastaken = msg.hastaken;
             if (valid == false)
             {
                 $("#msg-area").empty();
-                $("#msg-area").show();
                 $("#msg-area").append("<div class='alert alert-error'><strong>对<" + $('td#' + course_id).text() + ">操作失败！</strong></div>");
+                $("#msg-area").show();
+                var t = setTimeout("$('#msg-area').fadeOut();",5000);
                 flag = false;
             }
             else
             {
+                var pos = ($("tr." + n + " td:eq(9)").text()).indexOf("/");
+                var total = ($("tr." + n + " td:eq(9)").text()).substring(pos + 1);
+                $("tr." + n + " td:eq(9)").text(hastaken + "/" + total);
                 $("#msg-area").empty();
-                $("#msg-area").show();
                 $("#msg-area").append("<div class='alert alert-success'><strong>对<" + $('td#' + course_id).text() + ">操作成功！</strong></div>");
+                $("#msg-area").show();
+                var t = setTimeout("$('#msg-area').fadeOut();",5000);
                 flag = true;
             }
         }
