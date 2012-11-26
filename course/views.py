@@ -68,6 +68,8 @@ def get_available_list(request):
                 courseObj['credit'] = course.credit
                 courseObj['place'] = course.location
                 courseObj['capacity'] = course.capacity
+                courseObj['hastaken'] =\
+                    Takes.objects.filter(course=course).count()
                 courseObj['exam_method'] = course.exam_method
                 courseObj['course_type'] = course.course_type.get_coursetype()
                 courseObj['department'] = course.department.name
