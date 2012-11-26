@@ -6,18 +6,7 @@ from course.models import Course
 from models import Student
 from ajaxutils.decorators import ajax
 
-def select_course(request):
-    if not hasattr(request.user, 'student'):
-        return HttpResponseForbidden('Only Student can select course')
-
-    course_id = request.POST['course_id']
-    course = None
-    try:
-        course = Course.objects.get(id=int(course_id))
-    except:
-        return HttpResponseForbidden('该课程不存在')
-
-    student = Student.objects.get(user=request.user)
+def select_course(student, course):
     try:
         take = Takes.objects.create(course=course,student=student)
         take.save()
