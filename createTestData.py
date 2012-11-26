@@ -10,7 +10,10 @@ from django.contrib.auth.models import User
     If you get runtime errors, you can
         1. Drop eduadminsystemdb database and recreate it
         2. Debug this script
+
+    Thie script will delete all your remain data
 """
+
 ## Schools
 from school.models import School, Department, Speciality
 
@@ -23,6 +26,7 @@ schools = [
         }
 ]
 
+School.objects.all().delete()
 for s in schools:
     obj = School.objects.get_or_create(**s)
     if not obj[1]:
@@ -38,6 +42,7 @@ departments = [
         }        
 ]
 
+Department.objects.all().delete()
 for d in departments:
     obj = Department.objects.get_or_create(**d)
     if not obj[1]:
@@ -55,6 +60,7 @@ specialities = [
         }        
 ]
 
+Speciality.objects.all().delete()
 for s in specialities:
     obj = Speciality.objects.get_or_create(**s)
     if not obj[1]:
@@ -75,6 +81,7 @@ studentMetas = [
     }        
 ]
 
+StudentMeta.objects.all().delete()
 for sm in studentMetas:
     obj = StudentMeta.objects.get_or_create(**sm)
     if not obj[1]:
@@ -119,6 +126,7 @@ students = [
     }
 ]
 
+Student.objects.all().delete()
 for student in students:
     try:
         user = User.objects.get(username=student['user']['username'])
@@ -146,9 +154,21 @@ teachers = [
                 'title': Teacher.TITLE[2][0],
                 'department': Department.objects.get(name='CS')
                 }
-            }    
+            },
+        {
+            'user': {
+                'username': 'yy',
+                'password': 'yy',
+                },
+            'teacher': {
+                'teacher_name': '衣扬',
+                'title': Teacher.TITLE[0][0],
+                'department': Department.objects.get(name='CS')
+                }
+            }
     ]
 
+Teacher.objects.all().delete()
 for teacher in teachers:
     try:
         user = User.objects.get(username=teacher['user']['username'])
@@ -190,9 +210,33 @@ courses = [
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
                 'department': Department.objects.get(name='CS')
                 }
+            },
+        {
+            'time': [
+                {
+                    'week': 3,
+                    'time': 'FGH',
+                    }
+                ],
+            'course': {
+                'name': '软件工程',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 1,
+                'to_week': 20,
+                'teacher': Teacher.objects.get(teacher_name='衣扬'),
+                'credit': 3,
+                'location': 'A302',
+                'capacity': 9999,
+                'exam_method': '考查',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'department': Department.objects.get(name='CS')
+                }
             }
     ]
 
+Course.objects.all().delete()
 for c in courses:
     obj = Course.objects.get_or_create(**c['course'])
     if not obj[1]:
@@ -209,9 +253,14 @@ takes = [
             {
                 'course': Course.objects.get(name='计算机图形学'),
                 'student': Student.objects.get(student_name='ABC')
+            },
+            {
+                'course': Course.objects.get(name='计算机图形学'),
+                'student': Student.objects.get(student_name='钟宇腾')
             }
     ]
 
+Takes.objects.all().delete()
 for t in takes:
     obj = Takes.objects.get_or_create(**t)
     if not obj[1]:
