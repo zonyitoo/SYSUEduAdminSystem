@@ -62,7 +62,8 @@ def get_available_list(request):
                         'department': course.teacher.department.name
                     }
             courseObj['credit'] = course.credit
-            courseObj['place'] = course.location
+            courseObj['place'] = [{'place': loc.location}
+                    for loc in course.location.all()]
             courseObj['capacity'] = course.capacity
             courseObj['hastaken'] =\
                 Takes.objects.filter(course=course).count()

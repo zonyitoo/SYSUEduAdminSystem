@@ -183,7 +183,7 @@ for teacher in teachers:
         teac[0].save()
     
 ## Courses
-from course.models import CourseType, Course, CourseTime
+from course.models import CourseType, Course, CourseTime, CourseLocation
 for t in CourseType.COURSE_TYPE:
     CourseType.objects.get_or_create(type_name=t[0])[0].save()
 
@@ -195,6 +195,11 @@ courses = [
                     'time': 'DE',
                     }
                 ],
+            'location': [
+                {
+                    'location': '东C501'
+                    }
+                ],
             'course': {
                 'name': '计算机图形学',
                 'academic_year': '2012-2013',
@@ -203,7 +208,6 @@ courses = [
                 'to_week': 20,
                 'teacher': Teacher.objects.get(teacher_name='纪庆革'),
                 'credit': 2,
-                'location': '东C501',
                 'capacity': 9999,
                 'exam_method': '考查',
                 'course_type':
@@ -218,6 +222,11 @@ courses = [
                     'time': 'GHI',
                     }
                 ],
+            'location': [
+                {
+                    'location': '东A302'
+                    }
+                ],
             'course': {
                 'name': '软件工程导论及实践',
                 'academic_year': '2012-2013',
@@ -226,7 +235,6 @@ courses = [
                 'to_week': 20,
                 'teacher': Teacher.objects.get(teacher_name='衣扬'),
                 'credit': 3,
-                'location': '东A302',
                 'capacity': 9999,
                 'exam_method': '考查',
                 'course_type':
@@ -245,6 +253,8 @@ for c in courses:
         print "Creating Course", obj[0].name
         obj[0].course_time = [CourseTime.objects.get_or_create(**ti)[0] 
                 for ti in c['time']]
+        obj[0].location = [CourseLocation.objects.get_or_create(**lo)[0]
+                for lo in c['location']]
         obj[0].save()
 
 ## Takes
