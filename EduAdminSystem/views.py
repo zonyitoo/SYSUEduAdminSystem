@@ -10,22 +10,8 @@ from django.contrib.auth.decorators import login_required
 from school.models import *
 from student.models import Student
 from teacher.models import Teacher
-"""
-def helloworld(request):
-    sist = School(name='SIST', addr='FUCK')
-    sist.save()
-    cs = Department(name='CS', addr='YOU', school=sist)
-    cs.save()
-    cst = Speciality(name='CST', department=cs)
-    cst.save()
+from ajaxutils.decorators import ajax
 
-    create_student('10383007', u'零零七', '123456', 'UG', '2010', 'CST')
-    
-    return HttpResponse('Inserted 10383007, password is 123456')
-
-def copyright(request):
-    return HttpResponse("Copyright by iphkwan, 19thell, zonyitoo, sheepke.")
-"""
 @login_required
 def index(request):
     if request.method == "GET":
@@ -47,16 +33,13 @@ def index(request):
     else:
         return HttpResponseBadRequest('Invalid Method')
 
-@login_required
+@ajax(login_required=True, require_GET=True)
 def index_getview(request):
-    if request.method == "GET":
-        if hasattr(request.user, 'student'):
-            return render_to_response('student.html', {},
-                context_instance=RequestContext(request))
-        elif hasattr(request.user, 'teacher'):
-            return render_to_response('teacher.html', {},
-                context_instance=RequestContext(request))
-        else:
-            return HttpResponseForbidden('Admin User??' + request.user.username)
+    if hasattr(request.user, 'student'):
+        return render_to_response('student.html', {},
+            context_instance=RequestContext(request))
+    elif hasattr(request.user, 'teacher'):
+        return render_to_response('teacher.html', {},
+            context_instance=RequestContext(request))
     else:
-        return HttpResponseForbidden('Invalid method')
+        return HttpResponseForbidden('Admin User??' + request.user.username)

@@ -1,12 +1,12 @@
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
+from django.http import HttpResponseNotAllowed, HttpResponseRedirect
 from user.controller import *
 from school.models import *
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, login, logout
 from django.utils import simplejson
+from ajaxutils.decorators import ajax
 
 def login_page(request):
     if request.method == 'GET':
@@ -48,28 +48,24 @@ def login_page(request):
         return HttpResponse(simplejson.dumps(retjson),
             mimetype='application/json')
     else:
-        return HttpResponseBadRequest('Invalid method')
+        return HttpResponseNotAllowed(['GET', 'POST'])
 
+@ajax(require_POST=True)
 def do_logout(request):
-    tojson = {'url': '/user/login/'}
+    tojson = {}
     if not request.user.is_anonymous():
         tojson['logoutaccount'] = request.user.username
 
     logout(request)
-    return HttpResponse(simplejson.dumps(tojson), mimetype='application/json')
+    return tojson
 
-@login_required
+@ajax(login_required=True, require_POST=True)
 def modify_pwd(request):
-    if request.method == 'POST':
-        oldpasswd = request.POST['oldpasswd']
-        newpasswd = request.POST['newpasswd']
-        if not request.user.check_password(oldpasswd):
-            return HttpResponse(simplejson.dumps({'valid': False}), 
-                mimetype='application/json')
-        else:
-            request.user.set_password(newpasswd)
-            request.user.save()
-            return HttpResponse(simplejson.dumps({'valid': True}), 
-                    mimetype='application/json')
+    oldpasswd = request.POST['oldpasswd']
+    newpasswd = request.POST['newpasswd']
+    if not request.user.check_password(oldpasswd):
+        return {'valid': False}
     else:
-        return HttpResponseBadRequest()
+        request.user.set_password(newpasswd)
+        request.user.save()
+        return {'valid': True}

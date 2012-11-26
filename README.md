@@ -25,6 +25,11 @@ sudo pip install django
 >>>
 ```
 
+最后安装Django AJAX-utils
+```bash
+sudo pip install django-ajaxutils
+```
+
 ## 数据库
 * 用户名：eduadminsystem
 * 密码：eduadminsystem
