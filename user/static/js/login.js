@@ -7,8 +7,9 @@ function validate()
     if (username == "")
     {
         $("#prompt").hide();
-        $("#alert").show();
+        $("#alert").hide();
         $("#alert").text("请输入用户名！");
+        $("#alert").fadeIn();
         $("#username")[0].focus();
         return false;
     }
@@ -29,8 +30,9 @@ function validate()
                 if (valid == false)
                 {
                     $("#prompt").hide();
-                    $("#alert").show();
+                    $("#alert").hide();
                     $("#alert").text("用户名或密码错误！");
+                    $("#alert").fadeIn();
                 }
                 else
                     window.location = next;

@@ -49,7 +49,7 @@ function getCourse()
             var total = list.length;
             var week_map = new Array("周日","周一","周二","周三","周四","周五","周六");
             $("#course-result").empty();
-            $("#course-result").append("<table class='table table-bordered table-condensed'><thead><tr><th>序号</th><th width='200'>课程名称</th><th width='150'>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th width='100'>剩余容量</th><th>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
+            $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>序号</th><th width='200'>课程名称</th><th width='150'>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th width='100'>剩余容量</th><th>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
             for (i = 0;i < total;i++)
             {
                 var index = i + 1;
@@ -67,7 +67,7 @@ function getCourse()
                 var course_time = list[i].course_time;
                 var capacity = list[i].capacity;
                 var take = list[i].take;
-                $("#course-list").append("<tr class='" + index + "'><td>" + index + "</td><td id='"+ id + "'>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td><a target='_blank' href='" + teacher.site + "' class='withajaxpopover' rel='popover' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " style=float:right;width:30%;height:30%;><br>学系：" + teacher.department + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td>" + exam + "</td><td>" + period + "</td><td id='course-time-1'></td><td id='course-locate-1'></td><td>" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
+                $("#course-list").append("<tr class='" + index + "'><td>" + index + "</td><td id='"+ id + "'>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td><a target='_blank' href='" + teacher.site + "' class='withajaxpopover' rel='popover' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " width=68 height=68 style=float:right><br>学系：" + teacher.department + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td>" + exam + "</td><td>" + period + "</td><td id='course-time-1'></td><td id='course-locate-1'></td><td>" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
                 for (j = 0;j < course_time.length;j++)
                 {
                     var week = week_map[course_time[j].week];

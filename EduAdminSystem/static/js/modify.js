@@ -25,22 +25,25 @@ function check()
     if (newpasswd != confirmpasswd)
     {
         $("#success").hide();
-        $("#error").show();
+        $("#error").hide();
         $("#error-content").text("确认密码必须与新密码相同！");
+        $("#error").fadeIn();
         $("#confirmpasswd").focus();
     }
     else if (oldpasswd == "")
     {
         $("#success").hide();
-        $("#error").show();
+        $("#error").hide()
         $("#error-content").text("旧密码错误！");
+        $("#error").fadeIn();
         $("#oldpasswd").focus();
     }
     else if (newpasswd.length < 6)
     {
         $("#success").hide();
-        $("#error").show();
+        $("#error").hide();
         $("#error-content").text("密码不得少于6位！");
+        $("#error").fadeIn();
         $("#newpasswd").focus();
     }
     else
@@ -60,15 +63,17 @@ function check()
                 if (valid == false)
                 {
                     $("#success").hide();
-                    $("#error").show();
+                    $("#error").hide();
                     $("#error-content").text("旧密码错误！");
+                    $("#error").fadeIn();
                     $("#oldpasswd").focus();
                 }
                 else
                 {
                     $("#error").hide();
-                    $("#success").show();
+                    $("#success").hide();
                     $("#success-content").text("密码修改成功！");
+                    $("#success").fadeIn();
                     $("#close").focus();
                 }
             }
