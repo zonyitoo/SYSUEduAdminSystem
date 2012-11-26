@@ -15,7 +15,8 @@ function toggleCourse(n)
       state = 1;
     if (sendRequest(n,course_id,state))
     {
-        $("#view-schedule-btn").trigger("click");
+        if ($("#schedule-result").text() != "")
+            $("#view-schedule-btn").trigger("click");
         if (state == 1)
         {
             $("." + n + ".btn").removeClass("btn-primary").removeClass("btn-btn-danger").removeClass("btn-success").addClass("btn-inverse");
