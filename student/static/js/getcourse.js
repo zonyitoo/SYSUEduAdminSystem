@@ -11,14 +11,14 @@ function toggleCourse(n)
     var course_id = $("tr." + n + " td:eq(1)").attr("id");
     if (sendRequest(course_id))
     {
-        if ($("." + n + ".btn").val() == "选课")
+        if ($("." + n + ".btn").val() == "选课" || $("." + n + ".btn").val() == "补选")
         {
-            $("." + n + ".btn").removeClass("btn-primary").addClass("btn-danger");
-            $("." + n + ".btn").val("退课");
+            $("." + n + ".btn").removeClass("btn-primary").removeClass("btn-btn-danger").removeClass("btn-success").addClass("btn-inverse");
+            $("." + n + ".btn").val("退课(待筛选)");
         }
-        else
+        else if ($("." + n + ".btn").val() == "退课" || $("." + n + ".btn").val() == "退课(待筛选)")
         {
-            $("." + n + ".btn").removeClass("btn-danger").addClass("btn-primary");
+            $("." + n + ".btn").removeClass("btn-danger").removeClass("btn-success").removeClass("btn-inverse").addClass("btn-primary");
             $("." + n + ".btn").val("选课");
         }
     }
