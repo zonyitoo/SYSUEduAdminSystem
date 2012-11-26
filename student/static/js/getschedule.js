@@ -6,16 +6,13 @@ $(document).ready(function(){
     });
 });
 
-function getSchedule(){
-    var yr = document.getElementById("school-year-3");
-    var year = yr.options[yr.selectedIndex].text;
-    var sem = document.getElementById("school-term-3").selectedIndex;
-    sem = sem + 1;
+function getSchedule()
+{
     $.ajax({
         url: '/take/getTakeCourses/',
-        data: 'year=' + year + '&sem=' + sem,
-        datatype: 'json',
+        data: 'school-year=' + $("#school-year-3").val() + '&school-term=' + document.getElementById("school-term-3").selectedIndex,
         type: 'get',
+        async: false,
         error: function()
         {
             alert("链接服务器错误！");
@@ -23,23 +20,47 @@ function getSchedule(){
         success: function(msg)
         {
             var i = 0;
-            var lt = msg.courses;
-            var tot = lt.length;
-            for (i = 0; i < tot; i++)
+            var j = 0;
+            var k = 0;
+            var list = msg.courses;
+            var total = list.length;
+            var week_map = new Array("世界末日","周一","周二","周三","周四","周五","周六","周日");
+            var time_map = new Array("08:00~08:45","08:55~09:40","09:50~10:35","10:45~11:30","11:40~12:25","12:35~13:20","13:30~14:15","14:25~15:10","15:20~16:05","16:15~17:00","17:10~17:55","18:05~18:50","19:00~19:45","19:55~20:40","20:50~21:35");
+            $("#schedule-result").empty();
+            $("#schedule-result").append("<table class='table table-bordered'><thead><tr><th width='100'>上课时段</th><th width='200'>周一</th><th width='200'>周二</th><th width='200'>周三</th><th width='200'>周四</th><th width='200'>周五</th><th width='200'>周六</th><th width='200'>周日</th></tr></thead><tbody id='schedule-list'></tbody</table>");
+            for (i = 0;i < 15;i++)
             {
-                var index = i + 1;
-                var courseName = lt[i].name;
-                var courseType = lt[i].course_type;
-                var credit = lt[i].credit;
-                var teacher = lt[i].teacher.teacher_name;
-                var exam = lt[i].exam_method;
-                var period = lt[i].from_week + "~" + lt[i].to_week + "周";
-                var time = lt[i].course_time.time;
-                var capacity = lt[i].capacity;
-                $("#schedule-result").empty();
-                $("#schedule-result").append("<table class='table table-bordered table-condensed'><thead><tr><th>序号</th><th width='200'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th width='100'>剩余容量</th></tr></thead><tbody id='schedule-list'></tbody</table>");
-                $("#schedule-list").append("<tr><td class='" + index + "'>" + index + "</td><td>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td>" + teacher + "</td><td>" + exam + "</td><td>" + period + "</td><td>" + time + "</td><td>" + capacity + "</td></tr>");
-            }           
+                $("#schedule-list").append("<tr class='" + i + " schedule'><td class='schedule withajaxpopover' rel='popover' title='详细时间' data-content='" + time_map[i] + "' data-placement='bottom'>" + String.fromCharCode(i + 65) + "</td><td class='Monday schedule'></td><td class='Tuesday schedule'></td><td class='Wednesday schedule'></td><td class='Thursday schedule'></td><td class='Friday schedule'></td><td class='Saturday schedule'></td><td class='Sunday schedule'></td></tr>");
+                if (i == 5 || i == 11)
+                  $("tr." + i).addClass("warning");
+            }
+            for (i = 0;i < total;i++)
+            {
+                var id = list[i].id;
+                var courseName = list[i].name;
+                var courseType = list[i].course_type;
+                var credit = list[i].credit;
+                var teacher = list[i].teacher;
+                if (teacher.img_addr == null)
+                  teacher.img_addr = "/static/img/default_user.jpg";
+                if (teacher.site == null)
+                  teacher.site = "#";
+                var exam = list[i].exam_method;
+                var period = list[i].from_week + "~" + list[i].to_week + "周";
+                var course_time = list[i].course_time;
+                var capacity = list[i].capacity;
+                for (j = 0;j < course_time.length;j++)
+                {
+                    var place = list[i].place;
+                    var week = course_time[j].week;
+                    var time = course_time[j].time;
+                    for (k = 1;k < time.length;k++)
+                      $("tr." + (time.charCodeAt(k) - 65) + " td:eq(" + week + ")").remove();
+                    $("tr." + (time.charCodeAt(0) - 65) + " td:eq(" + week + ")").replaceWith("<td rowspan='" + time.length + "' style='background: #d9edf7;' class='withajaxpopover' rel='popover' title='课程信息' data-content='课程类型：" + courseType + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "<br>考核方式：" + exam + "' data-placement='bottom'>" + courseName + "<br>" + place + "<br>" + period + "</td>");
+                }
+            }
+            $("#schedule-result").append("<div id='msg-area'></div>");
         }
     });
+    $("[rel = 'popover']").popover();
 }

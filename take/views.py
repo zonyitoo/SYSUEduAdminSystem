@@ -37,7 +37,7 @@ def get_take_courses(request):
                         'department': take.course.teacher.department.name
                     }
             courseObj['credit'] = take.course.credit
-            courseObj['location'] = take.course.location
+            courseObj['place'] = take.course.location
             courseObj['capacity'] = take.course.capacity
             courseObj['exam_method'] = take.course.exam_method
             courseObj['course_type'] = CourseType.get_coursetype(take.course.course_type)

@@ -215,7 +215,7 @@ courses = [
             'time': [
                 {
                     'week': 3,
-                    'time': 'FGH',
+                    'time': 'GHI',
                     }
                 ],
             'course': {
