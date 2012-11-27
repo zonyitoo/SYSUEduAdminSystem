@@ -31,40 +31,46 @@ sudo pip install django-ajaxutils
 ```
 
 ## 数据库
-* 用户名：eduadminsystem
-* 密码：eduadminsystem
-* 数据库名：eduadminsystemdb
 
-```sql
-grant all privileges on eduadminsystemdb.* to eduadminsystem@localhost identified by
-"eduadminsystem";
+### Postgresql
+
+先安装相关的软件包
+
+```bash
+sudo apt-get install postgresql postgresql-server-all # Postgresql的数据库服务器
 ```
 
-* 创建数据库时要设置字符集为UTF-8
+由于必须要使用`postgres`用户才能修改数据库，所以要修改用户`postgres`的默认密码
 
-```sql
-create database eduadminsystemdb character set utf8;
+```bash
+sudo passwd postgres
 ```
 
-如果已经创建过数据库，那么要先把原有的数据库DROP掉，可以直接执行`db.sql`，执行方法是在`sqlshell`中输入
+建立新的数据库`easdb`，登录用户名为`eas`，密码是`eduadminsystem`
 
-```sql
-source db.sql
+```bash
+sudo -u postgres createuser eas -P
+sudo -u postgres createdb -O eas easdb
 ```
 
-以上会把原有的`eduadminsystemdb`重新创建，那么接下来就要运行
+安装Postgresql的Python组件，及Django-Database-URL工具，用来根据系统环境变量`DATABASE_URL`来设定数据库的地址
+
+```bash
+sudo pip install psycopg2 dj-database-url
+```
+
+同步Django数据库并生成测试用数据
 
 ```bash
 python manage.py syncdb
-```
-
-来创建系统所要用到的表，接下来就执行`createTestData.py`来生成一些测试数据
-
-```bash
 python createTestData.py
 ```
 
-`createTestData.py`如果执行出错请自行Debug，请大家一起往里面加测试数据吧
+删除数据库
+
+```
+sudo -u postgres dropdb easdb
+```
 
 ## Trouble Shooting
 * 怎么运行？
