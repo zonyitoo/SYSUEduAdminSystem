@@ -15,9 +15,17 @@ function validate()
     }
     else 
     {
+        var username = $("#username").val();
+        var passwd = $("#passwd").val();
+        for (var i = 0;i < username.length;i++)
+          if (username[i] < '0' || username[i] > '9' && username[i] < 'A' || username[i] > 'Z' && username[i] < 'a' || username[i] > 'z')
+          {
+              alert("用户名非法！");
+              return false;
+          }
         $.ajax({
             url: '/user/login/',
-            data: 'username=' + $("#username").val() + '&passwd=' + $("#passwd").val(), //需要验证的参数
+            data: 'username=' + username + '&passwd=' + passwd,
             type: 'post',
             error: function(jqXHR,textStatus,errorThrown)
             {
