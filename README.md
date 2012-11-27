@@ -37,7 +37,7 @@ sudo pip install django-ajaxutils
 先安装相关的软件包
 
 ```bash
-sudo apt-get install postgresql postgresql-server-all # Postgresql的数据库服务器
+sudo apt-get install postgresql postgresql-client postgresql-server-all # Postgresql的数据库服务器
 ```
 
 由于必须要使用`postgres`用户才能修改数据库，所以要修改用户`postgres`的默认密码
