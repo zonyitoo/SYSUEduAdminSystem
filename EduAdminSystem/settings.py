@@ -14,11 +14,11 @@ LOGIN_URL = '/user/login/'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'eduadminsystemdb',                      # Or path to database file if using sqlite3.
-        'USER': 'eduadminsystem',                      # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'easdb',                      # Or path to database file if using sqlite3.
+        'USER': 'eas',                      # Not used with sqlite3.
         'PASSWORD': 'eduadminsystem',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -190,3 +190,7 @@ LOGGING = {
         },
     }
 }
+
+# Parse database configuration from $DATABASE_URL
+#import dj_database_url
+#DATABASES['default'] = dj_database_url.config()
