@@ -32,14 +32,14 @@ function toggleCourse(n)
 
 function getCourse()
 {
-    var cultivate = document.getElementById("cultivate-1").selectedIndex;
+    var cultivate = $("#cultivate-1 option:selected").val();
     var po = !($("#po").hasClass("active"));
     var pr = !($("#pr").hasClass("active"));
     var mo = !($("#mo").hasClass("active"));
     var mr = !($("#mr").hasClass("active"));
     $.ajax({
         url: '/course/getAvailableList/',
-        data: 'cultivate=' + cultivate +'&po=' + po + '&pr=' + pr + '&mo=' + mo + '&mr=' + mr,
+        data: 'cultivate=' + cultivate +'&po=' + po + '&pr=' + pr + '&mo=' + mo + '&mr=' + mr + '&school-year=' + $(".current-year").text() + '&school-term=' + $(".current-term").text(),
         datatype: 'json',
         type: 'get',
         async: false,

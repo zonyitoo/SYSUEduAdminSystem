@@ -14,7 +14,7 @@ coursetype = {
 
 @ajax(login_required=True, require_GET=True)
 def get_available_list(request):
-    cultivate = int(request.GET.get('cultivate', 0))
+    cultivate = int(request.GET.get('cultivate', ''))
     ct = []
     if request.GET['po'] == 'true':
         ct.append(coursetype['po'])
@@ -24,8 +24,8 @@ def get_available_list(request):
         ct.append(coursetype['mo'])
     if request.GET['mr'] == 'true':
         ct.append(coursetype['mr'])
-    academic_year = request.GET.get('academic_year', '2012-2013')
-    sem = request.GET.get('sem', 1)
+    academic_year = request.GET.get('school-year', '')
+    sem = request.GET.get('school-term', '')
     
     courseType = []
     for cot in ct:
@@ -90,3 +90,36 @@ def get_available_list(request):
         'courses': courseArr, 
         'studentid': request.user.username
     }
+
+@ajax(login_required=True, require_GET=True)
+def get_educate_plan(request):
+    cultivate = int(request.GET.get('cultivate', ''))
+    academic_year = request.GET.get('school-year', '')
+    sem = request.GET.get('school-term', '')
+    
+    # only work for student 
+    user = request.user
+    student = Student.objects.get(user = user)
+    
+    # only work for major
+    department = None
+    if cultivate == 0:
+        department = student.student_meta.major.department
+        
+    plan = {}
+    plan['pr_req'] = str(student.student_meta.req_pubcourse)
+    plan['po_req'] = str(student.student_meta.req_pubelective)
+    plan['mr_req'] = str(student.student_meta.req_procourse)
+    plan['mo_req'] = str(student.student_meta.req_proelective)
+    plan['pr_credit'] = str(student.pubcourse_credit)
+    plan['po_credit'] = str(student.pubelective_credit)
+    plan['mr_credit'] = str(student.procourse_credit)
+    plan['mo_credit'] = str(student.proelective_credit)
+    plan['grade_point'] = str(student.grade_point)
+    plan['student_type'] = student.student_meta.type_name
+    plan['year'] = student.student_meta.year
+
+    return {
+        'plan': plan, 
+        'studentid': request.user.username
+        }

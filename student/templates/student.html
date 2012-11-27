@@ -15,6 +15,8 @@
             <li><a data-toggle="tab" href="#tabs-5">成绩报告</a></li>
           </ul>
         <div class="tab-content">
+        <div class="hide current-year"></div>
+        <div class="hide current-term"></div>
         <div class="fade in active tab-pane" id="tabs-1">
           <div class="form-horizontal">
               <span class="span6">
@@ -22,10 +24,10 @@
                   <label class="control-label" for="cultivate-1">培养类别</label>
                   <div class="controls">
                     <select class="span2" name="cultivate" id="cultivate-1">
-                      <option>主修</option>
-                      <option>辅修</option>
-                      <option>双学位</option>
-                      <option>交换生</option>
+                      <option value="0" selected="selected">主修</option>
+                      <option value="1">辅修</option>
+                      <option value="2">双学位</option>
+                      <option value="3">交换生</option>
                     </select>
                   </div>
                 </div>
@@ -60,10 +62,10 @@
                   <label class="control-label" for="cultivate-2">培养类别</label>
                   <div class="controls">
                     <select class="span2" name="cultivate" id="cultivate-2">
-                      <option>主修</option>
-                      <option>辅修</option>
-                      <option>双学位</option>
-                      <option>交换生</option>
+                      <option value="0" selected="selected">主修</option>
+                      <option value="1">辅修</option>
+                      <option value="2">双学位</option>
+                      <option value="3">交换生</option>
                     </select>
                   </div>
                 </div>
@@ -92,9 +94,9 @@
               <label class="control-label" for="school-term-3">学期</label>
               <div class="controls">
                 <select class="span2 school-term" name="school-term-3" id="school-term-3">
-                  <option>上学期</option>
-                  <option>下学期</option>
-                  <option>小学期</option>
+                  <option value="1" selected="selected">上学期</option>
+                  <option value="2">下学期</option>
+                  <option value="3">小学期</option>
                 </select>
               </div>
             </div>
@@ -124,22 +126,6 @@
               <label class="control-label" for="school-year-5">学年</label>
               <div class="controls">
                 <select class="span2 school-year" name="school-year-5" id="school-year-5">
-                  <option>2005-2006</option>
-                  <option>2006-2007</option>
-                  <option>2007-2008</option>
-                  <option>2008-2009</option>
-                  <option>2009-2010</option>
-                  <option>2009-2010</option>
-                  <option>2010-2011</option>
-                  <option>2011-2012</option>
-                  <option>2012-2013</option>
-                  <option>2013-2014</option>
-                  <option>2014-2015</option>
-                  <option>2015-2016</option>
-                  <option>2016-2017</option>
-                  <option>2017-2018</option>
-                  <option>2018-2019</option>
-                  <option>2019-2020</option>
                 </select>
               </div>
             </div>
@@ -147,9 +133,9 @@
               <label class="control-label" for="school-term-5">学期</label>
               <div class="controls">
                 <select class="span2 school-term" name="school-term-5" id="school-term-5">
-                  <option>上学期</option>
-                  <option>下学期</option>
-                  <option>小学期</option>
+                  <option value="1" selected="selected">上学期</option>
+                  <option value="2">下学期</option>
+                  <option value="3">小学期</option>
                 </select>
               </div>
             </div>
