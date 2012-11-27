@@ -76,7 +76,7 @@ function getCourse()
             var total = list.length;
             var week_map = new Array("世界末日","周一","周二","周三","周四","周五","周六","周日");
             $("#course-result").empty();
-            $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>序号</th><th class='very-wide-block'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th>当前人数</th><th class='wide-block'>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
+            $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr class='head'><th>序号</th><th class='very-wide-block'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th>当前人数</th><th class='wide-block'>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
             for (i = 0;i < total;i++)
             {
                 var index = i + 1;
@@ -101,7 +101,26 @@ function getCourse()
                     var week = week_map[course_time[j].week];
                     var time = course_time[j].time;
                     var place = course_time[j].place;
-                    $("." + index + ".course-time-1").append(week + " " + time);
+                    $("." + index + ".course-time-1").append("<a class='" + index + "'>" + week + "</a><br><a class='" + index + "'>" + time + "</a>");
+                    if ($("#course-result tr." + index).hasClass(week) == false)
+                       $("#course-result tr." + index).addClass(week);
+                    if ($("#course-result tr." + index).hasClass(time) == false)
+                        $("#course-result tr." + index).addClass(time);
+                    $("#course-result a." + index).click(function() {
+                        var filter = $(this).text();
+                        if ($(this).hasClass("filter"))
+                        {
+                            $("#course-result tr:not('." + filter + "')").show();
+                            $(this).removeClass("filter");
+                        }
+                        else
+                        {
+                            $("#course-result tr:not('." + filter + "')").hide();
+                            $(this).addClass("filter");
+                        }
+                        $("#course-result tr." + filter).show();
+                        $("#course-result tr.head").show();
+                    });
                     $("." + index + ".course-locate-1").append(place);
                 }
                 if (take == 0)
@@ -125,7 +144,7 @@ function getCourse()
                     $("." + index + ".btn").val("退课(待筛选)");
                 }
             }
-            $("#course-result").append("<div id='msg-area'></div>");
+            $("#course-result").append("<div class='msg-area'></div>");
         }
     });
     $("[rel = 'popover']").popover();
@@ -172,21 +191,21 @@ function sendRequest(n,course_id,state)
             var hastaken = msg.hastaken;
             if (valid == false)
             {
-                $("#msg-area").empty();
-                $("#msg-area").append("<div class='alert alert-error'><strong>对<" + $('td#' + course_id).text() + ">操作失败！</strong></div>");
-                $("#msg-area").show();
-                var t = setTimeout("$('#msg-area').fadeOut();",5000);
+                $("#course-result.msg-area").empty();
+                $("#course-result.msg-area").append("<div class='alert alert-error'><strong>对<" + $('td#' + course_id).text() + ">操作失败！</strong></div>");
+                $("#course-result.msg-area").show();
+                var t = setTimeout("$('#course-result.msg-area').fadeOut();",5000);
                 flag = false;
             }
             else
             {
-                var pos = ($("tr." + n + " td:eq(9)").text()).indexOf("/");
-                var total = ($("tr." + n + " td:eq(9)").text()).substring(pos + 1);
-                $("tr." + n + " td:eq(9)").text(hastaken + "/" + total);
-                $("#msg-area").empty();
-                $("#msg-area").append("<div class='alert alert-success'><strong>对<" + $('td#' + course_id).text() + ">操作成功！</strong></div>");
-                $("#msg-area").show();
-                var t = setTimeout("$('#msg-area').fadeOut();",5000);
+                var pos = ($("#course-result tr." + n + " td:eq(9)").text()).indexOf("/");
+                var total = ($("#course-result tr." + n + " td:eq(9)").text()).substring(pos + 1);
+                $("#course-result tr." + n + " td:eq(9)").text(hastaken + "/" + total);
+                $("#course-result.msg-area").empty();
+                $("#course-result.msg-area").append("<div class='alert alert-success'><strong>对<" + $('td#' + course_id).text() + ">操作成功！</strong></div>");
+                $("#course-result.msg-area").show();
+                var t = setTimeout("$('#course-result.msg-area').fadeOut();",5000);
                 flag = true;
             }
         }

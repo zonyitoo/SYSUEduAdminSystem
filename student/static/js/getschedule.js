@@ -76,11 +76,11 @@ function getSchedule()
                     var week = course_time[j].week;
                     var time = course_time[j].time;
                     for (k = 1;k < time.length;k++)
-                      $("tr." + (time.charCodeAt(k) - 65) + " td:eq(" + week + ")").remove();
-                    $("tr." + (time.charCodeAt(0) - 65) + " td:eq(" + week + ")").replaceWith("<td rowspan='" + time.length + "' style='background: #d9edf7;' class='withajaxpopover' rel='popover' title='课程信息' data-content='课程类型：" + courseType + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "<br>考核方式：" + exam + "' data-placement='bottom'>" + courseName + "<br>" + place + "<br>" + period + "</td>");
+                      $("#schedule-result tr." + (time.charCodeAt(k) - 65) + " td:eq(" + week + ")").remove();
+                    $("#schedule-result tr." + (time.charCodeAt(0) - 65) + " td:eq(" + week + ")").replaceWith("<td rowspan='" + time.length + "' style='background: #d9edf7;' class='withajaxpopover' rel='popover' title='课程信息' data-content='课程类型：" + courseType + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "<br>考核方式：" + exam + "' data-placement='bottom'>" + courseName + "<br>" + place + "<br>" + period + "</td>");
                 }
             }
-            $("#schedule-result").append("<div id='msg-area'></div>");
+            $("#schedule-result").append("<div class='msg-area'></div>");
         }
     });
     $("[rel = 'popover']").popover();
