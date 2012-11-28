@@ -28,7 +28,8 @@ ul {
 
 ul.menu li {
     list-style: none;
-    float:left;
+    float: left;
+    width: 100px;
     height: 40px;
     text-align: center;
     background: -webkit-gradient(radial, 50% 100%, 10, 50% 50%, 90, from(rgba(31,169,244,1)), to(rgba(0,28,78, 1)) );
@@ -140,10 +141,6 @@ ul.vertical[rel=ver1] li a:hover {
     margin-top:50px;
 }
 
-#login-section{
-    float:right;
-}
-
 #login-section input{
     margin-top:5px;
 }
@@ -152,16 +149,12 @@ ul.vertical[rel=ver1] li a:hover {
     margin-top:4px;
 }
 
-#status{
-    float:right;
-}
-
 #information{
     margin-top: 4px;
     height: 27px;
     line-height: 27px;
     text-align: left;
-    vertical-align: baseline;
+    vertical-align: middle;
 }
 
 #bottomNav {
