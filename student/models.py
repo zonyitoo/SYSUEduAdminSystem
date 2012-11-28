@@ -10,6 +10,15 @@ class StudentMinor(models.Model):
     pubelective_credit = models.PositiveIntegerField(default=0)
     procourse_credit = models.PositiveIntegerField(default=0)
     proelective_credit = models.PositiveIntegerField(default=0)
+    gpa = models.DecimalField(max_digits=2, decimal_places=1, default=0)
+    pubcourse_gpa = models.DecimalField(max_digits=2, decimal_places=1,
+            default=0)
+    pubelective_gpa = models.DecimalField(max_digits=2, decimal_places=1,
+            default=0)
+    procourse_gpa = models.DecimalField(max_digits=2, decimal_places=1,
+            default=0)
+    proelective_gpa = models.DecimalField(max_digits=2, decimal_places=1,
+            default=0)
 
 class StudentMeta(models.Model):
     UNGRADUATED = 'UG'
@@ -32,7 +41,15 @@ class Student(models.Model):
     pubelective_credit = models.PositiveIntegerField(default=0)
     procourse_credit = models.PositiveIntegerField(default=0)
     proelective_credit = models.PositiveIntegerField(default=0)
-    grade_point = models.DecimalField(max_digits=2, decimal_places=1, default=0)
+    gpa = models.DecimalField(max_digits=2, decimal_places=1, default=0)
+    pubcourse_gpa = models.DecimalField(max_digits=2, decimal_places=1,
+            default=0)
+    pubelective_gpa = models.DecimalField(max_digits=2, decimal_places=1,
+            default=0)
+    procourse_gpa = models.DecimalField(max_digits=2, decimal_places=1,
+            default=0)
+    proelective_gpa = models.DecimalField(max_digits=2, decimal_places=1,
+            default=0)
     student_meta = models.ForeignKey(StudentMeta)
     student_minor = models.ManyToManyField(StudentMinor, null=True, blank=True)
     user = models.OneToOneField(User, related_name='student')

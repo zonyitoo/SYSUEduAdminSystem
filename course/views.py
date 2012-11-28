@@ -115,7 +115,11 @@ def get_educate_plan(request):
     plan['po_credit'] = str(student.pubelective_credit)
     plan['mr_credit'] = str(student.procourse_credit)
     plan['mo_credit'] = str(student.proelective_credit)
-    plan['grade_point'] = str(student.grade_point)
+    plan['pr_gpa'] = str(student.pubcourse_gpa)
+    plan['po_gpa'] = str(student.pubelective_gpa)
+    plan['mr_gpa'] = str(student.procourse_gpa)
+    plan['mo_gpa'] = str(student.proelective_gpa)
+    plan['gpa'] = str(student.gpa)
     plan['student_type'] = student.student_meta.type_name
     plan['year'] = student.student_meta.year
 
