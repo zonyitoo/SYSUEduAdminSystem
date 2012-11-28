@@ -85,7 +85,7 @@ function getCourse()
                 var courseType = list[i].course_type;
                 var credit = list[i].credit;
                 var teacher = list[i].teacher;
-                if (teacher.img_addr == null)
+                if (teacher.img_addr == null || teacher.img_addr == "")
                   teacher.img_addr = "/static/img/default_user.jpg";
                 if (teacher.site == null)
                   teacher.site = "#";
