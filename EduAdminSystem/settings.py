@@ -72,12 +72,12 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths. 
     'user/static/', 
-    'assessment/static/', 
-    'course/static/',
-    'school/static/',
-    'take/static/',
+    #'assessment/static/', 
+    #'course/static/',
+    #'school/static/',
+    #'take/static/',
     'student/static/', 
-    'teacher/static/',
+    #'teacher/static/',
     'EduAdminSystem/static/', 
 )
 
@@ -132,7 +132,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     #PROJECT_PATH + '/templates/'
     os.path.join(os.path.dirname(__file__), 'user/templates/'), 
-    os.path.join(os.path.dirname(__file__), 'assessment/templates/'),
+    #os.path.join(os.path.dirname(__file__), 'assessment/templates/'),
     os.path.join(os.path.dirname(__file__), 'course/templates/'),
     os.path.join(os.path.dirname(__file__), 'school/templates/'),
     os.path.join(os.path.dirname(__file__), 'take/templates/'),
