@@ -157,6 +157,14 @@ ul.vertical[rel=ver1] li a:hover {
     vertical-align: middle;
 }
 
+#information-phone{
+    margin-top: 4px;
+    height: 27px;
+    line-height: 27px;
+    text-align: left;
+    vertical-align: baseline;
+}
+
 #bottomNav {
     z-index: 999;
     position: fixed;
