@@ -94,8 +94,6 @@ def get_available_list(request):
 @ajax(login_required=True, require_GET=True)
 def get_educate_plan(request):
     cultivate = int(request.GET.get('cultivate', ''))
-    academic_year = request.GET.get('school-year', '')
-    sem = request.GET.get('school-term', '')
     
     # only work for student 
     user = request.user
@@ -107,23 +105,63 @@ def get_educate_plan(request):
         department = student.student_meta.major.department
         
     plan = {}
-    plan['pr_req'] = str(student.student_meta.req_pubcourse)
-    plan['po_req'] = str(student.student_meta.req_pubelective)
-    plan['mr_req'] = str(student.student_meta.req_procourse)
-    plan['mo_req'] = str(student.student_meta.req_proelective)
-    plan['pr_credit'] = str(student.pubcourse_credit)
-    plan['po_credit'] = str(student.pubelective_credit)
-    plan['mr_credit'] = str(student.procourse_credit)
-    plan['mo_credit'] = str(student.proelective_credit)
+    plan['pr_req'] = student.student_meta.req_pubcourse
+    plan['po_req'] = student.student_meta.req_pubelective
+    plan['mr_req'] = student.student_meta.req_procourse
+    plan['mo_req'] = student.student_meta.req_proelective
+    plan['pr_credit'] = student.pubcourse_credit
+    plan['po_credit'] = student.pubelective_credit
+    plan['mr_credit'] = student.procourse_credit
+    plan['mo_credit'] = student.proelective_credit
     plan['pr_gpa'] = str(student.pubcourse_gpa)
     plan['po_gpa'] = str(student.pubelective_gpa)
     plan['mr_gpa'] = str(student.procourse_gpa)
     plan['mo_gpa'] = str(student.proelective_gpa)
     plan['gpa'] = str(student.gpa)
+    plan['pubcourse_gpa'] = str(student.pubcourse_gpa)
+    plan['pubelective_gpa'] = str(student.pubelective_gpa)
+    plan['procourse_gpa'] = str(student.procourse_gpa)
+    plan['proelective_gpa'] = str(student.proelective_gpa)
     plan['student_type'] = student.student_meta.type_name
-    plan['year'] = student.student_meta.year
+    plan['year'] = int(student.student_meta.year)
+
+    grade={}
+    grade['fresh'] = str(plan['year']) + '-' + str(plan['year'] + 1)
+    grade['sophomore'] = str(plan['year'] + 1) + '-' + str(plan['year'] + 2)
+    grade['junior'] = str(plan['year'] + 2) + '-' + str(plan['year'] + 3)
+    grade['senior'] = str(plan['year'] + 3) + '-' + str(plan['year'] + 4)
+
+    courses = Course.objects.filter(academic_year__in=[grade['fresh'],grade['sophomore'],grade['junior'],grade['senior']],
+            department=department)
+
+    courseArr = []
+    for course in courses:
+        courseObj = {}
+        courseObj['id'] = course.id
+        courseObj['name'] = course.name
+        courseObj['academic_year'] = course.academic_year
+        courseObj['semester'] = course.semester
+        courseObj['from_week'] = course.from_week
+        courseObj['to_week'] = course.to_week
+        courseObj['teacher'] = {
+                    'teacher_name': course.teacher.teacher_name,
+                    'title': course.teacher.get_title_unicode(),
+                    'img_addr': course.teacher.img_addr,
+                    'site': course.teacher.site,
+                    'department': course.teacher.department.name
+                }
+        courseObj['credit'] = course.credit
+        courseObj['capacity'] = course.capacity
+        courseObj['hastaken'] =\
+            Takes.objects.filter(course=course).count()
+        courseObj['exam_method'] = course.exam_method
+        courseObj['course_type'] = course.course_type.get_coursetype()
+        courseObj['department'] = course.department.name
+
+        courseArr.append(courseObj)
 
     return {
         'plan': plan, 
+        'courses': courseArr,
         'studentid': request.user.username
         }

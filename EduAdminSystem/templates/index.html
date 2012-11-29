@@ -10,21 +10,30 @@
   <body>
     <div class="wrapper navbar" id="bottomNav">
         <ul class="menu" rel="sam1">
-          <li class="visible-desktop"><a href="#">首页</a></li>
-          <li class="visible-desktop"><a target="_blank" href="http://jwc.sysu.edu.cn/">教务新闻</a></li>
+          <li><a href="#">首页</a></li>
+          <li><a class="remote" href="http://jwc.sysu.edu.cn/" data-toggle="modal" data-target="#news" data-keyboard="true">教务新闻</a></li>
           <li><a href="#contact" data-toggle="modal" data-keyboard="true">联系我们</a></li>
           <li><a href="#calendar" data-toggle="modal" data-keyboard="true">查看校历</a></li>
           <li><a href="#about" data-toggle="modal" data-keyboard="true">关于</a></li>
 
 
-          <div class="pull-right hidden-phone">
+          <span class="pull-right">
               <fieldset>
                 <span class="badge badge-success user-information" id="information">{{ account }}({{ name }})</span>
                 <button id="modifypasswd" onclick="refresh()" class="btn btn-danger" href="#modify" data-toggle="modal" data-keyboard="true"><i class="icon-cog icon-white"></i> 修改密码</button>
                 <button id="logout" onclick="logout()" class="btn btn-primary"><i class="icon-share-alt icon-white"></i> 注销</button>
               </fieldset>
-          </div>
+          </span>
         </ul>
+    </div>
+
+    <div class="modal hide fade" id="news">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3>教务新闻</h3>
+        </div>
+	    <div class="modal-body" style="height:450px;"></div>
+        <div class="modal-footer"></div>
     </div>
 
     <div class="modal hide fade" id="contact">
@@ -102,13 +111,6 @@
       </div>
     </div>
 
-      <div class="pull-left visible-phone" style="margin-top:30px;margin-bottom:15px;">
-          <fieldset>
-            <span class="badge badge-success user-information" id="information-phone">{{ account }}({{ name }})</span>
-            <button id="modifypasswd" onclick="refresh()" class="btn btn-danger" href="#modify" data-toggle="modal" data-keyboard="true"><i class="icon-cog icon-white"></i> 修改密码</button>
-            <button id="logout" onclick="logout()" class="btn btn-primary"><i class="icon-share-alt icon-white"></i> 注销</button>
-          </fieldset>
-      </div>
   <hr>
   <div class="container" id="content"> 
   </div>

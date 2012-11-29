@@ -1,5 +1,15 @@
 //JavaScript Document
 $(document).ready(function(){
+    $('a.remote').on('click', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $("#news .modal-body").html('<iframe width="100%" height="100%" frameborder="0" allowtransparency="true" src="'+url+'"></iframe>');
+    });
+    $("#news").on('show', function(){
+        $(document).keydown(function(){
+            $("#news").modal('hide');
+        });
+    });
     $("#contact").on('show', function(){
         $(document).keydown(function(){
             $("#contact").modal('hide');

@@ -19,10 +19,10 @@ class CourseType(models.Model):
             (PRO_ELECTIVE, u'专业选修课'),
         )
     courseTypeToUnicode = {
-            PUB_COURSE: u'公共必修课',
-            PUB_ELECTIVE: u'公共选修课', 
-            PRO_COURSE: u'专业必修课',
-            PRO_ELECTIVE: u'专业选修课'
+            PUB_COURSE: u'公必',
+            PUB_ELECTIVE: u'公选', 
+            PRO_COURSE: u'专必',
+            PRO_ELECTIVE: u'专选'
         }
 
     type_name = models.CharField(max_length=4, choices=COURSE_TYPE)
