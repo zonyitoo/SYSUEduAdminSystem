@@ -13,7 +13,7 @@ class Takes(models.Model):
     rank = models.PositiveIntegerField(default=0, blank=True)
     
     def __unicode__(self):
-        return self.student, self.course
+        return self.student.student_name + ' ' + self.course.name
 
     def getDataDict(self):
         score = self.final_score * self.final_percentage / 100 \
