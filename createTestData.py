@@ -177,6 +177,17 @@ teachers = [
                 'title': Teacher.TITLE[2][0],
                 'department': Department.objects.get(name='CS')
                 }
+            },
+        {
+            'user': {
+                'username': 'naive',
+                'password': 'naive',
+                },
+            'teacher': {
+                'teacher_name': '拿衣服',
+                'title': Teacher.TITLE[2][0],
+                'department': Department.objects.get(name='CS')
+                }
             }
     ]
 
@@ -211,6 +222,30 @@ courses = [
             'course': {
                 'name': '计算机图形学',
                 'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 1,
+                'to_week': 20,
+                'teacher': Teacher.objects.get(teacher_name='纪庆革'),
+                'credit': 2,
+                'capacity': 9999,
+                'hastaken': 1,
+                'exam_method': '考查',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'department': Department.objects.get(name='CS')
+                }
+            },
+        {
+            'time': [
+                {
+                    'week': 2,
+                    'time': 'DE',
+                    'location': '东C501'
+                    }
+                ],
+            'course': {
+                'name': '计算机图形学',
+                'academic_year': '2011-2012',
                 'semester': 1,
                 'from_week': 1,
                 'to_week': 20,
@@ -263,9 +298,58 @@ courses = [
                 'teacher': Teacher.objects.get(teacher_name='邱道文'),
                 'credit': 3,
                 'capacity': 9999,
+                'hastaken': 1,
                 'exam_method': '笔试',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[2][0]),
+                'department': Department.objects.get(name='CS')
+                }
+            },
+        {
+            'time': [
+                {
+                    'week': 2,
+                    'time': 'CDE',
+                    'location': '东C201'
+                    }
+                ],
+            'course': {
+                'name': 'Test_Collision1',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 1,
+                'to_week': 18,
+                'teacher': Teacher.objects.get(teacher_name='拿衣服'),
+                'credit': 3,
+                'capacity': 9999,
+                'hastaken': 1,
+                'exam_method': '笔试',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'department': Department.objects.get(name='CS')
+                }
+            },
+        {
+            'time': [
+                {
+                    'week': 3,
+                    'time': 'GH',
+                    'location': '东C201'
+                    }
+                ],
+            'course': {
+                'name': 'Test_Capacity1',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 1,
+                'to_week': 18,
+                'teacher': Teacher.objects.get(teacher_name='拿衣服'),
+                'credit': 2,
+                'capacity': 5,
+                'hastaken': 5,
+                'exam_method': '笔试',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
                 'department': Department.objects.get(name='CS')
                 }
             }
@@ -286,11 +370,13 @@ for c in courses:
 from take.models import Takes
 takes = [
             {
-                'course': Course.objects.get(name='计算机图形学'),
+                'course': Course.objects.get(name='计算机图形学',
+                    academic_year='2012-2013'),
                 'student': Student.objects.get(student_name='ABC')
             },
             {
-                'course': Course.objects.get(name='计算机图形学'),
+                'course': Course.objects.get(name='计算机图形学',
+                    academic_year='2012-2013'),
                 'student': Student.objects.get(student_name='钟宇腾')
             },
             {
@@ -299,6 +385,17 @@ takes = [
                 'usual_score': 80.0,
                 'final_score': 60.0,
                 'final_percentage': 70,
+                'rank': 2,
+                'has_assessment': True,
+                'screened': True
+            },
+            {
+                'course': Course.objects.get(name='数学分析II'),
+                'student': Student.objects.get(student_name='ABC'),
+                'usual_score': 90.0,
+                'final_score': 95.0,
+                'final_percentage': 70,
+                'rank': 1,
                 'has_assessment': True,
                 'screened': True
             }
