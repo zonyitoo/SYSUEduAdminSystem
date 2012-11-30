@@ -78,6 +78,7 @@ class Student(models.Model):
 
     def getDataDict(self):
         dc = {
+            'user': self.user,
             'student_name': self.student_name,
             'pubcourse_credit': self.pubcourse_credit,
             'pubelective_credit': self.pubelective_credit,
