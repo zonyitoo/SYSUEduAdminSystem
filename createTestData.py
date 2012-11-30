@@ -311,3 +311,5 @@ for t in takes:
     else:
         print "Creating Take", t
         obj[0].save()
+        obj[0].course.hastaken += 1
+        obj[0].course.save()
