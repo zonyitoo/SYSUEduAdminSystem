@@ -64,6 +64,7 @@ class Course(models.Model):
     exam_method = models.CharField(max_length=20)
     course_type = models.ForeignKey(CourseType)
     course_meta = models.ForeignKey(CourseMeta, blank=True, null=True)
+    hastaken = models.IntegerField(default=0)
     department = models.ForeignKey(Department, default=0)
     assessment_avgscore = models.DecimalField(max_digits=5, decimal_places=2,
             default=0)
@@ -87,6 +88,7 @@ class Course(models.Model):
             'capacity': self.capacity,
             'exam_method': self.exam_method,
             'course_type': self.course_type.get_coursetype(),
+            'hastaken': self.hastaken,
             'department': self.department.getDataDict(),
             'screened': self.screened,
         }

@@ -10,6 +10,7 @@ class Takes(models.Model):
     final_percentage = models.PositiveSmallIntegerField(default=60)
     has_assessment = models.BooleanField(default=False)
     screened = models.BooleanField(default=False)
+    rank = models.PositiveIntegerField(default=0, blank=True)
     
     def __unicode__(self):
         return self.student, self.course
@@ -23,4 +24,5 @@ class Takes(models.Model):
             'final_percentage': self.final_percentage,
             'has_assessment': self.has_assessment,
             'screened': self.screened,
+            'rank': self.rank,
         }

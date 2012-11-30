@@ -8,23 +8,27 @@ from ajaxutils.decorators import ajax
 
 def select_course(student, course):
     try:
-        take = Takes.objects.create(course=course,student=student)
+        take = Takes.objects.create(course=course, student=student)
         take.save()
+        course.hastaken = Takes.objects.filter(course=course).count()
+        course.save()
     except:
         pass
 
     return {'valid': True,
-        'hastaken':Takes.objects.filter(course=course).count()}
+        'hastaken': course.hastaken}
 
 def withdrawal_course(student, course):
     try:
         take = Takes.objects.get(course=course, student=student)
         take.delete()
+        course.hastaken = Takes.objects.filter(course=course).count()
+        course.save()
     except:
         pass
     
     return {'valid': True, 
-        'hastaken': Takes.objects.filter(course=course).count()}
+        'hastaken': course.hastaken}
     
 @ajax(login_required=True, require_POST=True)
 def toggle_course(request):

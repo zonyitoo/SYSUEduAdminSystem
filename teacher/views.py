@@ -1,7 +1,7 @@
 from django.http import HttpResponseForbidden, HttpResponseBadRequest
 from ajaxutils.decorators import ajax
 
-from coures.models import Course, CourseType
+from course.models import Course, CourseType
 from teacher.models import Teacher
 from take.models import Takes
 
@@ -49,12 +49,9 @@ def get_takeninfo_list(request):
         return HttpResponseForbidden("Only teacher can access")
 
     course_id = int(request.GET['course_id'])
-    year = request.GET['year']
 
     takes = Takes.objects.filter(
                 course=Course.objects.get(id=course_id),
-                year=year,
-                teacher__user__exact=request.user
             )
 
     return {
