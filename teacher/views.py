@@ -11,9 +11,7 @@ convertCourseType = {
 
 @ajax(login_required=True, require_GET=True)
 def get_avaliable_courses(request):
-    if hasattr(request.user, 'teacher'):
-        teacher = Teacher.objects.get(user=request.user)
-    else:
+    if not hasattr(request.user, 'teacher'):
         return HttpResponseForbidden("Only teacher can access")
 
     year = request.GET['year']
@@ -46,21 +44,19 @@ def get_avaliable_courses(request):
         courseObj['department'] = course.department.name
 
 @ajax(login_required=True, require_GET=True)
-def get_student_list(request):
-    if hasattr(request.user, 'teacher'):
-        teacher = Teacher.objects.get(user=request.user)
-    else:
+def get_takeninfo_list(request):
+    if not hasattr(request.user, 'teacher'):
         return HttpResponseForbidden("Only teacher can access")
 
     course_id = int(request.GET['course_id'])
     year = request.GET['year']
 
     takes = Takes.objects.filter(
-                course = Course.objects.get(id=course_id),
-                year = year,
-                teacher = teacher
+                course=Course.objects.get(id=course_id),
+                year=year,
+                teacher__user__exact=request.user
             )
 
-    for take in takes:
-        pass
-
+    return {
+        'takes': [take.getDataDict() for take in takes],
+    }
