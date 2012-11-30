@@ -90,6 +90,10 @@ class Student(models.Model):
             'procourse_gpa': str(self.procourse_gpa),
             'proelective_gpa': str(self.proelective_gpa),
             'student_meta': self.student_meta.getDataDict(),
+            'user': {
+                'username': self.user.username,
+                'last_login': self.user.last_login,
+            }
         }
 
         return dc
