@@ -16,13 +16,15 @@ class Takes(models.Model):
         return self.student, self.course
 
     def getDataDict(self):
+        score = self.final_score * self.final_percentage / 100 \
+                + self.usual_score * (100 - self.final_percentage) / 100
         return {
-            'coures': self.course.getDataDict(),
+            'course': self.course.getDataDict(),
             'student': self.student.getDataDict(),
             'usual_score': str(self.usual_score),
             'final_score': str(self.final_score),
             'final_percentage': self.final_percentage,
-            'score': str(self.final_score * self.final_percentage / 100.0 + self.usual_score * (100 - self.final_percentage) / 100.0),
+            'score': str(score),
             'has_assessment': self.has_assessment,
             'screened': self.screened,
             'rank': self.rank,

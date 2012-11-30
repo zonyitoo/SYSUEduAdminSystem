@@ -42,18 +42,20 @@ function getScore()
         {
             $("#score-result").empty();
             $("#score-result").append("<table class='table table-bordered table-hover table-condensed'><thead><tr><th>序号</th><th>课程名称</th><th>课程类别</th><th>学分</th><th>平时成绩</th><th>期末成绩</th><th>总评</th><th>排名</th></tr></thead><tbody id='score-list'></tbody></table>");
-            var courses = msg.courses;
+            var courses = msg.takes;
             var courseName,courseType,credit,usualScore,finalScore,finalPercentage,totalScore,rank;
             for (var i = 0;i < courses.length;i++)
             {
-                courseName = courses[i].name;
-                courseType = courses[i].course_type;
-                credit = courses[i].credit;
+                courseName = courses[i].course.name;
+                courseType = courses[i].course.course_type;
+                credit = courses[i].course.credit;
                 usualScore = courses[i].usual_score;
                 finalScore = courses[i].final_score;
                 finalPercentage = courses[i].final_percentage;
-                totalScore = usualScore * (1 - finalPercentage) + finalScore * finalPercentage;
-                $("#score-list").append("<tr><td>" + (i + 1) + "</td><td>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td>" + usualScore + "</td><td>" + finalScore + "</td><td>" + totalScore + "</td><td></td></tr>");
+                //totalScore = usualScore * (1 - finalPercentage) + finalScore * finalPercentage;
+                totalScore = courses[i].score;
+                rank = courses[i].rank;
+                $("#score-list").append("<tr><td>" + (i + 1) + "</td><td>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td>" + usualScore + "</td><td>" + finalScore + "</td><td>" + totalScore + "</td><td>" + rank + "</td></tr>");
             }
             $("#score-result").append("<div class='msg-area'></div>");
         }
