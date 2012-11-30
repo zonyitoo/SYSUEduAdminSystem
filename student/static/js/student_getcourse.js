@@ -9,9 +9,9 @@ $(document).ready(function(){
 function toggleCourse(n)
 {
     var course_id = $("tr." + n + " td:eq(1)").attr("id");
-    var current = $("." + n + ".btn").val();
+    var current = $("." + n + ".btn");
     var state = 0;
-    if (current == "选课" || current == "补选")
+    if (current.val() == "选课" || current.val() == "补选")
       state = 1;
     if (sendRequest(n,course_id,state))
     {
@@ -19,13 +19,13 @@ function toggleCourse(n)
             $("#view-schedule-btn").trigger("click");
         if (state == 1)
         {
-            $("." + n + ".btn").removeClass("btn-primary").removeClass("btn-btn-danger").removeClass("btn-success").addClass("btn-inverse");
-            $("." + n + ".btn").val("退课(待筛选)");
+            current.removeClass("btn-primary").removeClass("btn-btn-danger").removeClass("btn-success").addClass("btn-inverse");
+            current.val("退课(待筛选)");
         }
         else
         {
-            $("." + n + ".btn").removeClass("btn-danger").removeClass("btn-success").removeClass("btn-inverse").addClass("btn-primary");
-            $("." + n + ".btn").val("选课");
+            current.removeClass("btn-danger").removeClass("btn-success").removeClass("btn-inverse").addClass("btn-primary");
+            current.val("选课");
         }
     }
 }
@@ -74,13 +74,13 @@ function getCourse()
             var week_map = new Array("世界末日","周一","周二","周三","周四","周五","周六","周日");
             $("#course-result").empty();
             $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr class='head'><th>序号</th><th class='very-wide-block'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th>当前人数</th><th class='wide-block'>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
-            var index,id,courseName,courseType,credit,exam,period,course_time,capacity,take,hastaken,week,time,place;
+            var index,id,course_name,course_type,credit,exam,period,course_time,capacity,take,hastaken,week,time,place;
             for (var i = 0;i < list.length;i++)
             {
                 index = i + 1;
                 id = list[i].id;
-                courseName = list[i].name;
-                courseType = list[i].course_type;
+                course_name = list[i].name;
+                course_type = list[i].course_type;
                 credit = list[i].credit;
                 teacher = list[i].teacher;
                 if (teacher.img_addr == null || teacher.img_addr == "")
@@ -93,7 +93,7 @@ function getCourse()
                 capacity = list[i].capacity;
                 take = list[i].take;
                 hastaken = list[i].hastaken;
-                $("#course-list").append("<tr class='" + index + "'><td>" + index + "</td><td id='"+ id + "'>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td><a target='_blank' href='" + teacher.site + "' class='withajaxpopover' rel='popover' data-placement='bottom' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " width=68 height=68 style=float:right><br>学系：" + teacher.department.name + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td>" + exam + "</td><td>" + period + "</td><td class='" + index + " course-time-1'></td><td class='" + index + " course-locate-1'></td><td>" + hastaken + "/" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
+                $("#course-list").append("<tr class='" + index + "'><td>" + index + "</td><td id='"+ id + "'>" + course_name + "</td><td>" + course_type + "</td><td>" + credit + "</td><td><a target='_blank' href='" + teacher.site + "' class='withajaxpopover' rel='popover' data-placement='bottom' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " width=68 height=68 style=float:right><br>学系：" + teacher.department.name + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td>" + exam + "</td><td>" + period + "</td><td class='" + index + " course-time-1'></td><td class='" + index + " course-locate-1'></td><td>" + hastaken + "/" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
                 for (var j = 0;j < course_time.length;j++)
                 {
                     week = week_map[course_time[j].week];
@@ -121,25 +121,26 @@ function getCourse()
                     });
                     $("." + index + ".course-locate-1").append(place);
                 }
+                var current_button = $("." + index + ".btn");
                 if (take == 0)
                 {
-                    $("." + index + ".btn").removeClass("btn-danger").removeClass("btn-inverse").removeClass("btn-success").addClass("btn-primary");
-                    $("." + index + ".btn").val("选课");
+                    current_button.removeClass("btn-danger").removeClass("btn-inverse").removeClass("btn-success").addClass("btn-primary");
+                    current_button.val("选课");
                 }
                 else if (take == 1)
                 {
-                    $("." + index + ".btn").removeClass("btn-primary").removeClass("btn-inverse").removeClass("btn-success").addClass("btn-danger");
-                    $("." + index + ".btn").val("退课");
+                    current_button.removeClass("btn-primary").removeClass("btn-inverse").removeClass("btn-success").addClass("btn-danger");
+                    current_button.val("退课");
                 }
                 else if (take == 2)
                 {
-                    $("." + index + ".btn").removeClass("btn-primary").removeClass("btn-danger").removeClass("btn-inverse").addClass("btn-success");
-                    $("." + index + ".btn").val("补选");
+                    current_button.removeClass("btn-primary").removeClass("btn-danger").removeClass("btn-inverse").addClass("btn-success");
+                    current_button.val("补选");
                 }
                 else
                 {
-                    $("." + index + ".btn").removeClass("btn-primary").removeClass("btn-danger").removeClass("btn-success").addClass("btn-inverse");
-                    $("." + index + ".btn").val("退课(待筛选)");
+                    current_button.removeClass("btn-primary").removeClass("btn-danger").removeClass("btn-success").addClass("btn-inverse");
+                    current_button.val("退课(待筛选)");
                 }
             }
             $("#course-result").append("<div class='msg-area'></div>");

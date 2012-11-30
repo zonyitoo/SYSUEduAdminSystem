@@ -1,3 +1,6 @@
+<link href="{{ STATIC_URL }}css/table.css" rel="stylesheet" type="text/css" media="screen"/>
+<script language="javascript" src="{{ STATIC_URL }}js/managescore.js" type="text/javascript"></script>
+<script language="javascript" src="{{ STATIC_URL }}js/teacher_getcourse.js" type="text/javascript"></script>
 <div class="container">
     <div id="content">
         <div class="tabbable">
@@ -6,36 +9,22 @@
             <li><a data-toggle="tab" href="#tabs-2">录入成绩</a></li>
           </ul>
         <div class="tab-content">
+        <div class="hide current-year"></div>
+        <div class="hide current-term"></div>
         <div class="fade in active tab-pane" id="tabs-1">
           <div class="form-horizontal">
             <div class="control-group">
-              <label class="control-label" for="school-year">学年</label>
+              <label class="control-label" for="school-year-1">学年</label>
               <div class="controls">
-                <select class="span2" name="school-year" id="school-year">
-                  <option>2005-2006</option>
-                  <option>2006-2007</option>
-                  <option>2007-2008</option>
-                  <option>2008-2009</option>
-                  <option>2009-2010</option>
-                  <option>2009-2010</option>
-                  <option>2010-2011</option>
-                  <option>2011-2012</option>
-                  <option>2012-2013</option>
-                  <option>2013-2014</option>
-                  <option>2014-2015</option>
-                  <option>2015-2016</option>
-                  <option>2016-2017</option>
-                  <option>2017-2018</option>
-                  <option>2018-2019</option>
-                  <option>2019-2020</option>
+                <select class="span2 school-year" name="school-year-1" id="school-year-1">
                 </select>
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="course-type">课程类别</label>
+              <label class="control-label" for="course-type-1">课程类别</label>
               <div class="controls">
-                <select class="span2" name="course-type" id="course-type">
-                  <option>公选</option>
+                <select class="span2" name="course-type-1" id="course-type-1">
+                  <option selected="selected">公选</option>
                   <option>公必</option>
                   <option>专选</option>
                   <option>专必</option>
@@ -44,7 +33,7 @@
             </div>
             <div class="control-group">
               <div class="controls">
-                  <button class="btn btn-primary" id="view-course-btn"><i class="icon-search icon-white"></i> 查看可开设课程</button>
+                  <button class="btn btn-primary" id="view-course-btn"><i class="icon-search icon-white"></i> 查看开设课程</button>
               </div>
             </div>
           </div>
@@ -54,47 +43,24 @@
         <div class="fade tab-pane" id="tabs-2">
           <div class="form-horizontal">
             <div class="control-group">
-              <label class="control-label" for="school-year">学年</label>
-              <div class="controls">
-                <select class="span2" name="school-year" id="school-year">
-                  <option>2005-2006</option>
-                  <option>2006-2007</option>
-                  <option>2007-2008</option>
-                  <option>2008-2009</option>
-                  <option>2009-2010</option>
-                  <option>2009-2010</option>
-                  <option>2010-2011</option>
-                  <option>2011-2012</option>
-                  <option>2012-2013</option>
-                  <option>2013-2014</option>
-                  <option>2014-2015</option>
-                  <option>2015-2016</option>
-                  <option>2016-2017</option>
-                  <option>2017-2018</option>
-                  <option>2018-2019</option>
-                  <option>2019-2020</option>
-                </select>
-              </div>
-            </div>
-            <div class="control-group">
               <label class="control-label" for="course">课程名称</label>
               <div class="controls">
-                <select class="span2" name="course" id="course">
+                <select class="span2" name="course-2" id="course-2">
                 </select>
               </div>
             </div>
             <div class="control-group">
               <div class="controls">
-                  <button class="btn btn-primary" id="view-course-btn"><i class="icon-search icon-white"></i> 查看学生名单</button>
+                  <button class="btn btn-primary" id="view-student-btn"><i class="icon-search icon-white"></i> 查看学生名单</button>
               </div>
             </div>
             <div class="control-group">
               <div class="controls">
-                  <button class="btn btn-primary" id="view-course-btn"><i class="icon-arrow-up icon-white"></i> 上传成绩</button>
+                  <button class="btn btn-primary" id="upload-score-btn"><i class="icon-arrow-up icon-white"></i> 上传成绩</button>
               </div>
             </div>
           </div>
-          <div id="record-result"></div>
+          <div id="student-result"></div>
         </div>
     </div>
 </div>

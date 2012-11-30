@@ -43,19 +43,19 @@ function getScore()
             $("#score-result").empty();
             $("#score-result").append("<table class='table table-bordered table-hover table-condensed'><thead><tr><th>序号</th><th>课程名称</th><th>课程类别</th><th>学分</th><th>平时成绩</th><th>期末成绩</th><th>总评</th><th>排名</th></tr></thead><tbody id='score-list'></tbody></table>");
             var courses = msg.takes;
-            var courseName,courseType,credit,usualScore,finalScore,finalPercentage,totalScore,rank,hastaken;
+            var course_name,course_type,credit,usual_score,final_score,final_percentage,total_score,rank;
             for (var i = 0;i < courses.length;i++)
             {
-                courseName = courses[i].course.name;
-                courseType = courses[i].course.course_type;
+                course_name = courses[i].course.name;
+                course_type = courses[i].course.course_type;
                 credit = courses[i].course.credit;
                 hastaken = courses[i].course.hastaken;
-                usualScore = courses[i].usual_score;
-                finalScore = courses[i].final_score;
-                finalPercentage = courses[i].final_percentage;
-                totalScore = courses[i].score;
+                usual_score = courses[i].usual_score;
+                final_score = courses[i].final_score;
+                final_percentage = courses[i].final_percentage;
+                total_score = courses[i].score;
                 rank = courses[i].rank;
-                $("#score-list").append("<tr><td>" + (i + 1) + "</td><td>" + courseName + "</td><td>" + courseType + "</td><td>" + credit + "</td><td>" + usualScore + "</td><td>" + finalScore + "</td><td>" + totalScore + "</td><td>" + rank + "/"+ hastaken + "</td></tr>");
+                $("#score-list").append("<tr><td>" + (i + 1) + "</td><td>" + course_name + "</td><td>" + course_type + "</td><td>" + credit + "</td><td>" + usual_score + "</td><td>" + final_score + "</td><td>" + total_score + "</td><td>" + rank + "</td></tr>");
             }
             $("#score-result").append("<div class='msg-area'></div>");
         }

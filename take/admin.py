@@ -1,4 +1,7 @@
 from django.contrib import admin
 from take.models import *
 
-admin.site.register(Takes)
+class TakesAdmin(admin.ModelAdmin):
+    list_display = ('student', 'course')
+
+admin.site.register(Takes, TakesAdmin)

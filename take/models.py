@@ -11,9 +11,10 @@ class Takes(models.Model):
     has_assessment = models.BooleanField(default=False)
     screened = models.BooleanField(default=False)
     rank = models.PositiveIntegerField(default=0, blank=True)
+    presence = models.PositiveSmallIntegerField(default=100)
     
     def __unicode__(self):
-        return self.student, self.course
+        return self.student.student_name + ' ' + self.course.name
 
     def getDataDict(self):
         score = self.final_score * self.final_percentage / 100 \
@@ -28,4 +29,5 @@ class Takes(models.Model):
             'has_assessment': self.has_assessment,
             'screened': self.screened,
             'rank': self.rank,
+            'presence': self.presence,
         }
