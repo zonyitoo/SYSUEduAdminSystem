@@ -51,7 +51,7 @@ class StudentMeta(models.Model):
             'req_pubelective': self.req_pubelective,
             'req_procourse': self.req_procourse,
             'req_proelective': self.req_proelective,
-            'major': self.getDataDict()
+            'major': self.major.getDataDict()
         }
 
 class Student(models.Model):
