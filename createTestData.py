@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
 from EduAdminSystem import settings
@@ -310,6 +311,6 @@ for t in takes:
         print "Take", t, "exists"
     else:
         print "Creating Take", t
-        obj[0].save()
         obj[0].course.hastaken += 1
         obj[0].course.save()
+        obj[0].save()
