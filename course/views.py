@@ -46,9 +46,6 @@ def get_available_list(request):
 
         for course in courses:
             courseObj = course.getDataDict()
-            
-            courseObj['hastaken'] =\
-                Takes.objects.filter(course=course).count()
 
             try:
                 t = Takes.objects.get(course=course, student=student)
@@ -110,13 +107,8 @@ def get_educate_plan(request):
     courses = Course.objects.filter(academic_year__in=[grade['fresh'],grade['sophomore'],grade['junior'],grade['senior']],
             department=department)
 
-    courseArr = []
-    for course in courses:
-        courseObj = course.getDataDict()
-        courseObj['hastaken'] =\
-            Takes.objects.filter(course=course).count()
-
-        courseArr.append(courseObj)
+    courseArr = [course.getDataDict() for course in courses]
+    
     return {
         'plan': plan, 
         'courses': courseArr,
