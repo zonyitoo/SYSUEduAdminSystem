@@ -262,6 +262,7 @@ courses = [
                 'teacher': Teacher.objects.get(teacher_name='邱道文'),
                 'credit': 3,
                 'capacity': 9999,
+                'hastaken': 1,
                 'exam_method': '笔试',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[2][0]),
@@ -298,6 +299,17 @@ takes = [
                 'usual_score': 80.0,
                 'final_score': 60.0,
                 'final_percentage': 70,
+                'rank': 2,
+                'has_assessment': True,
+                'screened': True
+            },
+            {
+                'course': Course.objects.get(name='数学分析II'),
+                'student': Student.objects.get(student_name='ABC'),
+                'usual_score': 90.0,
+                'final_score': 95.0,
+                'final_percentage': 70,
+                'rank': 1,
                 'has_assessment': True,
                 'screened': True
             }
@@ -310,6 +322,6 @@ for t in takes:
         print "Take", t, "exists"
     else:
         print "Creating Take", t
-        obj[0].save()
         obj[0].course.hastaken += 1
         obj[0].course.save()
+        obj[0].save()
