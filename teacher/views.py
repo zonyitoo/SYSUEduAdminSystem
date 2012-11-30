@@ -4,55 +4,39 @@ from ajaxutils.decorators import ajax
 from course.models import Course, CourseType
 from teacher.models import Teacher
 from take.models import Takes
-
-convertCourseType = {
-            
-        }
+import time
 
 @ajax(login_required=True, require_GET=True)
-def get_avaliable_courses(request):
+def get_scoreable_list(request):
     if not hasattr(request.user, 'teacher'):
         return HttpResponseForbidden("Only teacher can access")
 
-    year = request.GET['year']
-    course_type = convertCourseType[request.GET['course_type']]
+    t = time.localtime(time.time())
+    year = t.tm_year
+    month = t.tm_mon
+    if month >= 9 or month <= 1:
+        year = str(year) + '-' + str(year + 1)
+    else:
+        year = str(year - 1) + '-' + str(year)
 
-    course_type = CourseType.objects.get(type_name=course_type) 
+    courses = Course.objects.filter(
+                teacher__user__exact=request.user,
+                academic_year=year
+            )
 
-    courses = Course.objects.filter(year=year, course_type=course_type)
-    for course in courses:
-        courseObj = {}
-        courseObj['id'] = course.id
-        courseObj['name'] = course.name
-        courseObj['academic_year'] = course.academic_year
-        courseObj['semester'] = course.semester
-        courseObj['from_week'] = course.from_week
-        courseObj['to_week'] = course.to_week
-        courseObj['course_time'] = [
-                {
-                    'week': t.week, 
-                    'time': t.time,
-                    'place': t.location
-                }
-                for t in course.course_time.all()]
-        courseObj['credit'] = course.credit
-        courseObj['capacity'] = course.capacity
-        courseObj['hastaken'] =\
-            Takes.objects.filter(course=course).count()
-        courseObj['exam_method'] = course.exam_method
-        courseObj['course_type'] = course.course_type.get_coursetype()
-        courseObj['department'] = course.department.name
-
+    return {
+        'courses': [course.name for course in courses],
+        'year': year
+    }
+    
 @ajax(login_required=True, require_GET=True)
 def get_takeninfo_list(request):
     if not hasattr(request.user, 'teacher'):
         return HttpResponseForbidden("Only teacher can access")
 
-    course_id = int(request.GET['course_id'])
+    course = request.GET['course']
 
-    takes = Takes.objects.filter(
-                course=Course.objects.get(id=course_id),
-            )
+    takes = Takes.objects.filter(course__name__exact=course)
 
     return {
         'takes': [take.getDataDict() for take in takes],
