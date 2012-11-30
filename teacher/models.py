@@ -33,4 +33,8 @@ class Teacher(models.Model):
             'img_addr': self.img_addr,
             'site': self.site,
             'department': self.department.getDataDict(),
+            'user': {
+                'username': self.user.username,
+                'last_login': self.user.last_login,
+            }
         }
