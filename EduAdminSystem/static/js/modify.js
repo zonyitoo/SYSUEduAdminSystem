@@ -1,28 +1,37 @@
 //JavaScript Document
+
 $(document).ready(function(){
-    $('a.remote').on('click', function(e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
-        $("#news .modal-body").html('<iframe width="100%" height="100%" frameborder="0" allowtransparency="true" src="'+url+'"></iframe>');
+    $("#upload").on('show', function(){
+        $(document).keydown(function(e){
+            if (e.which == 27)
+                $("#upload").modal('hide');
+        });
     });
-    $("#news").on('show', function(){
-        $(document).keydown(function(){
-            $("#news").modal('hide');
+    $("#modify").on('show', function(){
+        $(document).keydown(function(e){
+            if (e.which == 27)
+            {
+                $("#modify").modal('hide');
+                refresh();
+            }
         });
     });
     $("#contact").on('show', function(){
-        $(document).keydown(function(){
-            $("#contact").modal('hide');
+        $(document).keydown(function(e){
+            if (e.which == 27)
+                $("#contact").modal('hide');
         });
     });
     $("#calendar").on('show', function(){
-        $(document).keydown(function(){
-            $("#calendar").modal('hide');
+        $(document).keydown(function(e){
+            if (e.which == 27)
+                $("#calendar").modal('hide');
         });
     });
     $("#about").on('show', function(){
-        $(document).keydown(function(){
-            $("#about").modal('hide');
+        $(document).keydown(function(e){
+            if (e.which == 27)
+                $("#about").modal('hide');
         });
     });
 });
@@ -118,7 +127,7 @@ function refresh()
     $("#error").hide();
     $("#success").hide();
     $("#oldpasswd").val("");
-    $("#oldpasswd").focus();
     $("#newpasswd").val("");
     $("#confirmpasswd").val("");
+    $("#oldpasswd").focus();
 }

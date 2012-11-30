@@ -1,6 +1,32 @@
 <link href="{{ STATIC_URL }}css/table.css" rel="stylesheet" type="text/css" media="screen"/>
 <script language="javascript" src="{{ STATIC_URL }}js/managescore.js" type="text/javascript"></script>
 <script language="javascript" src="{{ STATIC_URL }}js/teacher_getcourse.js" type="text/javascript"></script>
+
+<div class="modal hide fade" id="upload">
+  <div class="modal-header">
+    <button id="close" type="button" class="close" data-dismiss="modal">&times;</button>
+    <h3>上传学生成绩</h3>
+  </div>
+  <div class="modal-body">
+      <form action="" method="POST" onsubmit="return upload()">{% csrf_token %}
+          <fieldset>
+              <div class="control-group">
+                <label>请务必按照模板格式填写成绩</label>
+                  <div class="controls">
+                    <input type="file" id="score-table"/>
+                  </div>
+              </div>
+              <div class="control-group">
+                  <div class="controls">
+                    <button type="submit" class="btn btn-primary">上传</button>
+                  </div>
+              </div>
+          </fieldset>
+      </form>
+  </div>
+  <div class="modal-footer"></div>
+</div>
+
 <div class="container">
     <div id="content">
         <div class="tabbable">
@@ -52,11 +78,8 @@
             <div class="control-group">
               <div class="controls">
                   <button class="btn btn-primary" id="view-student-btn"><i class="icon-search icon-white"></i> 查看学生名单</button>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="controls">
-                  <button class="btn btn-primary" id="upload-score-btn"><i class="icon-arrow-up icon-white"></i> 上传成绩</button>
+                  <button class="btn btn-primary" id="download-template-btn"><i class="icon-download icon-white"></i> 下载成绩模板</button>
+                  <button href="#upload" data-toggle="modal" class="btn btn-primary" id="upload-score-btn"><i class="icon-upload icon-white"></i> 上传成绩</button>
               </div>
             </div>
           </div>
