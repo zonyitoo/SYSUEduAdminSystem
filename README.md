@@ -25,10 +25,12 @@ sudo pip install django
 >>>
 ```
 
-最后安装Django AJAX-utils
+安装Django AJAX-utils, xlutils
 ```bash
-sudo pip install django-ajaxutils
+sudo pip install django-ajaxutils, xlutils
 ```
+
+
 
 ## 数据库
 
