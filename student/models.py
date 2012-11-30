@@ -27,6 +27,8 @@ class StudentMeta(models.Model):
             (UNGRADUATED, u'本科生'), 
             (GRADUATED, u'研究生'), 
         )
+    TYPE_TO_UNICODE = {k: u for k, u in STUDENT_TYPE}
+
     type_name = models.CharField(max_length=2, choices=STUDENT_TYPE, default=UNGRADUATED)
     year = models.CharField(max_length=4)
     req_pubcourse = models.PositiveIntegerField(default=0)
@@ -34,6 +36,23 @@ class StudentMeta(models.Model):
     req_procourse = models.PositiveIntegerField(default=0)
     req_proelective = models.PositiveIntegerField(default=0)
     major = models.ForeignKey(Speciality)
+
+    def __unicode__(self):
+        return self.TYPE_TO_UNICODE[self.type_name]
+
+    def getUnicodeType(self):
+        return self.TYPE_TO_UNICODE[self.type_name]
+
+    def getDataDict(self):
+        return {
+            'type_name': self.TYPE_TO_UNICODE[self.type_name],
+            'year': self.year,
+            'req_pubcourse': self.req_pubcourse,
+            'req_pubelective': self.req_pubelective,
+            'req_procourse': self.req_procourse,
+            'req_proelective': self.req_proelective,
+            'major': self.getDataDict()
+        }
 
 class Student(models.Model):
     student_name = models.CharField(max_length=30)
@@ -57,3 +76,19 @@ class Student(models.Model):
     def __unicode__(self):
         return self.student_name
 
+    def getDataDict(self):
+        dc = {
+            'student_name': self.student_name,
+            'pubcourse_credit': self.pubcourse_credit,
+            'pubelective_credit': self.pubelective_credit,
+            'procourse_credit': self.procourse_credit,
+            'proelective_credit': self.proelective_credit,
+            'gpa': self.gpa,
+            'pubcourse_gpa': self.pubcourse_gpa,
+            'pubelective_gpa': self.pubelective_gpa,
+            'procourse_gpa': self.procourse_gpa,
+            'proelective_gpa': self.proelective_gpa,
+            'student_meta': self.student_meta.getDataDict(),
+        }
+
+        return dc

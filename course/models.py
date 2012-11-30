@@ -35,6 +35,13 @@ class CourseTime(models.Model):
 
     def __unicode__(self):
         return str(self.week)
+
+    def getDataDict(self):
+        return {
+            'week': self.week,
+            'time': self.time,
+            'place': self.location
+        }
     
 class Course(models.Model):
     name = models.CharField(max_length=30)
@@ -65,4 +72,22 @@ class Course(models.Model):
     
     def __unicode__(self):
         return self.name
+    
+    def getDataDict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'academic_year': self.academic_year,
+            'semester': self.semester,
+            'from_week': self.from_week,
+            'to_week': self.to_week,
+            'course_time': [ct.getDataDict() for ct in self.course_time.all()],
+            'teacher': self.teacher.getDataDict(),
+            'credit': self.credit,
+            'capacity': self.capacity,
+            'exam_method': self.exam_method,
+            'course_type': self.course_type.get_coursetype(),
+            'department': self.department.getDataDict(),
+            'screened': self.screened,
+        }
 

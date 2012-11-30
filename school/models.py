@@ -6,6 +6,12 @@ class School(models.Model):
 
     def __unicode__(self):
         return self.name
+    
+    def getDataDict(self):
+        return {
+            'name': self.name,
+            'addr': self.addr,
+        }
 
 class Department(models.Model):
     name = models.CharField(max_length=30)
@@ -15,10 +21,23 @@ class Department(models.Model):
     def __unicode__(self):
         return self.name
 
+    def getDataDict(self):
+        return {
+            'name': self.name,
+            'addr': self.addr,
+            'school': self.school.getDataDict()
+        }
+
 class Speciality(models.Model):
     name = models.CharField(max_length=30)
     department = models.ForeignKey(Department)
 
     def __unicode__(self):
         return self.name
+    
+    def getDataDict(self):
+        return {
+            'name': self.name,
+            'department': self.department.getDataDict()
+        }
     

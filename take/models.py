@@ -10,3 +10,17 @@ class Takes(models.Model):
     final_percentage = models.PositiveSmallIntegerField(default=60)
     has_assessment = models.BooleanField(default=False)
     screened = models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return self.student, self.course
+
+    def getDataDict(self):
+        return {
+            'coures': self.course.getDataDict(),
+            'student': self.student.getDataDict(),
+            'usual_score': self.usual_score,
+            'final_score': self.final_score,
+            'final_percentage': self.final_percentage,
+            'has_assessment': self.has_assessment,
+            'screened': self.screened,
+        }

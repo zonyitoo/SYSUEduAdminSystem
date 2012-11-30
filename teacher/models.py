@@ -25,3 +25,12 @@ class Teacher(models.Model):
 
     def get_title_unicode(self):
         return self.titleToUnicode[self.title]
+    
+    def getDataDict(self):
+        return {
+            'teacher_name': self.teacher_name,
+            'title': self.titleToUnicode[self.title],
+            'img_addr': self.img_addr,
+            'site': self.site,
+            'department': self.department.getDataDict(),
+        }

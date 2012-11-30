@@ -45,34 +45,10 @@ def get_available_list(request):
                 department=department)
 
         for course in courses:
-            courseObj = {}
-            courseObj['id'] = course.id
-            courseObj['name'] = course.name
-            courseObj['academic_year'] = course.academic_year
-            courseObj['semester'] = course.semester
-            courseObj['from_week'] = course.from_week
-            courseObj['to_week'] = course.to_week
-            courseObj['course_time'] = [
-                    {
-                        'week': t.week, 
-                        'time': t.time,
-                        'place': t.location
-                    }
-                    for t in course.course_time.all()]
-            courseObj['teacher'] = {
-                        'teacher_name': course.teacher.teacher_name,
-                        'title': course.teacher.get_title_unicode(),
-                        'img_addr': course.teacher.img_addr,
-                        'site': course.teacher.site,
-                        'department': course.teacher.department.name
-                    }
-            courseObj['credit'] = course.credit
-            courseObj['capacity'] = course.capacity
+            courseObj = course.getDataDict()
+            
             courseObj['hastaken'] =\
                 Takes.objects.filter(course=course).count()
-            courseObj['exam_method'] = course.exam_method
-            courseObj['course_type'] = course.course_type.get_coursetype()
-            courseObj['department'] = course.department.name
 
             try:
                 t = Takes.objects.get(course=course, student=student)
@@ -136,30 +112,11 @@ def get_educate_plan(request):
 
     courseArr = []
     for course in courses:
-        courseObj = {}
-        courseObj['id'] = course.id
-        courseObj['name'] = course.name
-        courseObj['academic_year'] = course.academic_year
-        courseObj['semester'] = course.semester
-        courseObj['from_week'] = course.from_week
-        courseObj['to_week'] = course.to_week
-        courseObj['teacher'] = {
-                    'teacher_name': course.teacher.teacher_name,
-                    'title': course.teacher.get_title_unicode(),
-                    'img_addr': course.teacher.img_addr,
-                    'site': course.teacher.site,
-                    'department': course.teacher.department.name
-                }
-        courseObj['credit'] = course.credit
-        courseObj['capacity'] = course.capacity
+        courseObj = course.getDataDict()
         courseObj['hastaken'] =\
             Takes.objects.filter(course=course).count()
-        courseObj['exam_method'] = course.exam_method
-        courseObj['course_type'] = course.course_type.get_coursetype()
-        courseObj['department'] = course.department.name
 
         courseArr.append(courseObj)
-
     return {
         'plan': plan, 
         'courses': courseArr,

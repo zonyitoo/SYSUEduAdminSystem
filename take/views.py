@@ -15,9 +15,10 @@ def get_take_courses(request):
             course__academic_year__exact=year,
             course__semester__exact=sem)
        
-    courseArr = []
+    courseArr = [take.course.getDataDict() for take in takes]
+    """
     for take in takes:
-        courseObj = {}
+        courseObj = take.course.getDataDict()
         courseObj['id'] = take.course.id
         courseObj['name'] = take.course.name
         courseObj['academic_year'] = take.course.academic_year
@@ -42,8 +43,8 @@ def get_take_courses(request):
         courseObj['capacity'] = take.course.capacity
         courseObj['exam_method'] = take.course.exam_method
         courseObj['course_type'] = CourseType.get_coursetype(take.course.course_type)
-
         courseArr.append(courseObj)
+    """
 
     return {
         'courses': courseArr, 
@@ -61,9 +62,10 @@ def get_take_score(request):
             course__academic_year__exact=year,
             course__semester__exact=sem, has_assessment=True)
        
+    """
     courseArr = []
     for take in takes:
-        courseObj = {}
+        courseObj = take.course.getDataDict()
         courseObj['id'] = take.course.id
         courseObj['name'] = take.course.name
         courseObj['academic_year'] = take.course.academic_year
@@ -80,10 +82,10 @@ def get_take_score(request):
         courseObj['usual_score'] = take.usual_score
         courseObj['final_score'] = take.final_score
         courseObj['final_percentage'] = take.final_percentage
-
         courseArr.append(courseObj)
-
+    """
+    takeArr = [take.getDataDict() for take in takes]
     return {
-        'courses': courseArr, 
+            'takes': takeArr,
         'studentid': request.user.username
     }
