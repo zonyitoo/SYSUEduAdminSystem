@@ -48,7 +48,7 @@ function getSchedule()
             $("#schedule-result").append("<table class='table table-bordered'><thead><tr><th width='100'>上课时段</th><th width='200'>周一</th><th width='200'>周二</th><th width='200'>周三</th><th width='200'>周四</th><th width='200'>周五</th><th width='200'>周六</th><th width='200'>周日</th></tr></thead><tbody id='schedule-list'></tbody</table>");
             for (i = 0;i < 15;i++)
             {
-                $("#schedule-list").append("<tr class='" + i + " schedule'><td class='schedule withajaxpopover' rel='popover' title='详细时间' data-content='" + time_map[i] + "' data-placement='bottom'>" + String.fromCharCode(i + 65) + "</td><td class='Monday schedule'></td><td class='Tuesday schedule'></td><td class='Wednesday schedule'></td><td class='Thursday schedule'></td><td class='Friday schedule'></td><td class='Saturday schedule'></td><td class='Sunday schedule'></td></tr>");
+                $("#schedule-list").append("<tr class='" + i + " schedule'><td class='schedule withajaxpopover' rel='popover' title='详细时间' data-content='" + time_map[i] + "' data-placement='bottom'>" + (i + 1) + "</td><td class='Monday schedule'></td><td class='Tuesday schedule'></td><td class='Wednesday schedule'></td><td class='Thursday schedule'></td><td class='Friday schedule'></td><td class='Saturday schedule'></td><td class='Sunday schedule'></td></tr>");
                 if (i == 5 || i == 11)
                   $("tr." + i).addClass("warning");
             }

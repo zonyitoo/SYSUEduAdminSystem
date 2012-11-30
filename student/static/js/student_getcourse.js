@@ -74,7 +74,7 @@ function getCourse()
             var week_map = new Array("世界末日","周一","周二","周三","周四","周五","周六","周日");
             $("#course-result").empty();
             $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr class='head'><th>序号</th><th class='very-wide-block'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th>当前人数</th><th class='wide-block'>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
-            var index,id,course_name,course_type,credit,exam,period,course_time,capacity,take,hastaken,week,time,place;
+            var index,id,course_name,course_type,credit,exam,period,course_time,capacity,take,hastaken,week,time,start_time,end_time,place;
             for (var i = 0;i < list.length;i++)
             {
                 index = i + 1;
@@ -98,27 +98,10 @@ function getCourse()
                 {
                     week = week_map[course_time[j].week];
                     time = course_time[j].time;
+                    start_time = time.charCodeAt(0) - 64;
+                    end_time = time.charCodeAt(time.length - 1) - 64;
                     place = course_time[j].place;
-                    $("." + index + ".course-time-1").append("<a class='" + index + "'>" + week + "</a><br><a class='" + index + "'>" + time + "</a>");
-                    if ($("#course-result tr." + index).hasClass(week) == false)
-                       $("#course-result tr." + index).addClass(week);
-                    if ($("#course-result tr." + index).hasClass(time) == false)
-                        $("#course-result tr." + index).addClass(time);
-                    $("#course-result a." + index).click(function() {
-                        var filter = $(this).text();
-                        if ($(this).hasClass("filter"))
-                        {
-                            $("#course-result tr:not('." + filter + "')").show();
-                            $(this).removeClass("filter");
-                        }
-                        else
-                        {
-                            $("#course-result tr:not('." + filter + "')").hide();
-                            $(this).addClass("filter");
-                        }
-                        $("#course-result tr." + filter).show();
-                        $("#course-result tr.head").show();
-                    });
+                    $("." + index + ".course-time-1").append(week + "<br>" + start_time + "~" + end_time + "节");
                     $("." + index + ".course-locate-1").append(place);
                 }
                 var current_button = $("." + index + ".btn");
