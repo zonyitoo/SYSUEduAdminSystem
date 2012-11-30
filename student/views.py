@@ -44,3 +44,9 @@ def toggle_course(request):
         return withdrawal_course(student, course)
     else:
         return HttpResponseBadRequest('Invalid Command')
+
+def collision_detect(stra, strb):
+    for ch in stra:
+        if strb.find(ch) != -1:
+            return False
+    return True
