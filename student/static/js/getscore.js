@@ -55,7 +55,7 @@ function getScore()
                 final_percentage = courses[i].final_percentage;
                 total_score = courses[i].score;
                 rank = courses[i].rank;
-                $("#score-list").append("<tr><td>" + (i + 1) + "</td><td>" + course_name + "</td><td>" + course_type + "</td><td>" + credit + "</td><td>" + usual_score + "</td><td>" + final_score + "</td><td>" + total_score + "</td><td>" + rank + "</td></tr>");
+                $("#score-list").append("<tr><td>" + (i + 1) + "</td><td>" + course_name + "</td><td>" + course_type + "</td><td>" + credit + "</td><td>" + usual_score + "</td><td>" + final_score + "</td><td>" + total_score + "</td><td>" + rank + "/" + hastaken + "</td></tr>");
             }
             $("#score-result").append("<div class='msg-area'></div>");
         }
