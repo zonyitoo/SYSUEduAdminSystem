@@ -40,23 +40,24 @@ function getPlan()
         },
         success: function(msg,textStatus,jqXHR)
         {
-            var plan = msg.plan;
+            var student = msg.student;
+            var student_meta = student.student_meta;
             var courses = msg.courses;
-            var pr_req = plan.pr_req;
-            var po_req = plan.po_req;
-            var mr_req = plan.mr_req;
-            var mo_req = plan.mo_req;
-            var pr_credit = plan.pr_credit;
-            var po_credit = plan.po_credit;
-            var mr_credit = plan.mr_credit;
-            var mo_credit = plan.mo_credit;
-            var gpa = plan.gpa;
-            var pr_gpa = plan.pubcourse_gpa;
-            var po_gpa = plan.pubelective_gpa;
-            var mr_gpa = plan.procourse_gpa;
-            var mo_gpa = plan.proelective_gpa;
-            var student_type = plan.student_type;
-            var reg_year = plan.year;
+            var pr_req = student_meta.req_pubcourse;
+            var po_req = student_meta.req_pubelective;
+            var mr_req = student_meta.req_procourse;
+            var mo_req = student_meta.req_proelective;
+            var pr_credit = student.pubcourse_credit;
+            var po_credit = student.pubelective_credit;
+            var mr_credit = student.procourse_credit;
+            var mo_credit = student.proelective_credit;
+            var gpa = student.gpa;
+            var pr_gpa = student.pubcourse_gpa;
+            var po_gpa = student.pubelective_gpa;
+            var mr_gpa = student.procourse_gpa;
+            var mo_gpa = student.proelective_gpa;
+            var student_type = student_meta.type_name;
+            var reg_year = student_meta.year;
             $("#plan-result").empty();
             $("#plan-result").append("<table class='table table-bordered table-hover table-condensed'><thead><tr><th>类别</th><th>应修学分</th><th>已修学分</th><th>平均绩点</th><th>专业排名</th></tr></thead><tbody id='plan-list'></tbody></table>");
             $("#plan-list").append("<tr><td>公必</td><td>" + pr_req + "</td><td>" + pr_credit + "</td><td>" + pr_gpa + "</td><td></td></tr><tr><td>公选</td><td>" + po_req + "</td><td>" + po_credit + "</td><td>" + po_gpa + "</td><td></td></tr><tr><td>专必</td><td>" + mr_req + "</td><td>" + mr_credit + "</td><td>" + mr_gpa + "</td><td></td></tr><tr><td>专选</td><td>" + mo_req + "</td><td>" + mo_credit + "</td><td>" + mo_gpa + "</td><td></td></tr><tr><td>合计</td><td>" + (pr_req + po_req + mr_req + mo_req) + "</td><td>" + (pr_credit + po_credit + mr_credit + mo_credit) + "</td><td>" + gpa + "</td><td></td></tr>");
