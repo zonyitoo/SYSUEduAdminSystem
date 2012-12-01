@@ -1,11 +1,12 @@
 # 教务系统
 这是大三软件工程作业
+*依然开发中*
 
 ## Members
-* [叶晓军](https://github.com/iphkwan)
-* [杨曦华](https://github.com/19thhell)
-* [钟宇腾](https://github.com/zonyitoo)
-* [柯毅豪](https://github.com/sheepke)
+* [叶晓军](https://github.com/iphkwan) 产品
+* [杨曦华](https://github.com/19thhell) 前端
+* [钟宇腾](https://github.com/zonyitoo) 架构
+* [柯毅豪](https://github.com/sheepke) 后台
 
 ## Installation
 * Django框架
@@ -32,7 +33,7 @@ sudo pip install django-ajaxutils, xlutils
 
 
 
-## 数据库
+## Database
 
 ### Postgresql
 
