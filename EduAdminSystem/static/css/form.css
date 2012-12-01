@@ -23,6 +23,10 @@ input.file {
     z-index: 2;
 }
 
-#file-path{
+#path{
     vertical-align: top;
+}
+
+#property{
+    margin-bottom:22px;
 }
