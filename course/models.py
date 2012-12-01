@@ -64,6 +64,7 @@ class Course(models.Model):
     exam_method = models.CharField(max_length=20)
     course_type = models.ForeignKey(CourseType)
     course_meta = models.ForeignKey(CourseMeta, blank=True, null=True)
+    attendance_percentage = models.PositiveSmallIntegerField(default=10)
     final_percentage = models.PositiveSmallIntegerField(default=60)
     hastaken = models.IntegerField(default=0)
     department = models.ForeignKey(Department, default=0)

@@ -121,10 +121,12 @@ def upload_score_sheet(request):
 
             take.usual_score = usualscore
             take.final_score = finalscore
-            percentage = take.course.final_percentage / 100
-            take.score = finalscore * percentage\
-                + usualscore * (1 - percentage)
-            take.presence = presence
+            take.attendance = presence
+            final_percentage = take.course.final_percentage / 100
+            attend_percentage = take.course.attendance_percentage / 100
+            take.score = finalscore * final_percentage\
+                + usualscore * (1 - final_percentage - attend_percentage)\
+                + attendance * attend_percentage / 100
             take.save()
             
     except xlrd.XLRDError:

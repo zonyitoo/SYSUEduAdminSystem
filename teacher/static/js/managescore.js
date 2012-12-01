@@ -51,7 +51,7 @@ function manageScore(){
             {
                 course = takes[i].course;
                 student = takes[i].student;
-                attendance = takes[i].presence;
+                attendance = takes[i].attendance;
                 usual_score = takes[i].usual_score;
                 final_score = takes[i].final_score;
                 score = takes[i].score;
@@ -65,4 +65,5 @@ function manageScore(){
 
 function upload()
 {
+    return true;
 }
