@@ -1,3 +1,29 @@
 #modifyform .btn{
     margin-left: 30px;
 }
+
+div.fileinputs {
+    position: relative;
+}
+ 
+div.fakefile {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
+ 
+input.file {
+    margin-left: 10px;
+    position: relative;
+    text-align: right;
+    -moz-opacity:0 ;
+    filter:alpha(opacity: 0);
+    opacity: 0;
+    z-index: 2;
+}
+
+#filelist{
+    margin-left: 10px;
+    vertical-align:top;
+}

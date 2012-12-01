@@ -54,4 +54,8 @@ $(document).ready(function() {
                 $("#course-2").append("<option class='" + i + "'>" + course_name[i] + "</option>");
         }
     });
+    $("#view-student-btn").trigger("click");
+    $("#course-2").change(function(){
+        $("#view-student-btn").trigger("click");
+    });
 });
