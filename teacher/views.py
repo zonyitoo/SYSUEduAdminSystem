@@ -53,13 +53,14 @@ def get_score_sheet(request):
     t = time.localtime(time.time())
     year = t.tm_year
     month = t.tm_mon
+    course_name = request.GET['course']
     if month >= 9 or month <= 1:
         year = str(year) + '-' + str(year + 1)
     else:
         year = str(year - 1) + '-' + str(year)
 
     takes = Takes.objects.filter(
-            course__name__exact=request.GET['course'],
+            course__name__exact=course_name,
             course__academic_year__exact=year,
             course__teacher__user__exact=request.user
         ).order_by('student__user__username')
@@ -70,16 +71,19 @@ def get_score_sheet(request):
     sheet.write(0, 1, u'姓名')
     sheet.write(0, 2, u'平时成绩')
     sheet.write(0, 3, u'期末成绩')
-    sheet.write(0, 4, u'出席率（0-100）')
+    sheet.write(0, 4, u'出勤率')
 
     row = 1
     for take in takes:
         sheet.write(row, 0, take.student.user.username)
         sheet.write(row, 1, take.student.student_name)
+        sheet.write(row, 2, take.usual_score)
+        sheet.write(row, 3, take.final_score)
+        sheet.write(row, 4, take.presence)
         row += 1
 
     response = HttpResponse(mimetype='application/ms-excel')
-    response['Content-Disposition'] = 'attachments; filename=scores.xls'
+    response['Content-Disposition'] = 'attachments; filename=中山大学学生成绩录入模板_' + course_name + '.xls'
     workbook.save(response)
 
     return response

@@ -5,6 +5,8 @@ $(document).ready(function(){
         manageScore();
     });
     $("#download-template-btn").click(function(){
+        var url = "/teacher/getScoreSheet/?course=" + $("#course-2").val();
+        window.open(url);
     });
 });
 
@@ -49,7 +51,7 @@ function manageScore(){
             {
                 course = takes[i].course;
                 student = takes[i].student;
-                attendance = takes[i].attendance;
+                attendance = takes[i].presence;
                 usual_score = takes[i].usual_score;
                 final_score = takes[i].final_score;
                 score = takes[i].score;
