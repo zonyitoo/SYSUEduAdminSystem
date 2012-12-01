@@ -14,6 +14,10 @@ $(document).ready(function(){
         var url = "/teacher/getScoreSheet/中山大学学生成绩录入模板_" + $("#course-2").val() + ".xls?course=" + $("#course-2").val();
         window.open(url);
     });
+    $("#score-file").change(function(){
+        var name = $(this).val();
+        $("#filelist").text(name);
+    });
 });
 
 function manageScore(){

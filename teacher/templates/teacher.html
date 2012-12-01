@@ -1,4 +1,5 @@
 <link href="{{ STATIC_URL }}css/table.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="{{ STATIC_URL }}css/form.css" rel="stylesheet" type="text/css" media="screen"/>
 <script language="javascript" src="{{ STATIC_URL }}js/managescore.js" type="text/javascript"></script>
 <script language="javascript" src="{{ STATIC_URL }}js/teacher_getcourse.js" type="text/javascript"></script>
 
@@ -11,17 +12,18 @@
       <form enctype="multipart/form-data" action="/teacher/uploadScoreSheet/" method="POST" onsubmit="return upload()">{% csrf_token %}
           <fieldset>
               <div class="control-group">
-                <label>请务必按照模板格式填写成绩</label>
-                  <div class="controls">
-                    <!--<input type="file" id="score-table"/>-->
-                    {% for field in form %}
-                      {{ field }}
-                    {% endfor %}
+                  <label>请务必按照模板格式填写成绩</label>
+                  <div class="controls fileinputs">
+                      <input class="span1 file" type="file" id="score-file">
+                      <div class="fakefile">
+                          <button class="span1 btn btn-primary">浏览</button>
+                          <span type="text" class="span4 input-large uneditable-input" id="filelist">文件路径</span>
+                      </div>
                   </div>
               </div>
               <div class="control-group">
                   <div class="controls">
-                    <button type="submit" class="btn btn-primary">上传</button>
+                    <button type="submit" class="span1 btn btn-primary">上传</button>
                   </div>
               </div>
           </fieldset>
@@ -81,8 +83,8 @@
             <div class="control-group">
               <div class="controls">
                   <button class="btn btn-primary" id="view-student-btn"><i class="icon-search icon-white"></i> 刷新学生名单</button>
-                  <button class="btn btn-primary" id="download-template-btn"><i class="icon-download icon-white"></i> 下载成绩模板</button>
-                  <button href="#upload" data-toggle="modal" class="btn btn-primary" id="upload-score-btn"><i class="icon-upload icon-white"></i> 上传成绩</button>
+                  <button class="btn btn-danger" id="download-template-btn"><i class="icon-download icon-white"></i> 下载成绩模板</button>
+                  <button href="#upload" data-toggle="modal" class="btn btn-success" id="upload-score-btn"><i class="icon-upload icon-white"></i> 上传成绩</button>
               </div>
             </div>
           </div>
