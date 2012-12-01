@@ -15,7 +15,7 @@
               <div class="controls fileinputs">
                   <input class="hide" type="file" name="file" id="file" onchange="fileSelected();"/>
                   <button id="browse" class="btn btn-primary">浏览</button>
-                  <span class="span4 uneditable-input" id="path">文件路径</span>
+                  <span id="path">文件路径</span>
               </div>
       </div>
       <div id="property"></div>
@@ -26,6 +26,9 @@
       </div>
       <div class="progress progress-striped active" id="progress">
           <div class="bar" id="progressbar"></div>
+      </div>
+      <div class="hide alert" id="tips">
+        <strong id="alert-content"></strong>
       </div>
   </div>
   <div class="modal-footer"></div>

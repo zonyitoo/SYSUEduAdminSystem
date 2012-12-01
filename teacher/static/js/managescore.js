@@ -87,12 +87,14 @@ function fileSelected()
     $("#property").append("文件名称：" + file.name + "<br>文件大小：" + file_size + "<br>文件类型：" + file.type);
     $("#progressbar").css("width","0");
     $("#progress").removeClass("progress-success");
+    $("#tips").hide();
 }
 
 function uploadFile()
 {
     $("#progressbar").css("width","0");
     $("#progress").removeClass("progress-success");
+    $("#tips").hide();
     var data = new FormData();
     data.append("file",document.getElementById("file").files[0]);
     var xhr = new XMLHttpRequest();
@@ -125,6 +127,9 @@ function uploadComplete(evt) {
     {
         $("#view-student-btn").trigger("click");
         $("#progress").addClass("progress-success");
+        $("#alert-content").text("学生成绩上传成功！");
+        $("#tips").addClass("alert-success");
+        $("#tips").fadeIn();
     }
 }
  
