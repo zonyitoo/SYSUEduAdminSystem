@@ -102,9 +102,10 @@ def upload_score_sheet(request):
     """
         Only teacher can do!!!
     """
-    form = ScoreUploadForm(request.POST, request.FILES)
-    if not form.is_valid():
-        return HttpResponseBadRequest('File not valid')
+    #form = ScoreUploadForm(request.POST, request.FILES)
+    #if not form.is_valid():
+    #    return HttpResponseBadRequest('File not valid')
+    raise Exception(request)
 
     fileobj = request.FILES['file']
     wb = xlrd.open_workbook(file_contents=fileobj.read())

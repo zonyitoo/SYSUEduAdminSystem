@@ -6,20 +6,20 @@ This is our homework of Software Engineering
 ## Members
 * [叶晓军](https://github.com/iphkwan) Project Manager
 * [杨曦华](https://github.com/19thhell) Front-end Web Develper
-* [钟宇腾](https://github.com/zonyitoo) Sever Side Developer
-* [柯毅豪](https://github.com/sheepke) Sever Side Developer
+* [钟宇腾](https://github.com/zonyitoo) Server Side Developer
+* [柯毅豪](https://github.com/sheepke) Server Side Developer
 
 ## Installation
-### Django框架
+### Django Web Framework
 
-我们的开发均基于Django框架，因此要运行先要安装Django。
+Our server use Django Web Framework as the sever side framework.
 
 ```bash
-sudo apt-get install python-pip  # 这是Python的包管理器
+sudo apt-get install python-pip  # the Python Package Index(PyPI)
 sudo pip install django
 ```
 
-检查是否安装成功，在python的交互终端中输入
+Invoke the Python Interpreter and type commands as below
 ```python
 >>> import django
 >>> django.VERSION
@@ -27,12 +27,12 @@ sudo pip install django
 >>>
 ```
 
-安装Django AJAX-utils, xlutils
+Install Django AJAX-utils, xlutils
 ```bash
 sudo pip install django-ajaxutils, xlutils
 ```
 
-### Postgresql(Database)
+### PostgreSQL Database
 
 这个词读（post-gress-Q-L）
 
@@ -96,9 +96,8 @@ Don't try to modify /static/\*，这个文件夹是由`collectstatic`自动聚�
 ## Reference
 * [Django Project](https://www.djangoproject.com/) Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.
 * [Bootstrap](https://github.com/twitter/bootstrap) Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development, created and maintained by Mark Otto and Jacob Thornton.
-* [Postgresql](http://www.postgresql.org/) PostgreSQL is a powerful, open source object-relational database system.
+* [PostgreSQL](http://www.postgresql.org/) PostgreSQL is a powerful, open source object-relational database system.
 * [Python](http://www.python.org/) Python is a programming language that lets you work more quickly and integrate your systems more effectively. You can learn to use Python and see almost immediate gains in productivity and lower maintenance costs.
-* 
 
 ## 项目提交日期和方法
 * Jan 3, 2013 23:00
