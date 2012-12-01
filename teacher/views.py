@@ -8,6 +8,7 @@ from course.models import Course, CourseType
 from teacher.models import Teacher
 from take.models import Takes
 from student.models import Student
+from teacher.upload import ScoreUploadForm
 import time, xlwt, xlrd
 
 @ajax(login_required=True, require_GET=True)
@@ -101,8 +102,14 @@ def upload_score_sheet(request):
     """
         Only teacher can do!!!
     """
-    fileobj = request.FILE['file']
-    wb = xlrd.open_workbook('filename')
+    form = ScoreUploadForm(request.POST, request.FILES)
+    if not form.is_valid():
+        return HttpResponseBadRequest('File not valid')
+
+    fileobj = request.FILES['file']
+    wb = xlrd.open_workbook(fileobj)
+
+    raise Exception('')
 
     ## Don't know where the file exist.
     ## TODO: get file from ajax

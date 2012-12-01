@@ -33,13 +33,15 @@ def index(request):
     else:
         return HttpResponseBadRequest('Invalid Method')
 
+from teacher.upload import ScoreUploadForm
+
 @ajax(login_required=True, require_GET=True)
 def index_getview(request):
     if hasattr(request.user, 'student'):
         return render_to_response('student.html', {},
             context_instance=RequestContext(request))
     elif hasattr(request.user, 'teacher'):
-        return render_to_response('teacher.html', {},
+        return render_to_response('teacher.html', {'form': ScoreUploadForm()},
             context_instance=RequestContext(request))
     else:
         return HttpResponseForbidden('Admin User??' + request.user.username)

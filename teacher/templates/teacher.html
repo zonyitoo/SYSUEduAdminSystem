@@ -13,7 +13,10 @@
               <div class="control-group">
                 <label>请务必按照模板格式填写成绩</label>
                   <div class="controls">
-                    <input type="file" id="score-table"/>
+                    <!--<input type="file" id="score-table"/>-->
+                    {% for field in form %}
+                      {{ field }}
+                    {% endfor %}
                   </div>
               </div>
               <div class="control-group">
