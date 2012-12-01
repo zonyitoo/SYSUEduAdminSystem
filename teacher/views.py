@@ -8,6 +8,7 @@ from course.models import Course, CourseType
 from teacher.models import Teacher
 from take.models import Takes
 from student.models import Student
+from teacher.forms import ScoreUploadForm
 import time, xlwt, xlrd
 
 @ajax(login_required=True, require_GET=True)
@@ -101,11 +102,12 @@ def upload_score_sheet(request):
     """
         Only teacher can do!!!
     """
-    fileobj = request.FILE['file']
-    wb = xlrd.open_workbook('filename')
+    form = ScoreUploadForm(request.POST, request.FILES)
+    if not form.is_valid():
+        return HttpResponseBadRequest('File not valid')
 
-    ## Don't know where the file exist.
-    ## TODO: get file from ajax
+    fileobj = request.FILES['file']
+    wb = xlrd.open_workbook(file_contents=fileobj.read())
 
     try:
         sheet = wb.sheet_by_name('scores')
@@ -116,7 +118,7 @@ def upload_score_sheet(request):
             studname = row[1]
             usualscore = row[2]
             finalscore = row[3]
-            presence = row[4]
+            attendance = row[4]
 
             take = Takes.objects.get(
                         student__user__username__exact=studnum,
@@ -126,7 +128,7 @@ def upload_score_sheet(request):
 
             take.usual_score = usualscore
             take.final_score = finalscore
-            take.attendance = presence
+            take.attendance = attendance
             final_percentage = take.course.final_percentage / 100
             attend_percentage = take.course.attendance_percentage / 100
             take.score = finalscore * final_percentage\

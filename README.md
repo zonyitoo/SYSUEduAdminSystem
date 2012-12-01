@@ -1,14 +1,16 @@
-# 教务系统
-这是大三软件工程作业
+# Education Adminstration System
+This is our homework of Software Engineering
+
+*Developing*
 
 ## Members
-* [叶晓军](https://github.com/iphkwan)
-* [杨曦华](https://github.com/19thhell)
-* [钟宇腾](https://github.com/zonyitoo)
-* [柯毅豪](https://github.com/sheepke)
+* [叶晓军](https://github.com/iphkwan) Project Manager
+* [杨曦华](https://github.com/19thhell) Front-end Web Develper
+* [钟宇腾](https://github.com/zonyitoo) Sever Side Developer
+* [柯毅豪](https://github.com/sheepke) Sever Side Developer
 
 ## Installation
-* Django框架
+### Django框架
 
 我们的开发均基于Django框架，因此要运行先要安装Django。
 
@@ -30,16 +32,14 @@ sudo pip install django
 sudo pip install django-ajaxutils, xlutils
 ```
 
+### Postgresql(Database)
 
-
-## 数据库
-
-### Postgresql
+这个词读（post-gress-Q-L）
 
 先安装相关的软件包
 
 ```bash
-sudo apt-get install postgresql postgresql-client postgresql-server-all # Postgresql的数据库服务器
+sudo apt-get install postgresql postgresql-client postgresql-server-dev-all # Postgresql的数据库服务器
 ```
 
 由于必须要使用`postgres`用户才能修改数据库，所以要修改用户`postgres`的默认密码
@@ -92,6 +92,13 @@ sudo -u postgres dropdb easdb
 * 修改了一些js/css后没有反应？
 
 Don't try to modify /static/\*，这个文件夹是由`collectstatic`自动聚集各模块中的static文件，修改应进入特定模块修改，并执行`collectstatic`使其生效。
+
+## Reference
+* [Django Project](https://www.djangoproject.com/) Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.
+* [Bootstrap](https://github.com/twitter/bootstrap) Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development, created and maintained by Mark Otto and Jacob Thornton.
+* [Postgresql](http://www.postgresql.org/) PostgreSQL is a powerful, open source object-relational database system.
+* [Python](http://www.python.org/) Python is a programming language that lets you work more quickly and integrate your systems more effectively. You can learn to use Python and see almost immediate gains in productivity and lower maintenance costs.
+* 
 
 ## 项目提交日期和方法
 * Jan 3, 2013 23:00

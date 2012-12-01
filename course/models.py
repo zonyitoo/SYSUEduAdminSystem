@@ -89,6 +89,8 @@ class Course(models.Model):
             'credit': self.credit,
             'capacity': self.capacity,
             'exam_method': self.exam_method,
+            'attendance_percentage': self.attendance_percentage,
+            'final_percentage': self.final_percentage,
             'course_type': self.course_type.get_coursetype(),
             'hastaken': self.hastaken,
             'department': self.department.getDataDict(),
