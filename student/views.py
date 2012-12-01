@@ -6,8 +6,49 @@ from course.models import Course
 from student.models import Student
 from ajaxutils.decorators import ajax
 
+# a simple version of course time collision detect
+def time_collision_detect(student, course):
+
+    # the filter can be optimized by adding academic_year?
+    takes = Takes.objects.filter(student=student)
+    for t in takes:
+        # have chosen this course before, return err 401
+        if t.course.name == course.name:
+            return 401
+        # different sem or academic year, pass
+        elif t.course.academic_year == course.academic_year and t.course.semester == course.semester:
+            cta = t.course.course_time.all()
+            ctb = course.course_time.all()
+            # course time collision check, if found, return err 402
+            for ta in cta:
+                stra = ta.time
+                for tb in ctb:
+                    strb = tb.time
+                    for ch in stra:
+                        if strb.find(ch) != -1:
+                            return 402
+    return 200
+
+def course_capacity_detect(course):
+    if course.capacity <= course.hastaken:
+        # if it's full, return err 403
+        return 403
+    return 200
+
 def select_course(student, course):
     try:
+        # test time collision
+        num = time_collision_detect(student, course)
+        if num != 200:
+            return {'valid': False,
+                    'err': num}
+
+        # test capacity full or not, it should only work after random selection
+        num = course_capacity_detect(course)
+        if num != 200:
+            return {'valid': False,
+                    'err': num}
+
         take = Takes.objects.create(course=course, student=student)
         take.save()
         course.hastaken = Takes.objects.filter(course=course).count()
@@ -16,7 +57,7 @@ def select_course(student, course):
         pass
 
     return {'valid': True,
-        'hastaken': course.hastaken}
+            'hastaken': course.hastaken}
 
 def withdrawal_course(student, course):
     try:
@@ -45,8 +86,3 @@ def toggle_course(request):
     else:
         return HttpResponseBadRequest('Invalid Command')
 
-def collision_detect(stra, strb):
-    for ch in stra:
-        if strb.find(ch) != -1:
-            return False
-    return True
