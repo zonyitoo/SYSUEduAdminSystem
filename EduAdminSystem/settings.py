@@ -77,7 +77,7 @@ STATICFILES_DIRS = (
     #'school/static/',
     #'take/static/',
     'student/static/', 
-    #'teacher/static/',
+    'teacher/static/',
     'EduAdminSystem/static/', 
 )
 
