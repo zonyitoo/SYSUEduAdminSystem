@@ -296,6 +296,7 @@ courses = [
                 'from_week': 1,
                 'to_week': 18,
                 'teacher': Teacher.objects.get(teacher_name='邱道文'),
+                'final_percentage': 70,
                 'credit': 3,
                 'capacity': 9999,
                 'hastaken': 1,
@@ -384,7 +385,7 @@ takes = [
                 'student': Student.objects.get(student_name='钟宇腾'),
                 'usual_score': 80.0,
                 'final_score': 60.0,
-                'final_percentage': 70,
+                'score': 60.0 * 0.7 + 80.0 * 0.3,
                 'rank': 2,
                 'has_assessment': True,
                 'screened': True
@@ -394,7 +395,7 @@ takes = [
                 'student': Student.objects.get(student_name='ABC'),
                 'usual_score': 90.0,
                 'final_score': 95.0,
-                'final_percentage': 70,
+                'score': 95.0 * 0.7 + 90.0 * 0.3,
                 'rank': 1,
                 'has_assessment': True,
                 'screened': True
