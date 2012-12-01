@@ -117,7 +117,7 @@ def upload_score_sheet(request):
 
             take.usual_score = usualscore
             take.final_score = finalscore
-            percentage = take.course.final_percentage / 100.0
+            percentage = take.course.final_percentage / 100
             take.score = finalscore * percentage\
                 + usualscore * (1 - percentage)
             take.presence = presence
