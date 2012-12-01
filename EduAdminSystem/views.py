@@ -33,7 +33,7 @@ def index(request):
     else:
         return HttpResponseBadRequest('Invalid Method')
 
-from teacher.upload import ScoreUploadForm
+from teacher.forms import ScoreUploadForm
 
 @ajax(login_required=True, require_GET=True)
 def index_getview(request):

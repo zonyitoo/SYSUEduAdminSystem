@@ -8,7 +8,7 @@
     <h3>上传学生成绩</h3>
   </div>
   <div class="modal-body">
-      <form action="/teacher/uploadScoreSheet/" method="POST" onsubmit="return upload()">{% csrf_token %}
+      <form enctype="multipart/form-data" action="/teacher/uploadScoreSheet/" method="POST" onsubmit="return upload()">{% csrf_token %}
           <fieldset>
               <div class="control-group">
                 <label>请务必按照模板格式填写成绩</label>
