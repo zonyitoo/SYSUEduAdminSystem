@@ -1,12 +1,6 @@
 //JavaScript Document
 
 $(document).ready(function(){
-    $("#upload").on('show', function(){
-        $(document).keydown(function(e){
-            if (e.which == 27)
-                $("#upload").modal('hide');
-        });
-    });
     $("#modify").on('show', function(){
         $(document).keydown(function(e){
             if (e.which == 27)

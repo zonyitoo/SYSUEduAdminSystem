@@ -47,7 +47,7 @@ def get_takeninfo_list(request):
     }
     
 @ajax(login_required=True, require_GET=True)
-def get_score_sheet(request):
+def get_score_sheet(request, filename):
     if not hasattr(request.user, 'teacher'):
         return HttpResponseForbidden("Only teacher can do this")
 
@@ -69,7 +69,11 @@ def get_score_sheet(request):
     workbook = xlwt.Workbook()
     sheet = workbook.add_sheet('scores')
     sheet.write(0, 0, course_name)
-    sheet.write(0, 1, Course.objects.get(name__exact=course_name).id)
+    sheet.write(0, 1, 
+            Course.objects.get(
+                        name__exact=course_name,
+                        academic_year__exact=year,
+                        teacher__user__exact=request.user).id)
     sheet.write(1, 0, u'学号')
     sheet.write(1, 1, u'姓名')
     sheet.write(1, 2, u'平时成绩')
@@ -82,11 +86,12 @@ def get_score_sheet(request):
         sheet.write(row, 1, take.student.student_name)
         sheet.write(row, 2, take.usual_score)
         sheet.write(row, 3, take.final_score)
-        sheet.write(row, 4, take.presence)
+        sheet.write(row, 4, take.attendance)
         row += 1
 
     response = HttpResponse(mimetype='application/ms-excel')
-    response['Content-Disposition'] = 'attachments; filename=中山大学学生成绩录入模板_' + course_name + '.xls'
+    response['Content-Disposition'] = 'attachments'
+    #u'attachments; filename=中山大学学生成绩录入模板_' + course_name + u'.xls'
     workbook.save(response)
 
     return response

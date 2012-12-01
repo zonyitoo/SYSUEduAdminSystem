@@ -1,11 +1,17 @@
 //JavaScript Document
 
 $(document).ready(function(){
+    $("#upload").on('show', function(){
+        $(document).keydown(function(e){
+            if (e.which == 27)
+                $("#upload").modal('hide');
+        });
+    });
     $("#view-student-btn").click(function(){
         manageScore();
     });
     $("#download-template-btn").click(function(){
-        var url = "/teacher/getScoreSheet/?course=" + $("#course-2").val();
+        var url = "/teacher/getScoreSheet/中山大学学生成绩录入模板_" + $("#course-2").val() + ".xls?course=" + $("#course-2").val();
         window.open(url);
     });
 });
