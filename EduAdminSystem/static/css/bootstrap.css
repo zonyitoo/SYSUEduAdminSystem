@@ -4976,7 +4976,7 @@ input[type="submit"].btn.btn-mini {
   right: 20%;
   z-index: 1050;
   width: 60%;
-  margin-top: -44%;
+  margin-top: 5%;
   background-color: #ffffff;
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -4994,7 +4994,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal.fade {
-  top: -25%;
+  top: -40%;
   -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
      -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
        -o-transition: opacity 0.3s linear, top 0.3s ease-out;

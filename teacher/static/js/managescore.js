@@ -125,7 +125,7 @@ function uploadComplete(evt) {
     }
     else
     {
-        $("#view-student-btn").trigger("click");
+        manageScore();
         $("#progress").addClass("progress-success");
         $("#alert-content").text("学生成绩上传成功！");
         $("#tips").addClass("alert-success");
