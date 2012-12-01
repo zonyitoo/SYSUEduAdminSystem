@@ -14,25 +14,8 @@ $(document).ready(function(){
         var url = "/teacher/getScoreSheet/中山大学学生成绩录入模板_" + $("#course-2").val() + ".xls?course=" + $("#course-2").val();
         window.open(url);
     });
-    var button = $("#select-file");
-    var csrftoken = getCookie('csrftoken');
-    var upload = new AjaxUpload('select-file',{
-        action: '/teacher/uploadScoreSheet/',
-        data: {
-        },
-        name: 'file',
-        autoSubmit: false,
-        onChange: function(file,extension){
-            $("#file-path").text(file);
-        },
-        onSubmit: function(file,extension){
-        },
-        onComplete: function(file,response){
-            alert(response);
-        }
-    });
-    $("#upload").click(function(){
-        upload.submit();
+    $("#browse").click(function(){
+        $("#file").trigger("click");
     });
 });
 
@@ -89,7 +72,86 @@ function manageScore(){
     $("[rel = 'popover']").popover();
 }
 
-function upload()
+function fileSelected()
 {
+    var file = document.getElementById("file").files[0];
+    if (file)
+    {
+        var file_size = 0;
+        if (file.size >= 1024 * 1024)
+          file_size = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + "MB";
+        else file_size = (Math.round(file.size * 100 / 1024) / 100).toString() + "KB";
+    }
+    $("#path").text($("#file").val());
+    $("#property").empty();
+    $("#property").append("文件名称：" + file.name + "<br>文件大小：" + file_size + "<br>文件类型：" + file.type);
+    $("#progressbar").css("width","0");
+    $("#progress").removeClass("progress-success");
+    $("#tips").hide();
+}
+
+function uploadFile()
+{
+    $("#progressbar").css("width","0");
+    $("#progress").removeClass("progress-success");
+    $("#tips").hide();
+    var data = new FormData();
+    data.append("file",document.getElementById("file").files[0]);
+    var xhr = new XMLHttpRequest();
+    xhr.upload.addEventListener("progress",uploadProgress,false);
+    xhr.addEventListener("load",uploadComplete,false);
+    xhr.addEventListener("error",uploadFailed,false);
+    xhr.addEventListener("abort",uploadCanceled,false);
+    xhr.open("POST","/teacher/uploadScoreSheet/");
+    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    xhr.send(data);
     return false;
+}
+
+function uploadProgress(evt)
+{
+    if (evt.lengthComputable)
+    {
+        var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+        $("#progressbar").css("width",percentComplete + "%");
+    }
+}
+
+function uploadComplete(evt) {
+    var msg = eval("(" + evt.target.responseText + ")");
+    var valid = msg.valid;
+    if (valid == false)
+    {
+    }
+    else
+    {
+        $("#view-student-btn").trigger("click");
+        $("#progress").addClass("progress-success");
+        $("#alert-content").text("学生成绩上传成功！");
+        $("#tips").addClass("alert-success");
+        $("#tips").fadeIn();
+    }
+}
+ 
+function uploadFailed(evt) {
+    alert("There was an error attempting to upload the file.");
+}
+
+function uploadCanceled(evt) {
+    alert("The upload has been canceled by the user or the browser dropped the connection.");
+}
+
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie != '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i ++) {
+      var cookie = jQuery.trim(cookies[i]);
+      if (cookie.substring(0, name.length + 1) == (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
 }

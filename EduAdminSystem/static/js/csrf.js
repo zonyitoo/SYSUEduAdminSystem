@@ -2,7 +2,6 @@
 
 $(document).ready(function(){ 
   var csrftoken = getCookie('csrftoken');
-//  alert("CSRF Token: " + csrftoken);
 
   $.ajaxSetup({
     beforeSend: function(xhr, settings) {
