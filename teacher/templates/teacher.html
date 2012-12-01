@@ -1,5 +1,6 @@
 <link href="{{ STATIC_URL }}css/table.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="{{ STATIC_URL }}css/form.css" rel="stylesheet" type="text/css" media="screen"/>
+<script language="javascript" src="{{ STATIC_URL }}js/ajaxupload.js" type="text/javascript"></script>
 <script language="javascript" src="{{ STATIC_URL }}js/managescore.js" type="text/javascript"></script>
 <script language="javascript" src="{{ STATIC_URL }}js/teacher_getcourse.js" type="text/javascript"></script>
 
@@ -9,25 +10,18 @@
     <h3>上传学生成绩</h3>
   </div>
   <div class="modal-body">
-      <form enctype="multipart/form-data" action="/teacher/uploadScoreSheet/" method="POST" onsubmit="return upload()">{% csrf_token %}
-          <fieldset>
-              <div class="control-group">
-                  <label>请务必按照模板格式填写成绩</label>
-                  <div class="controls fileinputs">
-                      <input class="span1 file" type="file" id="score-file">
-                      <div class="fakefile">
-                          <button class="span1 btn btn-primary">浏览</button>
-                          <span type="text" class="span4 input-large uneditable-input" id="filelist">文件路径</span>
-                      </div>
-                  </div>
+      <div class="control-group">
+          <label>请务必按照模板格式填写成绩</label>
+              <div class="controls fileinputs">
+                  <button class="btn btn-primary" id="select-file">浏览</button>
+                  <span class="span4 uneditable-input" id="file-path">文件路径</span>
               </div>
-              <div class="control-group">
-                  <div class="controls">
-                    <button type="submit" class="span1 btn btn-primary">上传</button>
-                  </div>
-              </div>
-          </fieldset>
-      </form>
+      </div>
+      <div class="control-group">
+          <div class="controls">
+            <button id="upload" class="btn btn-primary">上传</button>
+          </div>
+      </div>
   </div>
   <div class="modal-footer"></div>
 </div>

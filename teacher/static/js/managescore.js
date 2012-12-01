@@ -14,9 +14,25 @@ $(document).ready(function(){
         var url = "/teacher/getScoreSheet/中山大学学生成绩录入模板_" + $("#course-2").val() + ".xls?course=" + $("#course-2").val();
         window.open(url);
     });
-    $("#score-file").change(function(){
-        var name = $(this).val();
-        $("#filelist").text(name);
+    var button = $("#select-file");
+    var csrftoken = getCookie('csrftoken');
+    var upload = new AjaxUpload('select-file',{
+        action: '/teacher/uploadScoreSheet/',
+        data: {
+        },
+        name: 'file',
+        autoSubmit: false,
+        onChange: function(file,extension){
+            $("#file-path").text(file);
+        },
+        onSubmit: function(file,extension){
+        },
+        onComplete: function(file,response){
+            alert(response);
+        }
+    });
+    $("#upload").click(function(){
+        upload.submit();
     });
 });
 
@@ -75,5 +91,5 @@ function manageScore(){
 
 function upload()
 {
-    return true;
+    return false;
 }

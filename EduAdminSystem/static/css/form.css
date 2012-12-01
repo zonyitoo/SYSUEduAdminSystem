@@ -23,7 +23,6 @@ input.file {
     z-index: 2;
 }
 
-#filelist{
-    margin-left: 10px;
-    vertical-align:top;
+#file-path{
+    vertical-align: top;
 }
