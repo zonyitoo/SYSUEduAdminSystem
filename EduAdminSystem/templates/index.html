@@ -3,6 +3,7 @@
 {% block js %}
 <script language="javascript" src="{{ STATIC_URL }}js/logout.js" type="text/javascript"></script>
 <script language="javascript" src="{{ STATIC_URL }}js/getview.js" type="text/javascript"></script>
+<script language="javascript" src="{{ STATIC_URL }}js/initialize.js" type="text/javascript"></script>
 <script language="javascript" src="{{ STATIC_URL }}js/modify.js" type="text/javascript"></script>
 {% endblock %}
 
@@ -27,7 +28,7 @@
         </ul>
     </div>
 
-    <div class="modal hide" id="contact">
+    <div class="modal hide fade in" id="contact">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">&times;</button>
 	    <h3>联系我们</h3>
@@ -43,7 +44,7 @@
 	  <div class="modal-footer"></div>
     </div>
 
-    <div class="modal hide" id="calendar" style="width: 60%;">
+    <div class="modal hide fade in" id="calendar" style="width: 60%;">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">&times;</button>
 	    <h3>中山大学校历</h3>
@@ -55,7 +56,7 @@
 	  <div class="modal-footer"></div>
     </div>
 
-    <div class="modal hide" id="about">
+    <div class="modal hide fade in" id="about">
 	  <div class="modal-header">
 	    <button id="close" type="button" class="close" data-dismiss="modal">&times;</button>
 	    <h3>关于本系统</h3>
@@ -66,7 +67,7 @@
 	  <div class="modal-footer"></div>
     </div>
 
-    <div class="modal hide" id="modify">
+    <div class="modal hide fade in" id="modify">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">&times;</button>
 	    <h3>修改密码</h3>

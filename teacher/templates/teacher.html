@@ -1,10 +1,10 @@
 <link href="{{ STATIC_URL }}css/table.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="{{ STATIC_URL }}css/form.css" rel="stylesheet" type="text/css" media="screen"/>
 <script language="javascript" src="{{ STATIC_URL }}js/ajaxupload.js" type="text/javascript"></script>
-<script language="javascript" src="{{ STATIC_URL }}js/managescore.js" type="text/javascript"></script>
-<script language="javascript" src="{{ STATIC_URL }}js/teacher_getcourse.js" type="text/javascript"></script>
+<script language="javascript" src="{{ STATIC_URL }}js/teacher_initialize.js" type="text/javascript"></script>
+<script language="javascript" src="{{ STATIC_URL }}js/teacher_managescore.js" type="text/javascript"></script>
 
-<div class="modal hide" id="upload">
+<div class="modal hide fade in" id="upload">
   <div class="modal-header">
     <button id="close" type="button" class="close" data-dismiss="modal">&times;</button>
     <h3>上传学生成绩</h3>
@@ -25,7 +25,7 @@
           </div>
       </div>
       <div class="progress progress-striped active" id="progress">
-          <div class="bar" id="progressbar"></div>
+          <div class="bar" id="progressbar" data-percentage="100"></div>
       </div>
       <div class="hide alert" id="tips">
         <strong id="alert-content"></strong>
@@ -76,7 +76,7 @@
         <div class="fade tab-pane" id="tabs-2">
           <div class="form-horizontal">
             <div class="control-group">
-              <label class="control-label" for="course">课程名称</label>
+              <label class="control-label" for="course-2">课程名称</label>
               <div class="controls">
                 <select class="span2" name="course-2" id="course-2">
                 </select>

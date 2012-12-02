@@ -170,14 +170,28 @@ function sendRequest(n,course_id,state)
         success: function(msg,textStatus,jqXHR)
         {
             var valid = msg.valid;
+            var err = msg.err;
             var hastaken = msg.hastaken;
             var msg_area = $("#course-result .msg-area");
+            var name = $("td#" + course_id).text();
             if (valid == false)
             {
                 msg_area.empty();
-                msg_area.append("<div class='alert alert-error'><strong>对<" + $('td#' + course_id).text() + ">操作失败！</strong></div>");
+                switch (err)
+                {
+                    case 41:
+                        msg_area.append("<div class='alert alert-error'><strong>您已选修过［" + name + "］！</strong></div>");
+                        break;
+                    case 42:
+                        msg_area.append("<div class='alert alert-error'><strong>［" + name + "］的课程时间出现冲突！</strong></div>");
+                        break;
+                    case 43:
+                        msg_area.append("<div class='alert alert-error'><strong>［" + name + "］的课程人数已满！</strong></div>");
+                        break;
+                    default:
+                        msg_area.append("<div class='alert alert-error'><strong>对［" + name + "］操作失败！</strong></div>");
+                }
                 msg_area.show();
-                var t = setTimeout("msg_area.fadeOut();",5000);
                 flag = false;
             }
             else
@@ -186,9 +200,8 @@ function sendRequest(n,course_id,state)
                 var total = ($("#course-result tr." + n + " td:eq(9)").text()).substring(pos + 1);
                 $("#course-result tr." + n + " td:eq(9)").text(hastaken + "/" + total);
                 msg_area.empty();
-                msg_area.append("<div class='alert alert-success'><strong>对<" + $('td#' + course_id).text() + ">操作成功！</strong></div>");
+                msg_area.append("<div class='alert alert-success'><strong>对［" + name + "］操作成功！</strong></div>");
                 msg_area.show();
-                var t = setTimeout("msg_area.fadeOut();",5000);
                 flag = true;
             }
         }
