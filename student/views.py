@@ -14,7 +14,7 @@ def time_collision_detect(student, course):
     for t in takes:
         # have chosen this course before, return err 401
         if t.course.name == course.name:
-            return 401
+            return 41
         # different sem or academic year, pass
         elif t.course.academic_year == course.academic_year and t.course.semester == course.semester:
             cta = t.course.course_time.all()
@@ -26,26 +26,26 @@ def time_collision_detect(student, course):
                     strb = tb.time
                     for ch in stra:
                         if strb.find(ch) != -1:
-                            return 402
-    return 200
+                            return 42
+    return 20
 
 def course_capacity_detect(course):
     if course.capacity <= course.hastaken:
         # if it's full, return err 403
-        return 403
-    return 200
+        return 43
+    return 20
 
 def select_course(student, course):
     try:
         # test time collision
         num = time_collision_detect(student, course)
-        if num != 200:
+        if num != 20:
             return {'valid': False,
                     'err': num}
 
         # test capacity full or not, it should only work after random selection
         num = course_capacity_detect(course)
-        if num != 200:
+        if num != 20:
             return {'valid': False,
                     'err': num}
 
