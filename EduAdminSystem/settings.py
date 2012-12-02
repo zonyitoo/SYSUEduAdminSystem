@@ -79,6 +79,7 @@ STATICFILES_DIRS = (
     'student/static/', 
     'teacher/static/',
     'EduAdminSystem/static/', 
+    #'administrator/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -139,6 +140,7 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates/'), 
     os.path.join(os.path.dirname(__file__), 'student/templates/'),
     os.path.join(os.path.dirname(__file__), 'teacher/templates/'), 
+    os.path.join(os.path.dirname(__file__), 'administrator/templates/'), 
 )
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -160,6 +162,7 @@ INSTALLED_APPS = (
     'user',
     'student',
     'teacher', 
+    'administrator',
 )
 
 # A sample logging configuration. The only tangible logging

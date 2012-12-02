@@ -90,7 +90,7 @@ def get_score_sheet(request, filename):
         sheet.write(row, 4, take.attendance)
         row += 1
 
-    response = HttpResponse(mimetype='application/ms-excel')
+    response = HttpResponse(mimetype='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachments'
     #u'attachments; filename=中山大学学生成绩录入模板_' + course_name + u'.xls'
     workbook.save(response)

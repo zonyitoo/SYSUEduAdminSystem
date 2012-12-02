@@ -4,7 +4,7 @@
 from EduAdminSystem import settings
 from django.core.management import setup_environ
 setup_environ(settings)
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
 
 """
     This script just for generating test data.
@@ -127,12 +127,18 @@ students = [
     }
 ]
 
+studentGroup = Group.objects.get_or_create(name='student')
+if not studentGroup[1]:
+    permaddtake = Permission.objects.get(codename='add_takes')
+    permdeltake = Permission.objects.get(codename='delete_takes')
+    studentGroup[0].permissions = [permaddtake, permdeltake]
 Student.objects.all().delete()
 for student in students:
     try:
         user = User.objects.get(username=student['user']['username'])
     except User.DoesNotExist:
         user = User.objects.create_user(**student['user'])
+        user.groups = [studentGroup[0]]
         user.save()
 
     obj = Student.objects.get_or_create(user=user, **student['student'])
@@ -191,12 +197,16 @@ teachers = [
             }
     ]
 
+teacherGroup = Group.objects.get_or_create(name='teacher')
+if not teacherGroup[1]:
+    teacherGroup[0].permissions = []
 Teacher.objects.all().delete()
 for teacher in teachers:
     try:
         user = User.objects.get(username=teacher['user']['username'])
     except User.DoesNotExist:
         user = User.objects.create_user(**teacher['user'])
+        user.groups = [teacherGroup[0]]
         user.save()
     teac = Teacher.objects.get_or_create(user=user, **teacher['teacher'])
     if not teac[1]:
