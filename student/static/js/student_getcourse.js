@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 function toggleCourse(n)
 {
-    var course_id = $("tr." + n + " td:eq(1)").attr("id");
+    var course_id = $("tr." + n + " td:eq(8)").attr("id");
     var current = $("." + n + ".btn");
     var state = 0;
     if (current.val() == "选课" || current.val() == "补选")
@@ -20,7 +20,7 @@ function toggleCourse(n)
         if (state == 1)
         {
             current.removeClass("btn-primary").removeClass("btn-btn-danger").removeClass("btn-success").addClass("btn-inverse");
-            current.val("退课(待筛选)");
+            current.val("退筛选");
         }
         else
         {
@@ -73,7 +73,7 @@ function getCourse()
             var list = msg.courses;
             var week_map = new Array("世界末日","周一","周二","周三","周四","周五","周六","周日");
             $("#course-result").empty();
-            $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr class='head'><th>序号</th><th class='very-wide-block'>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>考核方式</th><th>起止时间</th><th>上课时段</th><th>上课地点</th><th>当前人数</th><th class='wide-block'>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
+            $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr class='head'><th>课程名称</th><th class='hidden-phone'>类别</th><th class='hidden-phone'>学分</th><th>任课教师</th><th class='hidden-phone'>考核方式</th><th class='hidden-phone'>起止时间</th><th>上课时段</th><th class='hidden-phone'>上课地点</th><th class='hidden-phone'>当前人数</th><th class=''>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
             var index,id,course_name,course_type,credit,exam,period,course_time,capacity,take,hastaken,week,time,start_time,end_time,place;
             for (var i = 0;i < list.length;i++)
             {
@@ -93,7 +93,7 @@ function getCourse()
                 capacity = list[i].capacity;
                 take = list[i].take;
                 hastaken = list[i].hastaken;
-                $("#course-list").append("<tr class='" + index + "'><td>" + index + "</td><td id='"+ id + "'>" + course_name + "</td><td>" + course_type + "</td><td>" + credit + "</td><td><a target='_blank' href='" + teacher.site + "' class='withajaxpopover' rel='popover' data-placement='bottom' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " width=68 height=68 style=float:right><br>学系：" + teacher.department.name + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td>" + exam + "</td><td>" + period + "</td><td class='" + index + " course-time-1'></td><td class='" + index + " course-locate-1'></td><td>" + hastaken + "/" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
+                $("#course-list").append("<tr class='" + index + "'><td id='"+ id + "'>" + course_name + "<a class='withajaxpopover visible-phone' rel='popover' title='课程信息' data-content='类别：" + course_type + "<br>学分：" + credit + "<br>考核方式：" + exam + "<br>起止时间：" + period + "<br>当前人数：" + hastaken + "/" + capacity + "'><i class='icon-info-sign'></i></a></td><td class='hidden-phone'>" + course_type + "</td><td class='hidden-phone'>" + credit + "</td><td><a target='_blank' href='" + teacher.site + "' class='withajaxpopover' rel='popover' data-placement='bottom' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " width=68 height=68 style=float:right><br>学系：" + teacher.department.name + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td class='hidden-phone'>" + exam + "</td><td class='hidden-phone'>" + period + "</td><td class='" + index + " course-time-1'></td><td class='" + index + " course-locate-1 hidden-phone'></td><td class='hidden-phone'>" + hastaken + "/" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
                 for (var j = 0;j < course_time.length;j++)
                 {
                     week = week_map[course_time[j].week];
@@ -123,7 +123,7 @@ function getCourse()
                 else
                 {
                     current_button.removeClass("btn-primary").removeClass("btn-danger").removeClass("btn-success").addClass("btn-inverse");
-                    current_button.val("退课(待筛选)");
+                    current_button.val("退筛选");
                 }
             }
             $("#course-result").append("<div class='msg-area'></div>");
@@ -196,9 +196,9 @@ function sendRequest(n,course_id,state)
             }
             else
             {
-                var pos = ($("#course-result tr." + n + " td:eq(9)").text()).indexOf("/");
-                var total = ($("#course-result tr." + n + " td:eq(9)").text()).substring(pos + 1);
-                $("#course-result tr." + n + " td:eq(9)").text(hastaken + "/" + total);
+                var pos = ($("#course-result tr." + n + " td:eq(8)").text()).indexOf("/");
+                var total = ($("#course-result tr." + n + " td:eq(8)").text()).substring(pos + 1);
+                $("#course-result tr." + n + " td:eq(8)").text(hastaken + "/" + total);
                 msg_area.empty();
                 msg_area.append("<div class='alert alert-success'><strong>对［" + name + "］操作成功！</strong></div>");
                 msg_area.show();

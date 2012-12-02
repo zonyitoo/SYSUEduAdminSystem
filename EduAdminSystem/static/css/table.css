@@ -3,10 +3,23 @@
     padding: 4px 5px;
 }
 
+.schedulepop{
+    width: 10px;
+}
+
+.medium-block{
+    width: 60px;
+}
+
 .wide-block{
     width: 120px;
 }
 
 .very-wide-block{
     width: 200px;
+}
+
+th,td{
+    text-align: center;
+    vertical-align: middle;
 }

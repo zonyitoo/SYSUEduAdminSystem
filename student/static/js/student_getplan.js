@@ -61,7 +61,7 @@ function getPlan()
             $("#plan-result").empty();
             $("#plan-result").append("<table class='table table-bordered table-hover table-condensed'><thead><tr><th>类别</th><th>应修学分</th><th>已修学分</th><th>平均绩点</th><th>专业排名</th></tr></thead><tbody id='plan-list'></tbody></table>");
             $("#plan-list").append("<tr><td>公必</td><td>" + pr_req + "</td><td>" + pr_credit + "</td><td>" + pr_gpa + "</td><td></td></tr><tr><td>公选</td><td>" + po_req + "</td><td>" + po_credit + "</td><td>" + po_gpa + "</td><td></td></tr><tr><td>专必</td><td>" + mr_req + "</td><td>" + mr_credit + "</td><td>" + mr_gpa + "</td><td></td></tr><tr><td>专选</td><td>" + mo_req + "</td><td>" + mo_credit + "</td><td>" + mo_gpa + "</td><td></td></tr><tr><td>合计</td><td>" + (pr_req + po_req + mr_req + mo_req) + "</td><td>" + (pr_credit + po_credit + mr_credit + mo_credit) + "</td><td>" + gpa + "</td><td></td></tr>");
-            $("#plan-result").append("<br><table class='table table-bordered table-hover table-condensed'><thead><tr><th>序号</th><th>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>开课学年</th><th>开课学期</th></tr></thead><tbody id='plan-course-list'></tbody></table>");
+            $("#plan-result").append("<br><table class='table table-bordered table-hover table-condensed'><thead><tr><th>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>开课学年</th><th>开课学期</th></tr></thead><tbody id='plan-course-list'></tbody></table>");
             var name,teacher,semester,term;
             for (var i = 0;i < courses.length;i++)
             {
@@ -82,7 +82,7 @@ function getPlan()
                         term = "小学期";
                         break;
                 }
-                $("#plan-course-list").append("<tr><td>" + (i + 1) + "</td><td>" + name + "</td><td>" + courses[i].course_type + "</td><td>" + courses[i].credit + "</td><td>" + teacher + "</td><td>" + courses[i].academic_year + "</td><td>"+ term + "</td></tr>");
+                $("#plan-course-list").append("<tr><td>" + name + "</td><td>" + courses[i].course_type + "</td><td>" + courses[i].credit + "</td><td>" + teacher + "</td><td>" + courses[i].academic_year + "</td><td>"+ term + "</td></tr>");
             }
             $("#plan-result").append("<div class='msg-area'></div>");
         }
