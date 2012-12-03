@@ -89,3 +89,14 @@ def get_take_score(request):
             'takes': takeArr,
         'studentid': request.user.username
     }
+
+@ajax(login_required=True, require_GET=True)
+def get_take_assessment(request):
+    takes = Takes.objects.filter(student__user__exact=request.user,
+            has_assessment=False)
+
+    takeArr = [take.getDataDict() for take in takes]
+    return {
+            'assessment': takeArr,
+            'studentid': request.user.username
+            }

@@ -5,4 +5,6 @@ urlpatterns = patterns('',
                 'take.views.get_take_courses'),
         url('getTakeScore/$',
                 'take.views.get_take_score'),
+        url('getTakeAssessment/$',
+                'take.views.get_take_assessment'),
 )
