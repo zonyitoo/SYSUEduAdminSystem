@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 function toggleCourse(n)
 {
-    var course_id = $("tr." + n + " td:eq(8)").attr("id");
+    var course_id = $("tr." + n + " td:eq(0)").attr("id");
     var current = $("." + n + ".btn");
     var state = 0;
     if (current.val() == "选课" || current.val() == "补选")
