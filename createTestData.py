@@ -215,6 +215,34 @@ for teacher in teachers:
         print 'Creating Teacher', teac[0].teacher_name
         teac[0].save()
     
+## Administrator
+from administrator.models import Administrator
+admins = [
+    {
+        'user': {
+            'username': 'admini',
+            'password': 'admini',
+        },
+        'administrator': {
+            'administrator_name': '我是传奇',
+        }
+    }        
+]
+
+Administrator.objects.all().delete()
+for ad in admins:
+    try:
+        user = User.objects.get(username=ad['user']['username'])
+    except User.DoesNotExist:
+        user = User.objects.create_user(**ad['user'])
+        user.save()
+    adm = Administrator.objects.get_or_create(user=user, **ad['administrator'])
+    if not adm[1]:
+        print 'Administrator', adm[0].administrator_name, 'exists'
+    else:
+        print 'Creating Administrator', adm[0].administrator_name
+        adm[0].save()
+
 ## Courses
 from course.models import CourseType, Course, CourseTime
 for t in CourseType.COURSE_TYPE:

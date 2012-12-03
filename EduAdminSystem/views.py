@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from school.models import *
 from student.models import Student
 from teacher.models import Teacher
+from administrator.models import Administrator
 from ajaxutils.decorators import ajax
 
 @login_required
@@ -25,7 +26,9 @@ def index(request):
             attr.update({'name': teacher.teacher_name, 
                     'account' : request.user.username})
         else:
-            pass    
+            admin = Administrator.objects.get(user=request.user)
+            attr.update({'name': admin.administrator_name,
+                    'account': request.user.username})
 
         return render_to_response('index.html', attr,
                 context_instance=RequestContext(request))
@@ -44,4 +47,6 @@ def index_getview(request):
         return render_to_response('teacher.html', {'form': ScoreUploadForm()},
             context_instance=RequestContext(request))
     else:
-        return HttpResponseForbidden('Admin User??' + request.user.username)
+        #return HttpResponseForbidden('Admin User??' + request.user.username)
+        return render_to_response('administrator.html', {},
+                context_instance=RequestContext(request))

@@ -84,7 +84,7 @@ def get_educate_plan(request):
         curyear += 1
 
     courses = Course.objects.filter(academic_year__in=student_timelife,
-            department=department)
+            department=department).order_by("academic_year")
     
     return {
         'student': student.getDataDict(),

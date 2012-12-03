@@ -40,11 +40,11 @@ def login_page(request):
             retjson['valid'] = True
 
         # Admin User (for test)
-        if user.is_staff:
+        if user.is_superuser:
             retjson['next'] = '/admin/'
             return HttpResponse(simplejson.dumps(retjson),
                 mimetype='application/json')
-        
+
         # Normal User
         retjson['next'] = request.POST.get('next', '/')
         return HttpResponse(simplejson.dumps(retjson),
