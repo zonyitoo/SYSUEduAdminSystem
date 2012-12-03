@@ -88,7 +88,7 @@ function getSchedule()
                     time = course_time[j].time;
                     for (k = 1;k < time.length;k++)
                       $("#schedule-result tr." + (time.charCodeAt(k) - 65) + " td:eq(" + week + ")").remove();
-                    $("#schedule-result tr." + (time.charCodeAt(0) - 65) + " td:eq(" + week + ")").replaceWith("<td rowspan='" + time.length + "' style='background: #d9edf7;' class='current week withajaxpopover schedulepop' rel='popover' title='课程信息' data-content='课程类型：" + course_type + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "<br>考核方式：" + exam + "' data-placement='bottom'>" + course_name + "<br>" + place + "<br>" + period + "</td>");
+                    $("#schedule-result tr." + (time.charCodeAt(0) - 65) + " td:eq(" + week + ")").replaceWith("<td rowspan='" + time.length + "' style='background: #d9edf7;' class='current week withajaxpopover schedulepop' rel='popover' title='课程信息' data-content='类别：" + course_type + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "<br>考核方式：" + exam + "' data-placement='bottom'>" + course_name + "<br>" + place + "<br>" + period + "</td>");
                     if (week != today)
                       $(".current").addClass("hidden-phone");
                     $(".current").removeClass("current");
