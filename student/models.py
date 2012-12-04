@@ -84,11 +84,13 @@ class Student(models.Model):
             'pubelective_credit': self.pubelective_credit,
             'procourse_credit': self.procourse_credit,
             'proelective_credit': self.proelective_credit,
-            'gpa': str(self.gpa),
-            'pubcourse_gpa': str(self.pubcourse_gpa),
-            'pubelective_gpa': str(self.pubelective_gpa),
-            'procourse_gpa': str(self.procourse_gpa),
-            'proelective_gpa': str(self.proelective_gpa),
+            'gpa': str(self.gpa / (self.pubcourse_credit +
+                self.pubelective_credit + self.procourse_credit +
+                self.proelective_credit)),
+            'pubcourse_gpa': str(self.pubcourse_gpa / self.pubcourse_credit),
+            'pubelective_gpa': str(self.pubelective_gpa / self.pubelective_credit),
+            'procourse_gpa': str(self.procourse_gpa / self.procourse_credit),
+            'proelective_gpa': str(self.proelective_gpa / self.proelective_credit),
             'student_meta': self.student_meta.getDataDict(),
             'user': {
                 'username': self.user.username,
