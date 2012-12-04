@@ -4,10 +4,10 @@ This is our homework of Software Engineering
 *Developing*
 
 ## Members
-* [叶晓军](https://github.com/iphkwan) Project Manager
-* [杨曦华](https://github.com/19thhell) Front-end Web Develper
-* [钟宇腾](https://github.com/zonyitoo) Server Side Developer
-* [柯毅豪](https://github.com/sheepke) Server Side Developer
+* [月亮脸](https://github.com/iphkwan) Project Manager
+* [虫尾巴](https://github.com/19thhell) Front-end Web Develper
+* [尖头叉子](https://github.com/zonyitoo) Server Side Developer
+* [大脚板](https://github.com/sheepke) Server Side Developer
 
 ## Installation
 ### Django Web Framework
@@ -34,41 +34,39 @@ sudo pip install django-ajaxutils, xlutils
 
 ### PostgreSQL Database
 
-这个词读（post-gress-Q-L）
+PostgreSQL(Post-gress-Q-L), often simply Postgres, is an object-relational database management system (ORDBMS) avaliable for many platforms.
 
-先安装相关的软件包
-
-```bash
-sudo apt-get install postgresql postgresql-client postgresql-server-dev-all # Postgresql的数据库服务器
-```
-
-由于必须要使用`postgres`用户才能修改数据库，所以要修改用户`postgres`的默认密码
+Install related packages
 
 ```bash
-sudo passwd postgres
+sudo apt-get install postgresql postgresql-client postgresql-server-dev-all # Postgresql server and client
 ```
 
-建立新的数据库`easdb`，登录用户名为`eas`，密码是`eduadminsystem`
+Create a new database named `easdb`，own by `eas`，password is `eduadminsystem`
 
 ```bash
 sudo -u postgres createuser eas -P
 sudo -u postgres createdb -O eas easdb
 ```
 
-安装Postgresql的Python组件，及Django-Database-URL工具，用来根据系统环境变量`DATABASE_URL`来设定数据库的地址
+Install the PostgreSQL adapter for Python and a simple Django Utility to configure Django application by `DATABASE_URL` environment variable..
 
 ```bash
 sudo pip install psycopg2 dj-database-url
 ```
 
-同步Django数据库并生成测试用数据
+Create tables and generate testing data.
 
 ```bash
 python manage.py syncdb
-python createTestData.py
 ```
 
-删除数据库
+`resetdb.sh` is a script for developers to reset database.
+```bash
+./resetdb.sh
+```
+
+Delete database
 
 ```
 sudo -u postgres dropdb easdb
