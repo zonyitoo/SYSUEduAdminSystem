@@ -24,8 +24,7 @@ $(document).ready(function() {
     $(".current-year").text(year + "-" + (year + 1));
     $(".current-term").text(term);
     $.ajax({
-        url: '/teacher/getScoreableList/',
-        data: 'school-year=' + $(".current-year").text() + '&school-term=' + $(".current-term").text(),
+        url: '/administrator/getSchoolList/',
         type: 'get',
         async: false,
         error: function(jqXHR,textStatus,errorThrown)
@@ -56,7 +55,7 @@ $(document).ready(function() {
         success: function(msg,textStatus,jqXHR)
         {
             var school_name = msg.schools;
-            for (var i = 0;i < course_name.length;i++)
+            for (var i = 0;i < school_name.length;i++)
                 $("#school-1").append("<option class='" + i + "'>" + school_name[i] + "</option>");
         }
     });

@@ -5,7 +5,7 @@ $(document).ready(function(){
         manageSchoolRoll();
     });
     $("#download-template-btn").click(function(){
-        var url = "/administrator/getScoreSheet/中山大学学生成绩录入模板_" + $("#school-1").val() + ".xls?course=" + $("#school-1").val();
+        var url = "/administrator/getStudentSheet/中山大学学生名单_" + $("#school-1").val() + ".xls?school=" + $("#school-1").val();
         window.open(url);
     });
     $("#browse").click(function(){
@@ -19,7 +19,7 @@ $(document).ready(function(){
 
 function manageSchoolRoll(){
     $.ajax({
-        url: '/administrator/getTakenInfoList/',
+        url: '/administrator/getStudentSheet/',
         data: 'school=' + $("#school-1").val(),
         type: 'get',
         async: false,
