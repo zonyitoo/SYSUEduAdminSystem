@@ -81,7 +81,7 @@ Run `python manage.py runserver 0.0.0.0:80` directly. If you get error, please m
 
 Execute `python manange.py collectstatic` after modifying static files. CAUTIONS! Don't try to modify the files in `/gstatic`.
 
-#### Reference
+## Reference
 * [Django Project](https://www.djangoproject.com/) Django is a high-level python web framework that encourages rapid development and clean, pragmatic design.
 * [Bootstrap](https://github.com/twitter/bootstrap) Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development, created and maintained by Mark Otto and Jacob Thornton.
 * [PostgreSQL](http://www.postgresql.org/) PostgreSQL is a powerful, open source object-relational database system.
