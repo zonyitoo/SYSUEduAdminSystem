@@ -6,7 +6,7 @@ from take.models import Takes
 from course.models import Course
 from student.models import Student, StudentMeta
 from school.models import Department, Speciality
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from ajaxutils.decorators import ajax
 import time, xlwt, xlrd
 
@@ -108,3 +108,15 @@ def upload_student_sheet(request):
             'valid': True,
             'exist_list': exilst,
         }
+        
+@ajax(login_required=True, require_POST=True)
+def toggle_select_course(request):
+    usergrp = Group.objects.get(name='student')
+    
+    state = request.POST['state']
+    if state == '1':
+        if usergrp.has_perm('add_takes'):
+            pass
+    elif state == '2':
+        pass
+

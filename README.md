@@ -73,31 +73,21 @@ sudo -u postgres dropdb easdb
 ```
 
 ## Trouble Shooting
-* 怎么运行？
+### How to deploy it?
 
-直接在根目录执行`python manage.py runserver`，若看到出错信息，先保证你已安装好Django，安装方向见上。
+Run `python manage.py runserver 0.0.0.0:80` directly. If you get error, please make sure that you have installed all the related packages. And you should notice you should gain the root priviledge to assess the 80 port.
 
-* 看起来css或js用的不是最新的代码？
+### Why static files I saw in the browser is not the lastest version?
 
-在根目录执行`python manage.py collectstatic`然后再`runserver`就可以了。
+Execute `python manange.py collectstatic` after modifying static files. CAUTIONS! Don't try to modify the files in `/gstatic`.
 
-* 管理员帐号的创建？
-
-在根目录执行`python manage.py syncdb`然后按提示创建管理员帐号。（e.g. admin@admin）
-
-利用django自带的后台，创建管理员帐号，即可在:`127.0.0.1：8000/admin/`中进行帐号/组管理。
-
-* 修改了一些js/css后没有反应？
-
-Don't try to modify /static/\*，这个文件夹是由`collectstatic`自动聚集各模块中的static文件，修改应进入特定模块修改，并执行`collectstatic`使其生效。
-
-## Reference
-* [Django Project](https://www.djangoproject.com/) Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.
+#### Reference
+* [Django Project](https://www.djangoproject.com/) Django is a high-level python web framework that encourages rapid development and clean, pragmatic design.
 * [Bootstrap](https://github.com/twitter/bootstrap) Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development, created and maintained by Mark Otto and Jacob Thornton.
 * [PostgreSQL](http://www.postgresql.org/) PostgreSQL is a powerful, open source object-relational database system.
 * [Python](http://www.python.org/) Python is a programming language that lets you work more quickly and integrate your systems more effectively. You can learn to use Python and see almost immediate gains in productivity and lower maintenance costs.
 
-## 项目提交日期和方法
+## Submit
 * Jan 3, 2013 23:00
 * Mail to 杨腾飞
 * 学号（后两位）名...项目

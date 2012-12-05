@@ -73,6 +73,10 @@ def withdrawal_course(student, course):
     
 @ajax(login_required=True, require_POST=True)
 def toggle_course(request):
+    if not request.user.has_perm('add_takes'):
+        #If admin close the permission
+        pass
+
     student = Student.objects.get(user=request.user)
     try:
         course = Course.objects.get(id=int(request.POST['course_id']))
