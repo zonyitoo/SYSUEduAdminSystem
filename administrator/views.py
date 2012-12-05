@@ -11,6 +11,15 @@ from ajaxutils.decorators import ajax
 import time, xlwt, xlrd
 
 @ajax(login_required=True, require_GET=True)
+def get_student_list(request):
+    school = request.GET['school']
+
+    return {
+        'students': [stud.getDataDict() for stud in
+            Student.objects.filter(student_meta__major__department__school__name__exact=school)]
+    }
+
+@ajax(login_required=True, require_GET=True)
 def get_student_sheet(request, filename):
     t = time.localtime(time.time())
     year = t.tm_year

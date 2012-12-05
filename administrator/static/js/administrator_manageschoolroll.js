@@ -51,18 +51,11 @@ function manageSchoolRoll(){
         success: function(msg,textStatus,jqXHR)
         {
             $("#student-result").empty();
-            $("#student-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>学号</th><th>姓名</th><th>学院</th><th>学系</th><th>专业</th><th>出勤率</th><th>平时成绩</th><th>期末成绩</th><th>总评</th></tr></thead><tbody id='student-list'></tbody></table>");
-            var takes = msg.takes;
-            var course,student,school,major,usual_score,final_score,score;
-            for (var i = 0;i < takes.length;i++)
+            $("#student-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>学号</th><th>姓名</th><th>学院</th><th>学系</th><th>专业</th></thead><tbody id='student-list'></tbody></table>");
+            var students = msg.students;
+            for (var i = 0;i < students.length;i++)
             {
-                course = takes[i].course;
-                student = takes[i].student;
-                attendance = takes[i].attendance;
-                usual_score = takes[i].usual_score;
-                final_score = takes[i].final_score;
-                score = takes[i].score;
-                $("#student-list").append("<tr><td>" + student.user.username + "</td><td>" + student.student_name + "</td><td>" + student.student_meta.major.department.school.name + "</td><td>" + student.student_meta.major.department.name + "</td><td>" + student.student_meta.major.name + "</td><td>" + attendance + "%</td><td>" + usual_score + "</td><td>" + final_score + "</td><td>" + score + "</td></tr>");
+                $("#student-list").append("<tr><td>" + students[i].user.username + "</td><td>" + students[i].student_name + "</td><td>" + students[i].student_meta.major.department.school.name + "</td><td>" + students[i].student_meta.major.department.name + "</td><td>" + students[i].student_meta.major.name + "</tr>");
             }
             $("#student-result").append("<div class='msg-area'></div>");
         }
