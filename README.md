@@ -1,7 +1,7 @@
-# Education Adminstration System
+# Education Administration System
 This is our homework of Software Engineering
 
-*Developing*
+*Developing* Be careful, it is awesome!
 
 ## Members
 * [月亮脸](https://github.com/iphkwan) Project Manager
@@ -75,7 +75,7 @@ sudo -u postgres dropdb easdb
 ## Trouble Shooting
 ### How to deploy it?
 
-Run `python manage.py runserver 0.0.0.0:80` directly. If you get error, please make sure that you have installed all the related packages. And you should notice you should gain the root priviledge to assess the 80 port.
+Run `python manage.py runserver 0.0.0.0:80` directly. If you get error, please make sure that you have installed all the related packages. And you should gain the root priviledge for assessing the 80 port.
 
 ### Why static files I saw in the browser is not the lastest version?
 
