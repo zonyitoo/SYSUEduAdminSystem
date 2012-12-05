@@ -4,8 +4,9 @@ from django.http import (
 )
 from take.models import Takes
 from course.models import Course
-from student.models import Student
-from school.models import Department
+from student.models import Student, StudentMeta
+from school.models import Department, Speciality
+from django.contrib.auth.models import User
 from ajaxutils.decorators import ajax
 import time, xlwt, xlrd
 
@@ -19,9 +20,11 @@ def get_student_sheet(request, filename):
     else:
         year = str(year - 1) + '-' + str(year)
 
-    ## Make all the departments. Every department a sheet
+    ## Make all the departments of a school. Every department a sheet
     workbook = xlwt.Workbook()
-    departs = Department.objects.all()
+    departs =\
+        Department.objects.filter(school__name__exact=request.GET['school'])
+
     for depart in departs:
         sheet = workbook.add_sheet(depart.name)
         sheet.write(0, 0, year)
@@ -35,10 +38,12 @@ def get_student_sheet(request, filename):
         sheet.write(0, 8, 40)
         sheet.write(1, 0, u'学号')
         sheet.write(1, 1, u'姓名')
-        sheet.write(1, 2, u'专业')
+        sheet.write(1, 2, u'身份证号')
+        sheet.write(1, 3, u'专业')
         sheet.write(2, 0, u'10383001')
         sheet.write(2, 1, u'张三')
-        sheet.write(2, 2, u'计算机科学与技术')
+        sheet.write(2, 2, u'4007820000000000')
+        sheet.write(2, 3, u'计算机科学与技术')
 
     response = HttpResponse(mimetype='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachments'
@@ -46,5 +51,60 @@ def get_student_sheet(request, filename):
 
     return response
 
+@ajax(login_required=True, require_POST=True)
 def upload_student_sheet(request):
-    pass
+    if hasattr(request.FILES, 'file'):
+        fileobj = request.FILES['file']
+        exilst = []
+        try:
+            wb = xlrd.open_workbook(file_contents=fileobj.read())
+            for sheet in wb.sheets():
+                depart = Department.objects.get(name=sheet.name)
+                frow = sheet.row_values(0)
+                year = frow[0]
+                req_pubcourse = frow[2]
+                req_pubelective = frow[4]
+                req_procourse = frow[6]
+                req_proelective = frow[8]
+
+                for rind in range(3, sheet.nrows):
+                    row = sheet.row_values(rind)
+                    spec = Speciality.objects.get_or_create(
+                                name=row[3],
+                                department=depart
+                            )
+                    if spec[1]:
+                        spec[0].save()
+
+                    try:
+                        user = User.objects.get(username=row[0])
+                        exilst.append({
+                                'number': row[0],
+                                'name': row[1]
+                            })
+                        continue
+                    except User.DoesNotExist:
+                        user = User.objects.create_user(username=row[0],
+                                password=row[2][-6:])
+                        user.save()
+
+                    meta = StudentMeta.objects.get_or_create(
+                                year=year,
+                                req_pubcourse=req_pubcourse,
+                                req_pubelective=req_pubelective,
+                                req_procourse=req_procourse,
+                                req_proelective=req_proelective,
+                                major=spec
+                            )[0]
+                    Student(student_name=row[1], student_meta=meta,
+                            user=user).save()
+
+        except xlrd.XLRDError:
+            return HttpResponseBadRequest('xls file error')
+        except:
+            return HttpResponseBadRequest('Error occur')
+
+        return {
+            'valid': True,
+            'exist_list': exilst,
+        }
