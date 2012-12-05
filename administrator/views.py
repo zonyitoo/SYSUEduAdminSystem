@@ -103,7 +103,7 @@ def upload_student_sheet(request):
                                 req_pubelective=req_pubelective,
                                 req_procourse=req_procourse,
                                 req_proelective=req_proelective,
-                                major=spec
+                                major=spec[0]
                             )[0]
                     Student(student_name=row[1], student_meta=meta,
                             user=user).save()

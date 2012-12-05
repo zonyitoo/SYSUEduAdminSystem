@@ -93,7 +93,7 @@ function uploadFile()
     xhr.addEventListener("load",uploadComplete,false);
     xhr.addEventListener("error",uploadFailed,false);
     xhr.addEventListener("abort",uploadCanceled,false);
-    xhr.open("POST","/administrator/uploadScoreSheet/");
+    xhr.open("POST","/administrator/uploadStudentSheet/");
     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
     xhr.send(data);
     return false;
