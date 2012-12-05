@@ -27,9 +27,6 @@
       <div class="progress progress-striped active" id="progress">
           <div class="bar" id="progressbar" data-percentage="100"></div>
       </div>
-      <div class="hide alert" id="tips">
-        <strong id="alert-content"></strong>
-      </div>
   </div>
   <div class="modal-footer"></div>
 </div>
@@ -40,11 +37,12 @@
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#tabs-1">学籍管理</a></li>
           </ul>
+        </div>
         <div class="tab-content">
         <div class="hide current-year"></div>
         <div class="hide current-term"></div>
 
-        <div class="fade tab-pane" id="tabs-1">
+        <div class="fade in active tab-pane" id="tabs-1">
           <div class="form-horizontal">
             <div class="control-group">
               <label class="control-label" for="school-1">学院</label>
@@ -63,5 +61,7 @@
           </div>
           <div id="student-result"></div>
         </div>
+        </div>
+
     </div>
 </div>

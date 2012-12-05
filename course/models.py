@@ -6,6 +6,7 @@ from school.models import Department
 class CourseMeta(models.Model):
     description = models.TextField()
     submit_addr = models.URLField()
+    grade = models.CharField(max_length=4)
 
 class CourseType(models.Model):
     PUB_COURSE = 'PubC'

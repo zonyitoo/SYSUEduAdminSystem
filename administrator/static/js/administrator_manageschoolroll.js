@@ -19,7 +19,7 @@ $(document).ready(function(){
 
 function manageSchoolRoll(){
     $.ajax({
-        url: '/administrator/getStudentSheet/',
+        url: '/administrator/getStudentList/',
         data: 'school=' + $("#school-1").val(),
         type: 'get',
         async: false,

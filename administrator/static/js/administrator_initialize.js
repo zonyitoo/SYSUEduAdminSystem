@@ -24,7 +24,7 @@ $(document).ready(function() {
     $(".current-year").text(year + "-" + (year + 1));
     $(".current-term").text(term);
     $.ajax({
-        url: '/administrator/getSchoolList/',
+        url: '/school/getAllSchools/',
         type: 'get',
         async: false,
         error: function(jqXHR,textStatus,errorThrown)
@@ -56,7 +56,7 @@ $(document).ready(function() {
         {
             var school_name = msg.schools;
             for (var i = 0;i < school_name.length;i++)
-                $("#school-1").append("<option class='" + i + "'>" + school_name[i] + "</option>");
+                $("#school-1").append("<option class='" + i + "'>" + school_name[i].name + "</option>");
         }
     });
 });
