@@ -19,7 +19,10 @@ $(document).ready(function() {
         term = 2;
     else term = 3;
     for (var i = year;i >= 2005;i--)
+    {
         $(".school-year").append("<option class='" + i + "'>" + i + "-" + (i + 1) + "</option>");
+        $(".grade").append("<option class='" + i + "'>" + i + "</option>");
+    }
     $(".school-term option[value='" + term + "']").attr("selected","selected");
     $(".current-year").text(year + "-" + (year + 1));
     $(".current-term").text(term);

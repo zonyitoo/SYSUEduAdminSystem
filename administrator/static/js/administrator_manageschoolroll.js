@@ -5,7 +5,7 @@ $(document).ready(function(){
         manageSchoolRoll();
     });
     $("#download-student-template-btn").click(function(){
-        var url = "/administrator/getStudentSheet/中山大学学生名单_" + $("#school-1").val() + ".xls?school=" + $("#school-1").val();
+        var url = "/administrator/getStudentSheet/中山大学学生名单_" + $("#school-1").val() + "_" + $("#grade-1").val() + ".xls?school=" + $("#school-1").val() + "&grade=" + $("#grade-1").val();
         window.open(url);
     });
     $("#browse-student").click(function(){
@@ -19,7 +19,7 @@ $(document).ready(function(){
 function manageSchoolRoll(){
     $.ajax({
         url: '/administrator/getStudentList/',
-        data: 'school=' + $("#school-1").val(),
+        data: 'school=' + $("#school-1").val() + "&grade=" + $("#grade-1").val(),
         type: 'get',
         async: false,
         error: function(jqXHR,textStatus,errorThrown)
@@ -119,6 +119,7 @@ function uploadComplete(evt) {
     {
         manageSchoolRoll();
         $("#progress-student").addClass("progress-success");
+        $("#view-student-btn").trigger("click");
     }
 }
  

@@ -13,6 +13,7 @@ function toggleCourse(n)
     var state = 0;
     if (current.val() == "选课" || current.val() == "补选")
       state = 1;
+    current.attr("disabled",true);
     if (sendRequest(n,course_id,state))
     {
         if ($("#schedule-result").text() != "")
@@ -28,6 +29,7 @@ function toggleCourse(n)
             current.val("选课");
         }
     }
+    current.attr("disabled",false);
 }
 
 function getCourse()
