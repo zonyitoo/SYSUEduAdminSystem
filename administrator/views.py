@@ -10,6 +10,9 @@ from django.contrib.auth.models import User, Group
 from ajaxutils.decorators import ajax
 import time, xlwt, xlrd
 
+import logging
+logger = logging.getLogger('EduAdminSystem')
+
 @ajax(login_required=True, require_GET=True)
 def get_student_list(request):
     school = request.GET['school']
@@ -23,12 +26,6 @@ def get_student_list(request):
 def get_student_sheet(request, filename):
     t = time.localtime(time.time())
     year = t.tm_year
-    month = t.tm_mon
-    if month >= 9 or month <= 1:
-        year = str(year) + '-' + str(year + 1)
-    else:
-        year = str(year - 1) + '-' + str(year)
-
     ## Make all the departments of a school. Every department a sheet
     workbook = xlwt.Workbook()
     departs =\
@@ -36,7 +33,7 @@ def get_student_sheet(request, filename):
 
     for depart in departs:
         sheet = workbook.add_sheet(depart.name)
-        sheet.write(0, 0, year)
+        sheet.write(0, 0, unicode(year))
         sheet.write(0, 1, u'公共必修总学分')
         sheet.write(0, 2, 10)
         sheet.write(0, 3, u'公共选修总学分')
@@ -62,61 +59,60 @@ def get_student_sheet(request, filename):
 
 @ajax(login_required=True, require_POST=True)
 def upload_student_sheet(request):
-    if hasattr(request.FILES, 'file'):
-        fileobj = request.FILES['file']
-        exilst = []
-        try:
-            wb = xlrd.open_workbook(file_contents=fileobj.read())
-            for sheet in wb.sheets():
-                depart = Department.objects.get(name=sheet.name)
-                frow = sheet.row_values(0)
-                year = frow[0]
-                req_pubcourse = frow[2]
-                req_pubelective = frow[4]
-                req_procourse = frow[6]
-                req_proelective = frow[8]
+    fileobj = request.FILES['file']
+    exilst = []
+    try:
+        wb = xlrd.open_workbook(file_contents=fileobj.read())
+        for sheet in wb.sheets():
+            depart = Department.objects.get(name=sheet.name)
+            frow = sheet.row_values(0)
+            year = frow[0]
+            req_pubcourse = frow[2]
+            req_pubelective = frow[4]
+            req_procourse = frow[6]
+            req_proelective = frow[8]
 
-                for rind in range(3, sheet.nrows):
-                    row = sheet.row_values(rind)
-                    spec = Speciality.objects.get_or_create(
-                                name=row[3],
-                                department=depart
-                            )
-                    if spec[1]:
-                        spec[0].save()
+            for rind in range(2, sheet.nrows):
+                row = sheet.row_values(rind)
+                spec = Speciality.objects.get_or_create(
+                            name=row[3],
+                            department=depart
+                        )
+                if spec[1]:
+                    spec[0].save()
 
-                    try:
-                        user = User.objects.get(username=row[0])
-                        exilst.append({
-                                'number': row[0],
-                                'name': row[1]
-                            })
-                        continue
-                    except User.DoesNotExist:
-                        user = User.objects.create_user(username=row[0],
-                                password=row[2][-6:])
-                        user.save()
+                try:
+                    user = User.objects.get(username=row[0])
+                    exilst.append({
+                            'number': row[0],
+                            'name': row[1]
+                        })
+                    continue
+                except User.DoesNotExist:
+                    user = User.objects.create_user(username=row[0],
+                            password=row[2][-6:])
+                    user.save()
 
-                    meta = StudentMeta.objects.get_or_create(
-                                year=year,
-                                req_pubcourse=req_pubcourse,
-                                req_pubelective=req_pubelective,
-                                req_procourse=req_procourse,
-                                req_proelective=req_proelective,
-                                major=spec[0]
-                            )[0]
-                    Student(student_name=row[1], student_meta=meta,
-                            user=user).save()
+                meta = StudentMeta.objects.get_or_create(
+                            year=year,
+                            req_pubcourse=req_pubcourse,
+                            req_pubelective=req_pubelective,
+                            req_procourse=req_procourse,
+                            req_proelective=req_proelective,
+                            major=spec[0]
+                        )[0]
+                s = Student(student_name=row[1], student_meta=meta,
+                        user=user)
+                s.save()
+    except xlrd.XLRDError:
+        return HttpResponseBadRequest('xls file error')
+    except:
+        return HttpResponseBadRequest('Error occur')
 
-        except xlrd.XLRDError:
-            return HttpResponseBadRequest('xls file error')
-        except:
-            return HttpResponseBadRequest('Error occur')
-
-        return {
-            'valid': True,
-            'exist_list': exilst,
-        }
+    return {
+        'valid': True,
+        'exist_list': exilst,
+    }
         
 @ajax(login_required=True, require_POST=True)
 def toggle_select_course(request):
