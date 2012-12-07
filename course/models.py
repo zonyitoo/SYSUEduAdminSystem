@@ -71,6 +71,7 @@ class Course(models.Model):
     department = models.ForeignKey(Department)
     class_oriented = models.ForeignKey(Class, null=True)
     screened = models.BooleanField(default=False)
+    stage = models.PositiveSmallIntegerField(default=1)
     
     def __unicode__(self):
         return self.name
@@ -94,6 +95,7 @@ class Course(models.Model):
             'hastaken': self.hastaken,
             'department': self.department.getDataDict(),
             'screened': self.screened,
+            'stage': self.stage,
         }
         if self.class_oriented:
             dc['class_oriented'] = self.class_oriented.getDataDict()

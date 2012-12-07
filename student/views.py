@@ -32,8 +32,8 @@ def time_collision_detect(student, course):
     return 20
 
 def course_capacity_detect(course):
-    if course.capacity <= course.hastaken:
-        # if it's full, return err 403
+    if course.capacity <= course.hastaken and course.stage == 3:
+        # if it's full and it's in third stage, return err 403
         return 43
     return 20
 
