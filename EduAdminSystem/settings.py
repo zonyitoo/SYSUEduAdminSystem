@@ -164,6 +164,7 @@ INSTALLED_APPS = (
     'student',
     'teacher', 
     'administrator',
+    'assessment',
 )
 
 # A sample logging configuration. The only tangible logging
