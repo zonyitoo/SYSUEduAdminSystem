@@ -69,6 +69,11 @@ class Student(models.Model):
     def __unicode__(self):
         return self.student_name
 
+    def calGPA(score):
+        if score < 60:
+            return 0.0
+        return (score - 50) / 10
+
     def getDataDict(self):
         dc = {
             'user': self.user,
@@ -85,26 +90,26 @@ class Student(models.Model):
         }
 
         try:
-            dc['gpa'] = str((self.pubcourse_weightsum +
-                self.pubelective_weightsum + self.procourse_weightsum +
-                self.proelective_weightsum)
-                    / (self.pubcourse_credit + self.pubelective_credit + self.procourse_credit + self.proelective_credit)),
+            dc['gpa'] = str(calGPA((self.pubcourse_weightsum + self.pubelective_weightsum \
+                        + self.procourse_weightsum + self.proelective_weightsum) \
+                        / (self.pubcourse_credit + self.pubelective_credit \
+                        + self.procourse_credit + self.proelective_credit))),
         except:
             dc['gpa'] = '0.0'
         try:
-            dc['pubcourse_gpa'] = str(self.pubcourse_weightsum / self.pubcourse_credit)
+            dc['pubcourse_gpa'] = str(calGPA(self.pubcourse_weightsum / self.pubcourse_credit))
         except:
             dc['pubcourse_gpa'] = '0.0'
         try:
-            dc['pubelective_gpa'] = str(self.pubelective_weightsum / self.pubelective_credit)
+            dc['pubelective_gpa'] = str(calGPA(self.pubelective_weightsum / self.pubelective_credit))
         except:
             dc['pubelective_gpa'] = '0.0'
         try:
-            dc['procourse_gpa'] = str(self.procourse_weightsum / self.procourse_credit)
+            dc['procourse_gpa'] = str(calGPA(self.procourse_weightsum / self.procourse_credit))
         except:
             dc['procourse_gpa'] = '0.0'
         try:
-            dc['proelective_gpa'] = str(self.proelective_weightsum / self.proelective_credit)
+            dc['proelective_gpa'] = str(calGPA(self.proelective_weightsum / self.proelective_credit))
         except:
             dc['proelective_gpa'] = '0.0'
 

@@ -84,7 +84,7 @@ def get_educate_plan(request):
     # only work for major
     department = None
     if cultivate == 0:
-        department = student.student_meta.major.department
+        department = student.student_meta.major.speciality.department
     
     student_timelife = []
     curyear = int(student.student_meta.year)
