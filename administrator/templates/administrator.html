@@ -4,28 +4,55 @@
 <script language="javascript" src="{{ STATIC_URL }}js/administrator_initialize.js" type="text/javascript"></script>
 <script language="javascript" src="{{ STATIC_URL }}js/administrator_manageschoolroll.js" type="text/javascript"></script>
 
-<div class="modal hide fade in" id="upload">
+<div class="modal hide fade in" id="upload-student">
   <div class="modal-header">
     <button id="close" type="button" class="close" data-dismiss="modal">&times;</button>
     <h3>上传学生信息</h3>
   </div>
   <div class="modal-body">
       <div class="control-group">
-          <label for="file">请务必按照模板格式填写学生信息</label>
+          <label for="file-student">请务必按照模板格式填写学生信息</label>
               <div class="controls fileinputs">
-                  <input class="hide" type="file" name="file" id="file" onchange="fileSelected();"/>
-                  <button id="browse" class="btn btn-primary">浏览</button>
-                  <span id="path">文件路径</span>
+                  <input class="hide" type="file" name="file" id="file-student" onchange="studentSheetSelected();"/>
+                  <button id="browse-student" class="browse btn btn-primary">浏览</button>
+                  <span id="path-student">文件路径</span>
               </div>
       </div>
-      <div id="property"></div>
+      <div id="property-student"></div>
       <div class="control-group">
           <div class="controls">
-            <button id="upload" class="btn btn-primary" onclick="uploadFile()">上传</button>
+            <button class="btn btn-primary" onclick="uploadStudent();">上传</button>
           </div>
       </div>
-      <div class="progress progress-striped active" id="progress">
-          <div class="bar" id="progressbar" data-percentage="100"></div>
+      <div class="progress progress-striped active" id="progress-student">
+          <div class="bar" id="progressbar-student" data-percentage="100"></div>
+      </div>
+  </div>
+  <div class="modal-footer"></div>
+</div>
+
+<div class="modal hide fade in" id="upload-teacher">
+  <div class="modal-header">
+    <button id="close" type="button" class="close" data-dismiss="modal">&times;</button>
+    <h3>上传教师信息</h3>
+  </div>
+  <div class="modal-body">
+      <div class="control-group">
+          <label for="file-teacher">请务必按照模板格式填写教师信息</label>
+              <div class="controls fileinputs">
+                  <input class="hide" type="file" name="file" id="file-teacher" onchange="teacherSheetSelected();"/>
+                  <button id="browse-teacher" class="browse btn btn-primary">浏览</button>
+                  <span id="path-teacher">文件路径</span>
+              </div>
+      </div>
+      <div id="property-teacher"></div>
+      <div class="control-group">
+          <div class="controls">
+            <button class="btn btn-primary" onclick="uploadTeacher();">上传</button>
+          </div>
+      </div>
+      <div class="progress progress-striped active" id="progress-teacher">
+          <div class="bar" id="progressbar-teacher" data-percentage="100"></div>
       </div>
   </div>
   <div class="modal-footer"></div>
@@ -36,6 +63,8 @@
         <div class="tabbable">
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#tabs-1">学籍管理</a></li>
+            <li><a data-toggle="tab" href="#tabs-2">教籍管理</a></li>
+            <li><a data-toggle="tab" href="#tabs-3">查看评教</a></li>
           </ul>
         </div>
         <div class="tab-content">
@@ -47,20 +76,58 @@
             <div class="control-group">
               <label class="control-label" for="school-1">学院</label>
               <div class="controls">
-                <select class="span2" name="school-1" id="school-1">
+                <select class="span2 school" name="school-1" id="school-1">
                 </select>
               </div>
             </div>
             <div class="control-group">
               <div class="controls">
-                  <button class="btn btn-primary" id="view-student-btn"><i class="icon-search icon-white"></i> 刷新学生名单</button>
-                  <button class="btn btn-danger" id="download-template-btn"><i class="icon-download icon-white"></i> 下载信息模板</button>
-                  <button href="#upload" data-toggle="modal" class="btn btn-success" id="upload-list-btn"><i class="icon-upload icon-white"></i> 上传学生信息</button>
+                  <button class="btn btn-success" id="view-student-btn"><i class="icon-search icon-white"></i> 刷新学生名单</button>
+                  <button class="btn btn-danger" id="download-student-template-btn"><i class="icon-download icon-white"></i> 下载信息模板</button>
+                  <button href="#upload-student" data-toggle="modal" class="upload btn btn-primary" id="upload-student-list-btn"><i class="icon-upload icon-white"></i> 上传学生信息</button>
               </div>
             </div>
           </div>
           <div id="student-result"></div>
         </div>
+
+        <div class="fade in tab-pane" id="tabs-2">
+          <div class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="school-2">学院</label>
+              <div class="controls">
+                <select class="span2 school" name="school-2" id="school-2">
+                </select>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                  <button class="btn btn-success" id="view-teacher-btn"><i class="icon-search icon-white"></i> 刷新教师名单</button>
+                  <button class="btn btn-danger" id="download-teacher-template-btn"><i class="icon-download icon-white"></i> 下载信息模板</button>
+                  <button href="#upload-teacher" data-toggle="modal" class="upload btn btn-primary" id="upload-teacher-list-btn"><i class="icon-upload icon-white"></i> 上传教师信息</button>
+              </div>
+            </div>
+          </div>
+          <div id="teacher-result"></div>
+        </div>
+
+        <div class="fade in tab-pane" id="tabs-3">
+          <div class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="school-3">学院</label>
+              <div class="controls">
+                <select class="span2 school" name="school-3" id="school-3">
+                </select>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+              </div>
+            </div>
+          </div>
+          <div id="assessment-result"></div>
+        </div>
+
         </div>
 
     </div>
