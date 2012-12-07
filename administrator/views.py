@@ -60,7 +60,6 @@ def get_student_sheet(request, filename):
 @ajax(login_required=True, require_POST=True)
 def upload_student_sheet(request):
     fileobj = request.FILES['file']
-    exilst = []
     try:
         wb = xlrd.open_workbook(file_contents=fileobj.read())
         for sheet in wb.sheets():
@@ -80,18 +79,14 @@ def upload_student_sheet(request):
                         )
                 if spec[1]:
                     spec[0].save()
-
+                    
                 try:
                     user = User.objects.get(username=row[0])
-                    exilst.append({
-                            'number': row[0],
-                            'name': row[1]
-                        })
-                    continue
+                    user.set_password(row[2][-6:])
                 except User.DoesNotExist:
                     user = User.objects.create_user(username=row[0],
                             password=row[2][-6:])
-                    user.save()
+                user.save()
 
                 meta = StudentMeta.objects.get_or_create(
                             year=year,
@@ -101,9 +96,16 @@ def upload_student_sheet(request):
                             req_proelective=req_proelective,
                             major=spec[0]
                         )[0]
-                s = Student(student_name=row[1], student_meta=meta,
-                        user=user)
-                s.save()
+                try:
+                    stud = Student.objects.get(student_name=row[1], user=user)
+                    if stud.student_meta is not meta:
+                        stud.student_meta = meta
+                        stud.save()
+                except Student.DoesNotExist:
+                    stud = Student(student_name=row[1], user=user,
+                            student_meta=meta)
+                    stud.save()
+
     except xlrd.XLRDError:
         return HttpResponseBadRequest('xls file error')
     except:
@@ -111,7 +113,6 @@ def upload_student_sheet(request):
 
     return {
         'valid': True,
-        'exist_list': exilst,
     }
         
 @ajax(login_required=True, require_POST=True)
