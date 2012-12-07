@@ -49,8 +49,10 @@ function getAssessment()
                 teacher = assessment[i].course.teacher;
                 $("#assessment-list").append("<tr><td>" + course_name + "</td><td>" + course_type + "</td><td>" + credit + "</td><td>" + teacher.teacher_name + "</td><td id='assessment-" + i + "'></td></tr>");
                 var assessment_block = $("#assessment-" + i);
-                assessment_block.append("<div class='accordion-group'><div class='accordion-heading'><div class='accordion-toggle' data-toggle='collapse' data-parent='#assessment-" + i + "' data-target='#assessment-0-" + i + "'><strong>外貌</strong></div></div><div id='assessment-0-" + i + "' class='accordion-body collapse'><div class='accordion-inner'><ul id='rating'><li><a>1</a></li><li><a>2</a></li><li><a>3</a></li><li><a>4</a></li><li><a>5</a></li></ul></div></div></div>");
-                assessment_block.append("<div class='accordion-group'><div class='accordion-heading'><div class='accordion-toggle' data-toggle='collapse' data-parent='#assessment-" + i + "' data-target='#assessment-1-" + i + "'><strong>身材</strong></div></div><div id='assessment-1-" + i + "' class='accordion-body collapse'><div class='accordion-inner'>0分不能再多了</div></div></div>");
+                assessment_block.append("<div class='accordion-group'><div class='accordion-heading'><div class='accordion-toggle' data-toggle='collapse' data-parent='#assessment-" + i + "' data-target='#assessment-0-" + i + "'><strong>外貌</strong></div></div><div id='assessment-0-" + i + "' class='accordion-body collapse'><div class='accordion-inner'><div class='maintainence'></div></div></div></div>");
+                $(".maintainence").raty();
+                assessment_block.append("<div class='accordion-group'><div class='accordion-heading'><div class='accordion-toggle' data-toggle='collapse' data-parent='#assessment-" + i + "' data-target='#assessment-1-" + i + "'><strong>身材</strong></div></div><div id='assessment-1-" + i + "' class='accordion-body collapse'><div class='accordion-inner'><div class='figure'></div></div></div></div>");
+                $(".figure").raty();
             }
         }
     });
