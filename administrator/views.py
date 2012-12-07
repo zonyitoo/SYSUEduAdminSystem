@@ -21,7 +21,7 @@ def get_student_list(request):
 
     return {
         'students': [stud.getDataDict() for stud in
-            Student.objects.filter(student_meta__major__department__school__name__exact=school,
+            Student.objects.filter(student_meta__major__speciality__department__school__name__exact=school,
                 student_meta__year__exact=grade)]
     }
 

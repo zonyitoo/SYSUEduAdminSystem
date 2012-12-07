@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.http import (
-    HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
+    HttpResponse, HttpResponseForbidden, HttpResponseBadRequest, Http404
 )
 from ajaxutils.decorators import ajax
 
@@ -126,20 +126,64 @@ def upload_score_sheet(request):
                         student__student_name__exact=studname,
                         course__id__exact=course_id
                     )
+            student = Student.objects.get(user__username__exact=studnum,
+                        student_name=studname)
+            course = Course.objects.get(id=course_id)
+
+            credit = course.credit
+            final_percentage = take.course.final_percentage
+            attend_percentage = take.course.attendance_percentage
+            current_score = finalscore * final_percentage / 100 \
+                    + usualscore * (100 - final_percentage - attend_percentage)/ 100 \
+                    + attendance * attend_percentage / 100
+
+            course_type = course.course_type.type_name
+
+            if course_type == CourseType.PUB_COURSE:
+                student.pubcourse_weightsum += ((current_score - take.score) * credit)
+                if current_score >= 60:
+                    if take.score < 60:
+                        student.pubcourse_credit += credit
+                else:
+                    if take.score >= 60:
+                        student.pubcourse_credit -= credit
+            elif course_type == CourseType.PUB_ELECTIVE:
+                student.pubelective_weightsum += ((current_score - take.score) * credit)
+                if current_score >= 60:
+                    if take.score < 60:
+                        student.pubelective_credit += credit
+                else:
+                    if take.score >= 60:
+                        student.pubelective_credit -= credit
+            elif course_type == CourseType.PRO_COURSE:
+                student.procourse_weightsum += ((current_score - take.score) * credit)
+                if current_score >= 60:
+                    if take.score < 60:
+                        student.procourse_credit += credit
+                else:
+                    if take.score >= 60:
+                        student.procourse_credit -= credit
+            elif course_type == CourseType.PRO_ELECTIVE:
+                student.proelective_weightsum += ((current_score - take.score) * credit)
+                if current_score >= 60:
+                    if take.score < 60:
+                        student.proelective_credit += credit
+                else:
+                    if take.score >= 60:
+                        student.proelective_credit -= credit
+            student.save()
 
             take.usual_score = usualscore
             take.final_score = finalscore
             take.attendance = attendance
-            final_percentage = take.course.final_percentage / 100
-            attend_percentage = take.course.attendance_percentage / 100
-            take.score = finalscore * final_percentage\
-                + usualscore * (1 - final_percentage - attend_percentage)\
-                + attendance * attend_percentage / 100
+            take.score = current_score
             take.save()
             
     except xlrd.XLRDError:
         return HttpResponseBadRequest('xls file invalid')
-    except:
+    except Exception, e:
+        print e
+        raise Http404
         return HttpResponseBadRequest('Error occur')
 
     takes = Takes.objects.filter(

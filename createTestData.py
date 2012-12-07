@@ -16,7 +16,7 @@ from django.contrib.auth.models import User, Group, Permission
 """
 
 ## Schools
-from school.models import School, Department, Speciality
+from school.models import School, Department, Speciality, Class
 
 schools = [
     {
@@ -88,6 +88,25 @@ for s in specialities:
         print 'Creating Speciality', s['name']
         obj[0].save()
 
+classes = [
+    {
+        'name': '计算机A班',
+        'speciality': Speciality.objects.get(name='CST'),
+        },
+    {
+        'name': '计算机B班',
+        'speciality': Speciality.objects.get(name='CST'),
+        },
+]
+
+Class.objects.all().delete()
+for c in classes:
+    obj = Class.objects.get_or_create(**c)
+    if not obj[1]:
+        print 'Class', c['name'], 'exists'
+    else:
+        print 'Creating Class', c['name']
+        obj[0].save()
 
 # Students
 from student.models import Student, StudentMeta
@@ -96,8 +115,13 @@ studentMetas = [
     {
         'type_name': StudentMeta.UNGRADUATED,
         'year': '2010',
-        'major': Speciality.objects.get(name='CST')
-    }        
+        'major': Class.objects.get(name='计算机A班'),
+    },
+    {
+        'type_name': StudentMeta.UNGRADUATED,
+        'year': '2010',
+        'major': Class.objects.get(name='计算机B班'),
+    }
 ]
 
 StudentMeta.objects.all().delete()
@@ -118,7 +142,7 @@ students = [
     "student": {
         "student_name": "ABC",
         "student_meta": StudentMeta.objects.get(
-            major=Speciality.objects.get(name='CST'), year=2010)
+            major=Class.objects.get(name='计算机A班'), year=2010)
         }
     },
     {
@@ -129,7 +153,7 @@ students = [
     "student": {
         "student_name": "BCD",
         "student_meta": StudentMeta.objects.get(
-            major=Speciality.objects.get(name='CST'), year=2010)
+            major=Class.objects.get(name='计算机A班'), year=2010)
         }
     },
     {
@@ -140,7 +164,7 @@ students = [
     "student": {
         "student_name": "钟宇腾",
         "student_meta": StudentMeta.objects.get(
-             major=Speciality.objects.get(name='CST'), year=2010)
+             major=Class.objects.get(name='计算机B班'), year=2010)
         }
     }
 ]
@@ -321,7 +345,8 @@ courses = [
                 'exam_method': '考查',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='CS'),
+                'class_oriented': Class.objects.get(name='计算机B班'),
                 }
             },
         {
@@ -344,7 +369,8 @@ courses = [
                 'exam_method': '考查',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='CS'),
+                'class_oriented': Class.objects.get(name='计算机A班'),
                 }
             },
         {
@@ -367,7 +393,8 @@ courses = [
                 'exam_method': '考查',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='CS'),
+                'class_oriented': Class.objects.get(name='计算机B班')
                 }
             },
         {
@@ -392,7 +419,8 @@ courses = [
                 'exam_method': '笔试',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[2][0]),
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='CS'),
+                'class_oriented': Class.objects.get(name='计算机B班')
                 }
             },
         {
@@ -416,7 +444,8 @@ courses = [
                 'exam_method': '笔试',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='CS'),
+                'class_oriented': Class.objects.get(name='计算机A班'),
                 }
             },
         {
@@ -440,7 +469,8 @@ courses = [
                 'exam_method': '笔试',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='CS'),
+                'class_oriented': Class.objects.get(name='计算机A班'),
                 }
             },
 	{
@@ -464,7 +494,8 @@ courses = [
                 'exam_method': '笔试',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='CS'),
+                'class_oriented': Class.objects.get(name='计算机B班'),
                 }
             },
 	{
@@ -488,7 +519,7 @@ courses = [
                 'exam_method': '考察',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
-                'department': Department.objects.get(name='LAW')
+                'department': Department.objects.get(name='LAW'),
                 }
             },
 	{
@@ -512,7 +543,31 @@ courses = [
                 'exam_method': '考察',
                 'course_type':
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
-                'department': Department.objects.get(name='BIO')
+                'department': Department.objects.get(name='BIO'),
+                }
+            },
+	{
+            'time': [
+                {
+                    'week': 1,
+                    'time': 'IJK',
+                    'location': '东A405'
+                    }
+                ],
+            'course': {
+                'name': '法律史',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 13,
+                'teacher': Teacher.objects.get(teacher_name='丁利'),
+                'credit': 3,
+                'capacity': 100,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
+                'department': Department.objects.get(name='LAW'),
                 }
             },
     ]

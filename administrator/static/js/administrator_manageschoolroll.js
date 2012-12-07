@@ -54,7 +54,7 @@ function manageSchoolRoll(){
             var students = msg.students;
             for (var i = 0;i < students.length;i++)
             {
-                $("#student-list").append("<tr><td>" + students[i].user.username + "</td><td>" + students[i].student_name + "</td><td>" + students[i].student_meta.major.department.school.name + "</td><td>" + students[i].student_meta.major.department.name + "</td><td>" + students[i].student_meta.major.name + "</tr>");
+                $("#student-list").append("<tr><td>" + students[i].user.username + "</td><td>" + students[i].student_name + "</td><td>" + students[i].student_meta.major.speciality.department.school.name + "</td><td>" + students[i].student_meta.major.speciality.department.name + "</td><td>" + students[i].student_meta.major.speciality.name + "</tr>");
             }
             $("#student-result").append("<div class='msg-area'></div>");
         }

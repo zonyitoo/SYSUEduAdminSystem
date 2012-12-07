@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 from teacher.models import Teacher
-from school.models import Department
+from school.models import Department, Class
 
 class CourseMeta(models.Model):
     description = models.TextField()
@@ -68,17 +68,16 @@ class Course(models.Model):
     attendance_percentage = models.PositiveSmallIntegerField(default=10)
     final_percentage = models.PositiveSmallIntegerField(default=60)
     hastaken = models.IntegerField(default=0)
-    department = models.ForeignKey(Department, default=0)
-    assessment_avgscore = models.DecimalField(max_digits=5, decimal_places=2,
-            default=0)
-    assessment_num = models.IntegerField(default=0)
+    department = models.ForeignKey(Department)
+    class_oriented = models.ForeignKey(Class, null=True)
     screened = models.BooleanField(default=False)
+    stage = models.PositiveSmallIntegerField(default=1)
     
     def __unicode__(self):
         return self.name
     
     def getDataDict(self):
-        return {
+        dc = {
             'id': self.id,
             'name': self.name,
             'academic_year': self.academic_year,
@@ -96,5 +95,12 @@ class Course(models.Model):
             'hastaken': self.hastaken,
             'department': self.department.getDataDict(),
             'screened': self.screened,
+            'stage': self.stage,
         }
+        if self.class_oriented:
+            dc['class_oriented'] = self.class_oriented.getDataDict()
+        else:
+            dc['class_oriented'] = None
+
+        return dc
 

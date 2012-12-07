@@ -19,19 +19,21 @@ def time_collision_detect(student, course):
         elif t.course.academic_year == course.academic_year and t.course.semester == course.semester:
             cta = t.course.course_time.all()
             ctb = course.course_time.all()
-            # course time collision check, if found, return err 402
+            #course time collision check, if found, return err 402
             for ta in cta:
                 stra = ta.time
+                weeka = ta.week
                 for tb in ctb:
                     strb = tb.time
+                    weekb = tb.week
                     for ch in stra:
-                        if strb.find(ch) != -1:
+                        if strb.find(ch) != -1 and weeka == weekb:
                             return 42
     return 20
 
 def course_capacity_detect(course):
-    if course.capacity <= course.hastaken:
-        # if it's full, return err 403
+    if course.capacity <= course.hastaken and course.stage == 3:
+        # if it's full and it's in third stage, return err 403
         return 43
     return 20
 

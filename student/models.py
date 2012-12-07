@@ -2,23 +2,21 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from school.models import Speciality
+from school.models import Speciality, Class
 
 class StudentMinor(models.Model):
-    minor_speciality = models.ForeignKey(Speciality)
+    minor = models.ForeignKey(Class)
     pubcourse_credit = models.PositiveIntegerField(default=0)
     pubelective_credit = models.PositiveIntegerField(default=0)
     procourse_credit = models.PositiveIntegerField(default=0)
     proelective_credit = models.PositiveIntegerField(default=0)
-    gpa = models.DecimalField(max_digits=2, decimal_places=1, default=0)
-    pubcourse_gpa = models.DecimalField(max_digits=2, decimal_places=1,
-            default=0)
-    pubelective_gpa = models.DecimalField(max_digits=2, decimal_places=1,
-            default=0)
-    procourse_gpa = models.DecimalField(max_digits=2, decimal_places=1,
-            default=0)
-    proelective_gpa = models.DecimalField(max_digits=2, decimal_places=1,
-            default=0)
+    pubcourse_weightsum = models.PositiveIntegerField(default=0)
+    pubelective_weightsum = models.PositiveIntegerField(default=0)
+    procourse_weightsum = models.PositiveIntegerField(default=0)
+    proelective_weightsum = models.PositiveIntegerField(default=0)
+
+    def __unicode__(self):
+        return self.minor.name
 
 class StudentMeta(models.Model):
     UNGRADUATED = 'UG'
@@ -35,7 +33,7 @@ class StudentMeta(models.Model):
     req_pubelective = models.PositiveIntegerField(default=0)
     req_procourse = models.PositiveIntegerField(default=0)
     req_proelective = models.PositiveIntegerField(default=0)
-    major = models.ForeignKey(Speciality)
+    major = models.ForeignKey(Class)
 
     def __unicode__(self):
         return self.TYPE_TO_UNICODE[self.type_name]
@@ -60,21 +58,21 @@ class Student(models.Model):
     pubelective_credit = models.PositiveIntegerField(default=0)
     procourse_credit = models.PositiveIntegerField(default=0)
     proelective_credit = models.PositiveIntegerField(default=0)
-    gpa = models.DecimalField(max_digits=2, decimal_places=1, default=0)
-    pubcourse_gpa = models.DecimalField(max_digits=2, decimal_places=1,
-            default=0)
-    pubelective_gpa = models.DecimalField(max_digits=2, decimal_places=1,
-            default=0)
-    procourse_gpa = models.DecimalField(max_digits=2, decimal_places=1,
-            default=0)
-    proelective_gpa = models.DecimalField(max_digits=2, decimal_places=1,
-            default=0)
+    pubcourse_weightsum = models.PositiveIntegerField(default=0)
+    pubelective_weightsum = models.PositiveIntegerField(default=0)    
+    procourse_weightsum = models.PositiveIntegerField(default=0)
+    proelective_weightsum = models.PositiveIntegerField(default=0)
     student_meta = models.ForeignKey(StudentMeta)
     student_minor = models.ManyToManyField(StudentMinor, null=True, blank=True)
     user = models.OneToOneField(User, related_name='student')
 
     def __unicode__(self):
         return self.student_name
+
+    def calGPA(score):
+        if score < 60:
+            return 0.0
+        return (score - 50) / 10
 
     def getDataDict(self):
         dc = {
@@ -92,24 +90,26 @@ class Student(models.Model):
         }
 
         try:
-            dc['gpa'] = str((self.pubcourse_gpa + self.pubelective_gpa + self.procourse_gpa + self.proelective_gpa)
-                    / (self.pubcourse_credit + self.pubelective_credit + self.procourse_credit + self.proelective_credit)),
+            dc['gpa'] = str(calGPA((self.pubcourse_weightsum + self.pubelective_weightsum \
+                        + self.procourse_weightsum + self.proelective_weightsum) \
+                        / (self.pubcourse_credit + self.pubelective_credit \
+                        + self.procourse_credit + self.proelective_credit))),
         except:
             dc['gpa'] = '0.0'
         try:
-            dc['pubcourse_gpa'] = str(self.pubcourse_gpa / self.pubcourse_credit)
+            dc['pubcourse_gpa'] = str(calGPA(self.pubcourse_weightsum / self.pubcourse_credit))
         except:
             dc['pubcourse_gpa'] = '0.0'
         try:
-            dc['pubelective_gpa'] = str(self.pubelective_gpa / self.pubelective_credit)
+            dc['pubelective_gpa'] = str(calGPA(self.pubelective_weightsum / self.pubelective_credit))
         except:
             dc['pubelective_gpa'] = '0.0'
         try:
-            dc['procourse_gpa'] = str(self.procourse_gpa / self.procourse_credit)
+            dc['procourse_gpa'] = str(calGPA(self.procourse_weightsum / self.procourse_credit))
         except:
             dc['procourse_gpa'] = '0.0'
         try:
-            dc['proelective_gpa'] = str(self.proelective_gpa / self.proelective_credit)
+            dc['proelective_gpa'] = str(calGPA(self.proelective_weightsum / self.proelective_credit))
         except:
             dc['proelective_gpa'] = '0.0'
 

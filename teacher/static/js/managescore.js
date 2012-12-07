@@ -64,7 +64,7 @@ function manageScore(){
                 usual_score = takes[i].usual_score;
                 final_score = takes[i].final_score;
                 score = takes[i].score;
-                $("#student-list").append("<tr><td>" + student.user.username + "</td><td>" + student.student_name + "</td><td>" + student.student_meta.major.department.school.name + "</td><td>" + student.student_meta.major.department.name + "</td><td>" + student.student_meta.major.name + "</td><td>" + attendance + "%</td><td>" + usual_score + "</td><td>" + final_score + "</td><td>" + score + "</td></tr>");
+                $("#student-list").append("<tr><td>" + student.user.username + "</td><td>" + student.student_name + "</td><td>" + student.student_meta.major.speciality.department.school.name + "</td><td>" + student.student_meta.major.speciality.department.name + "</td><td>" + student.student_meta.major.speciality.name + "</td><td>" + attendance + "%</td><td>" + usual_score + "</td><td>" + final_score + "</td><td>" + score + "</td></tr>");
             }
             $("#student-result").append("<div class='msg-area'></div>");
         }
