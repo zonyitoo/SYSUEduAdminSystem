@@ -12,12 +12,15 @@ function toggleCourse(n)
     var current = $("." + n + ".btn");
     var state = 0;
     if (current.val() == "选课" || current.val() == "补选")
-      state = 1;
+        state = 1;
     current.attr("disabled",true);
     if (sendRequest(n,course_id,state))
     {
         if ($("#schedule-result").text() != "")
+        {
             $("#view-schedule-btn").trigger("click");
+        }
+        $("#view-assessment-btn").trigger("click");
         if (state == 1)
         {
             current.removeClass("btn-primary").removeClass("btn-btn-danger").removeClass("btn-success").addClass("btn-inverse");

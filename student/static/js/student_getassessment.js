@@ -2,6 +2,9 @@
 
 $(document).ready(function(){
     getAssessment();
+    $("#view-assessment-btn").click(function(){
+        getAssessment();
+    });
 });
 
 function getAssessment()
@@ -49,10 +52,16 @@ function getAssessment()
                 teacher = assessment[i].course.teacher;
                 $("#assessment-list").append("<tr><td>" + course_name + "</td><td>" + course_type + "</td><td>" + credit + "</td><td>" + teacher.teacher_name + "</td><td id='assessment-" + i + "'></td></tr>");
                 var assessment_block = $("#assessment-" + i);
-                assessment_block.append("<div class='accordion-group'><div class='accordion-heading'><div class='accordion-toggle' data-toggle='collapse' data-parent='#assessment-" + i + "' data-target='#assessment-0-" + i + "'><strong>外貌</strong></div></div><div id='assessment-0-" + i + "' class='accordion-body collapse'><div class='accordion-inner'><div class='maintainence'></div></div></div></div>");
-                $(".maintainence").raty();
+                assessment_block.append("<div class='accordion-group'><div class='accordion-heading'><div class='accordion-toggle' data-toggle='collapse' data-parent='#assessment-" + i + "' data-target='#assessment-0-" + i + "'><strong>外貌</strong></div></div><div id='assessment-0-" + i + "' class='accordion-body collapse'><div class='accordion-inner'><div class='maintain'></div></div></div></div>");
                 assessment_block.append("<div class='accordion-group'><div class='accordion-heading'><div class='accordion-toggle' data-toggle='collapse' data-parent='#assessment-" + i + "' data-target='#assessment-1-" + i + "'><strong>身材</strong></div></div><div id='assessment-1-" + i + "' class='accordion-body collapse'><div class='accordion-inner'><div class='figure'></div></div></div></div>");
-                $(".figure").raty();
+                $(".maintain").raty({
+                    hints: ['屌丝','毅丝','普通青年','文艺青年','糕帅富'],
+                    scoreName: "score"
+                });
+                $(".figure").raty({
+                    hints: ['1分不能再多','2分不能再多','3分不能再多','4分不能再多','5分不能再多'],
+                    scoreName: "score"
+                });
             }
         }
     });
