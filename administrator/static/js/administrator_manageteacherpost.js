@@ -1,26 +1,25 @@
 //JavaScript Document
 
 $(document).ready(function(){
-    $("#view-student-btn").click(function(){
-        manageScore();
+    $("#view-teacher-btn").click(function(){
+        manageTeacherPost();
     });
-    $("#download-template-btn").click(function(){
-        var url = "/teacher/getScoreSheet/中山大学学生成绩录入模板_" + $("#course-2").val() + ".xls?course=" + $("#course-2").val();
+    $("#download-teacher-template-btn").click(function(){
+        var url = "/administrator/getTeacherSheet/中山大学教师名单_" + $("#school-1").val() + ".xls?school=" + $("#school-2").val();
         window.open(url);
     });
-    $("#browse").click(function(){
-        $("#file").trigger("click");
+    $("#browse-teacher").click(function(){
+        $("#file-teacher").trigger("click");
     });
-    $("#view-student-btn").trigger("click");
-    $("#course-2").change(function(){
-        $("#view-student-btn").trigger("click");
+    $("#school-2").change(function(){
+        $("#view-teacher-btn").trigger("click");
     });
 });
 
-function manageScore(){
+function manageTeacherPost(){
     $.ajax({
-        url: '/teacher/getTakenInfoList/',
-        data: 'course=' + $("#course-2").val(),
+        url: '/administrator/getTeacherList/',
+        data: 'school=' + $("#school-2").val(),
         type: 'get',
         async: false,
         error: function(jqXHR,textStatus,errorThrown)
@@ -50,29 +49,22 @@ function manageScore(){
         },
         success: function(msg,textStatus,jqXHR)
         {
-            $("#student-result").empty();
-            $("#student-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>学号</th><th>姓名</th><th>学院</th><th>学系</th><th>专业</th><th>出勤率</th><th>平时成绩</th><th>期末成绩</th><th>总评</th></tr></thead><tbody id='student-list'></tbody></table>");
-            var takes = msg.takes;
-            var course,student,school,major,usual_score,final_score,score;
-            for (var i = 0;i < takes.length;i++)
+            $("#teacher-result").empty();
+            $("#teacher-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th class='wide-block'>工号</th><th class='wide-block'>姓名</th><th class='wide-block'>职称</th><th class='very-wide-block'>学院</th><th class='very-wide-block'>学系</th></thead><tbody id='teacher-list'></tbody></table>");
+            var teachers = msg.teachers;
+            for (var i = 0;i < teachers.length;i++)
             {
-                course = takes[i].course;
-                student = takes[i].student;
-                attendance = takes[i].attendance;
-                usual_score = takes[i].usual_score;
-                final_score = takes[i].final_score;
-                score = takes[i].score;
-                $("#student-list").append("<tr><td>" + student.user.username + "</td><td>" + student.student_name + "</td><td>" + student.student_meta.major.department.school.name + "</td><td>" + student.student_meta.major.department.name + "</td><td>" + student.student_meta.major.name + "</td><td>" + attendance + "%</td><td>" + usual_score + "</td><td>" + final_score + "</td><td>" + score + "</td></tr>");
+                $("#teacher-list").append("<tr><td>" + teachers[i].user.username + "</td><td>" + teachers[i].teacher_name + "</td><td>" + teachers[i].title + "</td><td>" + teachers[i].department.school.name + "</td><td>" + teachers[i].department.name + "</tr>");
             }
-            $("#student-result").append("<div class='msg-area'></div>");
+            $("#teacher-result").append("<div class='msg-area'></div>");
         }
     });
     $("[rel = 'popover']").popover();
 }
 
-function fileSelected()
+function teacherSheetSelected()
 {
-    var file = document.getElementById("file").files[0];
+    var file = document.getElementById("file-teacher").files[0];
     if (file)
     {
         var file_size = 0;
@@ -80,27 +72,27 @@ function fileSelected()
           file_size = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + "MB";
         else file_size = (Math.round(file.size * 100 / 1024) / 100).toString() + "KB";
     }
-    $("#path").text($("#file").val());
-    $("#property").empty();
-    $("#property").append("文件名称：" + file.name + "<br>文件大小：" + file_size + "<br>文件类型：" + file.type);
-    $("#progressbar").css("width","0");
-    $("#progressbar").removeClass("progress-success");
-    $("#progressbar").text("");
+    $("#path-teacher").text($("#file-teacher").val());
+    $("#property-teacher").empty();
+    $("#property-teacher").append("文件名称：" + file.name + "<br>文件大小：" + file_size + "<br>文件类型：" + file.type);
+    $("#progressbar-teacher").css("width","0");
+    $("#progressbar-teacher").removeClass("progress-success");
+    $("#progressbar-teacher").text("");
 }
 
-function uploadFile()
+function uploadStudent()
 {
-    $("#progressbar").css("width","0");
-    $("#progressbar").removeClass("progress-success");
-    $("#progressbar").text("");
+    $("#progressbar-teacher").css("width","0");
+    $("#progressbar-teacher").removeClass("progress-success");
+    $("#progressbar-teacher").text("");
     var data = new FormData();
-    data.append("file",document.getElementById("file").files[0]);
+    data.append("file",document.getElementById("file-teacher").files[0]);
     var xhr = new XMLHttpRequest();
     xhr.upload.addEventListener("progress",uploadProgress,false);
     xhr.addEventListener("load",uploadComplete,false);
     xhr.addEventListener("error",uploadFailed,false);
     xhr.addEventListener("abort",uploadCanceled,false);
-    xhr.open("POST","/teacher/uploadScoreSheet/");
+    xhr.open("POST","/administrator/uploadTeacherSheet/");
     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
     xhr.send(data);
     return false;
@@ -108,7 +100,7 @@ function uploadFile()
 
 function uploadProgress(evt)
 {
-    var bar = $("#progressbar");
+    var bar = $("#progressbar-teacher");
     if (evt.lengthComputable){
         var percent = Math.round(evt.loaded / evt.total * 100);
         bar.css("width",percent + "%");
@@ -125,8 +117,8 @@ function uploadComplete(evt) {
     }
     else
     {
-        manageScore();
-        $("#progress").addClass("progress-success");
+        manageTeacherPost();
+        $("#progress-teacher").addClass("progress-success");
     }
 }
  

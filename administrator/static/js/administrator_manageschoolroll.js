@@ -4,14 +4,13 @@ $(document).ready(function(){
     $("#view-student-btn").click(function(){
         manageSchoolRoll();
     });
-    $("#download-template-btn").click(function(){
+    $("#download-student-template-btn").click(function(){
         var url = "/administrator/getStudentSheet/中山大学学生名单_" + $("#school-1").val() + ".xls?school=" + $("#school-1").val();
         window.open(url);
     });
-    $("#browse").click(function(){
-        $("#file").trigger("click");
+    $("#browse-student").click(function(){
+        $("#file-student").trigger("click");
     });
-    $("#view-student-btn").trigger("click");
     $("#school-1").change(function(){
         $("#view-student-btn").trigger("click");
     });
@@ -51,7 +50,7 @@ function manageSchoolRoll(){
         success: function(msg,textStatus,jqXHR)
         {
             $("#student-result").empty();
-            $("#student-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>学号</th><th>姓名</th><th>学院</th><th>学系</th><th>专业</th></thead><tbody id='student-list'></tbody></table>");
+            $("#student-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th class='wide-block'>学号</th><th class='wide-block'>姓名</th><th class='very-wide-block'>学院</th><th class='very-wide-block'>学系</th><th class='very-wide-block'>专业</th></thead><tbody id='student-list'></tbody></table>");
             var students = msg.students;
             for (var i = 0;i < students.length;i++)
             {
@@ -63,9 +62,9 @@ function manageSchoolRoll(){
     $("[rel = 'popover']").popover();
 }
 
-function fileSelected()
+function studentSheetSelected()
 {
-    var file = document.getElementById("file").files[0];
+    var file = document.getElementById("file-student").files[0];
     if (file)
     {
         var file_size = 0;
@@ -73,21 +72,21 @@ function fileSelected()
           file_size = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + "MB";
         else file_size = (Math.round(file.size * 100 / 1024) / 100).toString() + "KB";
     }
-    $("#path").text($("#file").val());
-    $("#property").empty();
-    $("#property").append("文件名称：" + file.name + "<br>文件大小：" + file_size + "<br>文件类型：" + file.type);
-    $("#progressbar").css("width","0");
-    $("#progressbar").removeClass("progress-success");
-    $("#progressbar").text("");
+    $("#path-student").text($("#file-student").val());
+    $("#property-student").empty();
+    $("#property-student").append("文件名称：" + file.name + "<br>文件大小：" + file_size + "<br>文件类型：" + file.type);
+    $("#progressbar-student").css("width","0");
+    $("#progressbar-student").removeClass("progress-success");
+    $("#progressbar-student").text("");
 }
 
-function uploadFile()
+function uploadStudent()
 {
-    $("#progressbar").css("width","0");
-    $("#progressbar").removeClass("progress-success");
-    $("#progressbar").text("");
+    $("#progressbar-student").css("width","0");
+    $("#progressbar-student").removeClass("progress-success");
+    $("#progressbar-student").text("");
     var data = new FormData();
-    data.append("file",document.getElementById("file").files[0]);
+    data.append("file",document.getElementById("file-student").files[0]);
     var xhr = new XMLHttpRequest();
     xhr.upload.addEventListener("progress",uploadProgress,false);
     xhr.addEventListener("load",uploadComplete,false);
@@ -101,22 +100,13 @@ function uploadFile()
 
 function uploadProgress(evt)
 {
-    var me = $("#progressbar");
-    var total = me.attr("data-percentage");
-    var current = 0;
-    var progress = setInterval(function() {
-        if (current >= total)
-        {
-            clearInterval(progress);
-            me.addClass("progress-success");
-        }
-        else
-        {
-            current++;
-            me.css("width",current + "%");
-        }
-        me.text(current + "%");
-    }, 100);
+    var bar = $("#progressbar-student");
+    if (evt.lengthComputable){
+        var percent = Math.round(evt.loaded / evt.total * 100);
+        bar.css("width",percent + "%");
+        bar.attr("width",percent + "%");
+        bar.text(bar.attr("width"));
+    }
 }
 
 function uploadComplete(evt) {
@@ -127,8 +117,8 @@ function uploadComplete(evt) {
     }
     else
     {
-        manageScore();
-        $("#progress").addClass("progress-success");
+        manageSchoolRoll();
+        $("#progress-student").addClass("progress-success");
     }
 }
  

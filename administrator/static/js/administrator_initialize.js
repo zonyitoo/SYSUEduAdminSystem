@@ -1,10 +1,10 @@
 //JavaScript Document
 
 $(document).ready(function() {
-    $("#upload").on('show', function(){
+    $(".upload").on('show', function(){
         $(document).keydown(function(e){
             if (e.which == 27)
-                $("#upload").modal('hide');
+                $(".upload").modal('hide');
         });
     });
     var date = new Date()
@@ -56,7 +56,7 @@ $(document).ready(function() {
         {
             var school_name = msg.schools;
             for (var i = 0;i < school_name.length;i++)
-                $("#school-1").append("<option class='" + i + "'>" + school_name[i].name + "</option>");
+                $(".school").append("<option class='" + i + "'>" + school_name[i].name + "</option>");
         }
     });
 });
