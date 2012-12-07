@@ -6,18 +6,19 @@ from student.models import Student
 from ajaxutils.decorators import ajax
 import time
 
-COURSE_TYPE = {
+COURSE_TYPE = [
     CourseType.PUB_ELECTIVE, 
     CourseType.PUB_COURSE,
     CourseType.PRO_ELECTIVE,
     CourseType.PRO_COURSE
-}
+]
 
 @ajax(login_required=True, require_GET=True)
 def get_available_list(request):
     cultivate = int(request.GET.get('cultivate', ''))
     
     course_type = COURSE_TYPE[int(request.GET['course_type'])]
+    course_type = CourseType.objects.get(type_name=course_type)
 
     year = '2012-2013'
     sem = 1
