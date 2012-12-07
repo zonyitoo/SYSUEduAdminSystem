@@ -41,3 +41,15 @@ class Speciality(models.Model):
             'department': self.department.getDataDict()
         }
     
+class Class(models.Model):
+    name = models.CharField(max_length=30)
+    speciality = models.ForeignKey(Speciality)
+
+    def __unicode__(self):
+        return self.name
+
+    def getDataDict(self):
+        return {
+            'name': self.name,
+            'speciality': self.speciality.getDataDict()
+        }

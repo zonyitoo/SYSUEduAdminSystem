@@ -38,13 +38,18 @@ function toggleCourse(n)
 function getCourse()
 {
     var cultivate = $("#cultivate-1 option:selected").val();
-    var po = !($("#po").hasClass("active"));
-    var pr = !($("#pr").hasClass("active"));
-    var mo = !($("#mo").hasClass("active"));
-    var mr = !($("#mr").hasClass("active"));
+    var select_type;
+    if ($("#po").hasClass("active"))
+        select_type = 0;
+    else if ($("#pr").hasClass("active"))
+        select_type = 1;
+    else if ($("#mo").hasClass("active"))
+        select_type = 2;
+    else if ($("#mr").hasClass("active"))
+        select_type = 3;
     $.ajax({
         url: '/course/getAvailableList/',
-        data: 'cultivate=' + cultivate +'&po=' + po + '&pr=' + pr + '&mo=' + mo + '&mr=' + mr + '&school-year=' + $(".current-year").text() + '&school-term=' + $(".current-term").text(),
+        data: 'cultivate=' + cultivate + '&course_type=' + select_type,
         datatype: 'json',
         type: 'get',
         async: false,
