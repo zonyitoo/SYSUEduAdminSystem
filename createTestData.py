@@ -24,7 +24,13 @@ schools = [
         },
     {
         'name': 'SS'
-        }
+        },
+    {
+	'name': 'LAW'
+	},
+    {
+	'name': 'LIFESCI'
+	}
 ]
 
 School.objects.all().delete()
@@ -40,7 +46,19 @@ departments = [
     {
         'name': 'CS',
         'school': School.objects.get(name='SIST')
-        }        
+        },
+    {
+	'name': 'SE',
+	'school': School.objects.get(name='SS')
+	},
+    {
+	'name': 'LAW',
+	'school': School.objects.get(name='LAW')
+	},
+    {
+	'name': 'BIO',
+	'school': School.objects.get(name='LIFESCI')
+	}
 ]
 
 Department.objects.all().delete()
@@ -194,7 +212,40 @@ teachers = [
                 'title': Teacher.TITLE[2][0],
                 'department': Department.objects.get(name='CS')
                 }
-            }
+            },
+	{
+	    'user': {
+		'username': 'lwj',
+		'password': 'lwj',
+		},
+	    'teacher': {
+		'teacher_name': '李文军',
+		'title': Teacher.TITLE[2][0],
+		'department': Department.objects.get(name='SE')
+		}
+	    },
+	{
+	    'user': {
+		'username': 'dl',
+		'password': 'dl',
+		},
+	    'teacher': {
+		'teacher_name': '丁利',
+		'title': Teacher.TITLE[2][0],
+		'department': Department.objects.get(name='LAW')
+		}
+	    },
+	{
+	    'user': {
+		'username': 'hxl',
+		'password': 'hxl',
+		},
+	    'teacher': {
+		'teacher_name': '贺熊雷',
+		'title': Teacher.TITLE[2][0],
+		'department': Department.objects.get(name='BIO')
+		}
+	    },
     ]
 
 teacherGroup = Group.objects.get_or_create(name='teacher')
@@ -391,7 +442,79 @@ courses = [
                     CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
                 'department': Department.objects.get(name='CS')
                 }
-            }
+            },
+	{
+            'time': [
+                {
+                    'week': 2,
+                    'time': 'CDE',
+                    'location': '东C401'
+                    }
+                ],
+            'course': {
+                'name': 'IT项目管理',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 1,
+                'to_week': 18,
+                'teacher': Teacher.objects.get(teacher_name='李文军'),
+                'credit': 3,
+                'capacity': 50,
+                'hastaken': 0,
+                'exam_method': '笔试',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'department': Department.objects.get(name='CS')
+                }
+            },
+	{
+            'time': [
+                {
+                    'week': 5,
+                    'time': 'HI',
+                    'location': '东A202'
+                    }
+                ],
+            'course': {
+                'name': '博弈论',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 13,
+                'teacher': Teacher.objects.get(teacher_name='丁利'),
+                'credit': 3,
+                'capacity': 100,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
+                'department': Department.objects.get(name='LAW')
+                }
+            },
+	{
+            'time': [
+                {
+                    'week': 1,
+                    'time': 'IJK',
+                    'location': '东A301'
+                    }
+                ],
+            'course': {
+                'name': '转基因研究',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 13,
+                'teacher': Teacher.objects.get(teacher_name='贺熊雷'),
+                'credit': 3,
+                'capacity': 100,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
+                'department': Department.objects.get(name='BIO')
+                }
+            },
     ]
 
 Course.objects.all().delete()
