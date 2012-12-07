@@ -10,4 +10,12 @@ class Assessment(models.Model):
 
     def __unicode__(self):
         return self.course.name
+    
+    def getDataDict(self):
+        return {
+            'subject': self.subject,
+            'weight': self.weight,
+            'score': self.score,
+            'course': self.course.getDataDict(),
+        }
 

@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 from teacher.models import Teacher
-from school.models import Department
+from school.models import Department, Class
 
 class CourseMeta(models.Model):
     description = models.TextField()
@@ -68,10 +68,9 @@ class Course(models.Model):
     attendance_percentage = models.PositiveSmallIntegerField(default=10)
     final_percentage = models.PositiveSmallIntegerField(default=60)
     hastaken = models.IntegerField(default=0)
-    department = models.ForeignKey(Department, default=0)
-    assessment_avgscore = models.DecimalField(max_digits=5, decimal_places=2,
-            default=0)
-    assessment_num = models.IntegerField(default=0)
+    department = models.ForeignKey(Department)
+    class_oriented = models.ForeignKey(Class, null=True)
+    department_oriented = models.ForeignKey(Department, null=True)
     screened = models.BooleanField(default=False)
     
     def __unicode__(self):
@@ -95,6 +94,7 @@ class Course(models.Model):
             'course_type': self.course_type.get_coursetype(),
             'hastaken': self.hastaken,
             'department': self.department.getDataDict(),
+            'class_oriented': self.class_oriented.getDataDict(),
             'screened': self.screened,
         }
 

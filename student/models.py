@@ -2,10 +2,10 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from school.models import Speciality
+from school.models import Speciality, Class
 
 class StudentMinor(models.Model):
-    minor_speciality = models.ForeignKey(Speciality)
+    minor = models.ForeignKey(Class)
     pubcourse_credit = models.PositiveIntegerField(default=0)
     pubelective_credit = models.PositiveIntegerField(default=0)
     procourse_credit = models.PositiveIntegerField(default=0)
@@ -19,6 +19,9 @@ class StudentMinor(models.Model):
             default=0)
     proelective_gpa = models.DecimalField(max_digits=2, decimal_places=1,
             default=0)
+
+    def __unicode__(self):
+        return self.minor.name
 
 class StudentMeta(models.Model):
     UNGRADUATED = 'UG'
@@ -35,7 +38,7 @@ class StudentMeta(models.Model):
     req_pubelective = models.PositiveIntegerField(default=0)
     req_procourse = models.PositiveIntegerField(default=0)
     req_proelective = models.PositiveIntegerField(default=0)
-    major = models.ForeignKey(Speciality)
+    major = models.ForeignKey(Class)
 
     def __unicode__(self):
         return self.TYPE_TO_UNICODE[self.type_name]

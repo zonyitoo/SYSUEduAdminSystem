@@ -4,64 +4,59 @@ from course.models import CourseType, Course
 from take.models import Takes
 from student.models import Student
 from ajaxutils.decorators import ajax
+import time
 
-coursetype = {
-        'po': CourseType.PUB_ELECTIVE, 
-        'pr': CourseType.PUB_COURSE,
-        'mo': CourseType.PRO_ELECTIVE,
-        'mr': CourseType.PRO_COURSE
-        }
+COURSE_TYPE = {
+    CourseType.PUB_ELECTIVE, 
+    CourseType.PUB_COURSE,
+    CourseType.PRO_ELECTIVE,
+    CourseType.PRO_COURSE
+}
 
 @ajax(login_required=True, require_GET=True)
 def get_available_list(request):
     cultivate = int(request.GET.get('cultivate', ''))
-    ct = []
-    if request.GET['po'] == 'true':
-        ct.append(coursetype['po'])
-    if request.GET['pr'] == 'true':
-        ct.append(coursetype['pr'])
-    if request.GET['mo'] == 'true':
-        ct.append(coursetype['mo'])
-    if request.GET['mr'] == 'true':
-        ct.append(coursetype['mr'])
-    academic_year = request.GET.get('school-year', '')
-    sem = request.GET.get('school-term', '')
     
-    courseType = []
-    for cot in ct:
-        ctobj = CourseType.objects.get(type_name=cot)
-        courseType.append(ctobj)
+    course_type = COURSE_TYPE[int(request.GET['course_type'])]
+
+    year = '2012-2013'
+    sem = 1
 
     student = Student.objects.get(user=request.user)
     # it only work for major now.
-    department = None
     if cultivate == 0:
-        department = student.student_meta.major.department
-    
+        stud_class = student.student_meta.major
+
     courseArr = []
-    for ict in courseType:
-        courses = Course.objects.filter(academic_year=academic_year,
-                semester=sem, course_type=ict,
-                department=department)
+    if request.GET['course_type'] == '0':
+        courses = Course.objects.filter(academic_year=year,
+                semester=sem, course_type=course_type)
+    elif request.GET['course_type'] == '1':
+        courses = Course.objects.filter(academic_year=year,
+                semester=sem, course_type=course_type,
+                department=stud_class.speciality.department)
+    else:
+        courses = Course.objects.filter(academic_year=year,
+                semester=sem, course_type=course_type,
+                class_oriented=stud_class)
 
-        for course in courses:
-            courseObj = course.getDataDict()
+    for course in courses:
+        courseObj = course.getDataDict()
 
-            try:
-                t = Takes.objects.get(course=course, student=student)
-                if course.screened:
-                    if t.screened: courseObj['take'] = 1
-                    else: courseObj['take'] = 2
-                else:
-                    courseObj['take'] = 3
-            except:
-                courseObj['take'] = 0 # The Student has not take this course
-            
-            courseArr.append(courseObj)
+        try:
+            t = Takes.objects.get(course=course, student=student)
+            if course.screened:
+                if t.screened: courseObj['take'] = 1
+                else: courseObj['take'] = 2
+            else:
+                courseObj['take'] = 3
+        except:
+            courseObj['take'] = 0 # The Student has not take this course
+        
+        courseArr.append(courseObj)
 
     return {
         'courses': courseArr, 
-        'studentid': request.user.username
     }
 
 @ajax(login_required=True, require_GET=True)
