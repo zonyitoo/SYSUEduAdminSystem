@@ -5,7 +5,7 @@ This is our homework of Software Engineering
 
 ## Members
 * [月亮脸](https://github.com/iphkwan) Project Manager
-* [虫尾巴](https://github.com/19thhell) Front-end Web Develper
+* [虫尾巴](https://github.com/19thhell) Front-end Web Developer
 * [尖头叉子](https://github.com/zonyitoo) Server Side Developer
 * [大脚板](https://github.com/sheepke) Server Side Developer
 
