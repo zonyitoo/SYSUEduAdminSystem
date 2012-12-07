@@ -16,10 +16,12 @@ logger = logging.getLogger('EduAdminSystem')
 @ajax(login_required=True, require_GET=True)
 def get_student_list(request):
     school = request.GET['school']
+    grade = request.GET['grade']
 
     return {
         'students': [stud.getDataDict() for stud in
-            Student.objects.filter(student_meta__major__department__school__name__exact=school)]
+            Student.objects.filter(student_meta__major__department__school__name__exact=school,
+                student_meta__year__exact=grade)]
     }
 
 @ajax(login_required=True, require_GET=True)
