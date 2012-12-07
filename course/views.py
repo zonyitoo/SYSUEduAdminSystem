@@ -18,10 +18,23 @@ def get_available_list(request):
     cultivate = int(request.GET.get('cultivate', ''))
     
     course_type = COURSE_TYPE[int(request.GET['course_type'])]
+    
+    t = time.localtime(time.time())
+    year = t.tm_year
+    month = t.tm_mon
+    if month >= 9 or month <= 1:
+        year = str(year) + '-' + str(year + 1)
+    else:
+        year = str(year - 1) + '-' + str(year)
+
     course_type = CourseType.objects.get(type_name=course_type)
 
-    year = '2012-2013'
-    sem = 1
+    if month >= 9 and month <= 1:
+        sem = 1
+    elif month > 1 and month <= 6:
+        sem = 2
+    else:
+        sem = 3
 
     student = Student.objects.get(user=request.user)
     # it only work for major now.
