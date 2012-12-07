@@ -29,12 +29,14 @@ def get_available_list(request):
 
     course_type = CourseType.objects.get(type_name=course_type)
 
-    if month >= 9 and month <= 1:
+    if month >= 9 or month <= 1:
         sem = 1
     elif month > 1 and month <= 6:
         sem = 2
     else:
         sem = 3
+
+    print year, sem
 
     student = Student.objects.get(user=request.user)
     # it only work for major now.
@@ -82,9 +84,9 @@ def get_educate_plan(request):
     student = Student.objects.get(user = user)
     
     # only work for major
-    department = None
+    stud_class = None
     if cultivate == 0:
-        department = student.student_meta.major.department
+        stud_class = student.student_meta.major
     
     student_timelife = []
     curyear = int(student.student_meta.year)
@@ -93,7 +95,7 @@ def get_educate_plan(request):
         curyear += 1
 
     courses = Course.objects.filter(academic_year__in=student_timelife,
-            department=department).order_by("academic_year")
+            class_oriented=stud_class).order_by("academic_year")
     
     return {
         'student': student.getDataDict(),
