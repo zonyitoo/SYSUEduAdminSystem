@@ -546,6 +546,30 @@ courses = [
                 'department': Department.objects.get(name='BIO'),
                 }
             },
+	{
+            'time': [
+                {
+                    'week': 1,
+                    'time': 'IJK',
+                    'location': '东A405'
+                    }
+                ],
+            'course': {
+                'name': '法律史',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 13,
+                'teacher': Teacher.objects.get(teacher_name='丁利'),
+                'credit': 3,
+                'capacity': 100,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type':
+                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
+                'department': Department.objects.get(name='LAW'),
+                }
+            },
     ]
 
 Course.objects.all().delete()

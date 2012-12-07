@@ -49,7 +49,7 @@ function getCourse()
         select_type = 3;
     $.ajax({
         url: '/course/getAvailableList/',
-        data: 'cultivate=' + cultivate +'&po=' + po + '&pr=' + pr + '&mo=' + mo + '&mr=' + mr + '&school-year=' + $(".current-year").text() + '&school-term=' + $(".current-term").text(),
+        data: 'cultivate=' + cultivate + '&course_type=' + select_type,
         datatype: 'json',
         type: 'get',
         async: false,

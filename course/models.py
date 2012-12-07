@@ -70,14 +70,13 @@ class Course(models.Model):
     hastaken = models.IntegerField(default=0)
     department = models.ForeignKey(Department)
     class_oriented = models.ForeignKey(Class, null=True)
-    department_oriented = models.ForeignKey(Department, null=True)
     screened = models.BooleanField(default=False)
     
     def __unicode__(self):
         return self.name
     
     def getDataDict(self):
-        return {
+        dc = {
             'id': self.id,
             'name': self.name,
             'academic_year': self.academic_year,
@@ -94,7 +93,12 @@ class Course(models.Model):
             'course_type': self.course_type.get_coursetype(),
             'hastaken': self.hastaken,
             'department': self.department.getDataDict(),
-            'class_oriented': self.class_oriented.getDataDict(),
             'screened': self.screened,
         }
+        if self.class_oriented:
+            dc['class_oriented'] = self.class_oriented.getDataDict()
+        else:
+            dc['class_oriented'] = None
+
+        return dc
 

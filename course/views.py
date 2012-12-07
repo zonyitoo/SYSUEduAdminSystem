@@ -6,12 +6,12 @@ from student.models import Student
 from ajaxutils.decorators import ajax
 import time
 
-COURSE_TYPE = {
+COURSE_TYPE = [
     CourseType.PUB_ELECTIVE, 
     CourseType.PUB_COURSE,
     CourseType.PRO_ELECTIVE,
     CourseType.PRO_COURSE
-}
+]
 
 @ajax(login_required=True, require_GET=True)
 def get_available_list(request):
@@ -26,6 +26,8 @@ def get_available_list(request):
         year = str(year) + '-' + str(year + 1)
     else:
         year = str(year - 1) + '-' + str(year)
+
+    course_type = CourseType.objects.get(type_name=course_type)
 
     if month >= 9 and month <= 1:
         sem = 1
