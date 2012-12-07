@@ -9,6 +9,15 @@
     }
   },
   {
+    "pk": 21,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "assessment",
+      "name": "assessment",
+      "app_label": "assessment"
+    }
+  },
+  {
     "pk": 4,
     "model": "contenttypes.contenttype",
     "fields": {
@@ -261,6 +270,33 @@
     }
   },
   {
+    "pk": 6,
+    "model": "course.coursetime",
+    "fields": {
+      "week": 2,
+      "location": "\u4e1cC401",
+      "time": "CDE"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "course.coursetime",
+    "fields": {
+      "week": 5,
+      "location": "\u4e1cA202",
+      "time": "HI"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "course.coursetime",
+    "fields": {
+      "week": 1,
+      "location": "\u4e1cA301",
+      "time": "IJK"
+    }
+  },
+  {
     "pk": 2,
     "model": "course.course",
     "fields": {
@@ -369,6 +405,87 @@
     }
   },
   {
+    "pk": 7,
+    "model": "course.course",
+    "fields": {
+      "assessment_avgscore": "0.00",
+      "academic_year": "2012-2013",
+      "capacity": 50,
+      "name": "IT\u9879\u76ee\u7ba1\u7406",
+      "course_time": [
+        6
+      ],
+      "course_type": 4,
+      "final_percentage": 60,
+      "hastaken": 0,
+      "teacher": 5,
+      "credit": 3,
+      "semester": 1,
+      "attendance_percentage": 10,
+      "department": 1,
+      "exam_method": "\u7b14\u8bd5",
+      "course_meta": null,
+      "screened": false,
+      "assessment_num": 0,
+      "to_week": 18,
+      "from_week": 1
+    }
+  },
+  {
+    "pk": 8,
+    "model": "course.course",
+    "fields": {
+      "assessment_avgscore": "0.00",
+      "academic_year": "2012-2013",
+      "capacity": 100,
+      "name": "\u535a\u5f08\u8bba",
+      "course_time": [
+        7
+      ],
+      "course_type": 2,
+      "final_percentage": 60,
+      "hastaken": 0,
+      "teacher": 6,
+      "credit": 3,
+      "semester": 1,
+      "attendance_percentage": 10,
+      "department": 3,
+      "exam_method": "\u8003\u5bdf",
+      "course_meta": null,
+      "screened": false,
+      "assessment_num": 0,
+      "to_week": 13,
+      "from_week": 2
+    }
+  },
+  {
+    "pk": 9,
+    "model": "course.course",
+    "fields": {
+      "assessment_avgscore": "0.00",
+      "academic_year": "2012-2013",
+      "capacity": 100,
+      "name": "\u8f6c\u57fa\u56e0\u7814\u7a76",
+      "course_time": [
+        8
+      ],
+      "course_type": 2,
+      "final_percentage": 60,
+      "hastaken": 0,
+      "teacher": 7,
+      "credit": 3,
+      "semester": 1,
+      "attendance_percentage": 10,
+      "department": 4,
+      "exam_method": "\u8003\u5bdf",
+      "course_meta": null,
+      "screened": false,
+      "assessment_num": 0,
+      "to_week": 13,
+      "from_week": 2
+    }
+  },
+  {
     "pk": 1,
     "model": "course.course",
     "fields": {
@@ -439,11 +556,54 @@
     }
   },
   {
+    "pk": 3,
+    "model": "school.school",
+    "fields": {
+      "name": "LAW",
+      "addr": ""
+    }
+  },
+  {
+    "pk": 4,
+    "model": "school.school",
+    "fields": {
+      "name": "LIFESCI",
+      "addr": ""
+    }
+  },
+  {
     "pk": 1,
     "model": "school.department",
     "fields": {
       "school": 1,
       "name": "CS",
+      "addr": ""
+    }
+  },
+  {
+    "pk": 2,
+    "model": "school.department",
+    "fields": {
+      "school": 2,
+      "name": "SE",
+      "addr": ""
+    }
+  },
+  {
+    "pk": 3,
+    "model": "school.department",
+    "fields": {
+      "school": 3,
+      "name": "LAW",
+      "addr": ""
+    }
+  },
+  {
+    "pk": 4,
+    "model": "school.department",
+    "fields": {
+      "school": 4,
+      "name": "BIO",
       "addr": ""
     }
   },
@@ -580,6 +740,33 @@
       "codename": "delete_administrator",
       "name": "Can delete administrator",
       "content_type": 20
+    }
+  },
+  {
+    "pk": 61,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_assessment",
+      "name": "Can add assessment",
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 62,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_assessment",
+      "name": "Can change assessment",
+      "content_type": 21
+    }
+  },
+  {
+    "pk": 63,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_assessment",
+      "name": "Can delete assessment",
+      "content_type": 21
     }
   },
   {
@@ -1088,42 +1275,24 @@
     "pk": 1,
     "model": "auth.user",
     "fields": {
-      "username": "admin",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": true,
-      "is_staff": true,
-      "last_login": "2012-12-04T17:18:13.849Z",
-      "groups": [],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$ZjBqxZDjbIIP$gN3O4TbbvsL+XLsgPjn4FPl5dzxU2PzASHBs2XNge8U=",
-      "email": "admin@admin.com",
-      "date_joined": "2012-12-04T17:05:52.339Z"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "auth.user",
-    "fields": {
       "username": "10383001",
       "first_name": "",
       "last_name": "",
       "is_active": true,
       "is_superuser": false,
       "is_staff": false,
-      "last_login": "2012-12-04T17:21:46.021Z",
+      "last_login": "2012-12-07T09:45:16.309Z",
       "groups": [
         1
       ],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$9y5Idy0p0IIc$PuYG45q/K8lQaFwTNkLIJEYwzF0dy/E3SQbLQ7J90aI=",
+      "password": "pbkdf2_sha256$10000$dXvrDitTy1MN$8X4bO34fmugK8YA0L2xSDrMjgBSvCbElxqwy7uvLpFI=",
       "email": "",
-      "date_joined": "2012-12-04T17:21:46.021Z"
+      "date_joined": "2012-12-07T09:45:16.309Z"
     }
   },
   {
-    "pk": 3,
+    "pk": 2,
     "model": "auth.user",
     "fields": {
       "username": "10383002",
@@ -1132,18 +1301,18 @@
       "is_active": true,
       "is_superuser": false,
       "is_staff": false,
-      "last_login": "2012-12-04T17:21:46.174Z",
+      "last_login": "2012-12-07T09:45:16.579Z",
       "groups": [
         1
       ],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$4W4u6FHEOJkl$ExZTScnqjU9QIHdeOIldwSJ9vCjTRa06YhvkdCi/73M=",
+      "password": "pbkdf2_sha256$10000$RyfdUKMnOy8t$MmOzEdanFRASHU4TjHf8+EfTVsJr1KYOKqwfag0nL+k=",
       "email": "",
-      "date_joined": "2012-12-04T17:21:46.174Z"
+      "date_joined": "2012-12-07T09:45:16.579Z"
     }
   },
   {
-    "pk": 4,
+    "pk": 3,
     "model": "auth.user",
     "fields": {
       "username": "10383067",
@@ -1152,18 +1321,18 @@
       "is_active": true,
       "is_superuser": false,
       "is_staff": false,
-      "last_login": "2012-12-04T17:21:46.329Z",
+      "last_login": "2012-12-07T09:45:16.838Z",
       "groups": [
         1
       ],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$q6Zqhyr7KAeR$9M7BOaFVm2GKiWvyxv9aionkjnuP+hegpt4SCW5dcTA=",
+      "password": "pbkdf2_sha256$10000$iVs3nzHUzpJX$u0fFMI0yYML0+zuqTC/94Ni0kF02hy51DKpq6GeTR6g=",
       "email": "",
-      "date_joined": "2012-12-04T17:21:46.329Z"
+      "date_joined": "2012-12-07T09:45:16.838Z"
     }
   },
   {
-    "pk": 5,
+    "pk": 4,
     "model": "auth.user",
     "fields": {
       "username": "jqg",
@@ -1172,18 +1341,18 @@
       "is_active": true,
       "is_superuser": false,
       "is_staff": false,
-      "last_login": "2012-12-04T17:21:46.499Z",
+      "last_login": "2012-12-07T09:45:17.130Z",
       "groups": [
         2
       ],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$edW84vqP8Ijq$KMa6GEO6wGvEjlKLSxQJR56jJzcNOV5g82hwWqnW/s0=",
+      "password": "pbkdf2_sha256$10000$ZQ3GGTTPqiN3$7pgn9yYLO7xxVvffiWWkXuO+qdmNKQy7iy3DC3TO0cs=",
       "email": "",
-      "date_joined": "2012-12-04T17:21:46.499Z"
+      "date_joined": "2012-12-07T09:45:17.130Z"
     }
   },
   {
-    "pk": 6,
+    "pk": 5,
     "model": "auth.user",
     "fields": {
       "username": "yy",
@@ -1192,18 +1361,18 @@
       "is_active": true,
       "is_superuser": false,
       "is_staff": false,
-      "last_login": "2012-12-04T17:21:46.651Z",
+      "last_login": "2012-12-07T09:45:17.390Z",
       "groups": [
         2
       ],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$O9jKEUu8ISO0$h/nW0QamOPD1FyInJ52V3M5wx0MkbaGbab0b6mogdZs=",
+      "password": "pbkdf2_sha256$10000$LO94uAMUho0e$SbFD4ZV8jvyGm0H4XGysa3CObvNGOuUutfQ/5E/tnuU=",
       "email": "",
-      "date_joined": "2012-12-04T17:21:46.651Z"
+      "date_joined": "2012-12-07T09:45:17.390Z"
     }
   },
   {
-    "pk": 7,
+    "pk": 6,
     "model": "auth.user",
     "fields": {
       "username": "qdw",
@@ -1212,18 +1381,18 @@
       "is_active": true,
       "is_superuser": false,
       "is_staff": false,
-      "last_login": "2012-12-04T17:21:46.797Z",
+      "last_login": "2012-12-07T09:45:17.649Z",
       "groups": [
         2
       ],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$f5z8AxIVUUmz$mrvlzfCcfA7S7jy/gYT2zIUcHx8krIFqHyJ2fK2n5j4=",
+      "password": "pbkdf2_sha256$10000$rwUTEGkMEo6v$j+s02AoQdf69lo9s8OHxT5eOTSuQaetSS06rV5KUXfw=",
       "email": "",
-      "date_joined": "2012-12-04T17:21:46.797Z"
+      "date_joined": "2012-12-07T09:45:17.649Z"
     }
   },
   {
-    "pk": 8,
+    "pk": 7,
     "model": "auth.user",
     "fields": {
       "username": "naive",
@@ -1232,18 +1401,78 @@
       "is_active": true,
       "is_superuser": false,
       "is_staff": false,
-      "last_login": "2012-12-04T17:21:46.940Z",
+      "last_login": "2012-12-07T09:45:17.913Z",
       "groups": [
         2
       ],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$gANL4JZGq1ll$1fitLlR/lL1OmbmffiR1iN5R3hcNDEN+CCYXD919H8w=",
+      "password": "pbkdf2_sha256$10000$k8XFUgDFPeff$18CfME8q1NdQ4nj2lgClrY8VATeDuAia/aY6cl933G4=",
       "email": "",
-      "date_joined": "2012-12-04T17:21:46.940Z"
+      "date_joined": "2012-12-07T09:45:17.913Z"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "auth.user",
+    "fields": {
+      "username": "lwj",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-12-07T09:45:18.160Z",
+      "groups": [
+        2
+      ],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$vXIXUtDqNJ6H$lr4oiIl6H6Ej5i3m6oXTgvXMm/q/sPMGy+Bjj+2j2/A=",
+      "email": "",
+      "date_joined": "2012-12-07T09:45:18.160Z"
     }
   },
   {
     "pk": 9,
+    "model": "auth.user",
+    "fields": {
+      "username": "dl",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-12-07T09:45:18.535Z",
+      "groups": [
+        2
+      ],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$78f3xXcdYK4Q$I521tammSh7BJG84Z8d9i60JgwXTgVUKajR1Iv1ADvo=",
+      "email": "",
+      "date_joined": "2012-12-07T09:45:18.535Z"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "auth.user",
+    "fields": {
+      "username": "hxl",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-12-07T09:45:18.805Z",
+      "groups": [
+        2
+      ],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$MPEDVkGn0NQb$NNKXt5HIgZYm3uqZEAM6vAh7NLuxGgiGXvJQxsMBFkk=",
+      "email": "",
+      "date_joined": "2012-12-07T09:45:18.805Z"
+    }
+  },
+  {
+    "pk": 11,
     "model": "auth.user",
     "fields": {
       "username": "admini",
@@ -1252,30 +1481,29 @@
       "is_active": true,
       "is_superuser": false,
       "is_staff": false,
-      "last_login": "2012-12-04T17:21:47.088Z",
+      "last_login": "2012-12-07T09:45:19.084Z",
       "groups": [],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$P1ywtiWTlBYh$m57xSnVe8ycyMecx7hUM1D/kANAQBxpKNT9SQS43SEI=",
+      "password": "pbkdf2_sha256$10000$3TvqcjmA7c90$YE/tvKOS5VQvrVee9u/eSzjmWNNZxGRezePg5qjh6zA=",
       "email": "",
-      "date_joined": "2012-12-04T17:21:47.088Z"
+      "date_joined": "2012-12-07T09:45:19.084Z"
     }
   },
   {
     "pk": 1,
     "model": "student.student",
     "fields": {
-      "pubelective_gpa": "0.0",
+      "proelective_weightsum": 0,
       "pubcourse_credit": 0,
+      "pubelective_weightsum": 0,
       "student_meta": 1,
       "student_minor": [],
-      "gpa": "0.0",
+      "procourse_weightsum": 0,
+      "pubcourse_weightsum": 0,
       "pubelective_credit": 0,
-      "proelective_gpa": "0.0",
-      "user": 2,
+      "user": 1,
       "proelective_credit": 0,
-      "procourse_gpa": "0.0",
       "student_name": "ABC",
-      "pubcourse_gpa": "0.0",
       "procourse_credit": 0
     }
   },
@@ -1283,18 +1511,17 @@
     "pk": 2,
     "model": "student.student",
     "fields": {
-      "pubelective_gpa": "0.0",
+      "proelective_weightsum": 0,
       "pubcourse_credit": 0,
+      "pubelective_weightsum": 0,
       "student_meta": 1,
       "student_minor": [],
-      "gpa": "0.0",
+      "procourse_weightsum": 0,
+      "pubcourse_weightsum": 0,
       "pubelective_credit": 0,
-      "proelective_gpa": "0.0",
-      "user": 3,
+      "user": 2,
       "proelective_credit": 0,
-      "procourse_gpa": "0.0",
       "student_name": "BCD",
-      "pubcourse_gpa": "0.0",
       "procourse_credit": 0
     }
   },
@@ -1302,18 +1529,17 @@
     "pk": 3,
     "model": "student.student",
     "fields": {
-      "pubelective_gpa": "0.0",
+      "proelective_weightsum": 0,
       "pubcourse_credit": 0,
+      "pubelective_weightsum": 0,
       "student_meta": 1,
       "student_minor": [],
-      "gpa": "0.0",
+      "procourse_weightsum": 0,
+      "pubcourse_weightsum": 0,
       "pubelective_credit": 0,
-      "proelective_gpa": "0.0",
-      "user": 4,
+      "user": 3,
       "proelective_credit": 0,
-      "procourse_gpa": "0.0",
       "student_name": "\u949f\u5b87\u817e",
-      "pubcourse_gpa": "0.0",
       "procourse_credit": 0
     }
   },
@@ -1324,7 +1550,7 @@
       "teacher_name": "\u7eaa\u5e86\u9769",
       "title": "AP",
       "site": null,
-      "user": 5,
+      "user": 4,
       "department": 1,
       "img_addr": null
     }
@@ -1336,7 +1562,7 @@
       "teacher_name": "\u8863\u626c",
       "title": "AP",
       "site": null,
-      "user": 6,
+      "user": 5,
       "department": 1,
       "img_addr": null
     }
@@ -1348,7 +1574,7 @@
       "teacher_name": "\u90b1\u9053\u6587",
       "title": "P",
       "site": null,
-      "user": 7,
+      "user": 6,
       "department": 1,
       "img_addr": null
     }
@@ -1360,8 +1586,44 @@
       "teacher_name": "\u62ff\u8863\u670d",
       "title": "P",
       "site": null,
-      "user": 8,
+      "user": 7,
       "department": 1,
+      "img_addr": null
+    }
+  },
+  {
+    "pk": 5,
+    "model": "teacher.teacher",
+    "fields": {
+      "teacher_name": "\u674e\u6587\u519b",
+      "title": "P",
+      "site": null,
+      "user": 8,
+      "department": 2,
+      "img_addr": null
+    }
+  },
+  {
+    "pk": 6,
+    "model": "teacher.teacher",
+    "fields": {
+      "teacher_name": "\u4e01\u5229",
+      "title": "P",
+      "site": null,
+      "user": 9,
+      "department": 3,
+      "img_addr": null
+    }
+  },
+  {
+    "pk": 7,
+    "model": "teacher.teacher",
+    "fields": {
+      "teacher_name": "\u8d3a\u718a\u96f7",
+      "title": "P",
+      "site": null,
+      "user": 10,
+      "department": 4,
       "img_addr": null
     }
   },
@@ -1371,7 +1633,7 @@
     "fields": {
       "school": null,
       "administrator_name": "\u6211\u662f\u4f20\u5947",
-      "user": 9
+      "user": 11
     }
   }
 ]
