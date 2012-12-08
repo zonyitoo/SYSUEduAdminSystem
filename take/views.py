@@ -23,7 +23,7 @@ def get_take_courses(request):
 @ajax(login_required=True, require_GET=True)
 def get_take_score(request):
     year = request.GET.get('school-year', '')
-    sem = request.GET.get('school-term', '')
+    sem = int(request.GET.get('school-term', '1'))
 
     user = request.user
     
