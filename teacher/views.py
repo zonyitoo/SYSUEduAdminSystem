@@ -120,12 +120,12 @@ def upload_score_sheet(request):
             usualscore = row[2]
             finalscore = row[3]
             attendance = row[4]
-
             take = Takes.objects.get(
                         student__user__username__exact=studnum,
                         student__student_name__exact=studname,
                         course__id__exact=course_id
                     )
+
             student = Student.objects.get(user__username__exact=studnum,
                         student_name=studname)
             course = Course.objects.get(id=course_id)
@@ -178,6 +178,7 @@ def upload_score_sheet(request):
             take.attendance = attendance
             take.score = current_score
             take.save()
+
             
     except xlrd.XLRDError:
         return HttpResponseBadRequest('xls file invalid')
@@ -186,7 +187,7 @@ def upload_score_sheet(request):
 
     takes = Takes.objects.filter(
                 course__id__exact=course_id
-            ).order_by('score')
+            ).order_by('-score')
 
     rank = 1
     for take in takes:
