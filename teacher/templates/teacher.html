@@ -3,6 +3,7 @@
 <script language="javascript" src="{{ STATIC_URL }}js/ajaxupload.js" type="text/javascript"></script>
 <script language="javascript" src="{{ STATIC_URL }}js/teacher_initialize.js" type="text/javascript"></script>
 <script language="javascript" src="{{ STATIC_URL }}js/teacher_managescore.js" type="text/javascript"></script>
+<script language="javascript" src="{{ STATIC_URL }}js/teacher_getplan.js" type="text/javascript"></script>
 
 <div class="modal hide fade in" id="upload">
   <div class="modal-header">
@@ -54,10 +55,10 @@
               <label class="control-label" for="course-type-1">课程类别</label>
               <div class="controls">
                 <select class="span2" name="course-type-1" id="course-type-1">
-                  <option selected="selected">公选</option>
-                  <option>公必</option>
-                  <option>专选</option>
-                  <option>专必</option>
+                  <option value="PubE" selected="selected">公选</option>
+                  <option value="PubC">公必</option>
+                  <option value="ProE">专选</option>
+                  <option value="ProC">专必</option>
                 </select>
               </div>
             </div>

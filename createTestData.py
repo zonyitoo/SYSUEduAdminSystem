@@ -116,11 +116,19 @@ studentMetas = [
         'type_name': StudentMeta.UNGRADUATED,
         'year': '2010',
         'major': Class.objects.get(name='计算机A班'),
+        'req_pubcourse': 34,
+        'req_pubelective': 16,
+        'req_procourse': 75,
+        'req_proelective': 32,
     },
     {
         'type_name': StudentMeta.UNGRADUATED,
         'year': '2010',
         'major': Class.objects.get(name='计算机B班'),
+        'req_pubcourse': 34,
+        'req_pubelective': 16,
+        'req_procourse': 75,
+        'req_proelective': 32,
     }
 ]
 

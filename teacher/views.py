@@ -33,7 +33,24 @@ def get_scoreable_list(request):
         'courses': [course.name for course in courses],
         'year': year
     }
-    
+
+@ajax(login_required=True, require_GET=True)
+def get_teach_plan(request):
+    if not hasattr(request.user, 'teacher'):
+        return HttpResponseForbidden("Only teacher can access")
+
+    year = request.GET.get('school-year')
+    course_type = request.GET.get('course-type')
+
+    courses = Course.objects.filter(
+            teacher__user__exact=request.user,
+            academic_year=year,
+            course_type__type_name__exact=course_type
+            )
+    return {
+        'courses': [course.getDataDict() for course in courses],
+    }
+
 @ajax(login_required=True, require_GET=True)
 def get_takeninfo_list(request):
     if not hasattr(request.user, 'teacher'):
@@ -120,6 +137,7 @@ def upload_score_sheet(request):
             usualscore = row[2]
             finalscore = row[3]
             attendance = row[4]
+
             take = Takes.objects.get(
                         student__user__username__exact=studnum,
                         student__student_name__exact=studname,

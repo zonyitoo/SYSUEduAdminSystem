@@ -315,7 +315,7 @@
     }
   },
   {
-    "pk": 2,
+    "pk": 12,
     "model": "course.course",
     "fields": {
       "academic_year": "2011-2012",
@@ -325,23 +325,24 @@
         1
       ],
       "course_type": 4,
-      "class_oriented": 1,
+      "class_oriented": 3,
       "final_percentage": 60,
       "hastaken": 0,
-      "teacher": 1,
+      "teacher": 8,
       "credit": 2,
       "semester": 1,
       "attendance_percentage": 10,
-      "department": 1,
+      "department": 5,
       "exam_method": "\u8003\u67e5",
       "course_meta": null,
       "screened": false,
       "to_week": 20,
-      "from_week": 1
+      "from_week": 1,
+      "stage": 1
     }
   },
   {
-    "pk": 3,
+    "pk": 13,
     "model": "course.course",
     "fields": {
       "academic_year": "2012-2013",
@@ -351,23 +352,24 @@
         2
       ],
       "course_type": 4,
-      "class_oriented": 2,
+      "class_oriented": 4,
       "final_percentage": 60,
       "hastaken": 0,
-      "teacher": 2,
+      "teacher": 9,
       "credit": 3,
       "semester": 1,
       "attendance_percentage": 10,
-      "department": 1,
+      "department": 5,
       "exam_method": "\u8003\u67e5",
       "course_meta": null,
       "screened": false,
       "to_week": 20,
-      "from_week": 1
+      "from_week": 1,
+      "stage": 1
     }
   },
   {
-    "pk": 5,
+    "pk": 15,
     "model": "course.course",
     "fields": {
       "academic_year": "2012-2013",
@@ -377,23 +379,24 @@
         4
       ],
       "course_type": 4,
-      "class_oriented": 1,
+      "class_oriented": 3,
       "final_percentage": 60,
       "hastaken": 1,
-      "teacher": 4,
+      "teacher": 11,
       "credit": 3,
       "semester": 1,
       "attendance_percentage": 10,
-      "department": 1,
+      "department": 5,
       "exam_method": "\u7b14\u8bd5",
       "course_meta": null,
       "screened": false,
       "to_week": 18,
-      "from_week": 1
+      "from_week": 1,
+      "stage": 1
     }
   },
   {
-    "pk": 6,
+    "pk": 16,
     "model": "course.course",
     "fields": {
       "academic_year": "2012-2013",
@@ -403,23 +406,24 @@
         5
       ],
       "course_type": 2,
-      "class_oriented": 1,
+      "class_oriented": 3,
       "final_percentage": 60,
       "hastaken": 5,
-      "teacher": 4,
+      "teacher": 11,
       "credit": 2,
       "semester": 1,
       "attendance_percentage": 10,
-      "department": 1,
+      "department": 5,
       "exam_method": "\u7b14\u8bd5",
       "course_meta": null,
       "screened": false,
       "to_week": 18,
-      "from_week": 1
+      "from_week": 1,
+      "stage": 1
     }
   },
   {
-    "pk": 7,
+    "pk": 17,
     "model": "course.course",
     "fields": {
       "academic_year": "2012-2013",
@@ -429,23 +433,24 @@
         6
       ],
       "course_type": 4,
-      "class_oriented": 2,
+      "class_oriented": 4,
       "final_percentage": 60,
       "hastaken": 0,
-      "teacher": 5,
+      "teacher": 12,
       "credit": 3,
       "semester": 1,
       "attendance_percentage": 10,
-      "department": 1,
+      "department": 5,
       "exam_method": "\u7b14\u8bd5",
       "course_meta": null,
       "screened": false,
       "to_week": 18,
-      "from_week": 1
+      "from_week": 1,
+      "stage": 1
     }
   },
   {
-    "pk": 8,
+    "pk": 18,
     "model": "course.course",
     "fields": {
       "academic_year": "2012-2013",
@@ -458,20 +463,21 @@
       "class_oriented": null,
       "final_percentage": 60,
       "hastaken": 0,
-      "teacher": 6,
+      "teacher": 13,
       "credit": 3,
       "semester": 1,
       "attendance_percentage": 10,
-      "department": 3,
+      "department": 7,
       "exam_method": "\u8003\u5bdf",
       "course_meta": null,
       "screened": false,
       "to_week": 13,
-      "from_week": 2
+      "from_week": 2,
+      "stage": 1
     }
   },
   {
-    "pk": 9,
+    "pk": 19,
     "model": "course.course",
     "fields": {
       "academic_year": "2012-2013",
@@ -484,20 +490,21 @@
       "class_oriented": null,
       "final_percentage": 60,
       "hastaken": 0,
-      "teacher": 7,
+      "teacher": 14,
       "credit": 3,
       "semester": 1,
       "attendance_percentage": 10,
-      "department": 4,
+      "department": 8,
       "exam_method": "\u8003\u5bdf",
       "course_meta": null,
       "screened": false,
       "to_week": 13,
-      "from_week": 2
+      "from_week": 2,
+      "stage": 1
     }
   },
   {
-    "pk": 10,
+    "pk": 20,
     "model": "course.course",
     "fields": {
       "academic_year": "2012-2013",
@@ -510,20 +517,21 @@
       "class_oriented": null,
       "final_percentage": 60,
       "hastaken": 0,
-      "teacher": 6,
+      "teacher": 13,
       "credit": 3,
       "semester": 1,
       "attendance_percentage": 10,
-      "department": 3,
+      "department": 7,
       "exam_method": "\u8003\u5bdf",
       "course_meta": null,
       "screened": false,
       "to_week": 13,
-      "from_week": 2
+      "from_week": 2,
+      "stage": 1
     }
   },
   {
-    "pk": 1,
+    "pk": 11,
     "model": "course.course",
     "fields": {
       "academic_year": "2012-2013",
@@ -533,23 +541,24 @@
         1
       ],
       "course_type": 4,
-      "class_oriented": 2,
+      "class_oriented": 4,
       "final_percentage": 60,
       "hastaken": 2,
-      "teacher": 1,
+      "teacher": 8,
       "credit": 2,
       "semester": 1,
       "attendance_percentage": 10,
-      "department": 1,
+      "department": 5,
       "exam_method": "\u8003\u67e5",
       "course_meta": null,
       "screened": false,
       "to_week": 20,
-      "from_week": 1
+      "from_week": 1,
+      "stage": 1
     }
   },
   {
-    "pk": 4,
+    "pk": 14,
     "model": "course.course",
     "fields": {
       "academic_year": "2010-2011",
@@ -559,23 +568,24 @@
         3
       ],
       "course_type": 3,
-      "class_oriented": 2,
+      "class_oriented": 4,
       "final_percentage": 70,
       "hastaken": 2,
-      "teacher": 3,
+      "teacher": 10,
       "credit": 3,
       "semester": 2,
       "attendance_percentage": 10,
-      "department": 1,
+      "department": 5,
       "exam_method": "\u7b14\u8bd5",
       "course_meta": null,
       "screened": false,
       "to_week": 18,
-      "from_week": 1
+      "from_week": 1,
+      "stage": 1
     }
   },
   {
-    "pk": 1,
+    "pk": 5,
     "model": "school.school",
     "fields": {
       "name": "SIST",
@@ -583,7 +593,7 @@
     }
   },
   {
-    "pk": 2,
+    "pk": 6,
     "model": "school.school",
     "fields": {
       "name": "SS",
@@ -591,7 +601,7 @@
     }
   },
   {
-    "pk": 3,
+    "pk": 7,
     "model": "school.school",
     "fields": {
       "name": "LAW",
@@ -599,7 +609,7 @@
     }
   },
   {
-    "pk": 4,
+    "pk": 8,
     "model": "school.school",
     "fields": {
       "name": "LIFESCI",
@@ -607,67 +617,67 @@
     }
   },
   {
-    "pk": 1,
+    "pk": 5,
     "model": "school.department",
     "fields": {
-      "school": 1,
+      "school": 5,
       "name": "CS",
       "addr": ""
     }
   },
   {
-    "pk": 2,
+    "pk": 6,
     "model": "school.department",
     "fields": {
-      "school": 2,
+      "school": 6,
       "name": "SE",
       "addr": ""
     }
   },
   {
-    "pk": 3,
+    "pk": 7,
     "model": "school.department",
     "fields": {
-      "school": 3,
+      "school": 7,
       "name": "LAW",
       "addr": ""
     }
   },
   {
-    "pk": 4,
+    "pk": 8,
     "model": "school.department",
     "fields": {
-      "school": 4,
+      "school": 8,
       "name": "BIO",
       "addr": ""
     }
   },
   {
-    "pk": 1,
+    "pk": 2,
     "model": "school.speciality",
     "fields": {
-      "department": 1,
+      "department": 5,
       "name": "CST"
     }
   },
   {
-    "pk": 1,
+    "pk": 3,
     "model": "school.class",
     "fields": {
       "name": "\u8ba1\u7b97\u673aA\u73ed",
-      "speciality": 1
+      "speciality": 2
     }
   },
   {
-    "pk": 2,
+    "pk": 4,
     "model": "school.class",
     "fields": {
       "name": "\u8ba1\u7b97\u673aB\u73ed",
-      "speciality": 1
+      "speciality": 2
     }
   },
   {
-    "pk": 1,
+    "pk": 5,
     "model": "take.takes",
     "fields": {
       "attendance": 100,
@@ -675,14 +685,14 @@
       "final_score": 0,
       "usual_score": 0,
       "screened": false,
-      "course": 1,
+      "course": 11,
       "score": 0,
       "rank": 0,
-      "student": 1
+      "student": 4
     }
   },
   {
-    "pk": 2,
+    "pk": 6,
     "model": "take.takes",
     "fields": {
       "attendance": 100,
@@ -690,14 +700,14 @@
       "final_score": 0,
       "usual_score": 0,
       "screened": false,
-      "course": 1,
+      "course": 11,
       "score": 0,
       "rank": 0,
-      "student": 3
+      "student": 6
     }
   },
   {
-    "pk": 3,
+    "pk": 7,
     "model": "take.takes",
     "fields": {
       "attendance": 100,
@@ -705,14 +715,14 @@
       "final_score": 60,
       "usual_score": 80,
       "screened": true,
-      "course": 4,
+      "course": 14,
       "score": 66,
       "rank": 2,
-      "student": 3
+      "student": 6
     }
   },
   {
-    "pk": 4,
+    "pk": 8,
     "model": "take.takes",
     "fields": {
       "attendance": 100,
@@ -720,36 +730,36 @@
       "final_score": 95,
       "usual_score": 90,
       "screened": true,
-      "course": 4,
+      "course": 14,
       "score": 93,
       "rank": 1,
-      "student": 1
+      "student": 4
     }
   },
   {
-    "pk": 1,
+    "pk": 3,
     "model": "student.studentmeta",
     "fields": {
-      "major": 1,
-      "req_pubcourse": 0,
-      "req_pubelective": 0,
+      "major": 3,
+      "req_pubcourse": 34,
+      "req_pubelective": 16,
       "type_name": "UG",
-      "req_procourse": 0,
+      "req_procourse": 75,
       "year": "2010",
-      "req_proelective": 0
+      "req_proelective": 32
     }
   },
   {
-    "pk": 2,
+    "pk": 4,
     "model": "student.studentmeta",
     "fields": {
-      "major": 2,
-      "req_pubcourse": 0,
-      "req_pubelective": 0,
+      "major": 4,
+      "req_pubcourse": 34,
+      "req_pubelective": 16,
       "type_name": "UG",
-      "req_procourse": 0,
+      "req_procourse": 75,
       "year": "2010",
-      "req_proelective": 0
+      "req_proelective": 32
     }
   },
   {
@@ -1351,7 +1361,10 @@
     "model": "auth.group",
     "fields": {
       "name": "student",
-      "permissions": []
+      "permissions": [
+        46,
+        48
+      ]
     }
   },
   {
@@ -1581,13 +1594,13 @@
     }
   },
   {
-    "pk": 1,
+    "pk": 4,
     "model": "student.student",
     "fields": {
       "proelective_weightsum": 0,
       "pubcourse_credit": 0,
       "pubelective_weightsum": 0,
-      "student_meta": 1,
+      "student_meta": 3,
       "student_minor": [],
       "procourse_weightsum": 0,
       "pubcourse_weightsum": 0,
@@ -1599,13 +1612,13 @@
     }
   },
   {
-    "pk": 2,
+    "pk": 5,
     "model": "student.student",
     "fields": {
       "proelective_weightsum": 0,
       "pubcourse_credit": 0,
       "pubelective_weightsum": 0,
-      "student_meta": 1,
+      "student_meta": 3,
       "student_minor": [],
       "procourse_weightsum": 0,
       "pubcourse_weightsum": 0,
@@ -1617,13 +1630,13 @@
     }
   },
   {
-    "pk": 3,
+    "pk": 6,
     "model": "student.student",
     "fields": {
       "proelective_weightsum": 0,
       "pubcourse_credit": 0,
       "pubelective_weightsum": 0,
-      "student_meta": 2,
+      "student_meta": 4,
       "student_minor": [],
       "procourse_weightsum": 0,
       "pubcourse_weightsum": 0,
@@ -1635,91 +1648,91 @@
     }
   },
   {
-    "pk": 1,
+    "pk": 8,
     "model": "teacher.teacher",
     "fields": {
       "teacher_name": "\u7eaa\u5e86\u9769",
       "title": "AP",
       "site": null,
       "user": 4,
-      "department": 1,
+      "department": 5,
       "img_addr": null
     }
   },
   {
-    "pk": 2,
+    "pk": 9,
     "model": "teacher.teacher",
     "fields": {
       "teacher_name": "\u8863\u626c",
       "title": "AP",
       "site": null,
       "user": 5,
-      "department": 1,
+      "department": 5,
       "img_addr": null
     }
   },
   {
-    "pk": 3,
+    "pk": 10,
     "model": "teacher.teacher",
     "fields": {
       "teacher_name": "\u90b1\u9053\u6587",
       "title": "P",
       "site": null,
       "user": 6,
-      "department": 1,
+      "department": 5,
       "img_addr": null
     }
   },
   {
-    "pk": 4,
+    "pk": 11,
     "model": "teacher.teacher",
     "fields": {
       "teacher_name": "\u62ff\u8863\u670d",
       "title": "P",
       "site": null,
       "user": 7,
-      "department": 1,
+      "department": 5,
       "img_addr": null
     }
   },
   {
-    "pk": 5,
+    "pk": 12,
     "model": "teacher.teacher",
     "fields": {
       "teacher_name": "\u674e\u6587\u519b",
       "title": "P",
       "site": null,
       "user": 8,
-      "department": 2,
+      "department": 6,
       "img_addr": null
     }
   },
   {
-    "pk": 6,
+    "pk": 13,
     "model": "teacher.teacher",
     "fields": {
       "teacher_name": "\u4e01\u5229",
       "title": "P",
       "site": null,
       "user": 9,
-      "department": 3,
+      "department": 7,
       "img_addr": null
     }
   },
   {
-    "pk": 7,
+    "pk": 14,
     "model": "teacher.teacher",
     "fields": {
       "teacher_name": "\u8d3a\u718a\u96f7",
       "title": "P",
       "site": null,
       "user": 10,
-      "department": 4,
+      "department": 8,
       "img_addr": null
     }
   },
   {
-    "pk": 1,
+    "pk": 2,
     "model": "administrator.administrator",
     "fields": {
       "school": null,
