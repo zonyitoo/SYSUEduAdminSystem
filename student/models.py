@@ -52,6 +52,12 @@ class StudentMeta(models.Model):
             'major': self.major.getDataDict()
         }
 
+def calGPA(score):
+    score = score * 1.0
+    if score < 60:
+        return 0.0
+    return (score - 50) / 10
+
 class Student(models.Model):
     student_name = models.CharField(max_length=30)
     pubcourse_credit = models.PositiveIntegerField(default=0)
@@ -69,10 +75,6 @@ class Student(models.Model):
     def __unicode__(self):
         return self.student_name
 
-    def calGPA(score):
-        if score < 60:
-            return 0.0
-        return (score - 50) / 10
 
     def getDataDict(self):
         dc = {
