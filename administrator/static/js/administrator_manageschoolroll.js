@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 function manageSchoolRoll(){
     $.ajax({
-        url: '/administrator/getStudentList/',
+        url: '/student/getStudentList/',
         data: 'school=' + $("#school-1").val() + "&grade=" + $("#grade-1").val(),
         type: 'get',
         async: false,

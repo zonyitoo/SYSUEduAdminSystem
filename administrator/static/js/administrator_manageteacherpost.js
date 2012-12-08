@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 function manageTeacherPost(){
     $.ajax({
-        url: '/administrator/getTeacherList/',
+        url: '/teacher/getTeacherList/',
         data: 'school=' + $("#school-2").val(),
         type: 'get',
         async: false,

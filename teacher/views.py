@@ -198,3 +198,13 @@ def upload_score_sheet(request):
     return {
         'valid': True,
     }
+    
+@ajax(login_required=True, require_GET=True)
+def get_teacher_list(request):
+    return {
+        'teachers': [teac.getDataDict()
+            for teac in
+            Teacher.objects.filter(department__school__name__exact=request.GET['school'])]
+    }
+
+

@@ -92,3 +92,15 @@ def toggle_course(request):
     else:
         return HttpResponseBadRequest('Invalid Command')
 
+@ajax(login_required=True, require_GET=True)
+def get_student_list(request):
+    school = request.GET['school']
+    grade = request.GET['grade']
+
+    return {
+        'students': [stud.getDataDict() for stud in
+            Student.objects.filter(student_meta__major__speciality__department__school__name__exact=school,
+                student_meta__year__exact=grade)]
+    }
+
+
