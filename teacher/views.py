@@ -181,9 +181,7 @@ def upload_score_sheet(request):
             
     except xlrd.XLRDError:
         return HttpResponseBadRequest('xls file invalid')
-    except Exception, e:
-        print e
-        raise Http404
+    except:
         return HttpResponseBadRequest('Error occur')
 
     takes = Takes.objects.filter(
