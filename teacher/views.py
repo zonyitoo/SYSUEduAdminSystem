@@ -200,9 +200,7 @@ def upload_score_sheet(request):
             
     except xlrd.XLRDError:
         return HttpResponseBadRequest('xls file invalid')
-    except Exception, e:
-        print e
-        raise Http404
+    except:
         return HttpResponseBadRequest('Error occur')
 
     takes = Takes.objects.filter(
@@ -218,3 +216,13 @@ def upload_score_sheet(request):
     return {
         'valid': True,
     }
+    
+@ajax(login_required=True, require_GET=True)
+def get_teacher_list(request):
+    return {
+        'teachers': [teac.getDataDict()
+            for teac in
+            Teacher.objects.filter(department__school__name__exact=request.GET['school'])]
+    }
+
+

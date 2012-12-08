@@ -13,7 +13,6 @@ function logout()
                     alert("网络状态异常，请刷新后重试");
                     break;
                 case 401:
-                    alert("当前用户已过期，请重新登录");
                     window.location = '/user/login/';
                     break;
                 case 403:
