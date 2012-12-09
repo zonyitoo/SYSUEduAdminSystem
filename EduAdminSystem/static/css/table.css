@@ -7,6 +7,10 @@
     width: 10px;
 }
 
+.narrow-block{
+    width: 30px;
+}
+
 .medium-block{
     width: 60px;
 }
@@ -17,6 +21,10 @@
 
 .very-wide-block{
     width: 200px;
+}
+
+.very-very-wide-block{
+    width: 400px;
 }
 
 th,td{
