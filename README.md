@@ -72,6 +72,15 @@ Delete database
 sudo -u postgres dropdb easdb
 ```
 
+## Documents
+Our document is written in Chinese, composing by LaTeX. You can clone it by 
+
+```bash
+git submodule update
+```
+
+Click [Here](https://github.com/zonyitoo/EduAdminSystemDoc) for more details.
+
 ## Trouble Shooting
 ### How to deploy it?
 
