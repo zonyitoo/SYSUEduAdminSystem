@@ -16,12 +16,53 @@ def get_course_assessments(request):
     sem = int(request.GET['semester'])
     dept = request.GET['department']
     
+    course = Course.objects.get(semester__exact=sem,
+            academic_year=year, department__name__exact=dept)
+    
     return {
         'assessments':
             [ass.getDataDict() for ass in Assessment.objects.filter(
-                    course__semester__exact=sem,
-                    course__academic_year__exact=year,
-                    course__department__name__exact=dept
-                )]
+                    course=course)]
     }
 
+@ajax(login_required=True, require_POST=True)
+def submit_course_assessments(request):
+    if not hasattr(request.user, 'student'):
+        return HttpResponseForbidden('Only Student can do')
+
+    try:
+        year = request.POST['year']
+        sem = int(request.POST['semester'])
+        dept = request.POST['department']
+        course_name = request.POST['course_name']
+        ass_score = request.POST['score'].split('_')
+    except:
+        return HttpResponseBadRequest('Invalid arguments')
+    
+    try:
+            course = Course.objects.get(name__exact=course_name, 
+                    semester__exact=sem,
+                    academic_year=year, 
+                department__name__exact=dept)
+    except:
+        return HttpResponseBadRequest('Invalid course')
+
+    try:
+        subj = 0
+        for score in ass_score:
+            ass = Assessment.objects.get(course=course, subject=subj)
+            ass.score = int(score)
+            ass.save()
+            subj += 1
+    except:
+        return HttpResponseBadRequest('Invalid Assessment')
+    
+    take = Takes.objects.get(course=course, student__user__exact=request.user)
+    take.has_assessment = True
+    take.save()
+
+    return {
+        'valid': True,
+        'assessments': [ass.getDataDict() 
+            for ass in Assessment.objects.filter(course=course)],
+    }

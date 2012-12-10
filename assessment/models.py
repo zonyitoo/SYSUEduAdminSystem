@@ -4,8 +4,8 @@ from course.models import Course
 
 class Assessment(models.Model):
     subject = models.PositiveSmallIntegerField()
-    weight = models.PositiveSmallIntegerField()
-    score = models.PositiveSmallIntegerField()
+    weight = models.PositiveSmallIntegerField(default=0)
+    score = models.PositiveSmallIntegerField(default=0)
     course = models.ForeignKey(Course)
 
     def __unicode__(self):

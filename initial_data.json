@@ -1,6 +1,6 @@
 [
   {
-    "pk": 21,
+    "pk": 20,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "administrator",
@@ -9,7 +9,7 @@
     }
   },
   {
-    "pk": 22,
+    "pk": 21,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "assessment",
@@ -18,7 +18,7 @@
     }
   },
   {
-    "pk": 15,
+    "pk": 14,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "class",
@@ -36,7 +36,7 @@
     }
   },
   {
-    "pk": 11,
+    "pk": 10,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "course",
@@ -54,7 +54,7 @@
     }
   },
   {
-    "pk": 10,
+    "pk": 9,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "coursetime",
@@ -63,16 +63,7 @@
     }
   },
   {
-    "pk": 9,
-    "model": "contenttypes.contenttype",
-    "fields": {
-      "model": "coursetype",
-      "name": "course type",
-      "app_label": "course"
-    }
-  },
-  {
-    "pk": 13,
+    "pk": 12,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "department",
@@ -108,7 +99,7 @@
     }
   },
   {
-    "pk": 12,
+    "pk": 11,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "school",
@@ -135,7 +126,7 @@
     }
   },
   {
-    "pk": 14,
+    "pk": 13,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "speciality",
@@ -144,7 +135,7 @@
     }
   },
   {
-    "pk": 19,
+    "pk": 18,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "student",
@@ -153,7 +144,7 @@
     }
   },
   {
-    "pk": 18,
+    "pk": 17,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "studentmeta",
@@ -162,7 +153,7 @@
     }
   },
   {
-    "pk": 17,
+    "pk": 16,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "studentminor",
@@ -171,7 +162,7 @@
     }
   },
   {
-    "pk": 16,
+    "pk": 15,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "takes",
@@ -180,7 +171,7 @@
     }
   },
   {
-    "pk": 20,
+    "pk": 19,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "teacher",
@@ -203,563 +194,6 @@
     "fields": {
       "domain": "example.com",
       "name": "example.com"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "course.coursetype",
-    "fields": {
-      "type_name": "PubC"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "course.coursetype",
-    "fields": {
-      "type_name": "PubE"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "course.coursetype",
-    "fields": {
-      "type_name": "ProC"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "course.coursetype",
-    "fields": {
-      "type_name": "ProE"
-    }
-  },
-  {
-    "pk": 1,
-    "model": "course.coursetime",
-    "fields": {
-      "week": 2,
-      "location": "\u4e1cC501",
-      "time": "DE"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "course.coursetime",
-    "fields": {
-      "week": 3,
-      "location": "\u4e1cA302",
-      "time": "GHI"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "course.coursetime",
-    "fields": {
-      "week": 2,
-      "location": "\u4e1cB202",
-      "time": "ABC"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "course.coursetime",
-    "fields": {
-      "week": 2,
-      "location": "\u4e1cC201",
-      "time": "CDE"
-    }
-  },
-  {
-    "pk": 5,
-    "model": "course.coursetime",
-    "fields": {
-      "week": 3,
-      "location": "\u4e1cC201",
-      "time": "GH"
-    }
-  },
-  {
-    "pk": 6,
-    "model": "course.coursetime",
-    "fields": {
-      "week": 2,
-      "location": "\u4e1cC401",
-      "time": "CDE"
-    }
-  },
-  {
-    "pk": 7,
-    "model": "course.coursetime",
-    "fields": {
-      "week": 5,
-      "location": "\u4e1cA202",
-      "time": "HI"
-    }
-  },
-  {
-    "pk": 8,
-    "model": "course.coursetime",
-    "fields": {
-      "week": 1,
-      "location": "\u4e1cA301",
-      "time": "IJK"
-    }
-  },
-  {
-    "pk": 9,
-    "model": "course.coursetime",
-    "fields": {
-      "week": 1,
-      "location": "\u4e1cA405",
-      "time": "IJK"
-    }
-  },
-  {
-    "pk": 12,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2011-2012",
-      "capacity": 9999,
-      "name": "\u8ba1\u7b97\u673a\u56fe\u5f62\u5b66",
-      "course_time": [
-        1
-      ],
-      "course_type": 4,
-      "class_oriented": 3,
-      "final_percentage": 60,
-      "hastaken": 0,
-      "teacher": 8,
-      "credit": 2,
-      "semester": 1,
-      "attendance_percentage": 10,
-      "department": 5,
-      "exam_method": "\u8003\u67e5",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 20,
-      "from_week": 1,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 13,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2012-2013",
-      "capacity": 9999,
-      "name": "\u8f6f\u4ef6\u5de5\u7a0b\u5bfc\u8bba\u53ca\u5b9e\u8df5",
-      "course_time": [
-        2
-      ],
-      "course_type": 4,
-      "class_oriented": 4,
-      "final_percentage": 60,
-      "hastaken": 0,
-      "teacher": 9,
-      "credit": 3,
-      "semester": 1,
-      "attendance_percentage": 10,
-      "department": 5,
-      "exam_method": "\u8003\u67e5",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 20,
-      "from_week": 1,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 15,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2012-2013",
-      "capacity": 9999,
-      "name": "Test_Collision1",
-      "course_time": [
-        4
-      ],
-      "course_type": 4,
-      "class_oriented": 3,
-      "final_percentage": 60,
-      "hastaken": 1,
-      "teacher": 11,
-      "credit": 3,
-      "semester": 1,
-      "attendance_percentage": 10,
-      "department": 5,
-      "exam_method": "\u7b14\u8bd5",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 18,
-      "from_week": 1,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 16,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2012-2013",
-      "capacity": 5,
-      "name": "Test_Capacity1",
-      "course_time": [
-        5
-      ],
-      "course_type": 2,
-      "class_oriented": 3,
-      "final_percentage": 60,
-      "hastaken": 5,
-      "teacher": 11,
-      "credit": 2,
-      "semester": 1,
-      "attendance_percentage": 10,
-      "department": 5,
-      "exam_method": "\u7b14\u8bd5",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 18,
-      "from_week": 1,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 17,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2012-2013",
-      "capacity": 50,
-      "name": "IT\u9879\u76ee\u7ba1\u7406",
-      "course_time": [
-        6
-      ],
-      "course_type": 4,
-      "class_oriented": 4,
-      "final_percentage": 60,
-      "hastaken": 0,
-      "teacher": 12,
-      "credit": 3,
-      "semester": 1,
-      "attendance_percentage": 10,
-      "department": 5,
-      "exam_method": "\u7b14\u8bd5",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 18,
-      "from_week": 1,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 18,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2012-2013",
-      "capacity": 100,
-      "name": "\u535a\u5f08\u8bba",
-      "course_time": [
-        7
-      ],
-      "course_type": 2,
-      "class_oriented": null,
-      "final_percentage": 60,
-      "hastaken": 0,
-      "teacher": 13,
-      "credit": 3,
-      "semester": 1,
-      "attendance_percentage": 10,
-      "department": 7,
-      "exam_method": "\u8003\u5bdf",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 13,
-      "from_week": 2,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 19,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2012-2013",
-      "capacity": 100,
-      "name": "\u8f6c\u57fa\u56e0\u7814\u7a76",
-      "course_time": [
-        8
-      ],
-      "course_type": 2,
-      "class_oriented": null,
-      "final_percentage": 60,
-      "hastaken": 0,
-      "teacher": 14,
-      "credit": 3,
-      "semester": 1,
-      "attendance_percentage": 10,
-      "department": 8,
-      "exam_method": "\u8003\u5bdf",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 13,
-      "from_week": 2,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 20,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2012-2013",
-      "capacity": 100,
-      "name": "\u6cd5\u5f8b\u53f2",
-      "course_time": [
-        9
-      ],
-      "course_type": 2,
-      "class_oriented": null,
-      "final_percentage": 60,
-      "hastaken": 0,
-      "teacher": 13,
-      "credit": 3,
-      "semester": 1,
-      "attendance_percentage": 10,
-      "department": 7,
-      "exam_method": "\u8003\u5bdf",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 13,
-      "from_week": 2,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 11,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2012-2013",
-      "capacity": 9999,
-      "name": "\u8ba1\u7b97\u673a\u56fe\u5f62\u5b66",
-      "course_time": [
-        1
-      ],
-      "course_type": 4,
-      "class_oriented": 4,
-      "final_percentage": 60,
-      "hastaken": 2,
-      "teacher": 8,
-      "credit": 2,
-      "semester": 1,
-      "attendance_percentage": 10,
-      "department": 5,
-      "exam_method": "\u8003\u67e5",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 20,
-      "from_week": 1,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 14,
-    "model": "course.course",
-    "fields": {
-      "academic_year": "2010-2011",
-      "capacity": 9999,
-      "name": "\u6570\u5b66\u5206\u6790II",
-      "course_time": [
-        3
-      ],
-      "course_type": 3,
-      "class_oriented": 4,
-      "final_percentage": 70,
-      "hastaken": 2,
-      "teacher": 10,
-      "credit": 3,
-      "semester": 2,
-      "attendance_percentage": 10,
-      "department": 5,
-      "exam_method": "\u7b14\u8bd5",
-      "course_meta": null,
-      "screened": false,
-      "to_week": 18,
-      "from_week": 1,
-      "stage": 1
-    }
-  },
-  {
-    "pk": 5,
-    "model": "school.school",
-    "fields": {
-      "name": "SIST",
-      "addr": ""
-    }
-  },
-  {
-    "pk": 6,
-    "model": "school.school",
-    "fields": {
-      "name": "SS",
-      "addr": ""
-    }
-  },
-  {
-    "pk": 7,
-    "model": "school.school",
-    "fields": {
-      "name": "LAW",
-      "addr": ""
-    }
-  },
-  {
-    "pk": 8,
-    "model": "school.school",
-    "fields": {
-      "name": "LIFESCI",
-      "addr": ""
-    }
-  },
-  {
-    "pk": 5,
-    "model": "school.department",
-    "fields": {
-      "school": 5,
-      "name": "CS",
-      "addr": ""
-    }
-  },
-  {
-    "pk": 6,
-    "model": "school.department",
-    "fields": {
-      "school": 6,
-      "name": "SE",
-      "addr": ""
-    }
-  },
-  {
-    "pk": 7,
-    "model": "school.department",
-    "fields": {
-      "school": 7,
-      "name": "LAW",
-      "addr": ""
-    }
-  },
-  {
-    "pk": 8,
-    "model": "school.department",
-    "fields": {
-      "school": 8,
-      "name": "BIO",
-      "addr": ""
-    }
-  },
-  {
-    "pk": 2,
-    "model": "school.speciality",
-    "fields": {
-      "department": 5,
-      "name": "CST"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "school.class",
-    "fields": {
-      "name": "\u8ba1\u7b97\u673aA\u73ed",
-      "speciality": 2
-    }
-  },
-  {
-    "pk": 4,
-    "model": "school.class",
-    "fields": {
-      "name": "\u8ba1\u7b97\u673aB\u73ed",
-      "speciality": 2
-    }
-  },
-  {
-    "pk": 5,
-    "model": "take.takes",
-    "fields": {
-      "attendance": 100,
-      "has_assessment": false,
-      "final_score": 0,
-      "usual_score": 0,
-      "screened": false,
-      "course": 11,
-      "score": 0,
-      "rank": 0,
-      "student": 4
-    }
-  },
-  {
-    "pk": 6,
-    "model": "take.takes",
-    "fields": {
-      "attendance": 100,
-      "has_assessment": false,
-      "final_score": 0,
-      "usual_score": 0,
-      "screened": false,
-      "course": 11,
-      "score": 0,
-      "rank": 0,
-      "student": 6
-    }
-  },
-  {
-    "pk": 7,
-    "model": "take.takes",
-    "fields": {
-      "attendance": 100,
-      "has_assessment": true,
-      "final_score": 60,
-      "usual_score": 80,
-      "screened": true,
-      "course": 14,
-      "score": 66,
-      "rank": 2,
-      "student": 6
-    }
-  },
-  {
-    "pk": 8,
-    "model": "take.takes",
-    "fields": {
-      "attendance": 100,
-      "has_assessment": true,
-      "final_score": 95,
-      "usual_score": 90,
-      "screened": true,
-      "course": 14,
-      "score": 93,
-      "rank": 1,
-      "student": 4
-    }
-  },
-  {
-    "pk": 3,
-    "model": "student.studentmeta",
-    "fields": {
-      "major": 3,
-      "req_pubcourse": 34,
-      "req_pubelective": 16,
-      "type_name": "UG",
-      "req_procourse": 75,
-      "year": "2010",
-      "req_proelective": 32
-    }
-  },
-  {
-    "pk": 4,
-    "model": "student.studentmeta",
-    "fields": {
-      "major": 4,
-      "req_pubcourse": 34,
-      "req_pubelective": 16,
-      "type_name": "UG",
-      "req_procourse": 75,
-      "year": "2010",
-      "req_proelective": 32
     }
   },
   {
@@ -790,11 +224,38 @@
     }
   },
   {
-    "pk": 61,
+    "pk": 58,
     "model": "auth.permission",
     "fields": {
       "codename": "add_administrator",
       "name": "Can add administrator",
+      "content_type": 20
+    }
+  },
+  {
+    "pk": 59,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_administrator",
+      "name": "Can change administrator",
+      "content_type": 20
+    }
+  },
+  {
+    "pk": 60,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_administrator",
+      "name": "Can delete administrator",
+      "content_type": 20
+    }
+  },
+  {
+    "pk": 61,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_assessment",
+      "name": "Can add assessment",
       "content_type": 21
     }
   },
@@ -802,8 +263,8 @@
     "pk": 62,
     "model": "auth.permission",
     "fields": {
-      "codename": "change_administrator",
-      "name": "Can change administrator",
+      "codename": "change_assessment",
+      "name": "Can change assessment",
       "content_type": 21
     }
   },
@@ -811,36 +272,9 @@
     "pk": 63,
     "model": "auth.permission",
     "fields": {
-      "codename": "delete_administrator",
-      "name": "Can delete administrator",
-      "content_type": 21
-    }
-  },
-  {
-    "pk": 64,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_assessment",
-      "name": "Can add assessment",
-      "content_type": 22
-    }
-  },
-  {
-    "pk": 65,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_assessment",
-      "name": "Can change assessment",
-      "content_type": 22
-    }
-  },
-  {
-    "pk": 66,
-    "model": "auth.permission",
-    "fields": {
       "codename": "delete_assessment",
       "name": "Can delete assessment",
-      "content_type": 22
+      "content_type": 21
     }
   },
   {
@@ -952,30 +386,30 @@
     }
   },
   {
-    "pk": 31,
+    "pk": 28,
     "model": "auth.permission",
     "fields": {
       "codename": "add_course",
       "name": "Can add course",
-      "content_type": 11
+      "content_type": 10
     }
   },
   {
-    "pk": 32,
+    "pk": 29,
     "model": "auth.permission",
     "fields": {
       "codename": "change_course",
       "name": "Can change course",
-      "content_type": 11
+      "content_type": 10
     }
   },
   {
-    "pk": 33,
+    "pk": 30,
     "model": "auth.permission",
     "fields": {
       "codename": "delete_course",
       "name": "Can delete course",
-      "content_type": 11
+      "content_type": 10
     }
   },
   {
@@ -1006,38 +440,11 @@
     }
   },
   {
-    "pk": 28,
+    "pk": 25,
     "model": "auth.permission",
     "fields": {
       "codename": "add_coursetime",
       "name": "Can add course time",
-      "content_type": 10
-    }
-  },
-  {
-    "pk": 29,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_coursetime",
-      "name": "Can change course time",
-      "content_type": 10
-    }
-  },
-  {
-    "pk": 30,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_coursetime",
-      "name": "Can delete course time",
-      "content_type": 10
-    }
-  },
-  {
-    "pk": 25,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_coursetype",
-      "name": "Can add course type",
       "content_type": 9
     }
   },
@@ -1045,8 +452,8 @@
     "pk": 26,
     "model": "auth.permission",
     "fields": {
-      "codename": "change_coursetype",
-      "name": "Can change course type",
+      "codename": "change_coursetime",
+      "name": "Can change course time",
       "content_type": 9
     }
   },
@@ -1054,98 +461,17 @@
     "pk": 27,
     "model": "auth.permission",
     "fields": {
-      "codename": "delete_coursetype",
-      "name": "Can delete course type",
+      "codename": "delete_coursetime",
+      "name": "Can delete course time",
       "content_type": 9
-    }
-  },
-  {
-    "pk": 43,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_class",
-      "name": "Can add class",
-      "content_type": 15
-    }
-  },
-  {
-    "pk": 44,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_class",
-      "name": "Can change class",
-      "content_type": 15
-    }
-  },
-  {
-    "pk": 45,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_class",
-      "name": "Can delete class",
-      "content_type": 15
-    }
-  },
-  {
-    "pk": 37,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_department",
-      "name": "Can add department",
-      "content_type": 13
-    }
-  },
-  {
-    "pk": 38,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_department",
-      "name": "Can change department",
-      "content_type": 13
-    }
-  },
-  {
-    "pk": 39,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_department",
-      "name": "Can delete department",
-      "content_type": 13
-    }
-  },
-  {
-    "pk": 34,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_school",
-      "name": "Can add school",
-      "content_type": 12
-    }
-  },
-  {
-    "pk": 35,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_school",
-      "name": "Can change school",
-      "content_type": 12
-    }
-  },
-  {
-    "pk": 36,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_school",
-      "name": "Can delete school",
-      "content_type": 12
     }
   },
   {
     "pk": 40,
     "model": "auth.permission",
     "fields": {
-      "codename": "add_speciality",
-      "name": "Can add speciality",
+      "codename": "add_class",
+      "name": "Can add class",
       "content_type": 14
     }
   },
@@ -1153,8 +479,8 @@
     "pk": 41,
     "model": "auth.permission",
     "fields": {
-      "codename": "change_speciality",
-      "name": "Can change speciality",
+      "codename": "change_class",
+      "name": "Can change class",
       "content_type": 14
     }
   },
@@ -1162,9 +488,90 @@
     "pk": 42,
     "model": "auth.permission",
     "fields": {
+      "codename": "delete_class",
+      "name": "Can delete class",
+      "content_type": 14
+    }
+  },
+  {
+    "pk": 34,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_department",
+      "name": "Can add department",
+      "content_type": 12
+    }
+  },
+  {
+    "pk": 35,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_department",
+      "name": "Can change department",
+      "content_type": 12
+    }
+  },
+  {
+    "pk": 36,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_department",
+      "name": "Can delete department",
+      "content_type": 12
+    }
+  },
+  {
+    "pk": 31,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_school",
+      "name": "Can add school",
+      "content_type": 11
+    }
+  },
+  {
+    "pk": 32,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_school",
+      "name": "Can change school",
+      "content_type": 11
+    }
+  },
+  {
+    "pk": 33,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_school",
+      "name": "Can delete school",
+      "content_type": 11
+    }
+  },
+  {
+    "pk": 37,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_speciality",
+      "name": "Can add speciality",
+      "content_type": 13
+    }
+  },
+  {
+    "pk": 38,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_speciality",
+      "name": "Can change speciality",
+      "content_type": 13
+    }
+  },
+  {
+    "pk": 39,
+    "model": "auth.permission",
+    "fields": {
       "codename": "delete_speciality",
       "name": "Can delete speciality",
-      "content_type": 14
+      "content_type": 13
     }
   },
   {
@@ -1222,38 +629,11 @@
     }
   },
   {
-    "pk": 55,
+    "pk": 52,
     "model": "auth.permission",
     "fields": {
       "codename": "add_student",
       "name": "Can add student",
-      "content_type": 19
-    }
-  },
-  {
-    "pk": 56,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "change_student",
-      "name": "Can change student",
-      "content_type": 19
-    }
-  },
-  {
-    "pk": 57,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "delete_student",
-      "name": "Can delete student",
-      "content_type": 19
-    }
-  },
-  {
-    "pk": 52,
-    "model": "auth.permission",
-    "fields": {
-      "codename": "add_studentmeta",
-      "name": "Can add student meta",
       "content_type": 18
     }
   },
@@ -1261,8 +641,8 @@
     "pk": 53,
     "model": "auth.permission",
     "fields": {
-      "codename": "change_studentmeta",
-      "name": "Can change student meta",
+      "codename": "change_student",
+      "name": "Can change student",
       "content_type": 18
     }
   },
@@ -1270,8 +650,8 @@
     "pk": 54,
     "model": "auth.permission",
     "fields": {
-      "codename": "delete_studentmeta",
-      "name": "Can delete student meta",
+      "codename": "delete_student",
+      "name": "Can delete student",
       "content_type": 18
     }
   },
@@ -1279,8 +659,8 @@
     "pk": 49,
     "model": "auth.permission",
     "fields": {
-      "codename": "add_studentminor",
-      "name": "Can add student minor",
+      "codename": "add_studentmeta",
+      "name": "Can add student meta",
       "content_type": 17
     }
   },
@@ -1288,8 +668,8 @@
     "pk": 50,
     "model": "auth.permission",
     "fields": {
-      "codename": "change_studentminor",
-      "name": "Can change student minor",
+      "codename": "change_studentmeta",
+      "name": "Can change student meta",
       "content_type": 17
     }
   },
@@ -1297,8 +677,8 @@
     "pk": 51,
     "model": "auth.permission",
     "fields": {
-      "codename": "delete_studentminor",
-      "name": "Can delete student minor",
+      "codename": "delete_studentmeta",
+      "name": "Can delete student meta",
       "content_type": 17
     }
   },
@@ -1306,8 +686,8 @@
     "pk": 46,
     "model": "auth.permission",
     "fields": {
-      "codename": "add_takes",
-      "name": "Can add takes",
+      "codename": "add_studentminor",
+      "name": "Can add student minor",
       "content_type": 16
     }
   },
@@ -1315,8 +695,8 @@
     "pk": 47,
     "model": "auth.permission",
     "fields": {
-      "codename": "change_takes",
-      "name": "Can change takes",
+      "codename": "change_studentminor",
+      "name": "Can change student minor",
       "content_type": 16
     }
   },
@@ -1324,420 +704,81 @@
     "pk": 48,
     "model": "auth.permission",
     "fields": {
-      "codename": "delete_takes",
-      "name": "Can delete takes",
+      "codename": "delete_studentminor",
+      "name": "Can delete student minor",
       "content_type": 16
     }
   },
   {
-    "pk": 58,
+    "pk": 43,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_takes",
+      "name": "Can add takes",
+      "content_type": 15
+    }
+  },
+  {
+    "pk": 44,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_takes",
+      "name": "Can change takes",
+      "content_type": 15
+    }
+  },
+  {
+    "pk": 45,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_takes",
+      "name": "Can delete takes",
+      "content_type": 15
+    }
+  },
+  {
+    "pk": 55,
     "model": "auth.permission",
     "fields": {
       "codename": "add_teacher",
       "name": "Can add teacher",
-      "content_type": 20
+      "content_type": 19
     }
   },
   {
-    "pk": 59,
+    "pk": 56,
     "model": "auth.permission",
     "fields": {
       "codename": "change_teacher",
       "name": "Can change teacher",
-      "content_type": 20
+      "content_type": 19
     }
   },
   {
-    "pk": 60,
+    "pk": 57,
     "model": "auth.permission",
     "fields": {
       "codename": "delete_teacher",
       "name": "Can delete teacher",
-      "content_type": 20
-    }
-  },
-  {
-    "pk": 1,
-    "model": "auth.group",
-    "fields": {
-      "name": "student",
-      "permissions": [
-        46,
-        48
-      ]
-    }
-  },
-  {
-    "pk": 2,
-    "model": "auth.group",
-    "fields": {
-      "name": "teacher",
-      "permissions": []
+      "content_type": 19
     }
   },
   {
     "pk": 1,
     "model": "auth.user",
     "fields": {
-      "username": "10383001",
+      "username": "admin",
       "first_name": "",
       "last_name": "",
       "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:52.754Z",
-      "groups": [
-        1
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$Hw49jrLuZIgh$+pFfTCQ/fiT4VtuM5QobgU5JGQiuRT+J9L56AhOU7d8=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:52.754Z"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "auth.user",
-    "fields": {
-      "username": "10383002",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:53.025Z",
-      "groups": [
-        1
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$NbOIH2bbW4iP$enEsWD0ZU0e8+PYooidSQsaSXJUYqKHI69FFJag2/Eo=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:53.025Z"
-    }
-  },
-  {
-    "pk": 3,
-    "model": "auth.user",
-    "fields": {
-      "username": "10383067",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:53.273Z",
-      "groups": [
-        1
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$OD54HvHThuaZ$tBfmrPAUXgeOkDsnu+XBZ+s+8cRKE7Ln/QmFSuM5UxE=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:53.273Z"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "auth.user",
-    "fields": {
-      "username": "jqg",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:53.652Z",
-      "groups": [
-        2
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$uelzjSj1P3Dn$KU8YbIiZepZO32jEv2NNRG8GQwP0JRH7X/YGRKmoy2c=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:53.652Z"
-    }
-  },
-  {
-    "pk": 5,
-    "model": "auth.user",
-    "fields": {
-      "username": "yy",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:53.904Z",
-      "groups": [
-        2
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$CPX1oa7ChIle$I4XW2hs46QKnFQyB6jdGvOUyv4UWEKKb3JQnhx/1Nyo=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:53.904Z"
-    }
-  },
-  {
-    "pk": 6,
-    "model": "auth.user",
-    "fields": {
-      "username": "qdw",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:54.173Z",
-      "groups": [
-        2
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$JMVGOdvfFrd2$+YcySJzfCVRgW/45k5I6rAlYPBmLKyWEvQ7gZyL4lj4=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:54.173Z"
-    }
-  },
-  {
-    "pk": 7,
-    "model": "auth.user",
-    "fields": {
-      "username": "naive",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:54.426Z",
-      "groups": [
-        2
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$teXqQQtmeQXC$hf5pYfneRr/zHiveUzXm0Lbn9OXvemzzOUAEWVTdOEw=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:54.426Z"
-    }
-  },
-  {
-    "pk": 8,
-    "model": "auth.user",
-    "fields": {
-      "username": "lwj",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:54.673Z",
-      "groups": [
-        2
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$Fk2n7AVxJOde$8qly3MQTRww2Elr5tv2n1KcLKSJ9fHhYWhcLOK14P1o=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:54.673Z"
-    }
-  },
-  {
-    "pk": 9,
-    "model": "auth.user",
-    "fields": {
-      "username": "dl",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:54.930Z",
-      "groups": [
-        2
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$Jqh2xkXLMacK$4jBiyCbNC1M8qMPb9ljGaJqPWWGKXKoqzrn/2Kn2pa4=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:54.930Z"
-    }
-  },
-  {
-    "pk": 10,
-    "model": "auth.user",
-    "fields": {
-      "username": "hxl",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:55.173Z",
-      "groups": [
-        2
-      ],
-      "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$T2HYnphiD4hC$556fK7duw9qg2Uof3EkVmwSog/0EYsvXujiwITMwVkY=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:55.173Z"
-    }
-  },
-  {
-    "pk": 11,
-    "model": "auth.user",
-    "fields": {
-      "username": "admini",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2012-12-07T09:54:55.427Z",
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2012-12-10T16:51:09.842Z",
       "groups": [],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$myasaao6P7mP$WBbsf1vtyZsV9MQiM80PU02Fcs4fZnBCRJZpY+zZQps=",
-      "email": "",
-      "date_joined": "2012-12-07T09:54:55.427Z"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "student.student",
-    "fields": {
-      "proelective_weightsum": 0,
-      "pubcourse_credit": 0,
-      "pubelective_weightsum": 0,
-      "student_meta": 3,
-      "student_minor": [],
-      "procourse_weightsum": 0,
-      "pubcourse_weightsum": 0,
-      "pubelective_credit": 0,
-      "user": 1,
-      "proelective_credit": 0,
-      "student_name": "ABC",
-      "procourse_credit": 0
-    }
-  },
-  {
-    "pk": 5,
-    "model": "student.student",
-    "fields": {
-      "proelective_weightsum": 0,
-      "pubcourse_credit": 0,
-      "pubelective_weightsum": 0,
-      "student_meta": 3,
-      "student_minor": [],
-      "procourse_weightsum": 0,
-      "pubcourse_weightsum": 0,
-      "pubelective_credit": 0,
-      "user": 2,
-      "proelective_credit": 0,
-      "student_name": "BCD",
-      "procourse_credit": 0
-    }
-  },
-  {
-    "pk": 6,
-    "model": "student.student",
-    "fields": {
-      "proelective_weightsum": 0,
-      "pubcourse_credit": 0,
-      "pubelective_weightsum": 0,
-      "student_meta": 4,
-      "student_minor": [],
-      "procourse_weightsum": 0,
-      "pubcourse_weightsum": 0,
-      "pubelective_credit": 0,
-      "user": 3,
-      "proelective_credit": 0,
-      "student_name": "\u949f\u5b87\u817e",
-      "procourse_credit": 0
-    }
-  },
-  {
-    "pk": 8,
-    "model": "teacher.teacher",
-    "fields": {
-      "teacher_name": "\u7eaa\u5e86\u9769",
-      "title": "AP",
-      "site": null,
-      "user": 4,
-      "department": 5,
-      "img_addr": null
-    }
-  },
-  {
-    "pk": 9,
-    "model": "teacher.teacher",
-    "fields": {
-      "teacher_name": "\u8863\u626c",
-      "title": "AP",
-      "site": null,
-      "user": 5,
-      "department": 5,
-      "img_addr": null
-    }
-  },
-  {
-    "pk": 10,
-    "model": "teacher.teacher",
-    "fields": {
-      "teacher_name": "\u90b1\u9053\u6587",
-      "title": "P",
-      "site": null,
-      "user": 6,
-      "department": 5,
-      "img_addr": null
-    }
-  },
-  {
-    "pk": 11,
-    "model": "teacher.teacher",
-    "fields": {
-      "teacher_name": "\u62ff\u8863\u670d",
-      "title": "P",
-      "site": null,
-      "user": 7,
-      "department": 5,
-      "img_addr": null
-    }
-  },
-  {
-    "pk": 12,
-    "model": "teacher.teacher",
-    "fields": {
-      "teacher_name": "\u674e\u6587\u519b",
-      "title": "P",
-      "site": null,
-      "user": 8,
-      "department": 6,
-      "img_addr": null
-    }
-  },
-  {
-    "pk": 13,
-    "model": "teacher.teacher",
-    "fields": {
-      "teacher_name": "\u4e01\u5229",
-      "title": "P",
-      "site": null,
-      "user": 9,
-      "department": 7,
-      "img_addr": null
-    }
-  },
-  {
-    "pk": 14,
-    "model": "teacher.teacher",
-    "fields": {
-      "teacher_name": "\u8d3a\u718a\u96f7",
-      "title": "P",
-      "site": null,
-      "user": 10,
-      "department": 8,
-      "img_addr": null
-    }
-  },
-  {
-    "pk": 2,
-    "model": "administrator.administrator",
-    "fields": {
-      "school": null,
-      "administrator_name": "\u6211\u662f\u4f20\u5947",
-      "user": 11
+      "password": "pbkdf2_sha256$10000$eQL2deltGFbl$9fneoOx8klv4ddW1DYmq38u9O96pKa+J3TlzFLGxpgU=",
+      "email": "admin@admin.com",
+      "date_joined": "2012-12-10T16:51:09.842Z"
     }
   }
 ]

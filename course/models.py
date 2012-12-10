@@ -8,27 +8,6 @@ class CourseMeta(models.Model):
     submit_addr = models.URLField()
     grade = models.CharField(max_length=4)
 
-class CourseType(models.Model):
-    PUB_COURSE = 'PubC'
-    PUB_ELECTIVE = 'PubE'
-    PRO_COURSE = 'ProC'
-    PRO_ELECTIVE = 'ProE'
-    COURSE_TYPE = (
-            (PUB_COURSE, u'公必'), 
-            (PUB_ELECTIVE, u'公选'), 
-            (PRO_COURSE, u'专必'), 
-            (PRO_ELECTIVE, u'专选'),
-        )
-    courseTypeToUnicode = { k:v for k, v in COURSE_TYPE }
-
-    type_name = models.CharField(max_length=4, choices=COURSE_TYPE)
-
-    def get_coursetype(self):
-        return self.courseTypeToUnicode[self.type_name]
-    
-    def __unicode__(self):
-        return self.courseTypeToUnicode[self.type_name]
-
 class CourseTime(models.Model):
     week = models.PositiveSmallIntegerField()
     time = models.CharField(max_length=15)
@@ -63,7 +42,20 @@ class Course(models.Model):
     credit = models.PositiveSmallIntegerField()
     capacity = models.PositiveIntegerField()
     exam_method = models.CharField(max_length=20)
-    course_type = models.ForeignKey(CourseType)
+
+    PUB_COURSE = 'PubC'
+    PUB_ELECTIVE = 'PubE'
+    PRO_COURSE = 'ProC'
+    PRO_ELECTIVE = 'ProE'
+    COURSE_TYPE = (
+            (PUB_COURSE, u'公必'), 
+            (PUB_ELECTIVE, u'公选'), 
+            (PRO_COURSE, u'专必'), 
+            (PRO_ELECTIVE, u'专选'),
+        )
+    COURSE_TYPE_TO_UNICODE = { k:v for k, v in COURSE_TYPE }
+
+    course_type = models.CharField(max_length=4, choices=COURSE_TYPE)
     course_meta = models.ForeignKey(CourseMeta, blank=True, null=True)
     attendance_percentage = models.PositiveSmallIntegerField(default=10)
     final_percentage = models.PositiveSmallIntegerField(default=60)
@@ -72,6 +64,21 @@ class Course(models.Model):
     class_oriented = models.ForeignKey(Class, null=True)
     screened = models.BooleanField(default=False)
     stage = models.PositiveSmallIntegerField(default=1)
+    
+    ASSTYPE_PHIL = 1
+    ASSTYPE_GYM = 2
+    ASSTYPE_THEORY = 3
+    ASSTYPE_LAB = 4
+    ASSESSMENT_TYPE = (
+        (ASSTYPE_PHIL, u'哲学类'),
+        (ASSTYPE_GYM, u'体育类'),
+        (ASSTYPE_THEORY, u'理论类'), 
+        (ASSTYPE_LAB, u'实验类'),
+    )
+    ASSTYPE_UNICODE = {x:y for x, y in ASSESSMENT_TYPE}
+
+    assessment_type = models.PositiveSmallIntegerField(default=ASSTYPE_THEORY,
+            choices=ASSESSMENT_TYPE)
     
     def __unicode__(self):
         return self.name
@@ -91,11 +98,12 @@ class Course(models.Model):
             'exam_method': self.exam_method,
             'attendance_percentage': self.attendance_percentage,
             'final_percentage': self.final_percentage,
-            'course_type': self.course_type.get_coursetype(),
+            'course_type': self.COURSE_TYPE_TO_UNICODE[self.course_type],
             'hastaken': self.hastaken,
             'department': self.department.getDataDict(),
             'screened': self.screened,
             'stage': self.stage,
+            'assessment_type': self.assessment_type,
         }
         if self.class_oriented:
             dc['class_oriented'] = self.class_oriented.getDataDict()

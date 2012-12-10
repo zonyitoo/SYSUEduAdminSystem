@@ -327,10 +327,8 @@ for ad in admins:
         adm[0].save()
 
 ## Courses
-from course.models import CourseType, Course, CourseTime
-for t in CourseType.COURSE_TYPE:
-    CourseType.objects.get_or_create(type_name=t[0])[0].save()
-
+from course.models import Course, CourseTime
+from assessment.models import Assessment
 courses = [
         {
             'time': [
@@ -351,10 +349,10 @@ courses = [
                 'capacity': 9999,
                 'hastaken': 1,
                 'exam_method': '考查',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'course_type': Course.PRO_ELECTIVE,
                 'department': Department.objects.get(name='CS'),
                 'class_oriented': Class.objects.get(name='计算机B班'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
         {
@@ -375,10 +373,10 @@ courses = [
                 'credit': 2,
                 'capacity': 9999,
                 'exam_method': '考查',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'course_type': Course.PRO_ELECTIVE,
                 'department': Department.objects.get(name='CS'),
                 'class_oriented': Class.objects.get(name='计算机A班'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
         {
@@ -399,10 +397,10 @@ courses = [
                 'credit': 3,
                 'capacity': 9999,
                 'exam_method': '考查',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'course_type': Course.PRO_ELECTIVE,
                 'department': Department.objects.get(name='CS'),
-                'class_oriented': Class.objects.get(name='计算机B班')
+                'class_oriented': Class.objects.get(name='计算机B班'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
         {
@@ -425,10 +423,10 @@ courses = [
                 'capacity': 9999,
                 'hastaken': 1,
                 'exam_method': '笔试',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[2][0]),
+                'course_type': Course.PRO_COURSE,
                 'department': Department.objects.get(name='CS'),
-                'class_oriented': Class.objects.get(name='计算机B班')
+                'class_oriented': Class.objects.get(name='计算机B班'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
         {
@@ -450,10 +448,10 @@ courses = [
                 'capacity': 9999,
                 'hastaken': 1,
                 'exam_method': '笔试',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'course_type': Course.PUB_COURSE,
                 'department': Department.objects.get(name='CS'),
                 'class_oriented': Class.objects.get(name='计算机A班'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
         {
@@ -475,10 +473,10 @@ courses = [
                 'capacity': 5,
                 'hastaken': 5,
                 'exam_method': '笔试',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
+                'course_type': Course.PUB_ELECTIVE,
                 'department': Department.objects.get(name='CS'),
                 'class_oriented': Class.objects.get(name='计算机A班'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
 	{
@@ -500,10 +498,10 @@ courses = [
                 'capacity': 50,
                 'hastaken': 0,
                 'exam_method': '笔试',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[3][0]),
+                'course_type': Course.PUB_ELECTIVE,
                 'department': Department.objects.get(name='CS'),
                 'class_oriented': Class.objects.get(name='计算机B班'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
 	{
@@ -525,9 +523,9 @@ courses = [
                 'capacity': 100,
                 'hastaken': 0,
                 'exam_method': '考察',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
+                'course_type': Course.PUB_ELECTIVE,
                 'department': Department.objects.get(name='LAW'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
 	{
@@ -549,9 +547,9 @@ courses = [
                 'capacity': 100,
                 'hastaken': 0,
                 'exam_method': '考察',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
+                'course_type': Course.PUB_ELECTIVE,
                 'department': Department.objects.get(name='BIO'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
 	{
@@ -573,9 +571,9 @@ courses = [
                 'capacity': 100,
                 'hastaken': 0,
                 'exam_method': '考察',
-                'course_type':
-                    CourseType.objects.get(type_name=CourseType.COURSE_TYPE[1][0]),
+                'course_type': Course.PUB_ELECTIVE,
                 'department': Department.objects.get(name='LAW'),
+                'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
     ]
@@ -590,6 +588,11 @@ for c in courses:
         obj[0].course_time = [CourseTime.objects.get_or_create(**ti)[0] 
                 for ti in c['time']]
         obj[0].save()
+
+        if obj[0].assessment_type == Course.ASSTYPE_THEORY:
+            for subi in range(1, 5):
+                Assessment(subject=subi, course=obj[0], weight=25).save()
+        ## Other course type????
 
 ## Takes
 from take.models import Takes
