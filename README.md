@@ -73,7 +73,7 @@ sudo -u postgres dropdb easdb
 ```
 
 ## Documents
-Our document is written in Chinese, composing by LaTeX. You can clone it by 
+Our document is written in Chinese and composed by LaTeX. You can clone it by 
 
 ```bash
 git submodule update
