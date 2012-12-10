@@ -15,9 +15,11 @@ def get_course_assessments(request):
     year = request.GET['year']
     sem = int(request.GET['semester'])
     dept = request.GET['department']
+    course_name = request.GET['course_name']
     
     course = Course.objects.get(semester__exact=sem,
-            academic_year=year, department__name__exact=dept)
+            academic_year=year, department__name__exact=dept,
+            name=course_name)
     
     return {
         'assessments':
