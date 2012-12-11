@@ -92,7 +92,7 @@ class Student(models.Model):
         }
 
         try:
-            dc['gpa'] = str(calGPA((self.pubcourse_weightsum + self.pubelective_weightsum \
+            dc['gpa'] =  str(calGPA((self.pubcourse_weightsum + self.pubelective_weightsum \
                         + self.procourse_weightsum + self.proelective_weightsum) \
                         / (self.pubcourse_credit + self.pubelective_credit \
                         + self.procourse_credit + self.proelective_credit))),
