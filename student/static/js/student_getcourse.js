@@ -1,6 +1,7 @@
 //JavaScript Document
 
 $(document).ready(function(){
+    getCourse();
     $("#view-course-btn").click(function(){
         getCourse();
     });
