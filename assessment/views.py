@@ -54,7 +54,7 @@ def submit_course_assessments(request):
     try:
         dept = request.POST['department']
         course_name = request.POST['course_name']
-        ass_score = request.POST['score'].split(' ')
+        ass_score = request.POST['score'].split(',')
     except:
         return HttpResponseBadRequest('Invalid arguments')
 

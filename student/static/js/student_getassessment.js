@@ -106,14 +106,14 @@ function getAssessment()
                 credit = assessment[i].course.credit;
                 teacher = assessment[i].course.teacher;
                 filter = type_map[assessment_type];
-                $("#assessment-list").append("<div class='well accordion-group'><div class='accordion-heading' class='accordion-toggle' data-parent='#assessment-list' data-toggle='collapse' href='#assessment-" + i + "'><div id='department-" + i + "' class='hide'>" + department + "</div><div id='course-name-" + i + "'>课程名称：" + course_name + "<br>类别：" + course_type + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "</div></div><div id='assessment-" + i + "' class='accordion-body collapse'><div id = 'assessment-in-" + i + "' class='accordion-inner'></div></div></div>");
+                $("#assessment-list").append("<div class='well accordion-group'><div class='accordion-heading' class='accordion-toggle' data-parent='#assessment-list' data-toggle='collapse' href='#assessment-" + i + "'><div id='department-" + i + "' class='hide'>" + department + "</div><div id='course-name-" + i + "' class='hide'>" + course_name + "</div><div>课程名称：" + course_name + "<br>类别：" + course_type + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "</div></div><div id='assessment-" + i + "' class='accordion-body collapse'><div id = 'assessment-in-" + i + "' class='accordion-inner'></div></div></div>");
                 var current_block = $("#assessment-in-" + i);
                 for (var j = 0;j < title_dict[filter].length;j++)
                 {
                     current_block.append("<p><strong>" + title_dict[filter][j] + "</strong></p><div id='assessment-" + j + "-" + i + "'></div>");
                     for (var k = 0;k < subject_dict[filter][j].length;k++)
                     {
-                        $("#assessment-" + j + "-" + i).append(subject_dict[filter][j][k] + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span><span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span>");
+                        $("#assessment-" + j + "-" + i).append(subject_dict[filter][j][k] + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span>");
                         $("#rate-" + i + "-" + j + "-" + k).raty({
                             hints: ['1','2','3','4','5'],
                             scoreName: "score",
@@ -121,7 +121,7 @@ function getAssessment()
                             starOff: 'star-off-big.png',
                             starOn: 'star-on-big.png',
                             target: '#hint-' + i + '-' + j + '-' + k,
-                            targetFormat: '&nbsp&nbsp&nbsp{score}',
+                            targetFormat: '{score}',
                             targetKeep: true,
                         });
                     }
@@ -138,50 +138,54 @@ function sendAssessment(index)
     var assessment_string = "";
     var flag = true;
     $("." + index + ".hint").each(function(){
-        if ($(this).text() == "")
+        if ($(this).text() == "" || $(this).text() == null)
             flag = false;
-        assessment_string += $(this).text();
+        assessment_string += $(this).text() + ",";
     });
+    assessment_string = assessment_string.substr(0,assessment_string.length - 1);
     if (flag == false)
     {
         alert("请对所有项目都进行评分后再提交");
         return 0;
     }
-    var submit_name = $("#course-name-" + index).text();
-    var submit_department = $("#department-" + index).text();
-    $.ajax({
-        url: '/assessment/submitCourseAssessments/',
-        data: 'department=' + submit_department + '&course_name=' + submit_name + '&score=' + assessment_string,
-        type: 'post',
-        async: false,
-        error: function(jqXHR,textStatus,errorThrown)
-        {
-            switch(jqXHR.status)
+    else
+    {
+        var submit_name = $("#course-name-" + index).text();
+        var submit_department = $("#department-" + index).text();
+        $.ajax({
+            url: '/assessment/submitCourseAssessments/',
+            data: 'department=' + submit_department + '&course_name=' + submit_name + '&score=' + assessment_string,
+            type: 'post',
+            async: false,
+            error: function(jqXHR,textStatus,errorThrown)
             {
-                case 400:
-                    alert("网络状态异常，请刷新后重试");
-                    break;
-                case 401:
-                    alert("当前用户已过期，请重新登录");
-                    window.location = '/user/login/';
-                    break;
-                case 403:
-                    alert("页面无法访问，请刷新后重试");
-                    break;
-                case 404:
-                    alert("页面不存在，请刷新后重试");
-                    break;
-                case 500:
-                    alert("服务器傲娇");
-                    break;
-                default:
-                    alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
-                    break;
+                switch(jqXHR.status)
+                {
+                    case 400:
+                        alert("网络状态异常，请刷新后重试");
+                        break;
+                    case 401:
+                        alert("当前用户已过期，请重新登录");
+                        window.location = '/user/login/';
+                        break;
+                    case 403:
+                        alert("页面无法访问，请刷新后重试");
+                        break;
+                    case 404:
+                        alert("页面不存在，请刷新后重试");
+                        break;
+                    case 500:
+                        alert("服务器傲娇");
+                        break;
+                    default:
+                        alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
+                        break;
+                }
+            },
+            success: function(msg,textStatus,jqXHR)
+            {
+                getAssessment();
             }
-        },
-        success: function(msg,textStatus,jqXHR)
-        {
-            getAssessment();
-        }
-    });
+        });
+    }
 }
