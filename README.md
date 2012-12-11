@@ -29,7 +29,7 @@ Invoke the Python Interpreter and type commands as below
 
 Install Django AJAX-utils, xlutils
 ```bash
-sudo pip install django-ajaxutils, xlutils
+sudo pip install django-ajaxutils xlutils
 ```
 
 ### PostgreSQL Database
@@ -39,7 +39,7 @@ PostgreSQL(Post-gress-Q-L), often simply Postgres, is an object-relational datab
 Install related packages
 
 ```bash
-sudo apt-get install postgresql postgresql-client postgresql-server-dev-all # Postgresql server and client
+sudo apt-get install postgresql postgresql-client postgresql-server-dev-all # Postgresql server & client
 ```
 
 Create a new database named `easdb`，own by `eas`，password is `eduadminsystem`
@@ -58,12 +58,7 @@ sudo pip install psycopg2 dj-database-url
 Create tables and generate testing data.
 
 ```bash
-python manage.py syncdb
-```
-
-`resetdb.sh` is a script for developers to reset database.
-```bash
-./resetdb.sh
+python manage.py syncdb && ./createTestData.py
 ```
 
 Delete database
@@ -72,12 +67,32 @@ Delete database
 sudo -u postgres dropdb easdb
 ```
 
+## Shortcuts
+Install all the required python packages by
+```
+sudo pip install -r requirements.txt
+```
+
+`resetdb.sh` is a script for developers to reset database.
+```bash
+./resetdb.sh ## If you get errors, please tell us
+```
+
+## Document
+Our document is written in Chinese and composed by LaTeX. You can clone it by 
+
+```bash
+git submodule update
+```
+
+Click [Here](https://github.com/zonyitoo/EduAdminSystemDoc) for more details.
+
 ## Trouble Shooting
 ### How to deploy it?
 
 Run `python manage.py runserver 0.0.0.0:80` directly. If you get error, please make sure that you have installed all the related packages. And you should gain the root priviledge for assessing the 80 port.
 
-### Why static files I saw in the browser is not the lastest version?
+### Why static files I saw in the browser are not the lastest version?
 
 Execute `python manange.py collectstatic` after modifying static files. CAUTIONS! Don't try to modify the files in `/gstatic`.
 

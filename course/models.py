@@ -84,7 +84,7 @@ class Course(models.Model):
         return self.name
     
     def getDataDict(self):
-        dc = {
+        return {
             'id': self.id,
             'name': self.name,
             'academic_year': self.academic_year,
@@ -104,11 +104,7 @@ class Course(models.Model):
             'screened': self.screened,
             'stage': self.stage,
             'assessment_type': self.assessment_type,
+            'class_oriented': self.class_oriented.getDataDict() if
+                self.class_oriented else None
         }
-        if self.class_oriented:
-            dc['class_oriented'] = self.class_oriented.getDataDict()
-        else:
-            dc['class_oriented'] = None
-
-        return dc
 

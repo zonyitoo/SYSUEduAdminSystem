@@ -16,6 +16,6 @@ class Assessment(models.Model):
             'subject': self.subject,
             'weight': self.weight,
             'score': self.score,
-            'course': self.course.getDataDict(),
+            #'course': self.course.getDataDict(),
         }
 

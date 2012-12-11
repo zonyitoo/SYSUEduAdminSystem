@@ -5,4 +5,4 @@ from school.models import School
 class Administrator(models.Model):
     administrator_name = models.CharField(max_length=30)
     school = models.ForeignKey(School, null=True)
-    user = models.OneToOneField(User, related_name='adminstrator')
+    user = models.OneToOneField(User, related_name='administrator')
