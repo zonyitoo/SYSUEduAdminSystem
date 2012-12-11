@@ -4,7 +4,7 @@ from django.http import (
 )
 from ajaxutils.decorators import ajax
 
-from course.models import Course, CourseType
+from course.models import Course
 from teacher.models import Teacher
 from take.models import Takes
 from student.models import Student
@@ -45,7 +45,7 @@ def get_teach_plan(request):
     courses = Course.objects.filter(
             teacher__user__exact=request.user,
             academic_year=year,
-            course_type__type_name__exact=course_type
+            course_type=course_type
             )
     return {
         'courses': [course.getDataDict() for course in courses],
@@ -155,9 +155,9 @@ def upload_score_sheet(request):
                     + usualscore * (100 - final_percentage - attend_percentage)/ 100 \
                     + attendance * attend_percentage / 100
 
-            course_type = course.course_type.type_name
+            course_type = course.course_type
 
-            if course_type == CourseType.PUB_COURSE:
+            if course_type == Course.PUB_COURSE:
                 student.pubcourse_weightsum += ((current_score - take.score) * credit)
                 if current_score >= 60:
                     if take.score < 60:
@@ -165,7 +165,7 @@ def upload_score_sheet(request):
                 else:
                     if take.score >= 60:
                         student.pubcourse_credit -= credit
-            elif course_type == CourseType.PUB_ELECTIVE:
+            elif course_type == Course.PUB_ELECTIVE:
                 student.pubelective_weightsum += ((current_score - take.score) * credit)
                 if current_score >= 60:
                     if take.score < 60:
@@ -173,7 +173,7 @@ def upload_score_sheet(request):
                 else:
                     if take.score >= 60:
                         student.pubelective_credit -= credit
-            elif course_type == CourseType.PRO_COURSE:
+            elif course_type == Course.PRO_COURSE:
                 student.procourse_weightsum += ((current_score - take.score) * credit)
                 if current_score >= 60:
                     if take.score < 60:
@@ -181,7 +181,7 @@ def upload_score_sheet(request):
                 else:
                     if take.score >= 60:
                         student.procourse_credit -= credit
-            elif course_type == CourseType.PRO_ELECTIVE:
+            elif course_type == Course.PRO_ELECTIVE:
                 student.proelective_weightsum += ((current_score - take.score) * credit)
                 if current_score >= 60:
                     if take.score < 60:
