@@ -6,20 +6,39 @@ from course.models import Course
 from student.models import Student
 from assessment.models import Assessment
 from ajaxutils.decorators import ajax
+import time
 
 @ajax(login_required=True, require_GET=True)
 def get_course_assessments(request):
     if not hasattr(request.user, 'administrator'):
         return HttpResponseForbidden('Only Administrator can do')
 
-    year = request.GET['year']
-    sem = int(request.GET['semester'])
-    dept = request.GET['department']
-    course_name = request.GET['course_name']
+    t = time.localtime(time.time())
+    year = t.tm_year
+    month = t.tm_mon
+    if month >= 9 or month <= 1:
+        year = str(year) + '-' + str(year + 1)
+    else:
+        year = str(year - 1) + '-' + str(year)
+
+    if month >= 9 or month <= 1:
+        sem = 1
+    elif month > 1 and month <= 6:
+        sem = 2
+    else:
+        sem = 3
+    try:
+        dept = request.GET['department']
+        course_name = request.GET['course_name']
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
     
-    course = Course.objects.get(semester__exact=sem,
-            academic_year=year, department__name__exact=dept,
-            name=course_name)
+    try:
+        course = Course.objects.get(semester__exact=sem,
+                academic_year=year, department__name__exact=dept,
+                name=course_name)
+    except Course.DoesNotExist:
+        return HttpResponseBadRequest('Course DoesNotExist')
     
     return {
         'assessments':
@@ -33,21 +52,34 @@ def submit_course_assessments(request):
         return HttpResponseForbidden('Only Student can do')
 
     try:
-        year = request.POST['year']
-        sem = int(request.POST['semester'])
         dept = request.POST['department']
         course_name = request.POST['course_name']
         ass_score = request.POST['score'].split(' ')
     except:
         return HttpResponseBadRequest('Invalid arguments')
-    
+
+    t = time.localtime(time.time())
+    year = t.tm_year
+    month = t.tm_mon
+    if month >= 9 or month <= 1:
+        year = str(year) + '-' + str(year + 1)
+    else:
+        year = str(year - 1) + '-' + str(year)
+
+    if month >= 9 or month <= 1:
+        sem = 1
+    elif month > 1 and month <= 6:
+        sem = 2
+    else:
+        sem = 3
+
     try:
-            course = Course.objects.get(name__exact=course_name, 
-                    semester__exact=sem,
-                    academic_year=year, 
+        course = Course.objects.get(name__exact=course_name, 
+                semester__exact=sem,
+                academic_year=year, 
                 department__name__exact=dept)
-    except:
-        return HttpResponseBadRequest('Invalid course')
+    except Course.DoesNotExist:
+        return HttpResponseBadRequest('Course DoesNotExist')
 
     try:
         subj = 0
