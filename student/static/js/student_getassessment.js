@@ -93,41 +93,46 @@ function getAssessment()
         },
         success: function(msg,textStatus,jqXHR)
         {
-            $("#assessment-result").empty();
-            $("#assessment-result").append("<div class='accordion'><div id='assessment-list'></div></div>");
             var assessment = msg.assessment;
             var course_name,course_type,credit,teacher,filter;
-            for (var i = 0;i < assessment.length;i++)
+            $("#assessment-result").empty();
+            if (assessment.length == 0)
+                $("#assessment-result").append("<center>未到教学评分时间或已完成所有教学评分项目</center>");
+            else
             {
-                course_name = assessment[i].course.name;
-                course_type = assessment[i].course.course_type;
-                department = assessment[i].course.department.name;
-                assessment_type = assessment[i].course.assessment_type;
-                credit = assessment[i].course.credit;
-                teacher = assessment[i].course.teacher;
-                filter = type_map[assessment_type];
-                $("#assessment-list").append("<div class='well accordion-group'><div class='accordion-heading' class='accordion-toggle' data-parent='#assessment-list' data-toggle='collapse' href='#assessment-" + i + "'><div id='department-" + i + "' class='hide'>" + department + "</div><div id='course-name-" + i + "' class='hide'>" + course_name + "</div><div>课程名称：" + course_name + "<br>类别：" + course_type + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "</div></div><div id='assessment-" + i + "' class='accordion-body collapse'><div id = 'assessment-in-" + i + "' class='accordion-inner'></div></div></div>");
-                var current_block = $("#assessment-in-" + i);
-                for (var j = 0;j < title_dict[filter].length;j++)
+                $("#assessment-result").append("<div class='accordion'><div id='assessment-list'></div></div>");
+                for (var i = 0;i < assessment.length;i++)
                 {
-                    current_block.append("<p><strong>" + title_dict[filter][j] + "</strong></p><div id='assessment-" + j + "-" + i + "'></div>");
-                    for (var k = 0;k < subject_dict[filter][j].length;k++)
+                    course_name = assessment[i].course.name;
+                    course_type = assessment[i].course.course_type;
+                    department = assessment[i].course.department.name;
+                    assessment_type = assessment[i].course.assessment_type;
+                    credit = assessment[i].course.credit;
+                    teacher = assessment[i].course.teacher;
+                    filter = type_map[assessment_type];
+                    $("#assessment-list").append("<div class='well accordion-group'><div class='accordion-heading' class='accordion-toggle' data-parent='#assessment-list' data-toggle='collapse' href='#assessment-" + i + "'><div id='department-" + i + "' class='hide'>" + department + "</div><div id='course-name-" + i + "' class='hide'>" + course_name + "</div><div>课程名称：" + course_name + "<br>类别：" + course_type + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "</div></div><div id='assessment-" + i + "' class='accordion-body collapse'><div id = 'assessment-in-" + i + "' class='accordion-inner'></div></div></div>");
+                    var current_block = $("#assessment-in-" + i);
+                    for (var j = 0;j < title_dict[filter].length;j++)
                     {
-                        $("#assessment-" + j + "-" + i).append(subject_dict[filter][j][k] + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span>");
-                        $("#rate-" + i + "-" + j + "-" + k).raty({
-                            hints: ['1','2','3','4','5'],
-                            scoreName: "score",
-                            size: 24,
-                            starOff: 'star-off-big.png',
-                            starOn: 'star-on-big.png',
-                            target: '#hint-' + i + '-' + j + '-' + k,
-                            targetFormat: '{score}',
-                            targetKeep: true,
-                        });
+                        current_block.append("<p><strong>" + title_dict[filter][j] + "</strong></p><div id='assessment-" + j + "-" + i + "'></div>");
+                        for (var k = 0;k < subject_dict[filter][j].length;k++)
+                        {
+                            $("#assessment-" + j + "-" + i).append(subject_dict[filter][j][k] + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span>");
+                            $("#rate-" + i + "-" + j + "-" + k).raty({
+                                hints: ['1','2','3','4','5'],
+                                scoreName: "score",
+                                size: 24,
+                                starOff: 'star-off-big.png',
+                                starOn: 'star-on-big.png',
+                                target: '#hint-' + i + '-' + j + '-' + k,
+                                targetFormat: '{score}',
+                                targetKeep: true,
+                            });
+                        }
+                        current_block.append("<br>");
                     }
-                    current_block.append("<br>");
+                    current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
                 }
-                current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
             }
         }
     });
