@@ -127,7 +127,7 @@ function getAssessment()
                     }
                     current_block.append("<br>");
                 }
-                current_block.append("<br><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
+                current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
             }
         }
     });
@@ -145,7 +145,8 @@ function sendAssessment(index)
     assessment_string = assessment_string.substr(0,assessment_string.length - 1);
     if (flag == false)
     {
-        alert("请对所有项目都进行评分后再提交");
+        $("#msg-area-" + index).text("请对所有项目都进行评分后再提交");
+        $("#msg-area-" + index).show();
         return 0;
     }
     else
