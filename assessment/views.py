@@ -82,7 +82,7 @@ def submit_course_assessments(request):
         return HttpResponseBadRequest('Course DoesNotExist')
 
     try:
-        subj = 0
+        subj = 1
         for score in ass_score:
             ass = Assessment.objects.get(course=course, subject=subj)
             ass.score = int(score)
