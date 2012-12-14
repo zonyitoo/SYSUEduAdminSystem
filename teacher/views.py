@@ -222,7 +222,7 @@ def get_teacher_list(request):
     return {
         'teachers': [teac.getDataDict()
             for teac in
-            Teacher.objects.filter(department__school__name__exact=request.GET['school'])]
+            Teacher.objects.filter(department__school__name__exact=request.GET['school']).order_by('user__username')]
     }
 
 
