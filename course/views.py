@@ -44,15 +44,16 @@ def get_available_list(request):
     courseArr = []
     if request.GET['course_type'] == '0':
         courses = Course.objects.filter(academic_year=year,
-                semester=sem, course_type=course_type)
+                semester=sem,
+                course_type=course_type).order_by('teacher__teacher_name')
     elif request.GET['course_type'] == '1':
         courses = Course.objects.filter(academic_year=year,
                 semester=sem, course_type=course_type,
-                department=stud_class.speciality.department)
+                department=stud_class.speciality.department).order_by('teacher__teacher_name')
     else:
         courses = Course.objects.filter(academic_year=year,
                 semester=sem, course_type=course_type,
-                class_oriented=stud_class)
+                class_oriented=stud_class).order_by('teacher__teacher_name')
 
     for course in courses:
         courseObj = course.getDataDict()
