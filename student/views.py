@@ -11,15 +11,18 @@ def time_collision_detect(student, course):
 
     # the filter can be optimized by adding academic_year?
     takes = Takes.objects.filter(student=student)
+    PubECount = 0
     for t in takes:
-        # have chosen this course before, return err 401
+        # have chosen this course before, return err 41
         if t.course.name == course.name:
             return 41
         # different sem or academic year, pass
         elif t.course.academic_year == course.academic_year and t.course.semester == course.semester:
+            if t.course.course_type == 'PubE':
+                PubECount = PubECount + 1
             cta = t.course.course_time.all()
             ctb = course.course_time.all()
-            #course time collision check, if found, return err 402
+            #course time collision check, if found, return err 42
             for ta in cta:
                 stra = ta.time
                 weeka = ta.week
@@ -29,11 +32,15 @@ def time_collision_detect(student, course):
                     for ch in stra:
                         if strb.find(ch) != -1 and weeka == weekb:
                             return 42
+    if course.course_type == 'PubE' and PubECount == 2:
+        # the student should not choose more than 2 PublicElective Course in
+        # one term, return error 44
+        return 44
     return 20
 
 def course_capacity_detect(course):
     if course.capacity <= course.hastaken and course.stage == 3:
-        # if it's full and it's in third stage, return err 403
+        # if it's full and it's in third stage, return err 43
         return 43
     return 20
 
@@ -100,7 +107,7 @@ def get_student_list(request):
     return {
         'students': [stud.getDataDict() for stud in
             Student.objects.filter(student_meta__major__speciality__department__school__name__exact=school,
-                student_meta__year__exact=grade)]
+                student_meta__year__exact=grade).order_by('user__username')]
     }
 
 
