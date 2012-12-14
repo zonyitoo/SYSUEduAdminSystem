@@ -7,7 +7,7 @@ from course.models import Course
 from student.models import Student, StudentMeta
 from teacher.models import Teacher
 from school.models import Department, Speciality
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, Permission
 from ajaxutils.decorators import ajax
 import time, xlwt, xlrd
 
@@ -107,17 +107,6 @@ def upload_student_sheet(request):
         'valid': True,
     }
         
-@ajax(login_required=True, require_POST=True)
-def toggle_select_course(request):
-    usergrp = Group.objects.get(name='student')
-    
-    state = request.POST['state']
-    if state == '1':
-        if usergrp.has_perm('add_takes'):
-            pass
-    elif state == '2':
-        pass
-
 @ajax(login_required=True, require_GET=True)
 def get_teacher_sheet(request, filename):
     ## Make all the departments of a school. Every department a sheet
@@ -168,3 +157,44 @@ def upload_teacher_sheet(request):
         return HttpResponseBadRequest('error occur')
 
     return {'valid': True}
+
+@ajax(login_required=True, require_POST=True)
+def toggle_select_course(request):
+    if not hasattr(request.user, 'administrator'):
+        return HttpResponseForbidden('Only Administrator can do')
+
+    usergrp = Group.objects.get(name='student')
+    perm = Permission.objects.get(codename='add_takes')
+    
+    try:
+        state = request.POST['state']
+    except:
+        return HttpResponseBadRequest('Invalid argument')
+
+    ## Open
+    if state == '1':
+        if not perm in usergrp.permission.all():
+            usergrp.permission.add(perm)
+
+        return {'valid': True, 'state': 2}
+    ## Close
+    elif state == '2':
+        try:
+            usergrp.permission.get(codename='add_takes').delete()
+        except Permission.DoesNotExist:
+            pass
+        
+        return {'valid': True, 'state': 1}
+
+    return HttpResponseBadRequest('Invalid State')
+
+
+@ajax(login_required=True, require_POST=True)
+def toggle_course_screen(request):
+    pass
+
+@ajax(login_required=True, require_POST=True)
+def toggle_upload_score(request):
+    pass
+
+
