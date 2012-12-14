@@ -166,6 +166,28 @@ students = [
     },
     {
     "user": {
+        "username": "10383003",
+        "password": "123456",
+        },
+    "student": {
+        "student_name": "崔成浩",
+        "student_meta": StudentMeta.objects.get(
+            major=Class.objects.get(name='计算机A班'), year=2010)
+        }
+    },
+    {
+    "user": {
+        "username": "10383073",
+        "password": "123456",
+        },
+    "student": {
+        "student_name": "金正恩",
+        "student_meta": StudentMeta.objects.get(
+            major=Class.objects.get(name='计算机B班'), year=2010)
+        }
+    },
+    {
+    "user": {
         "username": "10383067",
         "password": "zonyitoo",
         },
@@ -470,8 +492,8 @@ courses = [
                 'to_week': 18,
                 'teacher': Teacher.objects.get(teacher_name='拿衣服'),
                 'credit': 2,
-                'capacity': 5,
-                'hastaken': 5,
+                'capacity': 1,
+                'hastaken': 0,
                 'exam_method': '笔试',
                 'course_type': Course.PUB_ELECTIVE,
                 'department': Department.objects.get(name='CS'),
@@ -606,6 +628,11 @@ takes = [
                 'course': Course.objects.get(name='计算机图形学',
                     academic_year='2012-2013'),
                 'student': Student.objects.get(student_name='钟宇腾')
+            },
+            {
+                'course': Course.objects.get(name='Test_Capacity1',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='崔成浩')
             },
             {
                 'course': Course.objects.get(name='数学分析II'),
