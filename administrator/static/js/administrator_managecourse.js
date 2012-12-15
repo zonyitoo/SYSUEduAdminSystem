@@ -1,15 +1,21 @@
 //JavaScript Document
 
 $(document).ready(function(){
-    $("#view-assessment-btn").click(function(){
-        viewAssessment();
+    $("#start-first-btn").click(function(){
+        toggleCourseScreen();
+    });
+    $("#start-second-btn").click(function(){
+        toggleCourseScreen();
+    });
+    $("#start-last-btn").click(function(){
+        toggleCourseScreen();
     });
 });
 
-function viewAssessment(){
+function toggleCourseScreen()
+{
     $.ajax({
-        url: '/administrator/getCourseAssessments/',
-        data: 'school=' + $("#school-3").val() + "&deparment=" + $("#department-3").val(),
+        url: '/administrator/toggleCourseScreen/',
         type: 'get',
         async: false,
         error: function(jqXHR,textStatus,errorThrown)
@@ -39,9 +45,7 @@ function viewAssessment(){
         },
         success: function(msg,textStatus,jqXHR)
         {
-            $("#assessment-result").empty();
-            $("#assessment-result").append("<div class='msg-area'></div>");
+            alert("OK");
         }
     });
-    $("[rel = 'popover']").popover();
 }

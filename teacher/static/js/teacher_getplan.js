@@ -1,7 +1,14 @@
 //JavaScript Document
 
 $(document).ready(function(){
+    getPlan();
     $("#view-course-btn").click(function(){
+        getPlan();
+    });
+    $("#school-year-1").change(function(){
+        getPlan();
+    });
+    $("#course-type-1").change(function(){
         getPlan();
     });
 });
