@@ -18,8 +18,10 @@ function getAssessment()
                 new Array(),
                 new Array(),
                 new Array(
-                    "123",
-                    "456"
+                    "教学态度",
+                    "教学内容",
+                    "教学方法",
+                    "教学效果"
                     ),
                 new Array(
                     "教学态度",
@@ -33,10 +35,25 @@ function getAssessment()
                 new Array(),
                 new Array(
                     new Array(
-                        "ABC"
+                        "备课充分，授课熟练。",
+                        "教态大方，为人师表。",
+                        "愿意与学生交流，能耐心解答学生疑问。"
                         ),
                     new Array(
-                        "DEF"
+                        "讲课深度和容量适合学生掌握。",
+                        "内容清晰，重点突出，难点讲透。",
+                        "注重反映学科发展的新动态和新成果。",
+                        "能介绍相关参考资料，注意新旧内容衔接。"
+                        ),
+                    new Array(
+                        "联系实际，案例讲解与理论阐述结合恰当。",
+                        "讲课有启发性，善于促进学生思考。",
+                        "能采用多种教学手段，运用效果好。"
+                        ),
+                    new Array(
+                        "教师授课有助于提高学生的认识、分析和解决问题的能力。",
+                        "教师授课有利于提高学生的学习兴趣。",
+                        "教师授课有助于引导学生自学。"
                         )
                     ),
                 new Array(
@@ -117,7 +134,7 @@ function getAssessment()
                         current_block.append("<p><strong>" + title_dict[filter][j] + "</strong></p><div id='assessment-" + j + "-" + i + "'></div>");
                         for (var k = 0;k < subject_dict[filter][j].length;k++)
                         {
-                            $("#assessment-" + j + "-" + i).append(subject_dict[filter][j][k] + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span>");
+                            $("#assessment-" + j + "-" + i).append(subject_dict[filter][j][k] + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span><br>");
                             $("#rate-" + i + "-" + j + "-" + k).raty({
                                 hints: ['1','2','3','4','5'],
                                 scoreName: "score",
