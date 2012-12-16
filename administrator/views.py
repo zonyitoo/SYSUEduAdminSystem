@@ -14,6 +14,13 @@ import time, xlwt, xlrd
 import logging
 logger = logging.getLogger('EduAdminSystem')
 
+COURSE_TYPE = [
+    Course.PUB_ELECTIVE,
+    Course.PUB_COURSE,
+    Course.PRO_ELECTIVE,
+    Course.PRO_COURSE
+]
+
 @ajax(login_required=True, require_GET=True)
 def get_student_sheet(request, filename):
     t = time.localtime(time.time())
@@ -191,7 +198,32 @@ def toggle_select_course(request):
 
 @ajax(login_required=True, require_POST=True)
 def toggle_course_screen(request):
-    pass
+    stage = int(request.POST['stage'])
+    if stage == 1 or stage == 2 :
+        c_type = COURSE_TYPE[int(request.POST['course_type'])-1]
+
+        course = Course.objects.filter(course_type=c_type,stage=stage,screened=False)
+    
+        print course
+       
+        for c in course:
+            avail_num = c.capacity-c.hastaken
+
+            take = Takes.objects.filter(course=c,screened=False)
+            wait_for_screen = take.count()
+            actual_num = min(avail_num,wait_for_screen)
+            take = take.order_by('?')[:actual_num]
+            for t in take:
+                t.screened = True
+                t.save()
+            c.stage += 1
+            c.save()
+    elif stage  == 3:
+        c_type = COURSE_TYPE[int(request.POST['course_type'])-1]
+        course = Course.objects.filter(course_type=c_type,stage=stage,screened=False)
+        for c in course:
+            c.screened = True
+            c.save()
 
 @ajax(login_required=True, require_POST=True)
 def toggle_upload_score(request):
