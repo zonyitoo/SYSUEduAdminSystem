@@ -63,66 +63,71 @@ function getAssessment()
                     teacher = assessment[i].course.teacher;
                     filter = type_map[assessment_type];
                     $("#assessment-list").append("<div class='well accordion-group'><div class='accordion-heading' class='accordion-toggle' data-parent='#assessment-list' data-toggle='collapse' href='#assessment-" + i + "'><div id='department-" + i + "' class='hide'>" + department + "</div><div id='course-name-" + i + "' class='hide'>" + course_name + "</div><div>课程名称：" + course_name + "<br>类别：" + course_type + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "</div></div><div id='assessment-" + i + "' class='accordion-body collapse'><div id = 'assessment-in-" + i + "' class='accordion-inner'></div></div></div>");
-                    $.ajax({
-                        url: '/assessment/getAssessmentEntries/',
-                        data: 'assessment_type=' + assessment_type,
-                        type: 'get',
-                        error: function(jqXHR,textStatus,errorThrown)
-                        {
-                            switch(jqXHR.status)
-                            {
-                                case 400:
-                                    alert("网络状态异常，请刷新后重试");
-                                    break;
-                                case 401:
-                                    alert("当前用户已过期，请重新登录");
-                                    window.location = '/user/login/';
-                                    break;
-                                case 403:
-                                    alert("页面无法访问，请刷新后重试");
-                                    break;
-                                case 404:
-                                    alert("页面不存在，请刷新后重试");
-                                    break;
-                                case 500:
-                                    alert("服务器傲娇");
-                                    break;
-                                default:
-                                    alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
-                                    break;
-                            }
-                        },
-                        success: function(msg,textStatus,jqXHR)
-                        {
-                            var descript = msg.assessments;
-                            var current_block = $("#assessment-in-" + i);
-                            var weight;
-                            for (var j = 0;j < descript.length;j++)
-                            {
-                                current_block.append("<p><strong>" + descript[j].subject.description + "</strong></p><div id='assessment-" + j + "-" + i + "'></div>");
-                                for (var k = 0;k < descript[j].entries.length;k++)
-                                {
-                                    $("#assessment-" + j + "-" + i).append(descript[j].entries[k].description + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span><br>");
-                                    weight = descript[j].entries[k].weight;
-                                    $("#rate-" + i + "-" + j + "-" + k).raty({
-                                        hints: [1 * weight,2 * weight,3 * weight,4 * weight,5 * weight],
-                                        scoreName: "score",
-                                        size: 24,
-                                        starOff: 'star-off-big.png',
-                                        starOn: 'star-on-big.png',
-                                        target: '#hint-' + i + '-' + j + '-' + k,
-                                        targetFormat: '{score}',
-                                        targetKeep: true,
-                                    });
-                                }
-                                current_block.append("<br>");
-                            }
-                            current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
-                        }
-                    });
-                            current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
+                    getAssessmentEntry(assessment_type,i);
                 }
             }
+        }
+    });
+}
+
+function getAssessmentEntry(asm_type,index)
+{
+    var descript,current_block,weight;
+    $.ajax({
+        url: '/assessment/getAssessmentEntries/',
+        data: 'assessment_type=' + asm_type,
+        type: 'get',
+        error: function(jqXHR,textStatus,errorThrown)
+        {
+            switch(jqXHR.status)
+            {
+                case 400:
+                    alert("网络状态异常，请刷新后重试");
+                    break;
+                case 401:
+                    alert("当前用户已过期，请重新登录");
+                    window.location = '/user/login/';
+                    break;
+                case 403:
+                    alert("页面无法访问，请刷新后重试");
+                    break;
+                case 404:
+                    alert("页面不存在，请刷新后重试");
+                    break;
+                case 500:
+                    alert("服务器傲娇");
+                    break;
+                default:
+                    alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
+                    break;
+            }
+        },
+        success: function(msg,textStatus,jqXHR)
+        {
+            var i = index;
+            descript = msg.assessments;
+            current_block = $("#assessment-in-" + i);
+            for (var j = 0;j < descript.length;j++)
+            {
+                current_block.append("<p><strong>" + descript[j].subject.description + "</strong></p><div id='assessment-" + j + "-" + i + "'></div>");
+                for (var k = 0;k < descript[j].entries.length;k++)
+                {
+                    $("#assessment-" + j + "-" + i).append(descript[j].entries[k].description + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span><br>");
+                    weight = descript[j].entries[k].weight;
+                    $("#rate-" + i + "-" + j + "-" + k).raty({
+                        hints: [1 * weight,2 * weight,3 * weight,4 * weight,5 * weight],
+                        scoreName: "score",
+                        size: 24,
+                        starOff: 'star-off-big.png',
+                        starOn: 'star-on-big.png',
+                        target: '#hint-' + i + '-' + j + '-' + k,
+                        targetFormat: '{score}',
+                        targetKeep: true,
+                    });
+                }
+                current_block.append("<br>");
+            }
+            current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ")'>提交</button></div></div>");
         }
     });
 }
