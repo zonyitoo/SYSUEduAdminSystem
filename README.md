@@ -115,7 +115,7 @@ output = stunnel.log
 
 [https]
 accept=443
-connect=8000
+connect=8001
 TIMEOUTclose=1
 ```
 
@@ -123,7 +123,10 @@ Now pop back to the Django project directory (the one with manage.py in it) and 
 
 ```
 sudo stunnel4 stunnel/https &
-HTTPS=on python manange.py runserver &
+## In one shell window
+HTTPS=on python manage.py runserver 8001 &
+## Another shell window
+python manage.py runserver 8000
 ```
 
 Then the stunnel will listen on port 443, wrap any connection it receives in SSL, and pass them along to port 8000.
