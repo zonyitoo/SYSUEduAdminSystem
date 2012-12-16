@@ -115,7 +115,7 @@ function getAssessmentEntry(asm_type,index)
                     $("#assessment-" + j + "-" + i).append(descript[j].entries[k].description + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span><br>");
                     weight = descript[j].entries[k].weight;
                     $("#rate-" + i + "-" + j + "-" + k).raty({
-                        hints: [1 * weight,2 * weight,3 * weight,4 * weight,5 * weight],
+                        hints: ["1","2","3","4","5"],
                         scoreName: "score",
                         size: 24,
                         starOff: 'star-off-big.png',
