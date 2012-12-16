@@ -5,6 +5,7 @@ from take.models import Takes
 from course.models import Course
 from student.models import Student
 from ajaxutils.decorators import ajax
+from django.contrib.auth.models import Group, Permission
 
 # a simple version of course time collision detect
 def time_collision_detect(student, course):
@@ -82,9 +83,12 @@ def withdrawal_course(student, course):
     
 @ajax(login_required=True, require_POST=True)
 def toggle_course(request):
-    if not request.user.has_perm('add_takes'):
+    studgrp = Group.objects.get(name='student')
+    perm = Permission.objects.get(codename='add_takes')
+
+    if not perm in studgrp.permissions.all():
         #If admin close the permission
-        pass
+        return HttpResponseForbidden('未开放选课')
 
     student = Student.objects.get(user=request.user)
     try:

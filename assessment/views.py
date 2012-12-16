@@ -87,7 +87,7 @@ def get_assessments(request):
 
     result = []
     for course in courses:
-        asses = Assessment.objects.filter(course=course)
+        asses = Assessment.objects.filter(course=course).order_by('id')
         total = 0
         for ass in asses:
             total += ass.score * ass.entry.weight
