@@ -4,7 +4,7 @@ $(document).ready(function(){
     $("#school-3").change(function(){
         $.ajax({
             url: '/school/getAllDepartments/',
-            data: 'school=' + $(".school").val(),
+            data: 'school=' + $("#school-3").val(),
             type: 'get',
             async: false,
             error: function(jqXHR,textStatus,errorThrown)

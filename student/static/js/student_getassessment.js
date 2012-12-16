@@ -142,6 +142,7 @@ function sendAssessment(index)
         assessment_string += $(this).text() + ",";
     });
     assessment_string = assessment_string.substr(0,assessment_string.length - 1);
+    alert(assessment_string);
     if (flag == false)
     {
         $("#msg-area-" + index).text("请对所有项目都进行评分后再提交");
