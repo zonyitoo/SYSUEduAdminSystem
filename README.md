@@ -67,7 +67,7 @@ Delete database
 sudo -u postgres dropdb easdb
 ```
 
-## Runserver with https
+### Runserver with https
 
 Install stunnel
 
@@ -75,7 +75,7 @@ Install stunnel
 sudo apt-get install stunnel
 ```
 
-You can run the command described in the last of this section directly. If you want to generate the key and certificate again, read the instructions below.
+You can run the command described at the last of this section directly. If you want to generate the key and certificate again, read the instructions below.
 
 Create a directory in project to hold the necessary configuration files and SSLish stuff.
 
@@ -134,18 +134,17 @@ If you don't want the two program keep running in the background, type the follo
 ## In one shell window
 sudo stunnel4 stunnel/https
 
-## An other shell window
+## Another shell window
 HTTPS=on python manage.py runserver
 ```
 
-```bash
-## Runserver in 8000 port
-python manage.py runserver
+Try to assess the address `https://localhost` or `https://127.0.0.1` or `https://[YOUR IP ADDRESS]`
+
+Don't forget the `https` !! If you want to assess the website without ssl ecryption, be sure to comment this line in `EduAdminSystem/settings.py`, or you will get into the endless redirection loop.
+
+```python
+SESSION_COOKIE_SECURE = True
 ```
-
-Try to assess the website `https://localhost` or `https://127.0.0.1` or `https://[YOUR IP ADDRESS]`
-
-Don't forget the `https` !!
 
 ## Shortcuts
 Install all the required python packages by
