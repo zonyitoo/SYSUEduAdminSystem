@@ -14,71 +14,6 @@ function getAssessment()
     type_map[2] = 1;
     type_map[3] = 2;
     type_map[4] = 3;
-    var title_dict = new Array(
-                new Array(),
-                new Array(),
-                new Array(
-                    "教学态度",
-                    "教学内容",
-                    "教学方法",
-                    "教学效果"
-                    ),
-                new Array(
-                    "教学态度",
-                    "教学内容",
-                    "教学方法",
-                    "教学效果"
-                    )
-                );
-    var subject_dict = new Array(
-                new Array(),
-                new Array(),
-                new Array(
-                    new Array(
-                        "备课充分，授课熟练。",
-                        "教态大方，为人师表。",
-                        "愿意与学生交流，能耐心解答学生疑问。"
-                        ),
-                    new Array(
-                        "讲课深度和容量适合学生掌握。",
-                        "内容清晰，重点突出，难点讲透。",
-                        "注重反映学科发展的新动态和新成果。",
-                        "能介绍相关参考资料，注意新旧内容衔接。"
-                        ),
-                    new Array(
-                        "联系实际，案例讲解与理论阐述结合恰当。",
-                        "讲课有启发性，善于促进学生思考。",
-                        "能采用多种教学手段，运用效果好。"
-                        ),
-                    new Array(
-                        "教师授课有助于提高学生的认识、分析和解决问题的能力。",
-                        "教师授课有利于提高学生的学习兴趣。",
-                        "教师授课有助于引导学生自学。"
-                        )
-                    ),
-                new Array(
-                    new Array(
-                        "教书育人，为人师表。",
-                        "实验教学准备充分，讲课流利。",
-                        "批改实验报告及时、认真，辅导耐心。"
-                        ),
-                    new Array(
-                        "熟悉实验内容和仪器使用，指导材料齐备。",
-                        "内容设计合理、讲解清晰，示范准确、规范。",
-                        "能安排一定的综合性、设计性的实验内容，并将科研成果引入教学。"
-                        ),
-                    new Array(
-                        "教学组织手段灵活有效、教学秩序好。",
-                        "善于引导学生运用所学知识分析实验的现象和结果。",
-                        "善于启发学生思考，注重师生互动。"
-                        ),
-                    new Array(
-                        "有助于培养学生的创新意识和创新思维。",
-                        "有助于提高学生的实验动手能力",
-                        "有助于学生巩固相关的理论知识。"
-                        )
-                    )
-                );
     $.ajax({
         url: '/take/getTakeAssessment/',
         type: 'get',
@@ -128,26 +63,63 @@ function getAssessment()
                     teacher = assessment[i].course.teacher;
                     filter = type_map[assessment_type];
                     $("#assessment-list").append("<div class='well accordion-group'><div class='accordion-heading' class='accordion-toggle' data-parent='#assessment-list' data-toggle='collapse' href='#assessment-" + i + "'><div id='department-" + i + "' class='hide'>" + department + "</div><div id='course-name-" + i + "' class='hide'>" + course_name + "</div><div>课程名称：" + course_name + "<br>类别：" + course_type + "<br>学分：" + credit + "<br>任课教师：" + teacher.teacher_name + "</div></div><div id='assessment-" + i + "' class='accordion-body collapse'><div id = 'assessment-in-" + i + "' class='accordion-inner'></div></div></div>");
-                    var current_block = $("#assessment-in-" + i);
-                    for (var j = 0;j < title_dict[filter].length;j++)
-                    {
-                        current_block.append("<p><strong>" + title_dict[filter][j] + "</strong></p><div id='assessment-" + j + "-" + i + "'></div>");
-                        for (var k = 0;k < subject_dict[filter][j].length;k++)
+                    $.ajax({
+                        url: '/assessment/getAssessmentEntries/',
+                        data: 'assessment_type=' + assessment_type,
+                        type: 'get',
+                        async: 'false',
+                        error: function(jqXHR,textStatus,errorThrown)
                         {
-                            $("#assessment-" + j + "-" + i).append(subject_dict[filter][j][k] + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span><br>");
-                            $("#rate-" + i + "-" + j + "-" + k).raty({
-                                hints: ['1','2','3','4','5'],
-                                scoreName: "score",
-                                size: 24,
-                                starOff: 'star-off-big.png',
-                                starOn: 'star-on-big.png',
-                                target: '#hint-' + i + '-' + j + '-' + k,
-                                targetFormat: '{score}',
-                                targetKeep: true,
-                            });
+                            switch(jqXHR.status)
+                            {
+                                case 400:
+                                    alert("网络状态异常，请刷新后重试");
+                                    break;
+                                case 401:
+                                    alert("当前用户已过期，请重新登录");
+                                    window.location = '/user/login/';
+                                    break;
+                                case 403:
+                                    alert("页面无法访问，请刷新后重试");
+                                    break;
+                                case 404:
+                                    alert("页面不存在，请刷新后重试");
+                                    break;
+                                case 500:
+                                    alert("服务器傲娇");
+                                    break;
+                                default:
+                                    alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
+                                    break;
+                            }
+                        },
+                        success: function(msg,textStatus,jqXHR)
+                        {
+                            var descript = msg.assessments;
+                            var current_block = $("#assessment-in-" + i);
+                            var weight;
+                            for (var j = 0;j < descript.length;j++)
+                            {
+                                current_block.append("<p><strong>" + descript[j].subject.description + "</strong></p><div id='assessment-" + j + "-" + i + "'></div>");
+                                for (var k = 0;k < descript[j].entries.length;k++)
+                                {
+                                    $("#assessment-" + j + "-" + i).append(descript[j].entries[k].description + "<br><span id='rate-" + i + "-" + j + "-" + k + "' class='rate " + i + "'></span>&nbsp&nbsp&nbsp<span id='hint-" + i + "-" + j + "-" + k + "' class='hint " + i + "'></span><br>");
+                                    weight = descript[j].entries[k].weight;
+                                    $("#rate-" + i + "-" + j + "-" + k).raty({
+                                        hints: [1 * weight,2 * weight,3 * weight,4 * weight,5 * weight],
+                                        scoreName: "score",
+                                        size: 24,
+                                        starOff: 'star-off-big.png',
+                                        starOn: 'star-on-big.png',
+                                        target: '#hint-' + i + '-' + j + '-' + k,
+                                        targetFormat: '{score}',
+                                        targetKeep: true,
+                                    });
+                                }
+                                current_block.append("<br>");
+                            }
                         }
-                        current_block.append("<br>");
-                    }
+                    });
                     current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
                 }
             }

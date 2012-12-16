@@ -435,11 +435,13 @@ assentries = [
         'subject': AssessmentSubject.objects.get(assessment_type=3,
             description='教学态度'),
         'description': "备课充分，授课熟练。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=3, 
             description='教学态度'),
         'description': "教态大方，为人师表。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=3,
@@ -455,11 +457,13 @@ assentries = [
         'subject': AssessmentSubject.objects.get(assessment_type=3,
             description='教学内容'),
         'description': "内容清晰，重点突出，难点讲透。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=3,
             description='教学内容'),
         'description': "注重反映学科发展的新动态和新成果。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=3,
@@ -470,16 +474,19 @@ assentries = [
         'subject': AssessmentSubject.objects.get(assessment_type=3,
             description='教学方法'),
         'description': "联系实际，案例讲解与理论阐述结合恰当。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=3,
             description='教学方法'),
         'description': "讲课有启发性，善于促进学生思考。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=3,
             description='教学方法'),
         'description': "能采用多种教学手段，运用效果好。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=3,
@@ -516,16 +523,19 @@ assentries = [
         'subject': AssessmentSubject.objects.get(assessment_type=4,
             description='教学内容'),
         'description': "熟悉实验内容和仪器使用，指导材料齐备。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=4,
             description='教学内容'),
         'description': "内容设计合理、讲解清晰，示范准确、规范。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=4,
             description='教学内容'),
         'description': "能安排一定的综合性、设计性的实验内容，并将科研成果引入教学。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=4,
@@ -536,26 +546,31 @@ assentries = [
         'subject': AssessmentSubject.objects.get(assessment_type=4,
             description='教学方法'),
         'description': "善于引导学生运用所学知识分析实验的现象和结果。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=4,
             description='教学方法'),
         'description': "善于启发学生思考，注重师生互动。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=4,
             description='教学效果'),
         'description': "有助于培养学生的创新意识和创新思维。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=4,
             description='教学效果'),
         'description': "有助于提高学生的实验动手能力。",
+        'weight': 2,
     },
     {
         'subject': AssessmentSubject.objects.get(assessment_type=4,
             description='教学效果'),
         'description': "有助于学生巩固相关的理论知识。",
+        'weight': 2,
     },
 ]
 

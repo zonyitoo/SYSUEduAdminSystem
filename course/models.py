@@ -69,11 +69,13 @@ class Course(models.Model):
     ASSTYPE_GYM = 2
     ASSTYPE_THEORY = 3
     ASSTYPE_LAB = 4
+    ASSTYPE_FOREIGN = 5
     ASSESSMENT_TYPE = (
         (ASSTYPE_PHIL, u'哲学类'),
         (ASSTYPE_GYM, u'体育类'),
         (ASSTYPE_THEORY, u'理论类'), 
         (ASSTYPE_LAB, u'实验类'),
+        (ASSTYPE_FOREIGN, u'外语类'),
     )
     ASSTYPE_UNICODE = {x:y for x, y in ASSESSMENT_TYPE}
 
