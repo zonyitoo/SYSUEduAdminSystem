@@ -48,6 +48,8 @@ function getCourse()
         select_type = 2;
     else if ($("#mr").hasClass("active"))
         select_type = 3;
+    else if ($("#pe").hasClass("active"))
+        select_type = 4;
     $.ajax({
         url: '/course/getAvailableList/',
         data: 'cultivate=' + cultivate + '&course_type=' + select_type,
