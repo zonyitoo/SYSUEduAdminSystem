@@ -67,7 +67,6 @@ function getAssessment()
                         url: '/assessment/getAssessmentEntries/',
                         data: 'assessment_type=' + assessment_type,
                         type: 'get',
-                        async: 'false',
                         error: function(jqXHR,textStatus,errorThrown)
                         {
                             switch(jqXHR.status)
@@ -118,9 +117,10 @@ function getAssessment()
                                 }
                                 current_block.append("<br>");
                             }
+                            current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
                         }
                     });
-                    current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
+                            current_block.append("<br><div id='msg-area-" + i + "' class='hide alert alert-danger'></div><div class='control-group'><div class='controls'><button id='assessment-submit-" + i + "' class='btn btn-primary " + i + "' onclick='sendAssessment(" + i + ");'>提交</button></div></div>");
                 }
             }
         }
