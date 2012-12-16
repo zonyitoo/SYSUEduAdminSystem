@@ -4,10 +4,33 @@ from django.http import HttpResponseForbidden, HttpResponseBadRequest
 from take.models import Takes
 from course.models import Course
 from student.models import Student
-from assessment.models import Assessment
+from assessment.models import Assessment, AssessmentSubject, AssessmentEntry
 from django.db.models import Count
 from ajaxutils.decorators import ajax
 import time
+
+@ajax(login_required=True, require_GET=True)
+def get_assessment_entries(request):
+    try:
+        ass_type = request.GET['assessment_type']
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
+    
+    ass_type = int(ass_type)
+
+    subjs = AssessmentSubject.objects.filter(assessment_type=ass_type)
+    
+    result = []
+    for subject in subjs:
+        result.append({
+            'subject': subject.getDataDict(),
+            'entries': [entry.getDataDict()
+                for entry in AssessmentEntry.objects.filter(subject=subject)]
+        })
+
+    return {
+        'assessments': result,
+    }
 
 @ajax(login_required=True, require_GET=True)
 def get_course_assessments(request):
@@ -49,6 +72,9 @@ def get_course_assessments(request):
     
 @ajax(login_required=True, require_GET=True)
 def get_assessments(request):
+    if not hasattr(request.user, 'administrator'):
+        return HttpResponseForbidden('Only Administrator can do')
+
     try:
         department = request.GET['department']
         year = request.GET['year']
@@ -56,17 +82,21 @@ def get_assessments(request):
     except:
         return HttpResponseBadRequest('Invalid Argument')
 
-    ass = Assessment.objects.filter(
-                department__name__exact=department,
-                course__academic_year__exact=year,
-                course__semester__exact=int(sem)
-            )
+    courses = Course.objects.filter(department__name__exact=department,
+            academic_year=year, semester=sem)
 
-    res = ass.values('course').annotate(total='score')
-    return {
-        'assessments':
-            []
-    }
+    result = []
+    for course in courses:
+        asses = Assessment.objects.filter(course=course)
+        total = 0
+        for ass in asses:
+            total += ass.score * ass.entry.weight
+        result.append({
+                'course': course.getDataDict(),
+                'assessment_score': total,
+            })
+
+    return {'assessments': result}
 
 @ajax(login_required=True, require_POST=True)
 def submit_course_assessments(request):

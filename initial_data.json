@@ -9,11 +9,29 @@
     }
   },
   {
-    "pk": 21,
+    "pk": 23,
     "model": "contenttypes.contenttype",
     "fields": {
       "model": "assessment",
       "name": "assessment",
+      "app_label": "assessment"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "assessmententry",
+      "name": "assessment entry",
+      "app_label": "assessment"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "model": "assessmentsubject",
+      "name": "assessment subject",
       "app_label": "assessment"
     }
   },
@@ -251,11 +269,65 @@
     }
   },
   {
-    "pk": 61,
+    "pk": 67,
     "model": "auth.permission",
     "fields": {
       "codename": "add_assessment",
       "name": "Can add assessment",
+      "content_type": 23
+    }
+  },
+  {
+    "pk": 68,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_assessment",
+      "name": "Can change assessment",
+      "content_type": 23
+    }
+  },
+  {
+    "pk": 69,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_assessment",
+      "name": "Can delete assessment",
+      "content_type": 23
+    }
+  },
+  {
+    "pk": 64,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_assessmententry",
+      "name": "Can add assessment entry",
+      "content_type": 22
+    }
+  },
+  {
+    "pk": 65,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "change_assessmententry",
+      "name": "Can change assessment entry",
+      "content_type": 22
+    }
+  },
+  {
+    "pk": 66,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "delete_assessmententry",
+      "name": "Can delete assessment entry",
+      "content_type": 22
+    }
+  },
+  {
+    "pk": 61,
+    "model": "auth.permission",
+    "fields": {
+      "codename": "add_assessmentsubject",
+      "name": "Can add assessment subject",
       "content_type": 21
     }
   },
@@ -263,8 +335,8 @@
     "pk": 62,
     "model": "auth.permission",
     "fields": {
-      "codename": "change_assessment",
-      "name": "Can change assessment",
+      "codename": "change_assessmentsubject",
+      "name": "Can change assessment subject",
       "content_type": 21
     }
   },
@@ -272,8 +344,8 @@
     "pk": 63,
     "model": "auth.permission",
     "fields": {
-      "codename": "delete_assessment",
-      "name": "Can delete assessment",
+      "codename": "delete_assessmentsubject",
+      "name": "Can delete assessment subject",
       "content_type": 21
     }
   },
@@ -773,12 +845,12 @@
       "is_active": true,
       "is_superuser": true,
       "is_staff": true,
-      "last_login": "2012-12-10T16:51:09.842Z",
+      "last_login": "2012-12-16T10:38:32.954Z",
       "groups": [],
       "user_permissions": [],
-      "password": "pbkdf2_sha256$10000$eQL2deltGFbl$9fneoOx8klv4ddW1DYmq38u9O96pKa+J3TlzFLGxpgU=",
+      "password": "pbkdf2_sha256$10000$Kf9bl5HgcxR4$bHwhqnAtgfDFTYEeHdyDRQZA4IY0JQ1r6PumlmI2fW4=",
       "email": "admin@admin.com",
-      "date_joined": "2012-12-10T16:51:09.842Z"
+      "date_joined": "2012-12-16T10:38:32.954Z"
     }
   }
 ]
