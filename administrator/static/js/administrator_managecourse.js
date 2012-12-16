@@ -1,13 +1,7 @@
 //JavaScript Document
 
 $(document).ready(function(){
-    $("#start-first-btn").click(function(){
-        toggleCourseScreen();
-    });
-    $("#start-second-btn").click(function(){
-        toggleCourseScreen();
-    });
-    $("#start-last-btn").click(function(){
+    $("#start-screen-btn").click(function(){
         toggleCourseScreen();
     });
 });
@@ -16,7 +10,8 @@ function toggleCourseScreen()
 {
     $.ajax({
         url: '/administrator/toggleCourseScreen/',
-        type: 'get',
+        data: 'course_type=' + $("#course-type-4").val() + '&stage=' + $("#stage-4").val(),
+        type: 'post',
         async: false,
         error: function(jqXHR,textStatus,errorThrown)
         {
