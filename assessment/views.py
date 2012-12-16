@@ -5,6 +5,7 @@ from take.models import Takes
 from course.models import Course
 from student.models import Student
 from assessment.models import Assessment
+from django.db.models import Count
 from ajaxutils.decorators import ajax
 import time
 
@@ -44,6 +45,27 @@ def get_course_assessments(request):
         'assessments':
             [ass.getDataDict() for ass in Assessment.objects.filter(
                     course=course)]
+    }
+    
+@ajax(login_required=True, require_GET=True)
+def get_assessments(request):
+    try:
+        department = request.GET['department']
+        year = request.GET['year']
+        sem = request.GET['semester']
+    except:
+        return HttpResponseBadRequest('Invalid Argument')
+
+    ass = Assessment.objects.filter(
+                department__name__exact=department,
+                course__academic_year__exact=year,
+                course__semester__exact=int(sem)
+            )
+
+    res = ass.values('course').annotate(total='score')
+    return {
+        'assessments':
+            []
     }
 
 @ajax(login_required=True, require_POST=True)
