@@ -14,6 +14,9 @@ $(document).ready(function(){
     $("#school-1").change(function(){
         $("#view-student-btn").trigger("click");
     });
+    $("#grade-1").change(function(){
+        $("#view-student-btn").trigger("click");
+    });
 });
 
 function manageSchoolRoll(){
