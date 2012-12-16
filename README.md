@@ -67,6 +67,86 @@ Delete database
 sudo -u postgres dropdb easdb
 ```
 
+## Runserver with https
+
+Install stunnel
+
+```bash
+sudo apt-get install stunnel
+```
+
+You can run the command described in the last of this section directly. If you want to generate the key and certificate again, read the instructions below.
+
+Create a directory in project to hold the necessary configuration files and SSLish stuff.
+
+```bash 
+mkdir stunnel
+cd stunnel
+```
+
+Next we will need to create a local certificate and key to be used for the SSL communication. For this we turn to openssl.
+
+Create the key:
+
+```bash
+openssl genrsa 1024 > stunnel.key
+```
+
+Create the certificate that uses this key.
+
+```bash
+openssl req -new -x509 -nodes -sha1 -days 365 -key stunnel.key > stunnel.cert
+```
+
+Now combine these into a single file that stunnel will use for its SSL communication
+
+```bash
+cat stunnel.key stunnel.cert > stunnel.pem
+```
+
+Create a config file for stunnel called dev\_https with the following contents
+```
+pid=
+
+cert = stunnel/stunnel.pem
+sslVersion = SSLv3
+foreground = yes
+output = stunnel.log
+
+[https]
+accept=443
+connect=8000
+TIMEOUTclose=1
+```
+
+Now pop back to the Django project directory (the one with manage.py in it) and create a script named runserver
+
+```
+sudo stunnel4 stunnel/https &
+HTTPS=on python manange.py runserver &
+```
+
+Then the stunnel will listen on port 443, wrap any connection it receives in SSL, and pass them along to port 8000.
+
+If you don't want the two program keep running in the background, type the following commands mannually.
+
+```bash
+## In one shell window
+sudo stunnel4 stunnel/https
+
+## An other shell window
+HTTPS=on python manage.py runserver
+```
+
+```bash
+## Runserver in 8000 port
+python manage.py runserver
+```
+
+Try to assess the website `https://localhost` or `https://127.0.0.1` or `https://[YOUR IP ADDRESS]`
+
+Don't forget the `https` !!
+
 ## Shortcuts
 Install all the required python packages by
 ```

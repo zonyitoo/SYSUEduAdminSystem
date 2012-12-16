@@ -87,7 +87,7 @@ def get_assessments(request):
 
     result = []
     for course in courses:
-        asses = Assessment.objects.filter(course=course)
+        asses = Assessment.objects.filter(course=course).order_by('id')
         total = 0
         for ass in asses:
             total += ass.score * ass.entry.weight
@@ -134,12 +134,21 @@ def submit_course_assessments(request):
         return HttpResponseBadRequest('Course DoesNotExist')
 
     try:
-        subj = 1
-        for score in ass_score:
-            ass = Assessment.objects.get(course=course, subject=subj)
-            ass.score = int(score)
-            ass.save()
-            subj += 1
+        subjects = AssessmentSubject.objects.filter(
+                assessment_type=course.assessment_type
+            ).order_by('id')
+
+        score_ind = 0;
+        for subj in subjects:
+            entries =\
+                AssessmentEntry.objects.filter(subject=subj).order_by('id')
+            for entry in entries:
+                ass = Assessment.objects.get_or_create(course=course, 
+                        entry=entry)[0]
+                ass.score = ass_score[score_ind]
+                score_ind += 1
+                ass.save()
+
     except:
         return HttpResponseBadRequest('Invalid Assessment')
     
