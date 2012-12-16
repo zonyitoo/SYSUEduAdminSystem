@@ -75,6 +75,8 @@ Install stunnel
 sudo apt-get install stunnel
 ```
 
+You can run the command described in the last of this section directly. If you want to generate the key and certificate again, read the instructions below.
+
 Create a directory in project to hold the necessary configuration files and SSLish stuff.
 
 ```bash 
@@ -120,7 +122,7 @@ TIMEOUTclose=1
 Now pop back to the Django project directory (the one with manage.py in it) and create a script named runserver
 
 ```
-sudo stunnel4 stunnel/dev_https &
+sudo stunnel4 stunnel/https &
 HTTPS=on python manange.py runserver &
 ```
 
@@ -130,7 +132,7 @@ If you don't want the two program keep running in the background, type the follo
 
 ```bash
 ## In one shell window
-sudo stunnel4 stunnel/dev_https
+sudo stunnel4 stunnel/https
 
 ## An other shell window
 HTTPS=on python manage.py runserver
