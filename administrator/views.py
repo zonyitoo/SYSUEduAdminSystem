@@ -166,35 +166,32 @@ def upload_teacher_sheet(request):
     return {'valid': True}
 
 @ajax(login_required=True, require_POST=True)
-def toggle_select_course(request):
+def open_select_course(request):
     if not hasattr(request.user, 'administrator'):
         return HttpResponseForbidden('Only Administrator can do')
 
     usergrp = Group.objects.get(name='student')
     perm = Permission.objects.get(codename='add_takes')
     
-    try:
-        state = request.POST['state']
-    except:
-        return HttpResponseBadRequest('Invalid argument')
-
     ## Open
-    if state == '1':
-        if not perm in usergrp.permission.all():
-            usergrp.permission.add(perm)
+    if not perm in usergrp.permission.all():
+        usergrp.permission.add(perm)
 
-        return {'valid': True, 'state': 2}
-    ## Close
-    elif state == '2':
-        try:
-            usergrp.permission.get(codename='add_takes').delete()
-        except Permission.DoesNotExist:
-            pass
-        
-        return {'valid': True, 'state': 1}
+    return {'valid': True}
 
-    return HttpResponseBadRequest('Invalid State')
+@ajax(login_required=True, require_POST=True)
+def close_select_course(request):
+    if not hasattr(request.user, 'administrator'):
+        return HttpResponseForbidden('Only Administrator can do')
 
+    usergrp = Group.objects.get(name='student')
+
+    try:
+        usergrp.permission.get(codename='add_takes').delete()
+    except Permission.DoesNotExist:
+        pass
+
+    return {'valid': True}
 
 @ajax(login_required=True, require_POST=True)
 def toggle_course_screen(request):
@@ -226,7 +223,12 @@ def toggle_course_screen(request):
             c.save()
 
 @ajax(login_required=True, require_POST=True)
-def toggle_upload_score(request):
-    pass
+def open_upload_score(request):
+    if not hasattr(request.user, 'administrator'):
+        return HttpResponseForbidden('Only Administrator can do')
 
-
+    
+@ajax(login_required=True, require_POST=True)
+def close_upload_score(request):
+    if not hasattr(request.user, 'administrator'):
+        return HttpResponseForbidden('Only Administrator can do')
