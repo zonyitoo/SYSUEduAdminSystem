@@ -170,7 +170,7 @@ def get_select_course_state(request):
     usergrp = Group.objects.get(name='student')
     perm = Permission.objects.get(codename='add_takes')
 
-    if perm in usergrp.permission.all():
+    if perm in usergrp.permissions.all():
         return {'state': True}
     else:
         return {'state': False}
