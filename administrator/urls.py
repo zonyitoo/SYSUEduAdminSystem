@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     url('uploadTeacherSheet/$', 'administrator.views.upload_teacher_sheet'),
 
     ## Select Course
+    url('getSelectCourseState/$',
+        'administrator.views.get_select_course_state'),
     url('openSelectCourse/$', 'administrator.views.open_select_course'),
     url('closeSelectCourse/$', 'administrator.views.close_select_course'),
 

@@ -105,6 +105,9 @@ def toggle_course(request):
 
 @ajax(login_required=True, require_GET=True)
 def get_student_list(request):
+    if not hasattr(request.user, 'administrator'):
+        return HttpResponseForbidden('Only Administrator can do')
+
     school = request.GET['school']
     grade = request.GET['grade']
 

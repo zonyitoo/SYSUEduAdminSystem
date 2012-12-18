@@ -165,6 +165,16 @@ def upload_teacher_sheet(request):
 
     return {'valid': True}
 
+@ajax(login_required=True, require_GET=True)
+def get_select_course_state(request):
+    usergrp = Group.objects.get(name='student')
+    perm = Permission.objects.get(codename='add_takes')
+
+    if perm in usergrp.permission.all():
+        return {'state': True}
+    else:
+        return {'state': False}
+
 @ajax(login_required=True, require_POST=True)
 def open_select_course(request):
     if not hasattr(request.user, 'administrator'):
