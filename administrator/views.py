@@ -187,7 +187,7 @@ def open_select_course(request):
     if not perm in usergrp.permission.all():
         usergrp.permission.add(perm)
 
-    return {'valid': True}
+    return {'success': True, 'state': True}
 
 @ajax(login_required=True, require_POST=True)
 def close_select_course(request):
@@ -201,7 +201,7 @@ def close_select_course(request):
     except Permission.DoesNotExist:
         pass
 
-    return {'valid': True}
+    return {'success': True, 'state': False}
 
 @ajax(login_required=True, require_POST=True)
 def toggle_course_screen(request):
