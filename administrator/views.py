@@ -184,8 +184,8 @@ def open_select_course(request):
     perm = Permission.objects.get(codename='add_takes')
     
     ## Open
-    if not perm in usergrp.permission.all():
-        usergrp.permission.add(perm)
+    if not perm in usergrp.permissions.all():
+        usergrp.permissions.add(perm)
 
     return {'success': True, 'state': True}
 
@@ -197,7 +197,7 @@ def close_select_course(request):
     usergrp = Group.objects.get(name='student')
 
     try:
-        usergrp.permission.get(codename='add_takes').delete()
+        usergrp.permissions.get(codename='add_takes').delete()
     except Permission.DoesNotExist:
         pass
 
@@ -236,9 +236,33 @@ def toggle_course_screen(request):
 def open_upload_score(request):
     if not hasattr(request.user, 'administrator'):
         return HttpResponseForbidden('Only Administrator can do')
+    
+    usergrp = Group.objects.get(name='teacher')
+    perm = Permission.objects.get(codename='change_takes')
+
+    if not perm in usergrp.permissions.all():
+        usergrp.permissions.add(perm)
+
+    return {'success': True, 'state': True}
 
     
 @ajax(login_required=True, require_POST=True)
 def close_upload_score(request):
     if not hasattr(request.user, 'administrator'):
         return HttpResponseForbidden('Only Administrator can do')
+
+    usergrp = Group.objects.get(name='teacher')
+
+    try:
+        usergrp.permissions.get(codename='change_takes').delete()
+    except Permission.DoesNotExist:
+        pass
+
+    return {'success': True, 'state': False}
+
+@ajax(login_required=True, require_GET=True)
+def get_upload_score_state(request):
+    usergrp = Group.objects.get(name='teacher')
+    perm = Permission.objects.get(codename='change_takes')
+
+    return {'state': perm in usergrp.permissions.all()}

@@ -20,4 +20,5 @@ urlpatterns = patterns('',
     ## Upload score
     url('openUploadScore/$', 'administrator.views.open_upload_score'),
     url('closeUploadScore/$', 'administrator.views.close_upload_score'),
+    url('getUploadScoreState/$', 'administrator.views.get_upload_score_state'),
 )

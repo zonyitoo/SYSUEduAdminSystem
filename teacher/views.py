@@ -8,6 +8,7 @@ from course.models import Course
 from teacher.models import Teacher
 from take.models import Takes
 from student.models import Student
+from django.contrib.auth.models import Group, Permission
 from teacher.forms import ScoreUploadForm
 import time, xlwt, xlrd
 
@@ -128,6 +129,12 @@ def upload_score_sheet(request):
     """
         Only teacher can do!!!
     """
+    usergrp = Group.objects.get(name='teacher')
+    perm = Permission.objects.get(codename='change_takes')
+
+    if not perm in usergrp.permissions.all():
+        return HttpResponseForbidden('Closed')
+
     form = ScoreUploadForm(request.POST, request.FILES)
     if not form.is_valid():
         return HttpResponseBadRequest('File not valid')
