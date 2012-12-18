@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from django.http import HttpResponseForbidden, HttpResponseBadRequest
 from ajaxutils.decorators import ajax
 from take.models import Takes
 
@@ -22,8 +23,11 @@ def get_take_courses(request):
 
 @ajax(login_required=True, require_GET=True)
 def get_take_score(request):
-    year = request.GET.get('school-year', '')
-    sem = int(request.GET.get('school-term', '1'))
+    try:
+        year = request.GET.get('school-year', '')
+        sem = int(request.GET.get('school-term', '1'))
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
 
     user = request.user
     
@@ -31,9 +35,13 @@ def get_take_score(request):
             course__academic_year__exact=year,
             course__semester__exact=sem, has_assessment=True)
     
-    takeArr = [take.getDataDict() for take in takes]
+    notass_takes = Takes.objects.filter(student__user__exact=user,
+            course__academic_year__exact=year,
+            course__semester__exact=sem, has_assessment=False)
+
     return {
-            'takes': takeArr,
+        'takes': [take.getDataDict() for take in takes],
+        'not_assessments': [take.course.name for take in notass_takes],
         'studentid': request.user.username
     }
 
@@ -44,6 +52,6 @@ def get_take_assessment(request):
 
     takeArr = [take.getDataDict() for take in takes]
     return {
-            'assessment': takeArr,
-            'studentid': request.user.username
-            }
+        'assessment': takeArr,
+        'studentid': request.user.username
+    }

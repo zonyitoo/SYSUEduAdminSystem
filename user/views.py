@@ -1,5 +1,6 @@
 from django.http import (
-    HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse
+    HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse,
+    HttpResponseBadRequestHttp
 )
 from user.controller import *
 from school.models import *
@@ -63,8 +64,12 @@ def do_logout(request):
 
 @ajax(login_required=True, require_POST=True)
 def modify_pwd(request):
-    oldpasswd = request.POST['oldpasswd']
-    newpasswd = request.POST['newpasswd']
+    try:
+        oldpasswd = request.POST['oldpasswd']
+        newpasswd = request.POST['newpasswd']
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
+
     if not request.user.check_password(oldpasswd):
         return {'valid': False}
     else:

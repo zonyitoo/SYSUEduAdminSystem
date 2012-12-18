@@ -39,8 +39,11 @@ def get_teach_plan(request):
     if not hasattr(request.user, 'teacher'):
         return HttpResponseForbidden("Only teacher can access")
 
-    year = request.GET.get('school-year')
-    course_type = request.GET.get('course-type')
+    try:
+        year = request.GET.get('school-year')
+        course_type = request.GET.get('course-type')
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
 
     courses = Course.objects.filter(
             teacher__user__exact=request.user,
@@ -56,7 +59,10 @@ def get_takeninfo_list(request):
     if not hasattr(request.user, 'teacher'):
         return HttpResponseForbidden("Only teacher can access")
 
-    course = request.GET['course']
+    try:
+        course = request.GET['course']
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
 
     takes = Takes.objects.filter(course__name__exact=course)
 
@@ -72,7 +78,10 @@ def get_score_sheet(request, filename):
     t = time.localtime(time.time())
     year = t.tm_year
     month = t.tm_mon
-    course_name = request.GET['course']
+    try:
+        course_name = request.GET['course']
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
     if month >= 9 or month <= 1:
         year = str(year) + '-' + str(year + 1)
     else:

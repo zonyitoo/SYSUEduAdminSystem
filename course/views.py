@@ -1,9 +1,11 @@
 # -*- coding:utf-8 -*-
 
+from django.http import HttpResponseForbidden, HttpResponseBadRequest
 from course.models import Course
 from take.models import Takes
 from student.models import Student
 from ajaxutils.decorators import ajax
+from django.db.models import Avg
 import time
 
 COURSE_TYPE = [
@@ -15,9 +17,12 @@ COURSE_TYPE = [
 
 @ajax(login_required=True, require_GET=True)
 def get_available_list(request):
-    cultivate = int(request.GET.get('cultivate', ''))
+    try:
+        cultivate = int(request.GET.get('cultivate', ''))
     
-    course_type = COURSE_TYPE[int(request.GET['course_type'])]
+        course_type = COURSE_TYPE[int(request.GET['course_type'])]
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
     
     t = time.localtime(time.time())
     year = t.tm_year
@@ -76,7 +81,10 @@ def get_available_list(request):
 
 @ajax(login_required=True, require_GET=True)
 def get_educate_plan(request):
-    cultivate = int(request.GET.get('cultivate', ''))
+    try:
+        cultivate = int(request.GET.get('cultivate', ''))
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
     
     # only work for student 
     user = request.user
@@ -100,3 +108,33 @@ def get_educate_plan(request):
         'student': student.getDataDict(),
         'courses': [course.getDataDict() for course in courses],
     }
+    
+@ajax(login_required=True, require_GET=True)
+def get_course_statistic(request):
+    if hasattr(request.user, 'student'):
+        return HttpResponseForbidden(
+            'Student is not allowed to assess the statistic')
+
+    try:
+        course_id = request.GET['course_id']
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
+
+    try:
+        course = Course.objects.get(id=int(course_id))
+    except Course.DoesNotExist:
+        return HttpResponseBadRequest('Course does not exist')
+
+    takes = Takes.objects.filter(course=course)
+
+    avg_score = takes.aggregate(Avg('score')).values()[0]
+    pass_cnt = takes.filter(score__gte=60)
+    notpass_cnt = takes.count() - pass_cnt
+
+    return {
+        'avg_score': avg_score,
+        'pass_cnt': pass_cnt,
+        'notpass_cnt': notpass_cnt,
+        'course': course.getDataDict(),
+    }
+    
