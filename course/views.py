@@ -12,7 +12,8 @@ COURSE_TYPE = [
     Course.PUB_ELECTIVE, 
     Course.PUB_COURSE,
     Course.PRO_ELECTIVE,
-    Course.PRO_COURSE
+    Course.PRO_COURSE,
+    Course.GYM_ELECTIVE,
 ]
 
 @ajax(login_required=True, require_GET=True)
@@ -55,6 +56,9 @@ def get_available_list(request):
         courses = Course.objects.filter(academic_year=year,
                 semester=sem, course_type=course_type,
                 department=stud_class.speciality.department).order_by('teacher__teacher_name')
+    elif request.GET['course_type'] == '4':
+        courses = Course.objects.filter(academic_year=year,
+                semester=sem, course_type=course_type).order_by('teacher__teacher_name')
     else:
         courses = Course.objects.filter(academic_year=year,
                 semester=sem, course_type=course_type,
