@@ -33,7 +33,8 @@ def get_take_score(request):
     
     takes = Takes.objects.filter(student__user__exact=user,
             course__academic_year__exact=year,
-            course__semester__exact=sem, has_assessment=True)
+            course__semester__exact=sem, has_assessment=True,
+            course__hasscore__exact=True)
     
     notass_takes = Takes.objects.filter(student__user__exact=user,
             course__academic_year__exact=year,
