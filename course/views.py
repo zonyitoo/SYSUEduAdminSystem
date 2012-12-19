@@ -65,9 +65,10 @@ def get_available_list(request):
 
         try:
             t = Takes.objects.get(course=course, student=student)
-            if course.screened:
-                if t.screened: courseObj['take'] = 1
-                else: courseObj['take'] = 2
+            #if course.screened:
+            if t.screened:
+                courseObj['take'] = 1
+                #else: courseObj['take'] = 2
             else:
                 courseObj['take'] = 3
         except:

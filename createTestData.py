@@ -14,6 +14,27 @@ from django.contrib.auth.models import User, Group, Permission
 
     Thie script will delete all your remain data
 """
+## Global Data
+from globaldata.models import GlobalData
+
+data = [
+    {
+        'pub_course_stage': 1,
+        'pub_elective_stage': 1,
+        'pro_course_stage': 1,
+        'pro_elective_stage': 1,
+        }
+]
+
+GlobalData.objects.all().delete()
+
+for d in data:
+    obj = GlobalData.objects.get_or_create(**d)
+    if not obj[1]:
+        print 'GlobaData exists'
+    else:
+        print 'Creating GlobalData'
+        obj[0].save()
 
 ## Schools
 from school.models import School, Department, Speciality, Class
