@@ -49,7 +49,7 @@ function getAssessment()
             var course_name,course_type,credit,teacher,filter;
             $("#assessment-result").empty();
             if (assessment.length == 0)
-                $("#assessment-result").append("<center>未到教学评分时间或已完成所有教学评分项目</center>");
+                $("#assessment-result").append("未到教学评分时间或已完成所有教学评分项目。");
             else
             {
                 $("#assessment-result").append("<div class='accordion'><div id='assessment-list'></div></div>");

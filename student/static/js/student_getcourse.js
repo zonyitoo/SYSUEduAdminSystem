@@ -86,6 +86,10 @@ function getCourse()
             var list = msg.courses;
             var week_map = new Array("世界末日","周一","周二","周三","周四","周五","周六","周日");
             $("#course-result").empty();
+            if (list.length == 0)
+                $("#course-result").append("暂未开设该类课程。");
+            else
+            {
             $("#course-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr class='head'><th>课程名称</th><th class='hidden-phone'>类别</th><th class='hidden-phone'>学分</th><th>任课教师</th><th class='hidden-phone'>考核方式</th><th class='hidden-phone'>起止时间</th><th>上课时段</th><th class='hidden-phone'>上课地点</th><th class='hidden-phone'>当前人数</th><th class=''>是否选择</th></tr></thead><tbody id='course-list'></tbody</table>");
             var index,id,course_name,course_type,credit,exam,period,course_time,capacity,take,hastaken,week,time,start_time,end_time,place;
             for (var i = 0;i < list.length;i++)
@@ -141,6 +145,7 @@ function getCourse()
             }
             if ($(".current-state").text() == "false")
                 $(".select").attr("disabled",true);
+            }
             $("#course-result").append("<div class='msg-area'></div>");
         }
     });

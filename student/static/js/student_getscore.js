@@ -42,7 +42,9 @@ function getScore()
         {
             var courses = msg.takes;
             $("#score-result").empty();
-            if (courses.length > 0)
+            if (courses.length == 0)
+                $("#score-result").append("暂无成绩可供查询。");
+            else
             {
                 $("#score-result").append("<table class='table table-bordered table-hover table-condensed'><thead><tr><th>序号</th><th>课程名称</th><th>课程类别</th><th>学分</th><th>平时成绩</th><th>期末成绩</th><th>总评</th><th>排名</th></tr></thead><tbody id='score-list'></tbody></table>");
                 var course_name,course_type,credit,usual_score,final_score,final_percentage,total_score,rank;
@@ -68,10 +70,6 @@ function getScore()
                 for (var i = 0;i < not_assess.length;i++)
                     $("#score-result .msg-area").append("<li><p>" + not_assess[i] + "</p></li>");
                 $("#score-result .msg-area").append("</ol>");
-            }
-            else if (courses.length == 0)
-            {
-                $("#score-result .msg-area").append("暂无成绩可供查询。");
             }
         }
     });
