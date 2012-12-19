@@ -928,5 +928,7 @@ for t in takes:
     else:
         print "Creating Take", t
         obj[0].course.hastaken += 1
+        if obj[0].score > 0:
+            obj[0].course.hasscore = True
         obj[0].course.save()
         obj[0].save()

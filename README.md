@@ -67,86 +67,71 @@ Delete database
 sudo -u postgres dropdb easdb
 ```
 
-### Runserver with https
+### Apache HTTP Server
 
-Install stunnel
-
-```bash
-sudo apt-get install stunnel
-```
-
-You can run the command described at the last of this section directly. If you want to generate the key and certificate again, read the instructions below.
-
-Create a directory in project to hold the necessary configuration files and SSLish stuff.
-
-```bash 
-mkdir stunnel
-cd stunnel
-```
-
-Next we will need to create a local certificate and key to be used for the SSL communication. For this we turn to openssl.
-
-Create the key:
+Install Apache HTTP Server
 
 ```bash
-openssl genrsa 1024 > stunnel.key
+sudo apt-get install apache2
 ```
 
-Create the certificate that uses this key.
+Then create a new file in `/etc/apache2/sites-enabled/` with contents as below (delete the default configure file if exists), replace `[PATH_TO_PROJECT]` with the abslute path of the project directory. For example: `/home/zonyitoo/workspace/EduAdminSystem`
 
-```bash
-openssl req -new -x509 -nodes -sha1 -days 365 -key stunnel.key > stunnel.cert
+```apache
+<VirtualHost *:80>
+    ServerName EduAdminSystem
+    LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so
+
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName EduAdminSystem
+    DocumentRoot [PATH_TO_PROJECT] 
+    WSGIScriptAlias / [PATH_TO_PROJECT]/apache/wsgi.py
+
+    Alias /static [PATH_TO_PROJECT]/gstatic
+    
+    #LoadModule ssl_module /usr/lib/apache2/modules/mod_ssl.so
+
+    SSLEngine On
+
+    SSLCertificateFile [PATH_TO_PROJECT]/apache/eas.cert
+    SSLCertificateKeyFile [PATH_TO_PROJECT]/apache/eas.key
+
+    <Directory "[PATH_TO_PROJECT]/apache">
+        <Files wsgi.py>
+            Order deny,allow
+            Allow from all
+        </Files>
+    </Directory>
+
+    <Directory "[PATH_TO_PROJECT]/gstatic/">
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    <Location "/">
+        SetHandler python-program
+        PythonHandler django.core.handlers.modpython
+        SetEnv DJANGO_SETTINGS_MODULE EduAdminSystem.settings
+        PythonPath "['[PATH_TO_PROJECT]'] + sys.path"
+        PythonDebug On
+    </Location>
+
+    <Location "/static/">
+        SetHandler None
+    </Location>
+</VirtualHost>
 ```
 
-Now combine these into a single file that stunnel will use for its SSL communication
-
-```bash
-cat stunnel.key stunnel.cert > stunnel.pem
-```
-
-Create a config file for stunnel called dev\_https with the following contents
-```
-pid=
-
-cert = stunnel/stunnel.pem
-sslVersion = SSLv3
-foreground = yes
-output = stunnel.log
-
-[https]
-accept=443
-connect=8001
-TIMEOUTclose=1
-```
-
-Now pop back to the Django project directory (the one with manage.py in it) and create a script named runserver
+Then activate the SSL module of Apache and restart Apache Daemon
 
 ```
-sudo stunnel4 stunnel/https &
-## In one shell window
-HTTPS=on python manage.py runserver 8001 &
-## Another shell window
-python manage.py runserver 8000
-```
-
-Then the stunnel will listen on port 443, wrap any connection it receives in SSL, and pass them along to port 8000.
-
-If you don't want the two program keep running in the background, type the following commands mannually.
-
-```bash
-## In one shell window
-sudo stunnel4 stunnel/https
-
-## Another shell window
-HTTPS=on python manage.py runserver
-```
-
-Try to assess the address `https://localhost` or `https://127.0.0.1` or `https://[YOUR IP ADDRESS]`
-
-Don't forget the `https` !! If you want to assess the website without ssl ecryption, be sure to comment this line in `EduAdminSystem/settings.py`, or you will get into the endless redirection loop.
-
-```python
-SESSION_COOKIE_SECURE = True
+sudo a2enmod ssl
+sudo service apache2 restart
 ```
 
 ## Shortcuts
