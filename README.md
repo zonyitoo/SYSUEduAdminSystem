@@ -69,10 +69,10 @@ sudo -u postgres dropdb easdb
 
 ### Apache HTTP Server
 
-Install Apache HTTP Server
+Install Apache HTTP Server and dependences
 
 ```bash
-sudo apt-get install apache2
+sudo apt-get install apache2 libapache2-mod-wsgi libapache2-mod-python
 ```
 
 Then create a new file in `/etc/apache2/sites-enabled/` with contents as below (delete the default configure file if exists), replace `[PATH_TO_PROJECT]` with the abslute path of the project directory. For example: `/home/zonyitoo/workspace/EduAdminSystem`
