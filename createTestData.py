@@ -930,5 +930,21 @@ for t in takes:
         obj[0].course.hastaken += 1
         if obj[0].score > 0:
             obj[0].course.hasscore = True
+            ct = obj[0].course.course_type
+            cred = obj[0].course.credit
+            mark = obj[0].score * cred
+            if ct == 'PubC' or ct == 'GymE':
+                obj[0].student.pubcourse_credit += cred
+                obj[0].student.pubcourse_weightsum += mark
+            elif ct == 'PubE':
+                obj[0].student.pubelective_credit += cred
+                obj[0].student.pubelective_weightsum += mark
+            elif ct == 'ProC':
+                obj[0].student.procourse_credit += cred
+                obj[0].student.procourse_weightsum += mark
+            elif ct == 'ProE':
+                obj[0].student.proelective_credit += cred
+                obj[0].student.proelective_weightsum += mark
+            obj[0].student.save()
         obj[0].course.save()
         obj[0].save()
