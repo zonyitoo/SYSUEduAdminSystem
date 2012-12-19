@@ -133,7 +133,7 @@ function getCourse()
                     current_button.removeClass("btn-primary").removeClass("btn-danger").removeClass("btn-inverse").addClass("btn-success");
                     current_button.val("补选");
                 }
-                else
+                else if (take == 3)
                 {
                     current_button.removeClass("btn-primary").removeClass("btn-danger").removeClass("btn-success").addClass("btn-inverse");
                     current_button.val("退筛选");
