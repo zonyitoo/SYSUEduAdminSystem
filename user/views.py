@@ -1,6 +1,6 @@
 from django.http import (
     HttpResponseNotAllowed, HttpResponseRedirect, HttpResponse,
-    HttpResponseBadRequestHttp
+    HttpResponseBadRequest
 )
 from user.controller import *
 from school.models import *

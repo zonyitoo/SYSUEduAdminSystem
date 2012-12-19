@@ -1,6 +1,8 @@
 # Django settings for EduAdminSystem project.
 import os
 
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 

@@ -13,17 +13,24 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-import os
+import os, sys
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "EduAdminSystem.settings")
 
-os.environ['HTTPS'] = 'on'
+#os.environ['HTTPS'] = 'on'
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+#from django.core.wsgi import get_wsgi_application
+#application = get_wsgi_application()
+
+app_path = '/home/zonyitoo/workspace/EduAdminSystem/' 
+if app_path not in sys.path:
+    sys.path.append(app_path)
+
+from django.core.handlers.wsgi import WSGIHandler
+application = WSGIHandler()
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
