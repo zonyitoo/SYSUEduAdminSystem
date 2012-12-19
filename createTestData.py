@@ -19,11 +19,22 @@ from globaldata.models import GlobalData
 
 data = [
     {
-        'pub_course_stage': 1,
-        'pub_elective_stage': 1,
-        'pro_course_stage': 1,
-        'pro_elective_stage': 1,
-        }
+	'name': 'PUB_COURSE',
+        'stage': 1,
+        },
+    {
+	'name': 'PUB_ELECTIVE',
+        'stage': 1,
+        },
+    {
+	'name': 'PRO_COURSE',
+        'stage': 1,
+        },
+    {
+	'name': 'PRO_ELECTIVE',
+        'stage': 1,
+        },
+
 ]
 
 GlobalData.objects.all().delete()
