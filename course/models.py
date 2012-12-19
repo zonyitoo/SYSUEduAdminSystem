@@ -64,6 +64,7 @@ class Course(models.Model):
     class_oriented = models.ForeignKey(Class, null=True)
     screened = models.BooleanField(default=False)
     stage = models.PositiveSmallIntegerField(default=1)
+    hasscore = models.BooleanField(default=False)
     
     ASSTYPE_PHIL = 1
     ASSTYPE_GYM = 2
