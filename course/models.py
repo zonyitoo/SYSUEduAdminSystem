@@ -47,11 +47,13 @@ class Course(models.Model):
     PUB_ELECTIVE = 'PubE'
     PRO_COURSE = 'ProC'
     PRO_ELECTIVE = 'ProE'
+    GYM_ELECTIVE = 'GymE'
     COURSE_TYPE = (
             (PUB_COURSE, u'公必'), 
             (PUB_ELECTIVE, u'公选'), 
             (PRO_COURSE, u'专必'), 
             (PRO_ELECTIVE, u'专选'),
+            (GYM_ELECTIVE, u'体育'),
         )
     COURSE_TYPE_TO_UNICODE = { k:v for k, v in COURSE_TYPE }
 
@@ -64,6 +66,7 @@ class Course(models.Model):
     class_oriented = models.ForeignKey(Class, null=True)
     screened = models.BooleanField(default=False)
     stage = models.PositiveSmallIntegerField(default=1)
+    hasscore = models.BooleanField(default=False)
     
     ASSTYPE_PHIL = 1
     ASSTYPE_GYM = 2
@@ -104,8 +107,8 @@ class Course(models.Model):
             'hastaken': self.hastaken,
             'department': self.department.getDataDict(),
             'screened': self.screened,
-            'stage': self.stage,
             'assessment_type': self.assessment_type,
+            'stage': self.stage,
             'class_oriented': self.class_oriented.getDataDict() if
                 self.class_oriented else None
         }

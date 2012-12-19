@@ -2,6 +2,7 @@
 from django.http import (
     HttpResponseForbidden, HttpResponseBadRequest, HttpResponse
 )
+from globaldata.models import GlobalData
 from take.models import Takes
 from course.models import Course
 from student.models import Student, StudentMeta

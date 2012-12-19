@@ -212,6 +212,8 @@ def upload_score_sheet(request):
             take.attendance = attendance
             take.score = current_score
             take.save()
+            course.hasscore = True
+            course.save()
 
             
     except xlrd.XLRDError:
