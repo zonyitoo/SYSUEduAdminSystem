@@ -106,7 +106,7 @@ function getCourse()
                 capacity = list[i].capacity;
                 take = list[i].take;
                 hastaken = list[i].hastaken;
-                $("#course-list").append("<tr class='" + index + "'><td id='"+ id + "'>" + course_name + "<a class='withajaxpopover visible-phone' rel='popover' title='课程信息' data-content='类别：" + course_type + "<br>学分：" + credit + "<br>考核方式：" + exam + "<br>起止时间：" + period + "<br>当前人数：" + hastaken + "/" + capacity + "'><i class='icon-info-sign'></i></a></td><td class='hidden-phone'>" + course_type + "</td><td class='hidden-phone'>" + credit + "</td><td><a target='_blank' href='" + teacher.site + "' class='withajaxpopover' rel='popover' data-placement='bottom' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " width=68 height=68 style=float:right><br>学系：" + teacher.department.name + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td class='hidden-phone'>" + exam + "</td><td class='hidden-phone'>" + period + "</td><td class='" + index + " course-time-1'></td><td class='" + index + " course-locate-1 hidden-phone'></td><td class='hidden-phone'>" + hastaken + "/" + capacity + "</td><td><input type='button' class='btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
+                $("#course-list").append("<tr class='" + index + "'><td id='"+ id + "'>" + course_name + "<a class='withajaxpopover visible-phone' rel='popover' title='课程信息' data-content='类别：" + course_type + "<br>学分：" + credit + "<br>考核方式：" + exam + "<br>起止时间：" + period + "<br>当前人数：" + hastaken + "/" + capacity + "'><i class='icon-info-sign'></i></a></td><td class='hidden-phone'>" + course_type + "</td><td class='hidden-phone'>" + credit + "</td><td><a target='_blank' href='" + teacher.site + "' class='withajaxpopover' rel='popover' data-placement='bottom' title='教师信息' data-content='姓名：" + teacher.teacher_name + "<img src=" + teacher.img_addr + " width=68 height=68 style=float:right><br>学系：" + teacher.department.name + "<br>职称：" + teacher.title + "<br>主页：" + teacher.site + "'>" + teacher.teacher_name + "</a></td><td class='hidden-phone'>" + exam + "</td><td class='hidden-phone'>" + period + "</td><td class='" + index + " course-time-1'></td><td class='" + index + " course-locate-1 hidden-phone'></td><td class='hidden-phone'>" + hastaken + "/" + capacity + "</td><td><input type='button' class='select btn btn-primary " + index + "' onclick='toggleCourse(" + index + ")' value='选课'/></td></tr>");
                 for (var j = 0;j < course_time.length;j++)
                 {
                     week = week_map[course_time[j].week];
@@ -139,6 +139,8 @@ function getCourse()
                     current_button.val("退筛选");
                 }
             }
+            if ($(".current-state").text() == "false")
+                $(".select").attr("disabled",true);
             $("#course-result").append("<div class='msg-area'></div>");
         }
     });
