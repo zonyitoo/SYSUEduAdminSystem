@@ -75,7 +75,7 @@ Install Apache HTTP Server
 sudo apt-get install apache2
 ```
 
-Then create a new file in `/etc/apache2/sites-enabled/` with contents below, replace `[PATH_TO_PROJECT]` with the abslute path of the project directory. For example: `/home/zonyitoo/workspace/EduAdminSystem`
+Then create a new file in `/etc/apache2/sites-enabled/` with contents as below (delete the default configure file if exists), replace `[PATH_TO_PROJECT]` with the abslute path of the project directory. For example: `/home/zonyitoo/workspace/EduAdminSystem`
 
 ```apache
 <VirtualHost *:80>
@@ -129,25 +129,9 @@ Then create a new file in `/etc/apache2/sites-enabled/` with contents below, rep
 
 Then activate the SSL module of Apache and restart Apache Daemon
 
-```bash
+```
 sudo a2enmod ssl
 sudo service apache2 restart
-```
-
-```bash
-## In one shell window
-sudo stunnel4 stunnel/https
-
-## Another shell window
-HTTPS=on python manage.py runserver
-```
-
-Try to assess the address `https://localhost` or `https://127.0.0.1` or `https://[YOUR IP ADDRESS]`
-
-Don't forget the `https` !! If you want to assess the website without ssl ecryption, be sure to comment this line in `EduAdminSystem/settings.py`, or you will get into the endless redirection loop.
-
-```python
-SESSION_COOKIE_SECURE = True
 ```
 
 ## Shortcuts
