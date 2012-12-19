@@ -108,6 +108,7 @@ class Course(models.Model):
             'department': self.department.getDataDict(),
             'screened': self.screened,
             'assessment_type': self.assessment_type,
+            'stage': self.stage,
             'class_oriented': self.class_oriented.getDataDict() if
                 self.class_oriented else None
         }
