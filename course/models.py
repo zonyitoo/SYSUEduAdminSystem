@@ -63,7 +63,6 @@ class Course(models.Model):
     department = models.ForeignKey(Department)
     class_oriented = models.ForeignKey(Class, null=True)
     screened = models.BooleanField(default=False)
-    stage = models.PositiveSmallIntegerField(default=1)
     
     ASSTYPE_PHIL = 1
     ASSTYPE_GYM = 2

@@ -169,6 +169,7 @@ INSTALLED_APPS = (
     'teacher', 
     'administrator',
     'assessment',
+    'globaldata',
 )
 
 # A sample logging configuration. The only tangible logging
