@@ -1,11 +1,13 @@
 # -*- coding:utf-8 -*-
 
 from django.http import HttpResponseForbidden, HttpResponseBadRequest
+from globaldata.models import GlobalData
 from take.models import Takes
 from course.models import Course
 from student.models import Student
 from ajaxutils.decorators import ajax
 from django.contrib.auth.models import Group, Permission
+
 
 # a simple version of course time collision detect
 def time_collision_detect(student, course):
@@ -40,7 +42,7 @@ def time_collision_detect(student, course):
     return 20
 
 def course_capacity_detect(course):
-    if course.capacity <= course.hastaken and course.stage == 3:
+    if course.capacity <= course.hastaken :
         # if it's full and it's in third stage, return err 43
         return 43
     return 20
@@ -58,7 +60,7 @@ def select_course(student, course):
         if num != 20:
             return {'valid': False,
                     'err': num}
-
+	
         take = Takes.objects.create(course=course, student=student)
         take.save()
         course.hastaken = Takes.objects.filter(course=course).count()
@@ -95,6 +97,7 @@ def toggle_course(request):
         course = Course.objects.get(id=int(request.POST['course_id']))
     except Course.DoesNotExist:
         return HttpResponseForbidden('该课程不存在')
+
 
     if request.POST['state'] == '1':
         return select_course(student, course)
