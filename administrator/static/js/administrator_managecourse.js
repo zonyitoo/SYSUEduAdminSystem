@@ -8,9 +8,20 @@ $(document).ready(function(){
 
 function toggleCourseScreen()
 {
+    var select_type;
+    if ($("#po").hasClass("active"))
+        select_type = 0;
+    else if ($("#pr").hasClass("active"))
+        select_type = 1;
+    else if ($("#mo").hasClass("active"))
+        select_type = 2;
+    else if ($("#mr").hasClass("active"))
+        select_type = 3;
+    else if ($("#pe").hasClass("active"))
+        select_type = 4;
     $.ajax({
         url: '/administrator/toggleCourseScreen/',
-        data: 'course_type=' + $("#course-type-4").val() + '&stage=' + $("#stage-4").val(),
+        data: 'course_type=' + select_type + '&stage=' + $("#stage-4").val(),
         type: 'post',
         async: false,
         error: function(jqXHR,textStatus,errorThrown)
