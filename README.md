@@ -72,7 +72,7 @@ sudo -u postgres dropdb easdb
 Install Apache HTTP Server and dependences
 
 ```bash
-sudo apt-get install apache2 libapache2-mod-wsgi libapache2-mod-python
+sudo apt-get install apache2 libapache2-mod-wsgi
 ```
 
 Then create a new file in `/etc/apache2/sites-enabled/` with contents as below (delete the default configure file if exists), replace `[PATH_TO_PROJECT]` with the abslute path of the project directory. For example: `/home/zonyitoo/workspace/EduAdminSystem`
@@ -89,41 +89,28 @@ Then create a new file in `/etc/apache2/sites-enabled/` with contents as below (
 
 <VirtualHost *:443>
     ServerName EduAdminSystem
-    DocumentRoot [PATH_TO_PROJECT] 
-    WSGIScriptAlias / [PATH_TO_PROJECT]/apache/wsgi.py
+    DocumentRoot /home/zonyitoo/workspace/EduAdminSystem/
+    WSGIScriptAlias / /home/zonyitoo/workspace/EduAdminSystem/apache/wsgi.py
 
-    Alias /static [PATH_TO_PROJECT]/gstatic
+    Alias /static /home/zonyitoo/workspace/EduAdminSystem/gstatic
     
-    #LoadModule ssl_module /usr/lib/apache2/modules/mod_ssl.so
-
     SSLEngine On
 
-    SSLCertificateFile [PATH_TO_PROJECT]/apache/eas.cert
-    SSLCertificateKeyFile [PATH_TO_PROJECT]/apache/eas.key
+    SSLCertificateFile /home/zonyitoo/workspace/EduAdminSystem/apache/eas.cert
+    SSLCertificateKeyFile /home/zonyitoo/workspace/EduAdminSystem/apache/eas.key
 
-    <Directory "[PATH_TO_PROJECT]/apache">
+    <Directory /home/zonyitoo/workspace/EduAdminSystem/apache>
         <Files wsgi.py>
             Order deny,allow
             Allow from all
         </Files>
     </Directory>
 
-    <Directory "[PATH_TO_PROJECT]/gstatic/">
+    <Directory /home/zonyitoo/workspace/EduAdminSystem/gstatic/>
         Order deny,allow
         Allow from all
     </Directory>
 
-    <Location "/">
-        SetHandler python-program
-        PythonHandler django.core.handlers.modpython
-        SetEnv DJANGO_SETTINGS_MODULE EduAdminSystem.settings
-        PythonPath "['[PATH_TO_PROJECT]'] + sys.path"
-        PythonDebug On
-    </Location>
-
-    <Location "/static/">
-        SetHandler None
-    </Location>
 </VirtualHost>
 ```
 
