@@ -34,6 +34,10 @@ data = [
 	'name': 'PRO_ELECTIVE',
         'stage': 1,
         },
+    {
+	'name': 'GYM_ELECTIVE',
+        'stage': 1,
+	},
 
 ]
 

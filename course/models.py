@@ -65,7 +65,6 @@ class Course(models.Model):
     department = models.ForeignKey(Department)
     class_oriented = models.ForeignKey(Class, null=True)
     screened = models.BooleanField(default=False)
-    stage = models.PositiveSmallIntegerField(default=1)
     hasscore = models.BooleanField(default=False)
     
     ASSTYPE_PHIL = 1
@@ -108,7 +107,6 @@ class Course(models.Model):
             'department': self.department.getDataDict(),
             'screened': self.screened,
             'assessment_type': self.assessment_type,
-            'stage': self.stage,
             'class_oriented': self.class_oriented.getDataDict() if
                 self.class_oriented else None
         }

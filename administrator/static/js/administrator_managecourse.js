@@ -21,7 +21,7 @@ function toggleCourseScreen()
         select_type = 4;
     $.ajax({
         url: '/administrator/toggleCourseScreen/',
-        data: 'course_type=' + select_type + '&stage=' + $("#stage-4").val(),
+        data: 'course_type=' + select_type,
         type: 'post',
         async: false,
         error: function(jqXHR,textStatus,errorThrown)

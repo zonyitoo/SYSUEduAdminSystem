@@ -16,10 +16,11 @@ import logging
 logger = logging.getLogger('EduAdminSystem')
 
 COURSE_TYPE = [
-    Course.PUB_ELECTIVE,
-    Course.PUB_COURSE,
-    Course.PRO_ELECTIVE,
-    Course.PRO_COURSE
+    'PUB_ELECTIVE',
+    'PUB_COURSE',
+    'PRO_ELECTIVE',
+    'PRO_COURSE',
+    'GYM_ELECTIVE',
 ]
 
 @ajax(login_required=True, require_GET=True)
@@ -206,32 +207,38 @@ def close_select_course(request):
 
 @ajax(login_required=True, require_POST=True)
 def toggle_course_screen(request):
-    stage = int(request.POST['stage'])
-    if stage == 1 or stage == 2 :
-        c_type = COURSE_TYPE[int(request.POST['course_type'])-1]
-
+    c_type = COURSE_TYPE[int(request.POST['course_type'])]
+    stage = GlobalData.objects.filter(name=c_type) 
+    if stage[0].stage == 1 or stage[0].stage == 2 :
         course = Course.objects.filter(course_type=c_type,stage=stage,screened=False)
     
-        print course
-       
         for c in course:
-            avail_num = c.capacity-c.hastaken
+            already_taken = Takes.objects.filter(course=c,screened=True)
+            already_taken_num = already_taken.count()
 
             take = Takes.objects.filter(course=c,screened=False)
             wait_for_screen = take.count()
-            actual_num = min(avail_num,wait_for_screen)
-            take = take.order_by('?')[:actual_num]
-            for t in take:
-                t.screened = True
-                t.save()
-            c.stage += 1
-            c.save()
-    elif stage  == 3:
-        c_type = COURSE_TYPE[int(request.POST['course_type'])-1]
+
+            avail_num = c.capacity - already_taken_num
+
+            if avail_num>0 :
+                take = take.order_by('?')[:actual_num]
+                for t in take:
+                    t.screened = True
+                    t.save()
+        
+        for s in stage:
+            s.stage += 1
+            s.save()
+
+    elif stage[0].stage  == 3:
+        c_type = COURSE_TYPE[int(request.POST['course_type'])]
         course = Course.objects.filter(course_type=c_type,stage=stage,screened=False)
         for c in course:
             c.screened = True
             c.save()
+
+    return {'valid': True}
 
 @ajax(login_required=True, require_POST=True)
 def open_upload_score(request):
