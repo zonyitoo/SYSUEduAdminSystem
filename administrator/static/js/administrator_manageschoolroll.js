@@ -52,14 +52,19 @@ function manageSchoolRoll(){
         },
         success: function(msg,textStatus,jqXHR)
         {
-            $("#student-result").empty();
-            $("#student-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th class='wide-block'>学号</th><th class='wide-block'>姓名</th><th class='very-wide-block'>学院</th><th class='very-wide-block'>学系</th><th class='very-wide-block'>专业</th></thead><tbody id='student-list'></tbody></table>");
             var students = msg.students;
-            for (var i = 0;i < students.length;i++)
+            $("#student-result").empty();
+            if (students.length == 0)
+                $("#student-result").append("学生名单未录入。");
+            else
             {
-                $("#student-list").append("<tr><td>" + students[i].user.username + "</td><td>" + students[i].student_name + "</td><td>" + students[i].student_meta.major.speciality.department.school.name + "</td><td>" + students[i].student_meta.major.speciality.department.name + "</td><td>" + students[i].student_meta.major.speciality.name + "</tr>");
+                $("#student-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th class='wide-block'>学号</th><th class='wide-block'>姓名</th><th class='very-wide-block'>学院</th><th class='very-wide-block'>学系</th><th class='very-wide-block'>专业</th></thead><tbody id='student-list'></tbody></table>");
+                for (var i = 0;i < students.length;i++)
+                {
+                    $("#student-list").append("<tr><td>" + students[i].user.username + "</td><td>" + students[i].student_name + "</td><td>" + students[i].student_meta.major.speciality.department.school.name + "</td><td>" + students[i].student_meta.major.speciality.department.name + "</td><td>" + students[i].student_meta.major.speciality.name + "</tr>");
+                }
+                $("#student-result").append("<div class='msg-area'></div>");
             }
-            $("#student-result").append("<div class='msg-area'></div>");
         }
     });
     $("[rel = 'popover']").popover();

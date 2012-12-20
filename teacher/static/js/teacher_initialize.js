@@ -23,6 +23,7 @@ $(document).ready(function() {
     $(".school-term option[value='" + term + "']").attr("selected","selected");
     $(".current-year").text(year + "-" + (year + 1));
     $(".current-term").text(term);
+    $("#view-course-btn").trigger("click");
     $.ajax({
         url: '/teacher/getScoreableList/',
         data: 'school-year=' + $(".current-year").text() + '&school-term=' + $(".current-term").text(),

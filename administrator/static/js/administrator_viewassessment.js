@@ -79,9 +79,24 @@ function viewAssessment(){
         },
         success: function(msg,textStatus,jqXHR)
         {
+            var assessments = msg.assessments;
             $("#assessment-result").empty();
-            alert(msg.assessments);
-            $("#assessment-result").append("<div class='msg-area'></div>");
+            if (assessments.length == 0)
+                $("#assessment-result").append("暂无学生评教。");
+            else
+            {
+                $("#assessment-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th>序号</th><th>课程名称</th><th>类别</th><th>任课教师</th><th>评教总分</th></tr></thead><tbody id='assessment-list'></tbody></table>");
+                var course_name,course_type,teacher,score;
+                for (var i = 0;i < assessments.length;i++)
+                {
+                    course_name = assessments[i].course.name;
+                    course_type = assessments[i].course.course_type;
+                    teacher = assessments[i].course.teacher;
+                    score = assessments[i].assessment_score;
+                    $("#assessment-list").append("<tr><td>" + (i + 1) + "</td><td>" + course_name + "</td><td>" + course_type + "</td><td>" + teacher.teacher_name + "</td><td>" + score + "</td></tr>");
+                }
+                $("#assessment-result").append("<div class='msg-area'></div>");
+            }
         }
     });
     $("[rel = 'popover']").popover();

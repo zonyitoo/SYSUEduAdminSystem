@@ -49,14 +49,19 @@ function manageTeacherPost(){
         },
         success: function(msg,textStatus,jqXHR)
         {
-            $("#teacher-result").empty();
-            $("#teacher-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th class='wide-block'>工号</th><th class='wide-block'>姓名</th><th class='wide-block'>职称</th><th class='very-wide-block'>学院</th><th class='very-wide-block'>学系</th></thead><tbody id='teacher-list'></tbody></table>");
             var teachers = msg.teachers;
-            for (var i = 0;i < teachers.length;i++)
+            $("#teacher-result").empty();
+            if (teachers.length == 0)
+                $("#teacher-result").append("教师名单未录入。");
+            else
             {
-                $("#teacher-list").append("<tr><td>" + teachers[i].user.username + "</td><td>" + teachers[i].teacher_name + "</td><td>" + teachers[i].title + "</td><td>" + teachers[i].department.school.name + "</td><td>" + teachers[i].department.name + "</tr>");
+                $("#teacher-result").append("<table class='table table-hover table-bordered table-condensed'><thead><tr><th class='wide-block'>工号</th><th class='wide-block'>姓名</th><th class='wide-block'>职称</th><th class='very-wide-block'>学院</th><th class='very-wide-block'>学系</th></thead><tbody id='teacher-list'></tbody></table>");
+                for (var i = 0;i < teachers.length;i++)
+                {
+                    $("#teacher-list").append("<tr><td>" + teachers[i].user.username + "</td><td>" + teachers[i].teacher_name + "</td><td>" + teachers[i].title + "</td><td>" + teachers[i].department.school.name + "</td><td>" + teachers[i].department.name + "</tr>");
+                }
+                $("#teacher-result").append("<div class='msg-area'></div>");
             }
-            $("#teacher-result").append("<div class='msg-area'></div>");
         }
     });
     $("[rel = 'popover']").popover();

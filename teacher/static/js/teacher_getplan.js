@@ -42,28 +42,33 @@ function getPlan() {
         success: function(msg,textStatus,jqXHR) {
             var courses = msg.courses;
             $("#available-result").empty();
-            $("#available-result").append("<br><table class='table table-bordered table-hover table-condensed'><thead><tr><th>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>开课学年</th><th>开课学期</th></tr></thead><tbody id='available-list'></tbody></table>");
-            var name, teacher, sem, term;
-            for (var i = 0; i < courses.length; ++i) {
-                name = courses[i].name;
-                teacher = courses[i].teacher.teacher_name;
-                if (teacher == null || teacher == "")
-                    teacher = "待定";
-                sem = courses[i].semester;
-                switch (sem) {
-                    case 1:
-                        term = "上学期";
-                        break;
-                    case 2:
-                        term = "下学期";
-                        break;
-                    case 3:
-                        term = "小学期";
-                        break;
+            if (courses.length == 0)
+                $("#available-result").append("暂无课程可开设。");
+            else
+            {
+                $("#available-result").append("<br><table class='table table-bordered table-hover table-condensed'><thead><tr><th>课程名称</th><th>类别</th><th>学分</th><th>任课教师</th><th>开课学年</th><th>开课学期</th></tr></thead><tbody id='available-list'></tbody></table>");
+                var name, teacher, sem, term;
+                for (var i = 0; i < courses.length; ++i) {
+                    name = courses[i].name;
+                    teacher = courses[i].teacher.teacher_name;
+                    if (teacher == null || teacher == "")
+                        teacher = "待定";
+                    sem = courses[i].semester;
+                    switch (sem) {
+                        case 1:
+                            term = "上学期";
+                            break;
+                        case 2:
+                            term = "下学期";
+                            break;
+                        case 3:
+                            term = "小学期";
+                            break;
+                    }
+                    $("#available-list").append("<tr><td>" + name + "</td><td>" + courses[i].course_type + "</td><td>" + courses[i].credit + "</td><td>" + teacher + "</td><td>" + courses[i].academic_year + "</td><td>"+ term + "</td></tr>");
                 }
-                $("#available-list").append("<tr><td>" + name + "</td><td>" + courses[i].course_type + "</td><td>" + courses[i].credit + "</td><td>" + teacher + "</td><td>" + courses[i].academic_year + "</td><td>"+ term + "</td></tr>");
+                $("#available-result").append("<div class='msg-area'></div>");
             }
-            $("#available-result").append("<div class='msg-area'></div>");
         }
     });
     $("[rel = 'popover']").popover();
