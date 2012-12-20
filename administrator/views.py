@@ -23,6 +23,14 @@ COURSE_TYPE = [
     'GYM_ELECTIVE',
 ]
 
+C_TYPE = [
+    Course.PUB_ELECTIVE,
+    Course.PUB_COURSE,
+    Course.PRO_ELECTIVE,
+    Course.PRO_COURSE,
+    Course.GYM_ELECTIVE,
+]
+
 @ajax(login_required=True, require_GET=True)
 def get_student_sheet(request, filename):
     t = time.localtime(time.time())
@@ -208,10 +216,10 @@ def close_select_course(request):
 @ajax(login_required=True, require_POST=True)
 def toggle_course_screen(request):
     c_type = COURSE_TYPE[int(request.POST['course_type'])]
+    cc_type = C_TYPE[int(request.POST['course_type'])]
     stage = GlobalData.objects.filter(name=c_type) 
     if stage[0].stage == 1 or stage[0].stage == 2 :
-        course = Course.objects.filter(course_type=c_type,stage=stage,screened=False)
-    
+        course = Course.objects.filter(course_type=cc_type,screened=False)
         for c in course:
             already_taken = Takes.objects.filter(course=c,screened=True)
             already_taken_num = already_taken.count()
@@ -220,9 +228,8 @@ def toggle_course_screen(request):
             wait_for_screen = take.count()
 
             avail_num = c.capacity - already_taken_num
-
             if avail_num>0 :
-                take = take.order_by('?')[:actual_num]
+                take = take.order_by('?')[:avail_num]
                 for t in take:
                     t.screened = True
                     t.save()
@@ -233,7 +240,8 @@ def toggle_course_screen(request):
 
     elif stage[0].stage  == 3:
         c_type = COURSE_TYPE[int(request.POST['course_type'])]
-        course = Course.objects.filter(course_type=c_type,stage=stage,screened=False)
+        cc_type = C_TYPE[int(request.POST['course_type'])]
+        course = Course.objects.filter(course_type=cc_type,stage=stage,screened=False)
         for c in course:
             c.screened = True
             c.save()
