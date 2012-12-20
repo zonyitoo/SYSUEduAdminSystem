@@ -89,24 +89,24 @@ Then create a new file in `/etc/apache2/sites-enabled/` with contents as below (
 
 <VirtualHost *:443>
     ServerName EduAdminSystem
-    DocumentRoot /home/zonyitoo/workspace/EduAdminSystem/
-    WSGIScriptAlias / /home/zonyitoo/workspace/EduAdminSystem/apache/wsgi.py
+    DocumentRoot [PATH_TO_PROJECT]/
+    WSGIScriptAlias / [PATH_TO_PROJECT]/apache/wsgi.py
 
-    Alias /static /home/zonyitoo/workspace/EduAdminSystem/gstatic
+    Alias /static [PATH_TO_PROJECT]/gstatic
     
     SSLEngine On
 
-    SSLCertificateFile /home/zonyitoo/workspace/EduAdminSystem/apache/eas.cert
-    SSLCertificateKeyFile /home/zonyitoo/workspace/EduAdminSystem/apache/eas.key
+    SSLCertificateFile [PATH_TO_PROJECT]/apache/eas.cert
+    SSLCertificateKeyFile [PATH_TO_PROJECT]/apache/eas.key
 
-    <Directory /home/zonyitoo/workspace/EduAdminSystem/apache>
+    <Directory [PATH_TO_PROJECT]/apache>
         <Files wsgi.py>
             Order deny,allow
             Allow from all
         </Files>
     </Directory>
 
-    <Directory /home/zonyitoo/workspace/EduAdminSystem/gstatic/>
+    <Directory [PATH_TO_PROJECT]/gstatic/>
         Order deny,allow
         Allow from all
     </Directory>
