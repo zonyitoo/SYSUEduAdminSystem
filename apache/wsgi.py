@@ -17,17 +17,16 @@ import os, sys
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "EduAdminSystem.settings")
 
-#os.environ['HTTPS'] = 'on'
-
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
 #from django.core.wsgi import get_wsgi_application
 #application = get_wsgi_application()
 
-app_path = '/home/zonyitoo/workspace/EduAdminSystem/' 
-if app_path not in sys.path:
-    sys.path.append(app_path)
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),
+"../../")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),
+"../")))
 
 from django.core.handlers.wsgi import WSGIHandler
 application = WSGIHandler()

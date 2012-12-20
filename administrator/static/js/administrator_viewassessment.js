@@ -48,7 +48,7 @@ $(document).ready(function(){
 
 function viewAssessment(){
     $.ajax({
-        url: '/assessment/getCourseAssessments/',
+        url: '/assessment/getAssessments/',
         data: 'department=' + $("#department-3").val() + '&year=' + $("#school-year-3").val() + '&semester=' + $("#school-term-3").val(),
         type: 'get',
         async: false,
