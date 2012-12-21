@@ -218,6 +218,7 @@ def toggle_course_screen(request):
     c_type = COURSE_TYPE[int(request.POST['course_type'])]
     cc_type = C_TYPE[int(request.POST['course_type'])]
     stage = GlobalData.objects.filter(name=c_type) 
+    return_val = stage[0].stage
     if stage[0].stage == 1 or stage[0].stage == 2 :
         course = Course.objects.filter(course_type=cc_type,screened=False)
         for c in course:
@@ -255,7 +256,7 @@ def toggle_course_screen(request):
             c.screened = True
             c.save()
 
-    return {'valid': True}
+    return {'valid': True,'stage':return_val}
 
 @ajax(login_required=True, require_POST=True)
 def open_upload_score(request):
