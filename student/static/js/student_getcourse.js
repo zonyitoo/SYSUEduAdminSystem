@@ -1,8 +1,17 @@
 //JavaScript Document
 
 $(document).ready(function(){
+    $("#course-result").text(""); 
     $("#view-course-btn").click(function(){
         getCourse();
+    });
+    $(".course-type").click(function(){
+        if ($("#course-result").text() != "")
+        {
+            $(".course-type").removeClass("active");
+            $(this).addClass("active");
+            getCourse();
+        }
     });
 });
 
