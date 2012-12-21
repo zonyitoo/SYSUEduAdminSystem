@@ -10,7 +10,7 @@ class GlobalData(models.Model):
 
     def getDataDict(self):
         return {
-                'id': self.id,
-                'name': self.name,
-                'stage': self.stage,
-                }
+            'id': self.id,
+            'name': self.name,
+            'stage': self.stage,
+        }
