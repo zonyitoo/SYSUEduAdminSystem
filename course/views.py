@@ -86,14 +86,29 @@ def get_available_list(request):
     elif cultivate == 1:
         ## Minor
         courseArr = []
+        if request.GET['course_type'] == '0':
+            courses = Course.objects.filter(academic_year=year,
+                    semester=sem,
+                    course_type=course_type).order_by('teacher__teacher_name')
+            for course in courses:
+                courseObj = course.getDataDict()
+
+                try:
+                    t = Takes.objects.get(course=course, student=student)
+                    #if course.screened:
+                    if t.screened:
+                        courseObj['take'] = 1
+                        #else: courseObj['take'] = 2
+                    else:
+                        courseObj['take'] = 3
+                except:
+                    courseObj['take'] = 0 # The Student has not take this course
+                
+                courseArr.append(courseObj)
+
         for mr in student.student_minor.all(): 
             stud_class = mr.minor
-            print "HERE"
-            if request.GET['course_type'] == '0':
-                courses = Course.objects.filter(academic_year=year,
-                        semester=sem,
-                        course_type=course_type).order_by('teacher__teacher_name')
-            elif request.GET['course_type'] == '1':
+            if request.GET['course_type'] == '1':
                 courses = Course.objects.filter(academic_year=year,
                         semester=sem, course_type=course_type,
                         department=stud_class.speciality.department).order_by('teacher__teacher_name')
