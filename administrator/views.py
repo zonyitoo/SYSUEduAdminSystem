@@ -207,7 +207,8 @@ def close_select_course(request):
     usergrp = Group.objects.get(name='student')
 
     try:
-        usergrp.permissions.get(codename='add_takes').delete()
+        perm = usergrp.permissions.get(codename='add_takes')
+        usergrp.permissions.remove(perm)
     except Permission.DoesNotExist:
         pass
 
@@ -280,7 +281,8 @@ def close_upload_score(request):
     usergrp = Group.objects.get(name='teacher')
 
     try:
-        usergrp.permissions.get(codename='change_takes').delete()
+        perm = usergrp.permissions.get(codename='change_takes')
+        usergrp.permissions.remove(perm)
     except Permission.DoesNotExist:
         pass
 
