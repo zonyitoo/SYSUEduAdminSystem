@@ -169,7 +169,8 @@
           <div class="form-horizontal">
             <div class="control-group">
               <div class="controls">
-                  <button class="btn btn-primary" id="start-select-btn">开放选课</button>
+                  <button class="btn btn-success" id="start-select-btn">开放选课</button>
+                  <button class="btn btn-danger" id="close-select-btn">关闭选课</button>
               </div>
             </div>
             <div class="control-group">
@@ -187,11 +188,11 @@
             <div class="control-group">
               <label class="control-label" for="stage-4">筛选阶段</label>
               <div class="controls">
-                <select class="span2" name="stage-4" id="stage-4">
-                  <option value="1">第一次筛选</option>
-                  <option value="2">第二次筛选</option>
-                  <option value="3">抢选</option>
-                </select>
+                <div class="btn-group active" data-toggle="buttons-radio" id="stage-4">
+                  <button id="first-select" class="active btn btn-primary">初选</button>
+                  <button id="second-select" class="btn btn-primary">复选</button>
+                  <button id="instant-select" class="btn btn-primary">抢选</button>
+                </div>
               </div>
             </div>
             <div class="control-group">
