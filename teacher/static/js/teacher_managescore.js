@@ -101,14 +101,24 @@ function uploadFile()
     $("#progressbar").text("");
     var data = new FormData();
     data.append("file",document.getElementById("file").files[0]);
-    var xhr = new XMLHttpRequest();
-    xhr.upload.addEventListener("progress",uploadProgress,false);
-    xhr.addEventListener("load",uploadComplete,false);
-    xhr.addEventListener("error",uploadFailed,false);
-    xhr.addEventListener("abort",uploadCanceled,false);
-    xhr.open("POST","/teacher/uploadScoreSheet/");
-    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-    xhr.send(data);
+    var filename = ($("#file").val()).split(".");
+    if (filename[filename.length - 1] == "xls")
+    {
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress",uploadProgress,false);
+        xhr.addEventListener("load",uploadComplete,false);
+        xhr.addEventListener("error",uploadFailed,false);
+        xhr.addEventListener("abort",uploadCanceled,false);
+        xhr.open("POST","/teacher/uploadScoreSheet/");
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        xhr.send(data);
+    }
+    else
+    {
+        $("#score-msg").removeClass("hide");
+        $("#score-msg").empty();
+        $("#score-msg").append("文件格式必须为*.xls");
+    }
     return false;
 }
 
