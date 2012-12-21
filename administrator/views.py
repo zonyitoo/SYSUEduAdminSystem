@@ -227,12 +227,21 @@ def toggle_course_screen(request):
             take = Takes.objects.filter(course=c,screened=False)
             wait_for_screen = take.count()
 
-            avail_num = c.capacity - already_taken_num
-            if avail_num>0 :
-                take = take.order_by('?')[:avail_num]
+            avail_num_max = c.capacity - already_taken_num
+            screen_num = min(avail_num_max,wait_for_screen)
+            if screen_num>0 :
+                take = take.order_by('?')[:screen_num]
                 for t in take:
                     t.screened = True
                     t.save()
+            
+            not_take = Takes.objects.filter(course=c,screened=False)
+            for n in not_take:
+                n.delete()
+
+
+            c.hastaken = already_taken_num + screen_num
+            c.save()
         
         for s in stage:
             s.stage += 1

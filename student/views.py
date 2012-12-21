@@ -7,7 +7,13 @@ from course.models import Course
 from student.models import Student
 from ajaxutils.decorators import ajax
 from django.contrib.auth.models import Group, Permission
-
+C_TYPE = {
+        'PubE':'PUB_ELECTIVE',
+        'PubC':'PUB_COURSE',
+        'ProE':'PRO_ELECTIVE',
+        'ProC':'PRO_COURSE',
+        'GymE':'GYM_ELECTIVE'
+}
 
 # a simple version of course time collision detect
 def time_collision_detect(student, course):
@@ -41,14 +47,17 @@ def time_collision_detect(student, course):
         return 44
     return 20
 
-def course_capacity_detect(course):
-    if course.capacity <= course.hastaken :
+def course_capacity_detect(course,stage):
+    if course.capacity <= course.hastaken and stage == 3 :
         # if it's full and it's in third stage, return err 43
         return 43
     return 20
 
 def select_course(student, course):
     try:
+        c_type = C_TYPE[course.course_type]
+        st = GlobalData.objects.filter(name=c_type)
+        stage = st[0].stage
         # test time collision
         num = time_collision_detect(student, course)
         if num != 20:
@@ -56,7 +65,7 @@ def select_course(student, course):
                     'err': num}
 
         # test capacity full or not, it should only work after random selection
-        num = course_capacity_detect(course)
+        num = course_capacity_detect(course,stage)
         if num != 20:
             return {'valid': False,
                     'err': num}
