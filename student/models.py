@@ -17,6 +17,40 @@ class StudentMinor(models.Model):
 
     def __unicode__(self):
         return self.minor.name
+    
+    def getDataDict(self):
+        dc = {
+            'minor': self.minor.getDataDict(),
+            'pubcourse_credit': self.pubcourse_credit,
+            'pubelective_credit': self.pubelective_credit,
+            'procourse_credit': self.procourse_credit,
+            'proelective_credit': self.proelective_credit,
+        }
+        try:
+            dc['gpa'] =  str(calGPA((self.pubcourse_weightsum + self.pubelective_weightsum \
+                        + self.procourse_weightsum + self.proelective_weightsum) \
+                        / (self.pubcourse_credit + self.pubelective_credit \
+                        + self.procourse_credit + self.proelective_credit))),
+        except:
+            dc['gpa'] = '0.0'
+        try:
+            dc['pubcourse_gpa'] = str(calGPA(self.pubcourse_weightsum / self.pubcourse_credit))
+        except:
+            dc['pubcourse_gpa'] = '0.0'
+        try:
+            dc['pubelective_gpa'] = str(calGPA(self.pubelective_weightsum / self.pubelective_credit))
+        except:
+            dc['pubelective_gpa'] = '0.0'
+        try:
+            dc['procourse_gpa'] = str(calGPA(self.procourse_weightsum / self.procourse_credit))
+        except:
+            dc['procourse_gpa'] = '0.0'
+        try:
+            dc['proelective_gpa'] = str(calGPA(self.proelective_weightsum / self.proelective_credit))
+        except:
+            dc['proelective_gpa'] = '0.0'
+
+        return dc
 
 class StudentMeta(models.Model):
     UNGRADUATED = 'UG'
