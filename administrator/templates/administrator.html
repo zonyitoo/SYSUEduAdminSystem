@@ -179,27 +179,20 @@
               <label class="control-label" for="course-type-4">筛选类别</label>
               <div class="controls">
                 <div class="btn-group active" data-toggle="buttons-radio" id="course-type-4">
-                  <button id="po" class="active btn btn-primary">公选</button>
-                  <button id="pr" class="btn btn-primary">公必</button>
-                  <button id="mo" class="btn btn-primary">专选</button>
-                  <button id="mr" class="btn btn-primary">专必</button>
-                  <button id="pe" class="btn btn-primary">体育课</button>
+                  <button id="po" class="course-type active btn btn-primary">公选</button>
+                  <button id="pr" class="course-type btn btn-primary">公必</button>
+                  <button id="mo" class="course-type btn btn-primary">专选</button>
+                  <button id="mr" class="course-type btn btn-primary">专必</button>
+                  <button id="pe" class="course-type btn btn-primary">体育课</button>
                 </div>
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="stage-4">筛选阶段</label>
+              <label class="control-label" for="stage-4">筛选步骤</label>
               <div class="controls">
-                <div class="btn-group active" data-toggle="buttons-radio" id="stage-4">
-                  <button id="first-select" class="active btn btn-primary">初选</button>
-                  <button id="second-select" class="btn btn-primary">复选</button>
-                  <button id="instant-select" class="btn btn-primary">抢选</button>
-                </div>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="controls">
-                  <button class="btn btn-primary" id="start-screen-btn">开始筛选</button>
+                  <button value="1" id="first-select" class="screen active btn btn-inverse">结束初选</button>
+                  <button value="2" id="second-select" class="screen btn btn-inverse">结束复选</button>
+                  <button value="3" id="instant-select" class="screen btn btn-inverse">结束抢选</button>
               </div>
             </div>
             <div class="hide alert alert-success" id="course-msg"></div>

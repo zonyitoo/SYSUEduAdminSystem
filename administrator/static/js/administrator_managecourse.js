@@ -2,14 +2,21 @@
 
 $(document).ready(function(){
     getCourseState();
+    getScreenState();
     $("#start-select-btn").click(function(){
         sendStartRequest();
     });
     $("#close-select-btn").click(function(){
         sendCloseRequest();
     });
-    $("#start-screen-btn").click(function(){
+    $(".screen").click(function(){
         toggleCourseScreen();
+        getScreenState();
+    });
+    $(".course-type").click(function(){
+        $(".course-type").removeClass("active");
+        $(this).addClass("active");
+        getScreenState();
     });
 });
 
@@ -132,6 +139,61 @@ function getCourseState()
                 $("#start-select-btn").addClass("hide");
                 $("#close-select-btn").removeClass("hide");
             }
+        }
+    });
+}
+
+function getScreenState()
+{
+    var select_type;
+    if ($("#po").hasClass("active"))
+        select_type = 0;
+    else if ($("#pr").hasClass("active"))
+        select_type = 1;
+    else if ($("#mo").hasClass("active"))
+        select_type = 2;
+    else if ($("#mr").hasClass("active"))
+        select_type = 3;
+    else if ($("#pe").hasClass("active"))
+        select_type = 4;
+    $.ajax({
+        url: '/administrator/getScreenState/',
+        data: 'course_type=' + select_type,
+        type: 'get',
+        async: 'false',
+        error: function(jqXHR,textStatus,errorThrown)
+        {
+            switch(jqXHR.status)
+            {
+                case 400:
+                    alert("网络状态异常，请刷新后重试");
+                    break;
+                case 401:
+                    alert("当前用户已过期，请重新登录");
+                    window.location = '/user/login/';
+                    break;
+                case 403:
+                    alert("页面无法访问，请刷新后重试");
+                    break;
+                case 404:
+                    alert("页面不存在，请刷新后重试");
+                    break;
+                case 500:
+                    alert("服务器傲娇");
+                    break;
+                default:
+                    alert(jqXHR.status + "\n" + textStatus + "\n" + errorThrown);
+                    break;
+            }
+        },
+        success: function(msg,textStatus,jqXHR)
+        {
+            var stage = msg.stage;
+            $(".screen").each(function(){
+                if ($(this).val() != stage)
+                    $(this).addClass("hide");
+                else $(this).removeClass("hide");
+            });
         }
     });
 }
