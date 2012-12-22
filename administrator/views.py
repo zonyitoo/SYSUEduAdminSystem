@@ -237,9 +237,9 @@ def get_course_screen_state(request):
 def toggle_course_screen(request):
     c_type = COURSE_TYPE[int(request.POST['course_type'])]
     cc_type = C_TYPE[int(request.POST['course_type'])]
-    stage = GlobalData.objects.filter(name=c_type) 
-    return_val = stage[0].stage
-    if stage[0].stage == 1 or stage[0].stage == 2 :
+    s = GlobalData.objects.get(name=c_type) 
+    return_val = s.stage
+    if s.stage == 1 or s.stage == 2 :
         course = Course.objects.filter(course_type=cc_type,screened=False)
         for c in course:
             already_taken = Takes.objects.filter(course=c,screened=True)
@@ -263,12 +263,11 @@ def toggle_course_screen(request):
 
             c.hastaken = already_taken_num + screen_num
             c.save()
-        
-        for s in stage:
-            s.stage += 1
-            s.save()
 
-    elif stage[0].stage  == 3:
+        s.stagie+=1
+        s.save()
+
+    elif s.stage  == 3:
         c_type = COURSE_TYPE[int(request.POST['course_type'])]
         cc_type = C_TYPE[int(request.POST['course_type'])]
         course = Course.objects.filter(course_type=cc_type,stage=stage,screened=False)
