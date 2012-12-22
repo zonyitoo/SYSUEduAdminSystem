@@ -3,14 +3,14 @@
 $(document).ready(function(){
     getScoreState();
     $("#start-score-btn").click(function(){
-        sendStartRequest();
+        sendStartScoreRequest();
     });
     $("#close-score-btn").click(function(){
-        sendCloseRequest();
+        sendCloseScoreRequest();
     });
 });
 
-function sendStartRequest()
+function sendStartScoreRequest()
 {
     $.ajax({
         url: '/administrator/openUploadScore/',
@@ -48,7 +48,7 @@ function sendStartRequest()
     });
 }
 
-function sendCloseRequest()
+function sendCloseScoreRequest()
 {
     $.ajax({
         url: '/administrator/closeUploadScore/',

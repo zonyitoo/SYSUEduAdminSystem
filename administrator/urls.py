@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 
     ## Course screen
     url('toggleCourseScreen/$', 'administrator.views.toggle_course_screen'),
+    url('getScreenState/$', 'administrator.views.get_course_screen_state'),
 
     ## Upload score
     url('openUploadScore/$', 'administrator.views.open_upload_score'),

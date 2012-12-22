@@ -155,6 +155,7 @@ function toggleCourseScreen()
         select_stage = 2;
     else if ($("#instant-select").hasClass("active"))
         select_stage = 3;
+    var stage_map = new Array("","初选","复选","抢选");
     $.ajax({
         url: '/administrator/toggleCourseScreen/',
         data: 'course_type=' + select_type,
@@ -187,7 +188,9 @@ function toggleCourseScreen()
         },
         success: function(msg,textStatus,jqXHR)
         {
-            alert("OK");
+            $("#course-msg").empty();
+            $("#course-msg").append(stage_map[select_stage] + "完成");
+            $("#course-msg").removeClass("hide");
         }
     });
 }
