@@ -264,7 +264,7 @@ def toggle_course_screen(request):
             c.hastaken = already_taken_num + screen_num
             c.save()
 
-        s.stagie+=1
+        s.stage+=1
         s.save()
 
     elif s.stage  == 3:

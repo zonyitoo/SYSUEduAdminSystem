@@ -253,6 +253,7 @@ function toggleCourseScreen()
             $("#course-msg").empty();
             $("#course-msg").append(stage_map[select_stage] + "完成");
             $("#course-msg").removeClass("hide");
+            sendCloseRequest();
         }
     });
 }
