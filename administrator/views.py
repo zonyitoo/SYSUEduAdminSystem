@@ -214,6 +214,25 @@ def close_select_course(request):
 
     return {'success': True, 'state': False}
 
+@ajax(login_required=True, require_GET=True)
+def get_course_screen_state(request):
+    try:
+        course_type = int(request.GET['course_type'])
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
+
+    try:
+        stage = GlobalData.objects.get(name=COURSE_TYPE[int(course_type)])
+    except:
+        return HttpResponseBadRequest('Invalid Course Type')
+
+    return {
+        'course_type': int(course_type),
+        'type_name':
+            Course.COURSE_TYPE_TO_UNICODE[C_TYPE[int(course_type)]],
+        'stage': stage.stage,
+    }
+
 @ajax(login_required=True, require_POST=True)
 def toggle_course_screen(request):
     c_type = COURSE_TYPE[int(request.POST['course_type'])]
