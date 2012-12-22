@@ -10,8 +10,21 @@ $(document).ready(function(){
         sendCloseRequest();
     });
     $(".screen").click(function(){
-        toggleCourseScreen();
-        getScreenState();
+        var c_msg = $("#course-msg");
+        if ($(".current-state").text() != "true")
+        {
+            c_msg.empty();
+            c_msg.append("结束当前筛选阶段前必须先开放选课！");
+            c_msg.removeClass("alert-success");
+            c_msg.addClass("alert-danger");
+            c_msg.show();
+        }
+        else
+        {
+            c_msg.hide();
+            toggleCourseScreen();
+            getScreenState();
+        }
     });
     $(".course-type").click(function(){
         $(".course-type").removeClass("active");
@@ -129,6 +142,7 @@ function getCourseState()
         },
         success: function(msg,textStatus,jqXHR)
         {
+            $(".current-state").text(msg.state);
             if (msg.state == false)
             {
                 $("#start-select-btn").removeClass("hide");
@@ -250,9 +264,12 @@ function toggleCourseScreen()
         },
         success: function(msg,textStatus,jqXHR)
         {
-            $("#course-msg").empty();
-            $("#course-msg").append(stage_map[select_stage] + "完成");
-            $("#course-msg").removeClass("hide");
+            var c_msg = $("#course-msg");
+            c_msg.empty();
+            c_msg.append(stage_map[select_stage] + "完成");
+            c_msg.removeClass("alert-danger");
+            c_msg.addClass("alert-success");
+            c_msg.show();
             sendCloseRequest();
         }
     });
