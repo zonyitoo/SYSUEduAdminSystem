@@ -56,8 +56,8 @@ def course_capacity_detect(course,stage):
 def select_course(student, course):
     try:
         c_type = C_TYPE[course.course_type]
-        st = GlobalData.objects.filter(name=c_type)
-        stage = st[0].stage
+        st = GlobalData.objects.get(name=c_type)
+        stage = st.stage
         # test time collision
         num = time_collision_detect(student, course)
         if num != 20:
@@ -71,6 +71,10 @@ def select_course(student, course):
                     'err': num}
 	
         take = Takes.objects.create(course=course, student=student)
+
+        if stage == 3:
+            take.screened = True
+
         take.save()
         course.hastaken = Takes.objects.filter(course=course).count()
         course.save()

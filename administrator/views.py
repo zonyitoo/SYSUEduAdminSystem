@@ -268,12 +268,8 @@ def toggle_course_screen(request):
         s.save()
 
     elif s.stage  == 3:
-        c_type = COURSE_TYPE[int(request.POST['course_type'])]
-        cc_type = C_TYPE[int(request.POST['course_type'])]
-        course = Course.objects.filter(course_type=cc_type,stage=stage,screened=False)
-        for c in course:
-            c.screened = True
-            c.save()
+        s.stage = 1
+        s.save()
 
     return {'valid': True,'stage':return_val}
 
