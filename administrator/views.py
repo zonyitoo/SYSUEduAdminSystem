@@ -254,6 +254,8 @@ def toggle_GYMcourse_screen(course):
         not_take = Takes.objects.filter(course=c,screened=False)
         for n in not_take:
             n.delete()
+        c.hastaken = already_taken_num + screen_num
+        c.save()
 
     for c in course:
         already_taken = Takes.objects.filter(course=c, screened=True)
@@ -275,6 +277,8 @@ def toggle_GYMcourse_screen(course):
         not_take = Takes.objects.filter(course=c,screened=False)
         for n in not_take:
             n.delete()
+        c.hastaken = already_taken_num + screen_num
+        c.save()
 
     for c in course:
         already_taken = Takes.objects.filter(course=c, screened=True)
@@ -296,6 +300,8 @@ def toggle_GYMcourse_screen(course):
         not_take = Takes.objects.filter(course=c,screened=False)
         for n in not_take:
             n.delete()
+        c.hastaken = already_taken_num + screen_num
+        c.save()
 
     for c in course:
         already_taken = Takes.objects.filter(course=c, screened=True)
@@ -313,6 +319,8 @@ def toggle_GYMcourse_screen(course):
         not_take = Takes.objects.filter(course=c,screened=False)
         for n in not_take:
             n.delete()
+        c.hastaken = already_taken_num + screen_num
+        c.save()
 
 @ajax(login_required=True, require_POST=True)
 def toggle_course_screen(request):
