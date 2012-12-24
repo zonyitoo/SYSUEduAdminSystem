@@ -217,7 +217,13 @@ function sendRequest(n,course_id,state)
                         msg_area.append("<div class='alert alert-error'><strong>［" + name + "］的课程人数已满！</strong></div>");
                         break;
                     case 44:
-                        msg_area.append("<div class='alert alert-error'><strong>学生每学期最多只能选修最多两门公共选修课！</strong></div>");
+                        msg_area.append("<div class='alert alert-error'><strong>学生每学期只能选修最多两门公共选修课！</strong></div>");
+                        break;
+                    case 45:
+                        msg_area.append("<div class='alert alert-error'><strong>学生每学期只能选修最多一门体育课！</strong></div>");
+                        break;
+                    case 46:
+                        msg_area.append("<div class='alert alert-error'><strong>预选阶段最多只能选择4门体育课！</strong></div>");
                         break;
                     default:
                         msg_area.append("<div class='alert alert-error'><strong>对［" + name + "］操作失败！</strong></div>");

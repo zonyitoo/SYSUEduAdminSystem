@@ -16,11 +16,12 @@ C_TYPE = {
 }
 
 # a simple version of course time collision detect
-def time_collision_detect(student, course):
+def time_collision_detect(student, course, stage):
 
     # the filter can be optimized by adding academic_year?
     takes = Takes.objects.filter(student=student)
     PubECount = 0
+    GYMECount = 0
     for t in takes:
         # have chosen this course before, return err 41
         if t.course.name == course.name:
@@ -29,6 +30,10 @@ def time_collision_detect(student, course):
         elif t.course.academic_year == course.academic_year and t.course.semester == course.semester:
             if t.course.course_type == 'PubE':
                 PubECount = PubECount + 1
+            if t.course.course_type == 'GymE':
+                GYMECount = GYMECount + 1
+                # GYM course won't meet time collision
+                continue
             cta = t.course.course_time.all()
             ctb = course.course_time.all()
             #course time collision check, if found, return err 42
@@ -45,6 +50,12 @@ def time_collision_detect(student, course):
         # the student should not choose more than 2 PublicElective Course in
         # one term, return error 44
         return 44
+    if course.course_type == 'GymE':
+        if stage == 3 and GYMECount == 1:
+            # student should not choose more than 1 GymE_Course in one term
+            return 45
+        if stage < 3 and GYMECount == 4:
+            return 46
     return 20
 
 def course_capacity_detect(course,stage):
@@ -59,7 +70,7 @@ def select_course(student, course):
         st = GlobalData.objects.get(name=c_type)
         stage = st.stage
         # test time collision
-        num = time_collision_detect(student, course)
+        num = time_collision_detect(student, course, stage)
         if num != 20:
             return {'valid': False,
                     'err': num}

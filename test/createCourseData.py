@@ -286,7 +286,127 @@ courses = [
                 'exam_method': '考察',
                 'course_type': Course.PUB_COURSE,
                 'department': Department.objects.get(name='TEST'),
-                'assessment_type': Course.ASSTYPE_THEORY,
+                'assessment_type': Course.ASSTYPE_PHIL,
+                }
+            },
+	{
+            'time': [
+                {
+                    'week': 4,
+                    'time': 'DE',
+                    'location': '篮球场'
+                    }
+                ],
+            'course': {
+                'name': '体育-篮球',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 16,
+                'teacher': Teacher.objects.get(teacher_name='2000001'),
+                'credit': 2,
+                'capacity': 35,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type': Course.GYM_ELECTIVE,
+                'department': Department.objects.get(name='TEST'),
+                'assessment_type': Course.ASSTYPE_GYM,
+                }
+            },
+	{
+            'time': [
+                {
+                    'week': 4,
+                    'time': 'DE',
+                    'location': '游泳馆'
+                    }
+                ],
+            'course': {
+                'name': '体育-游泳',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 16,
+                'teacher': Teacher.objects.get(teacher_name='2000002'),
+                'credit': 2,
+                'capacity': 35,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type': Course.GYM_ELECTIVE,
+                'department': Department.objects.get(name='TEST'),
+                'assessment_type': Course.ASSTYPE_GYM,
+                }
+            },
+	{
+            'time': [
+                {
+                    'week': 4,
+                    'time': 'DE',
+                    'location': '网球场'
+                    }
+                ],
+            'course': {
+                'name': '体育-网球',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 16,
+                'teacher': Teacher.objects.get(teacher_name='2000003'),
+                'credit': 2,
+                'capacity': 35,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type': Course.GYM_ELECTIVE,
+                'department': Department.objects.get(name='TEST'),
+                'assessment_type': Course.ASSTYPE_GYM,
+                }
+            },
+	{
+            'time': [
+                {
+                    'week': 4,
+                    'time': 'DE',
+                    'location': '足球场'
+                    }
+                ],
+            'course': {
+                'name': '体育-足球',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 16,
+                'teacher': Teacher.objects.get(teacher_name='2000004'),
+                'credit': 2,
+                'capacity': 35,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type': Course.GYM_ELECTIVE,
+                'department': Department.objects.get(name='TEST'),
+                'assessment_type': Course.ASSTYPE_GYM,
+                }
+            },
+	{
+            'time': [
+                {
+                    'week': 4,
+                    'time': 'DE',
+                    'location': '羽毛球场'
+                    }
+                ],
+            'course': {
+                'name': '体育-羽毛球',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 16,
+                'teacher': Teacher.objects.get(teacher_name='2000005'),
+                'credit': 2,
+                'capacity': 35,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type': Course.GYM_ELECTIVE,
+                'department': Department.objects.get(name='TEST'),
+                'assessment_type': Course.ASSTYPE_GYM,
                 }
             },
     ]

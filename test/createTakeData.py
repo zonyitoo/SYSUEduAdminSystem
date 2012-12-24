@@ -56,7 +56,7 @@ takes = [
                 'screened': True
             }
     ]
-for i in range(1200001, 1200101):
+for i in range(1200001, 1200011):
     d = {
             'course': Course.objects.get(name='主体思想'),
             'student': Student.objects.get(student_name=str(i))

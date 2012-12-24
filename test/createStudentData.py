@@ -114,7 +114,7 @@ students = [
         }
     }
 ]
-for i in range(1200001, 1200101):
+for i in range(1200001, 1200011):
     d ={
             "user": {
                 "username": str(i),
