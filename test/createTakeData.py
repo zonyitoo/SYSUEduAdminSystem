@@ -56,6 +56,12 @@ takes = [
                 'screened': True
             }
     ]
+for i in range(1200001, 1200101):
+    d = {
+            'course': Course.objects.get(name='主体思想'),
+            'student': Student.objects.get(student_name=str(i))
+            }
+    takes.append(d)
 
 Takes.objects.all().delete()
 for t in takes:

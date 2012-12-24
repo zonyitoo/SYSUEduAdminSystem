@@ -36,6 +36,15 @@ studentMetas = [
         'req_pubelective': 16,
         'req_procourse': 75,
         'req_proelective': 32,
+    },
+    {
+        'type_name': StudentMeta.UNGRADUATED,
+        'year': '2012',
+        'major': Class.objects.get(name='主体思想班'),
+        'req_pubcourse': 34,
+        'req_pubelective': 16,
+        'req_procourse': 75,
+        'req_proelective': 32,
     }
 ]
 
@@ -105,6 +114,19 @@ students = [
         }
     }
 ]
+for i in range(1200001, 1200101):
+    d ={
+            "user": {
+                "username": str(i),
+                "password": "123456",
+                },
+            "student": {
+                "student_name": str(i),
+                "student_meta": StudentMeta.objects.get(
+                    major=Class.objects.get(name='主体思想班'), year=2012)
+                }
+            }
+    students.append(d)
 
 studentGroup = Group.objects.get_or_create(name='student')
 if not studentGroup[1]:

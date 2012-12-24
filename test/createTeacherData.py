@@ -96,7 +96,32 @@ teachers = [
 		'department': Department.objects.get(name='BIO')
 		}
 	    },
+	{
+	    'user': {
+		'username': 'xjp',
+		'password': 'xjp',
+		},
+	    'teacher': {
+		'teacher_name': 'XJP',
+		'title': Teacher.TITLE[2][0],
+		'department': Department.objects.get(name='TEST')
+		}
+	    },
     ]
+
+for i in range(2000001, 2000101):
+    d = {
+            'user': {
+                'username': str(i),
+                'password': '123456',
+            },
+            'teacher': {
+                'teacher_name': str(i),
+                'title': Teacher.TITLE[i%3][0],
+                'department': Department.objects.get(name='CS')
+            }
+        }
+    teachers.append(d)
 
 teacherGroup = Group.objects.get_or_create(name='teacher')
 if not teacherGroup[1]:

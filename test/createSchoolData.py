@@ -25,11 +25,14 @@ schools = [
         'name': 'SS'
         },
     {
-	'name': 'LAW'
-	},
+	    'name': 'LAW'
+	    },
     {
-	'name': 'LIFESCI'
-	}
+	    'name': 'LIFESCI'
+	    },
+    {
+        'name': 'TEST'
+        }
 ]
 
 School.objects.all().delete()
@@ -47,17 +50,21 @@ departments = [
         'school': School.objects.get(name='SIST')
         },
     {
-	'name': 'SE',
-	'school': School.objects.get(name='SS')
-	},
+	    'name': 'SE',
+	    'school': School.objects.get(name='SS')
+	    },
     {
-	'name': 'LAW',
-	'school': School.objects.get(name='LAW')
-	},
+	    'name': 'TEST',
+	    'school': School.objects.get(name='TEST')
+	    },
     {
-	'name': 'BIO',
-	'school': School.objects.get(name='LIFESCI')
-	}
+	    'name': 'LAW',
+	    'school': School.objects.get(name='LAW')
+	    },
+    {
+	    'name': 'BIO',
+	    'school': School.objects.get(name='LIFESCI')
+	    }
 ]
 
 Department.objects.all().delete()
@@ -73,6 +80,10 @@ specialities = [
     {
         'name': 'CST',
         'department': Department.objects.get(name='CS')
+        },        
+    {
+        'name': 'TEST',
+        'department': Department.objects.get(name='TEST')
         }        
 ]
 
@@ -93,6 +104,10 @@ classes = [
     {
         'name': '计算机B班',
         'speciality': Speciality.objects.get(name='CST'),
+        },
+    {
+        'name': '主体思想班',
+        'speciality': Speciality.objects.get(name='TEST'),
         },
 ]
 

@@ -265,6 +265,30 @@ courses = [
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
+	{
+            'time': [
+                {
+                    'week': 1,
+                    'time': 'ABC',
+                    'location': '东B101'
+                    }
+                ],
+            'course': {
+                'name': '主体思想',
+                'academic_year': '2012-2013',
+                'semester': 1,
+                'from_week': 2,
+                'to_week': 18,
+                'teacher': Teacher.objects.get(teacher_name='XJP'),
+                'credit': 3,
+                'capacity': 9999,
+                'hastaken': 0,
+                'exam_method': '考察',
+                'course_type': Course.PUB_COURSE,
+                'department': Department.objects.get(name='TEST'),
+                'assessment_type': Course.ASSTYPE_THEORY,
+                }
+            },
     ]
 
 Course.objects.all().delete()
