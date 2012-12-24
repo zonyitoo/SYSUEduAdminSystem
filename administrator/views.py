@@ -233,6 +233,87 @@ def get_course_screen_state(request):
         'stage': stage.stage,
     }
 
+def toggle_GYMcourse_screen(course):
+    for c in course:
+        already_taken = Takes.objects.filter(course=c, screened=True)
+        already_taken_num = already_taken.count()
+        # first choice, rank == 10001
+        take = Takes.objects.filter(course=c, screened=False, rank=10001)
+        wait_for_screen = take.count()
+        avail_num_max = c.capacity - already_taken_num
+        screen_num = min(avail_num_max,wait_for_screen)
+        if screen_num>0 :
+            take = take.order_by('?')[:screen_num]
+            for t in take:
+                t.screened = True
+                t.save()
+                other_choice = Takes.objects.filter(student=t.student,
+                        course__course_type__exact='GymE',screened=False)
+                for n in other_choice:
+                    n.delete()
+        not_take = Takes.objects.filter(course=c,screened=False)
+        for n in not_take:
+            n.delete()
+
+    for c in course:
+        already_taken = Takes.objects.filter(course=c, screened=True)
+        already_taken_num = already_taken.count()
+        # second choice, rank == 10002
+        take = Takes.objects.filter(course=c, screened=False, rank=10002)
+        wait_for_screen = take.count()
+        avail_num_max = c.capacity - already_taken_num
+        screen_num = min(avail_num_max,wait_for_screen)
+        if screen_num>0 :
+            take = take.order_by('?')[:screen_num]
+            for t in take:
+                t.screened = True
+                t.save()
+                other_choice = Takes.objects.filter(student=t.student,
+                        course__course_type__exact='GymE',screened=False)
+                for n in other_choice:
+                    n.delete()
+        not_take = Takes.objects.filter(course=c,screened=False)
+        for n in not_take:
+            n.delete()
+
+    for c in course:
+        already_taken = Takes.objects.filter(course=c, screened=True)
+        already_taken_num = already_taken.count()
+        # 3rd choice, rank == 10003
+        take = Takes.objects.filter(course=c, screened=False, rank=10003)
+        wait_for_screen = take.count()
+        avail_num_max = c.capacity - already_taken_num
+        screen_num = min(avail_num_max,wait_for_screen)
+        if screen_num>0 :
+            take = take.order_by('?')[:screen_num]
+            for t in take:
+                t.screened = True
+                t.save()
+                other_choice = Takes.objects.filter(student=t.student,
+                        course__course_type__exact='GymE',screened=False)
+                for n in other_choice:
+                    n.delete()
+        not_take = Takes.objects.filter(course=c,screened=False)
+        for n in not_take:
+            n.delete()
+
+    for c in course:
+        already_taken = Takes.objects.filter(course=c, screened=True)
+        already_taken_num = already_taken.count()
+        # 4th choice, rank == 10004
+        take = Takes.objects.filter(course=c, screened=False, rank=10004)
+        wait_for_screen = take.count()
+        avail_num_max = c.capacity - already_taken_num
+        screen_num = min(avail_num_max,wait_for_screen)
+        if screen_num>0 :
+            take = take.order_by('?')[:screen_num]
+            for t in take:
+                t.screened = True
+                t.save()
+        not_take = Takes.objects.filter(course=c,screened=False)
+        for n in not_take:
+            n.delete()
+
 @ajax(login_required=True, require_POST=True)
 def toggle_course_screen(request):
     c_type = COURSE_TYPE[int(request.POST['course_type'])]
@@ -241,28 +322,31 @@ def toggle_course_screen(request):
     return_val = s.stage
     if s.stage == 1 or s.stage == 2 :
         course = Course.objects.filter(course_type=cc_type,screened=False)
-        for c in course:
-            already_taken = Takes.objects.filter(course=c,screened=True)
-            already_taken_num = already_taken.count()
+        if c_type == 'GYM_ELECTIVE':
+            toggle_GYMcourse_screen(course)
+        else:
+            for c in course:
+                already_taken = Takes.objects.filter(course=c,screened=True)
+                already_taken_num = already_taken.count()
 
-            take = Takes.objects.filter(course=c,screened=False)
-            wait_for_screen = take.count()
+                take = Takes.objects.filter(course=c,screened=False)
+                wait_for_screen = take.count()
 
-            avail_num_max = c.capacity - already_taken_num
-            screen_num = min(avail_num_max,wait_for_screen)
-            if screen_num>0 :
-                take = take.order_by('?')[:screen_num]
-                for t in take:
-                    t.screened = True
-                    t.save()
+                avail_num_max = c.capacity - already_taken_num
+                screen_num = min(avail_num_max,wait_for_screen)
+                if screen_num>0 :
+                    take = take.order_by('?')[:screen_num]
+                    for t in take:
+                        t.screened = True
+                        t.save()
             
-            not_take = Takes.objects.filter(course=c,screened=False)
-            for n in not_take:
-                n.delete()
+                not_take = Takes.objects.filter(course=c,screened=False)
+                for n in not_take:
+                    n.delete()
 
 
-            c.hastaken = already_taken_num + screen_num
-            c.save()
+                c.hastaken = already_taken_num + screen_num
+                c.save()
 
         s.stage+=1
         s.save()

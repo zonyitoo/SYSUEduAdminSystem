@@ -64,7 +64,7 @@ def course_capacity_detect(course,stage):
         return 43
     return 20
 
-def select_course(student, course):
+def select_course(student, course, rank):
     try:
         c_type = C_TYPE[course.course_type]
         st = GlobalData.objects.get(name=c_type)
@@ -81,7 +81,7 @@ def select_course(student, course):
             return {'valid': False,
                     'err': num}
 	
-        take = Takes.objects.create(course=course, student=student)
+        take = Takes.objects.create(course=course, student=student, rank=rank)
 
         if stage == 3:
             take.screened = True
@@ -117,14 +117,17 @@ def toggle_course(request):
         return HttpResponseForbidden('未开放选课')
 
     student = Student.objects.get(user=request.user)
+    rank = 0
     try:
         course = Course.objects.get(id=int(request.POST['course_id']))
+        if course.course_type == 'GymE':
+            rank = request.POST['rank']
     except Course.DoesNotExist:
         return HttpResponseForbidden('该课程不存在')
 
 
     if request.POST['state'] == '1':
-        return select_course(student, course)
+        return select_course(student, course, rank)
     elif request.POST['state'] == '0':
         return withdrawal_course(student, course)
     else:
