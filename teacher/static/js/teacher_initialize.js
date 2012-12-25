@@ -62,7 +62,7 @@ $(document).ready(function() {
         }
     });
     $.ajax({
-        url: '/administrator/getSelectCourseState/',
+        url: '/administrator/getUploadScoreState/',
         type: 'get',
         async: false,
         error: function(jqXHR,textStatus,errorThrown)
