@@ -68,7 +68,10 @@ def get_student_sheet(request, filename):
 
 @ajax(login_required=True, require_POST=True)
 def upload_student_sheet(request):
-    fileobj = request.FILES['file']
+    try:
+        fileobj = request.FILES['file']
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
     try:
         wb = xlrd.open_workbook(file_contents=fileobj.read())
         for sheet in wb.sheets():
@@ -150,7 +153,10 @@ def get_teacher_sheet(request, filename):
 
 @ajax(login_required=True, require_POST=True)
 def upload_teacher_sheet(request):
-    fileobj = request.FILES['file']
+    try:
+        fileobj = request.FILES['file']
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
 
     try:
         wb = xlrd.open_workbook(file_contents=fileobj.read())

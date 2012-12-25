@@ -9,7 +9,6 @@ from teacher.models import Teacher
 from take.models import Takes
 from student.models import Student
 from django.contrib.auth.models import Group, Permission
-from teacher.forms import ScoreUploadForm
 import time, xlwt, xlrd
 
 @ajax(login_required=True, require_GET=True)
@@ -135,15 +134,13 @@ def upload_score_sheet(request):
     if not perm in usergrp.permissions.all():
         return HttpResponseForbidden('Closed')
 
-    form = ScoreUploadForm(request.POST, request.FILES)
-    if not form.is_valid():
-        return HttpResponseBadRequest('File not valid')
-    #raise Exception(request)
-
-    fileobj = request.FILES['file']
-    wb = xlrd.open_workbook(file_contents=fileobj.read())
+    try:
+        fileobj = request.FILES['file']
+    except:
+        return HttpResponseBadRequest('Invalid Arguments')
 
     try:
+        wb = xlrd.open_workbook(file_contents=fileobj.read())
         sheet = wb.sheet_by_name('scores')
         course_id = int(sheet.cell_value(0, 1))
         for ri in range(2, sheet.nrows):
