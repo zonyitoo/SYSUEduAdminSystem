@@ -14,6 +14,7 @@ class Teacher(models.Model):
             (TITLE_PROFESSOR, u'教授'), 
         )
     titleToUnicode = {t:u for t, u in TITLE}
+    UNICODE_TO_TITLE = {u:t for t, u in TITLE}
     title = models.CharField(max_length=2, choices=TITLE)
     img_addr = models.URLField(null=True, blank=True)
     site = models.URLField(null=True, blank=True)
@@ -25,7 +26,7 @@ class Teacher(models.Model):
 
     def get_title_unicode(self):
         return self.titleToUnicode[self.title]
-    
+
     def getDataDict(self):
         return {
             'teacher_name': self.teacher_name,

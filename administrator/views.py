@@ -147,12 +147,14 @@ def get_teacher_sheet(request, filename):
         sheet = workbook.add_sheet(depart.name)
         sheet.write(0, 0, u'登录名')
         sheet.write(0, 1, u'姓名')
-        sheet.write(0, 2, u'身份证号')
-        sheet.write(0, 3, u'学系')
+        sheet.write(0, 2, u'职称')
+        sheet.write(0, 3, u'身份证号')
+        sheet.write(0, 4, u'学系')
         sheet.write(1, 0, u'jqg')
         sheet.write(1, 1, u'纪老师')
-        sheet.write(1, 2, u'4007820000000000')
-        sheet.write(1, 3, u'计算机科学系')
+        sheet.write(1, 2, u'副教授')
+        sheet.write(1, 3, u'4007820000000000')
+        sheet.write(1, 4, u'计算机科学系')
 
     response = HttpResponse(mimetype='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachments'
@@ -170,22 +172,27 @@ def upload_teacher_sheet(request):
     try:
         wb = xlrd.open_workbook(file_contents=fileobj.read())
         for sheet in wb.sheets():
-            for rid in range(1, sheet.nrow):
+            for rid in range(1, sheet.nrows):
                 row = sheet.row_values(rid)
-                depart = Department.objects.get(name=row[3])
+                depart = Department.objects.get(name=row[4])
                 try:
                     user = User.objects.get(username=row[0])
-                    user.set_password(row[2][-6:])
+                    user.set_password(row[3][-6:])
                 except:
                     user = User.objects.create_user(username=row[0], 
-                            password=row[2][-6:])
+                            password=row[3][-6:])
+
+                user.save()
 
                 Teacher.objects.get_or_create(teacher_name=row[1], 
-                        department=depart)[0].save()
+                        department=depart, user=user, 
+                        title=Teacher.UNICODE_TO_TITLE[row[2]])[0].save()
 
-    except xlrd.XLRDError:
+    except xlrd.XLRDError, e:
+        print e
         return HttpResponseBadRequest('xls file error')
-    except:
+    except Exception, e:
+        print e
         return HttpResponseBadRequest('error occur')
 
     return {'valid': True}
