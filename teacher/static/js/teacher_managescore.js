@@ -92,15 +92,17 @@ function fileSelected()
     $("#property").empty();
     $("#property").append("文件名称：" + file.name + "<br>文件大小：" + file_size + "<br>文件类型：" + file.type);
     $("#progressbar").css("width","0");
-    $("#progressbar").removeClass("progress-success");
     $("#progressbar").text("");
+    $("#progress").removeClass("progress-success");
+    $("#progress").removeClass("progress-danger");
 }
 
 function uploadFile()
 {
     $("#progressbar").css("width","0");
-    $("#progressbar").removeClass("progress-success");
     $("#progressbar").text("");
+    $("#progress").removeClass("progress-success");
+    $("#progress").removeClass("progress-danger");
     var data = new FormData();
     data.append("file",document.getElementById("file").files[0]);
     var filename = ($("#file").val()).split(".");
@@ -137,14 +139,21 @@ function uploadProgress(evt)
 
 function uploadComplete(evt) {
     var msg = eval("(" + evt.target.responseText + ")");
-    var valid = msg.valid;
-    if (valid == false)
+    var valid = msg.status;
+    if (valid == "error")
     {
+        $("#progressbar").text("上传失败");
+        $("#progress").addClass("progress-danger");
+        $("#score-msg").removeClass("hide");
+        $("#score-msg").empty();
+        $("#score-msg").append("<h3>注意事项</h3><div style='margin-left:5%'><ul><li>请不要对表格模板中的格式进行任何修改</li><li>请不要对表格模板中的内容进行任何省略或缩写</li><li>请确保填写完表格模板中的所有条目</li><li>请确保每个单元格中的内容类型正确（如数值、文字等）</li></ul></div>");
     }
     else
     {
         manageScore();
+        $("#progressbar").text("上传成功");
         $("#progress").addClass("progress-success");
+        $("#score-msg").addClass("hide");
     }
 }
  

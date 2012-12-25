@@ -30,3 +30,19 @@ input.file {
 #property{
     margin-bottom:22px;
 }
+
+#path-student{
+    vertical-align: middle;
+}
+
+#property-student{
+    margin-bottom:22px;
+}
+
+#path-teacher{
+    vertical-align: middle;
+}
+
+#property-teacher{
+    margin-bottom:22px;
+}

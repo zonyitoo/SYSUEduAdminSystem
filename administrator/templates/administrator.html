@@ -17,7 +17,7 @@
       <div class="control-group">
           <label for="file-student">请务必按照模板格式填写学生信息</label>
               <div class="controls fileinputs">
-                  <input class="hide" type="file" name="file" id="file-student" onchange="studentSheetSelected();"/>
+                  <input class="hide" type="file" name="file-student" id="file-student" onchange="studentSheetSelected();"/>
                   <button id="browse-student" class="browse btn btn-primary">浏览</button>
                   <span id="path-student">文件路径</span>
               </div>
@@ -31,6 +31,7 @@
       <div class="progress progress-striped active" id="progress-student">
           <div class="bar" id="progressbar-student" data-percentage="100"></div>
       </div>
+      <div class="hide alert alert-danger" id="student-msg"></div>
   </div>
   <div class="modal-footer"></div>
 </div>
@@ -44,7 +45,7 @@
       <div class="control-group">
           <label for="file-teacher">请务必按照模板格式填写教师信息</label>
               <div class="controls fileinputs">
-                  <input class="hide" type="file" name="file" id="file-teacher" onchange="teacherSheetSelected();"/>
+                  <input class="hide" type="file" name="file-teacher" id="file-teacher" onchange="teacherSheetSelected();"/>
                   <button id="browse-teacher" class="browse btn btn-primary">浏览</button>
                   <span id="path-teacher">文件路径</span>
               </div>
@@ -58,6 +59,7 @@
       <div class="progress progress-striped active" id="progress-teacher">
           <div class="bar" id="progressbar-teacher" data-percentage="100"></div>
       </div>
+      <div class="hide alert alert-danger" id="teacher-msg"></div>
   </div>
   <div class="modal-footer"></div>
 </div>

@@ -81,29 +81,42 @@ function teacherSheetSelected()
     $("#property-teacher").empty();
     $("#property-teacher").append("文件名称：" + file.name + "<br>文件大小：" + file_size + "<br>文件类型：" + file.type);
     $("#progressbar-teacher").css("width","0");
-    $("#progressbar-teacher").removeClass("progress-success");
     $("#progressbar-teacher").text("");
+    $("#progress-teacher").removeClass("progress-success");
+    $("#progress-teacher").removeClass("progress-danger");
 }
 
-function uploadStudent()
+function uploadTeacher()
 {
     $("#progressbar-teacher").css("width","0");
-    $("#progressbar-teacher").removeClass("progress-success");
     $("#progressbar-teacher").text("");
+    $("#progress-teacher").removeClass("progress-success");
+    $("#progress-teacher").removeClass("progress-danger");
+    var file = document.getElementById("file-teacher").files[0];
     var data = new FormData();
-    data.append("file",document.getElementById("file-teacher").files[0]);
-    var xhr = new XMLHttpRequest();
-    xhr.upload.addEventListener("progress",uploadProgress,false);
-    xhr.addEventListener("load",uploadComplete,false);
-    xhr.addEventListener("error",uploadFailed,false);
-    xhr.addEventListener("abort",uploadCanceled,false);
-    xhr.open("POST","/administrator/uploadTeacherSheet/");
-    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-    xhr.send(data);
+    data.append("file-teacher",file);
+    var filename = (file.name).split(".");
+    if (filename[filename.length - 1] == "xls")
+    {
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress",uploadTeacherProgress,false);
+        xhr.addEventListener("load",uploadTeacherComplete,false);
+        xhr.addEventListener("error",uploadTeacherFailed,false);
+        xhr.addEventListener("abort",uploadTeacherCanceled,false);
+        xhr.open("POST","/administrator/uploadTeacherSheet/");
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        xhr.send(data);
+    }
+    else
+    {
+        $("#teacher-msg").removeClass("hide");
+        $("#teacher-msg").empty();
+        $("#teacher-msg").append("文件格式必须为*.xls");
+    }
     return false;
 }
 
-function uploadProgress(evt)
+function uploadTeacherProgress(evt)
 {
     var bar = $("#progressbar-teacher");
     if (evt.lengthComputable){
@@ -114,24 +127,31 @@ function uploadProgress(evt)
     }
 }
 
-function uploadComplete(evt) {
+function uploadTeacherComplete(evt) {
     var msg = eval("(" + evt.target.responseText + ")");
-    var valid = msg.valid;
-    if (valid == false)
+    var valid = msg.status;
+    if (valid == "error")
     {
+        $("#progressbar-teacher").text("上传失败");
+        $("#progress-teacher").addClass("progress-danger");
+        $("#teacher-msg").removeClass("hide");
+        $("#teacher-msg").empty();
+        $("#teacher-msg").append("<h3>注意事项</h3><div style='margin-left:5%'><ul><li>请不要对表格模板中的格式进行任何修改</li><li>请不要对表格模板中的内容进行任何省略或缩写</li><li>请确保填写完表格模板中的所有条目</li><li>请确保每个单元格中的内容类型正确（如数值、文字等）</li></ul></div>");
     }
     else
     {
         manageTeacherPost();
+        $("#progressbar-teacher").text("上传成功");
         $("#progress-teacher").addClass("progress-success");
+        $("#teacher-msg").addClass("hide");
     }
 }
  
-function uploadFailed(evt) {
+function uploadTeacherFailed(evt) {
     alert("There was an error attempting to upload the file.");
 }
 
-function uploadCanceled(evt) {
+function uploadTeacherCanceled(evt) {
     alert("The upload has been canceled by the user or the browser dropped the connection.");
 }
 
