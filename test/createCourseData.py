@@ -39,7 +39,7 @@ courses = [
                 'hastaken': 1,
                 'exam_method': '考查',
                 'course_type': Course.PRO_ELECTIVE,
-                'department': Department.objects.get(name='CS'),
+                'department': Department.objects.get(name='计算机科学系'),
                 'class_oriented': Class.objects.get(name='计算机B班'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
@@ -63,7 +63,7 @@ courses = [
                 'capacity': 9999,
                 'exam_method': '考查',
                 'course_type': Course.PRO_ELECTIVE,
-                'department': Department.objects.get(name='CS'),
+                'department': Department.objects.get(name='计算机科学系'),
                 'class_oriented': Class.objects.get(name='计算机A班'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
@@ -82,12 +82,12 @@ courses = [
                 'semester': 1,
                 'from_week': 1,
                 'to_week': 20,
-                'teacher': Teacher.objects.get(teacher_name='杨毅'),
+                'teacher': Teacher.objects.get(teacher_name='衣杨'),
                 'credit': 3,
                 'capacity': 9999,
                 'exam_method': '考查',
                 'course_type': Course.PRO_ELECTIVE,
-                'department': Department.objects.get(name='CS'),
+                'department': Department.objects.get(name='计算机科学系'),
                 'class_oriented': Class.objects.get(name='计算机B班'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
@@ -113,7 +113,7 @@ courses = [
                 'hastaken': 1,
                 'exam_method': '笔试',
                 'course_type': Course.PRO_COURSE,
-                'department': Department.objects.get(name='CS'),
+                'department': Department.objects.get(name='计算机科学系'),
                 'class_oriented': Class.objects.get(name='计算机B班'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
@@ -138,7 +138,7 @@ courses = [
                 'hastaken': 1,
                 'exam_method': '笔试',
                 'course_type': Course.PUB_COURSE,
-                'department': Department.objects.get(name='CS'),
+                'department': Department.objects.get(name='计算机科学系'),
                 'class_oriented': Class.objects.get(name='计算机A班'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
@@ -163,7 +163,7 @@ courses = [
                 'hastaken': 0,
                 'exam_method': '笔试',
                 'course_type': Course.PUB_ELECTIVE,
-                'department': Department.objects.get(name='CS'),
+                'department': Department.objects.get(name='计算机科学系'),
                 'class_oriented': Class.objects.get(name='计算机A班'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
@@ -188,7 +188,7 @@ courses = [
                 'hastaken': 0,
                 'exam_method': '笔试',
                 'course_type': Course.PUB_ELECTIVE,
-                'department': Department.objects.get(name='CS'),
+                'department': Department.objects.get(name='计算机科学系'),
                 'class_oriented': Class.objects.get(name='计算机B班'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
@@ -213,7 +213,7 @@ courses = [
                 'hastaken': 0,
                 'exam_method': '考察',
                 'course_type': Course.PUB_ELECTIVE,
-                'department': Department.objects.get(name='LAW'),
+                'department': Department.objects.get(name='法学'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
@@ -237,7 +237,7 @@ courses = [
                 'hastaken': 0,
                 'exam_method': '考察',
                 'course_type': Course.PUB_ELECTIVE,
-                'department': Department.objects.get(name='BIO'),
+                'department': Department.objects.get(name='生物科学与技术系'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
@@ -261,7 +261,7 @@ courses = [
                 'hastaken': 0,
                 'exam_method': '考察',
                 'course_type': Course.PUB_ELECTIVE,
-                'department': Department.objects.get(name='LAW'),
+                'department': Department.objects.get(name='法学'),
                 'assessment_type': Course.ASSTYPE_THEORY,
                 }
             },
@@ -279,7 +279,7 @@ courses = [
                 'semester': 1,
                 'from_week': 2,
                 'to_week': 18,
-                'teacher': Teacher.objects.get(teacher_name='XJP'),
+                'teacher': Teacher.objects.get(teacher_name='谨平'),
                 'credit': 3,
                 'capacity': 9999,
                 'hastaken': 0,

@@ -155,7 +155,7 @@ def get_teacher_sheet(request, filename):
         sheet.write(1, 0, u'jls')
         sheet.write(1, 1, u'纪老师')
         sheet.write(1, 2, u'副教授')
-        sheet.write(1, 3, u'4007820000000000')
+        sheet.write(1, 3, u'4407820000000000')
         sheet.write(1, 4, u'计算机科学系')
 
     response = HttpResponse(mimetype='application/vnd.ms-excel')

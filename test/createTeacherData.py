@@ -27,7 +27,7 @@ teachers = [
             'teacher': {
                 'teacher_name': '激情哥',
                 'title': Teacher.TITLE[1][0],
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='计算机科学系')
                 }
             },
         {
@@ -36,9 +36,9 @@ teachers = [
                 'password': 'yy',
                 },
             'teacher': {
-                'teacher_name': '杨毅',
+                'teacher_name': '衣杨',
                 'title': Teacher.TITLE[1][0],
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='计算机科学系')
                 }
             },
         {
@@ -49,7 +49,7 @@ teachers = [
             'teacher': {
                 'teacher_name': '丘道长',
                 'title': Teacher.TITLE[2][0],
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='计算机科学系')
                 }
             },
         {
@@ -60,7 +60,7 @@ teachers = [
             'teacher': {
                 'teacher_name': 'Naive Bayes',
                 'title': Teacher.TITLE[2][0],
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='计算机科学系')
                 }
             },
 	{
@@ -71,7 +71,7 @@ teachers = [
 	    'teacher': {
 		'teacher_name': '李文军',
 		'title': Teacher.TITLE[2][0],
-		'department': Department.objects.get(name='SE')
+		'department': Department.objects.get(name='软件工程')
 		}
 	    },
 	{
@@ -82,7 +82,7 @@ teachers = [
 	    'teacher': {
 		'teacher_name': '丁利',
 		'title': Teacher.TITLE[2][0],
-		'department': Department.objects.get(name='LAW')
+		'department': Department.objects.get(name='法学')
 		}
 	    },
 	{
@@ -93,7 +93,7 @@ teachers = [
 	    'teacher': {
 		'teacher_name': '贺熊雷',
 		'title': Teacher.TITLE[2][0],
-		'department': Department.objects.get(name='BIO')
+		'department': Department.objects.get(name='生物科学与技术系')
 		}
 	    },
 	{
@@ -102,7 +102,7 @@ teachers = [
 		'password': 'xjp',
 		},
 	    'teacher': {
-		'teacher_name': 'XJP',
+		'teacher_name': '谨平',
 		'title': Teacher.TITLE[2][0],
 		'department': Department.objects.get(name='TEST')
 		}
@@ -118,7 +118,7 @@ for i in range(2000001, 2000011):
             'teacher': {
                 'teacher_name': str(i),
                 'title': Teacher.TITLE[i%3][0],
-                'department': Department.objects.get(name='CS')
+                'department': Department.objects.get(name='计算机科学系')
             }
         }
     teachers.append(d)

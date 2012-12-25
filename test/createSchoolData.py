@@ -19,16 +19,16 @@ from school.models import School, Department, Speciality, Class
 
 schools = [
     {
-        'name': 'SIST'
+        'name': '信息科学与技术学院'
         },
     {
-        'name': 'SS'
+        'name': '软件学院'
         },
     {
-	    'name': 'LAW'
+	    'name': '法学院'
 	    },
     {
-	    'name': 'LIFESCI'
+	    'name': '生命科学学院'
 	    },
     {
         'name': 'TEST'
@@ -46,24 +46,24 @@ for s in schools:
 
 departments = [
     {
-        'name': 'CS',
-        'school': School.objects.get(name='SIST')
+        'name': '计算机科学系',
+        'school': School.objects.get(name='信息科学与技术学院')
         },
     {
-	    'name': 'SE',
-	    'school': School.objects.get(name='SS')
+	    'name': '软件工程',
+	    'school': School.objects.get(name='软件学院')
 	    },
     {
 	    'name': 'TEST',
 	    'school': School.objects.get(name='TEST')
 	    },
     {
-	    'name': 'LAW',
-	    'school': School.objects.get(name='LAW')
+	    'name': '法学',
+	    'school': School.objects.get(name='法学院')
 	    },
     {
-	    'name': 'BIO',
-	    'school': School.objects.get(name='LIFESCI')
+	    'name': '生物科学与技术系',
+	    'school': School.objects.get(name='生命科学学院')
 	    }
 ]
 
@@ -78,8 +78,8 @@ for d in departments:
 
 specialities = [
     {
-        'name': 'CST',
-        'department': Department.objects.get(name='CS')
+        'name': '计算机科学与技术',
+        'department': Department.objects.get(name='计算机科学系')
         },        
     {
         'name': 'TEST',
@@ -99,11 +99,11 @@ for s in specialities:
 classes = [
     {
         'name': '计算机A班',
-        'speciality': Speciality.objects.get(name='CST'),
+        'speciality': Speciality.objects.get(name='计算机科学与技术'),
         },
     {
         'name': '计算机B班',
-        'speciality': Speciality.objects.get(name='CST'),
+        'speciality': Speciality.objects.get(name='计算机科学与技术'),
         },
     {
         'name': '主体思想班',
