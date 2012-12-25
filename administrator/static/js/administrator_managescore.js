@@ -15,7 +15,7 @@ function sendStartScoreRequest()
     $.ajax({
         url: '/administrator/openUploadScore/',
         type: 'post',
-        async: 'false',
+        async: false,
         error: function(jqXHR,textStatus,errorThrown)
         {
             switch(jqXHR.status)
@@ -53,7 +53,7 @@ function sendCloseScoreRequest()
     $.ajax({
         url: '/administrator/closeUploadScore/',
         type: 'post',
-        async: 'false',
+        async: false,
         error: function(jqXHR,textStatus,errorThrown)
         {
             switch(jqXHR.status)
@@ -91,7 +91,7 @@ function getScoreState()
     $.ajax({
         url: '/administrator/getUploadScoreState/',
         type: 'get',
-        async: 'false',
+        async: false,
         error: function(jqXHR,textStatus,errorThrown)
         {
             switch(jqXHR.status)

@@ -38,7 +38,7 @@ function sendStartRequest()
     $.ajax({
         url: '/administrator/openSelectCourse/',
         type: 'post',
-        async: 'false',
+        async: false,
         error: function(jqXHR,textStatus,errorThrown)
         {
             switch(jqXHR.status)
@@ -76,7 +76,7 @@ function sendCloseRequest()
     $.ajax({
         url: '/administrator/closeSelectCourse/',
         type: 'post',
-        async: 'false',
+        async: false,
         error: function(jqXHR,textStatus,errorThrown)
         {
             switch(jqXHR.status)
@@ -114,7 +114,7 @@ function getCourseState()
     $.ajax({
         url: '/administrator/getSelectCourseState/',
         type: 'get',
-        async: 'false',
+        async: false,
         error: function(jqXHR,textStatus,errorThrown)
         {
             switch(jqXHR.status)
@@ -174,7 +174,7 @@ function getScreenState()
         url: '/administrator/getScreenState/',
         data: 'course_type=' + select_type,
         type: 'get',
-        async: 'false',
+        async: false,
         error: function(jqXHR,textStatus,errorThrown)
         {
             switch(jqXHR.status)

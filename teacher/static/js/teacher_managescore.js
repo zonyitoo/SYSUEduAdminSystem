@@ -71,6 +71,8 @@ function manageScore(){
                 }
                 $("#student-result").append("<div class='msg-area'></div>");
             }
+            if ($(".current-state").text() == "false")
+                $("#upload-score-btn").attr("disabled",true);
         }
     });
     $("[rel = 'popover']").popover();

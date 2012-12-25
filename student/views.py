@@ -81,7 +81,20 @@ def select_course(student, course, rank):
             return {'valid': False,
                     'err': num}
 	
-        take = Takes.objects.create(course=course, student=student, rank=rank)
+        if course.course_type == Course.GYM_ELECTIVE:
+            try:
+                take = Takes.objects.get(student=student, 
+                        course__course_type__exact=Course.GYM_ELECTIVE, 
+                        screened=False, 
+                        rank=rank)
+                return {
+                    'valid': False,
+                    'err': 47
+                }
+            except Takes.DoesNotExist:
+                take = Takes.objects.create(course=course, student=student, rank=rank)
+        else:
+            take = Takes.objects.create(course=course, student=student)
 
         if stage == 3:
             take.screened = True
@@ -120,8 +133,10 @@ def toggle_course(request):
     rank = 0
     try:
         course = Course.objects.get(id=int(request.POST['course_id']))
-        if course.course_type == 'GymE':
-            rank = request.POST['rank']
+        try:
+            rank = int(request.POST['rank'])
+        except:
+            rank = 0
     except Course.DoesNotExist:
         return HttpResponseForbidden('该课程不存在')
 

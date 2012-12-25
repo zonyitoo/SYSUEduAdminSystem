@@ -64,7 +64,7 @@ $(document).ready(function() {
     $.ajax({
         url: '/administrator/getSelectCourseState/',
         type: 'get',
-        async: 'false',
+        async: false,
         error: function(jqXHR,textStatus,errorThrown)
         {
             switch(jqXHR.status)
@@ -93,8 +93,6 @@ $(document).ready(function() {
         success: function(msg,textStatus,jqXHR)
         {
             $(".current-state").text(msg.state);
-            if (msg.state == false)
-                $("#upload-score-btn").attr("disabled",true);
         }
     });
 });

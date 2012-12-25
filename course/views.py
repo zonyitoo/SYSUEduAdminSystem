@@ -75,8 +75,12 @@ def get_available_list(request):
                     #else: courseObj['take'] = 2
                 else:
                     courseObj['take'] = 3
+
+                if request.GET['course_type'] == '4':
+                    courseObj['rank'] = t.rank
             except:
                 courseObj['take'] = 0 # The Student has not take this course
+                courseObj['rank'] = 0
             
             courseArr.append(courseObj)
 
