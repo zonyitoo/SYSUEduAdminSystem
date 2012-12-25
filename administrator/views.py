@@ -127,9 +127,11 @@ def upload_student_sheet(request):
                             student_meta=meta)
                     stud.save()
 
-    except xlrd.XLRDError:
+    except xlrd.XLRDError, e:
+        print "Administrator upload_student_sheet", e
         return HttpResponseBadRequest('xls file error')
-    except:
+    except Exception, e:
+        print "Administrator upload_student_sheet", e
         return HttpResponseBadRequest('Error occur')
 
     return {
@@ -189,10 +191,10 @@ def upload_teacher_sheet(request):
                         title=Teacher.UNICODE_TO_TITLE[row[2]])[0].save()
 
     except xlrd.XLRDError, e:
-        print e
+        print 'Administrator upload_teacher_sheet', e
         return HttpResponseBadRequest('xls file error')
     except Exception, e:
-        print e
+        print 'Administrator upload_teacher_sheet', e
         return HttpResponseBadRequest('error occur')
 
     return {'valid': True}
