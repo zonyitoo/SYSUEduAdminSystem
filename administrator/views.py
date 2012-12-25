@@ -7,7 +7,7 @@ from take.models import Takes
 from course.models import Course
 from student.models import Student, StudentMeta
 from teacher.models import Teacher
-from school.models import Department, Speciality
+from school.models import Department, Speciality, Class
 from django.contrib.auth.models import User, Group, Permission
 from ajaxutils.decorators import ajax
 import time, xlwt, xlrd
@@ -55,10 +55,12 @@ def get_student_sheet(request, filename):
         sheet.write(1, 1, u'姓名')
         sheet.write(1, 2, u'身份证号')
         sheet.write(1, 3, u'专业')
+        sheet.write(1, 4, u'班级')
         sheet.write(2, 0, u'10383001')
         sheet.write(2, 1, u'张三')
         sheet.write(2, 2, u'4007820000000000')
         sheet.write(2, 3, u'计算机科学与技术')
+        sheet.write(2, 4, u'A')
 
     response = HttpResponse(mimetype='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachments'
@@ -91,6 +93,13 @@ def upload_student_sheet(request):
                         )
                 if spec[1]:
                     spec[0].save()
+
+                cla = Class.objects.get_or_create(
+                            name=row[4],
+                            speciality=spec[0]
+                        )
+                if cla[1]:
+                    cla[0].save()
                     
                 try:
                     user = User.objects.get(username=row[0])
@@ -106,7 +115,7 @@ def upload_student_sheet(request):
                             req_pubelective=req_pubelective,
                             req_procourse=req_procourse,
                             req_proelective=req_proelective,
-                            major=spec[0]
+                            major=cla[0]
                         )[0]
                 try:
                     stud = Student.objects.get(student_name=row[1], user=user)
