@@ -389,6 +389,9 @@ function sendPERequest(n,course_id,state,rank)
                     case 46:
                         msg_area.append("<div class='alert alert-error'><strong>预选阶段最多只能选择4门体育课！</strong></div>");
                         break;
+                    case 47:
+                        msg_area.append("<div class='alert alert-error'><strong>不能选择2门相同志愿的体育课！</strong></div>");
+                        break;
                     default:
                         msg_area.append("<div class='alert alert-error'><strong>对［" + name + "］操作失败！</strong></div>");
                 }

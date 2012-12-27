@@ -140,8 +140,9 @@ def toggle_course(request):
     except Course.DoesNotExist:
         return HttpResponseForbidden('该课程不存在')
 
-
+    
     if request.POST['state'] == '1':
+        rank = rank + 10000
         return select_course(student, course, rank)
     elif request.POST['state'] == '0':
         return withdrawal_course(student, course)

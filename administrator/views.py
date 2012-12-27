@@ -270,19 +270,19 @@ def toggle_GYMcourse_screen(course):
             take = take.order_by('?')[:screen_num]
             for t in take:
                 t.screened = True
+                t.rank = 0
                 t.save()
                 other_choice = Takes.objects.filter(student=t.student,
                         course__course_type__exact='GymE',screened=False)
                 for n in other_choice:
                     n.delete()
-        not_take = Takes.objects.filter(course=c,screened=False)
+        not_take = Takes.objects.filter(course=c,screened=False,rank=10001)
         for n in not_take:
             n.delete()
         c.hastaken = already_taken_num + screen_num
         c.save()
 
     for c in course:
-        print 'ok!-rank = 2'
         already_taken = Takes.objects.filter(course=c, screened=True)
         already_taken_num = already_taken.count()
         # second choice, rank == 10002
@@ -294,13 +294,13 @@ def toggle_GYMcourse_screen(course):
             take = take.order_by('?')[:screen_num]
             for t in take:
                 t.screened = True
-                print 'one guy'
+                t.rank = 0
                 t.save()
                 other_choice = Takes.objects.filter(student=t.student,
                         course__course_type__exact='GymE',screened=False)
                 for n in other_choice:
                     n.delete()
-        not_take = Takes.objects.filter(course=c,screened=False)
+        not_take = Takes.objects.filter(course=c,screened=False,rank=10002)
         for n in not_take:
             n.delete()
         c.hastaken = already_taken_num + screen_num
@@ -318,12 +318,13 @@ def toggle_GYMcourse_screen(course):
             take = take.order_by('?')[:screen_num]
             for t in take:
                 t.screened = True
+                t.rank = 0
                 t.save()
                 other_choice = Takes.objects.filter(student=t.student,
                         course__course_type__exact='GymE',screened=False)
                 for n in other_choice:
                     n.delete()
-        not_take = Takes.objects.filter(course=c,screened=False)
+        not_take = Takes.objects.filter(course=c,screened=False,rank=10003)
         for n in not_take:
             n.delete()
         c.hastaken = already_taken_num + screen_num
@@ -341,8 +342,9 @@ def toggle_GYMcourse_screen(course):
             take = take.order_by('?')[:screen_num]
             for t in take:
                 t.screened = True
+                t.rank = 0
                 t.save()
-        not_take = Takes.objects.filter(course=c,screened=False)
+        not_take = Takes.objects.filter(course=c,screened=False,rank=10004)
         for n in not_take:
             n.delete()
         c.hastaken = already_taken_num + screen_num
