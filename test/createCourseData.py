@@ -274,7 +274,7 @@ courses = [
                     }
                 ],
             'course': {
-                'name': '主体思想',
+                'name': '科学发展观',
                 'academic_year': '2012-2013',
                 'semester': 1,
                 'from_week': 2,
@@ -298,14 +298,14 @@ courses = [
                     }
                 ],
             'course': {
-                'name': '体育-篮球',
+                'name': '体育-篮球-TEST',
                 'academic_year': '2012-2013',
                 'semester': 1,
                 'from_week': 2,
                 'to_week': 16,
                 'teacher': Teacher.objects.get(teacher_name='2000001'),
                 'credit': 2,
-                'capacity': 35,
+                'capacity': 1,
                 'hastaken': 0,
                 'exam_method': '考察',
                 'course_type': Course.GYM_ELECTIVE,
@@ -322,14 +322,14 @@ courses = [
                     }
                 ],
             'course': {
-                'name': '体育-游泳',
+                'name': '体育-游泳-TEST',
                 'academic_year': '2012-2013',
                 'semester': 1,
                 'from_week': 2,
                 'to_week': 16,
                 'teacher': Teacher.objects.get(teacher_name='2000002'),
                 'credit': 2,
-                'capacity': 35,
+                'capacity': 1,
                 'hastaken': 0,
                 'exam_method': '考察',
                 'course_type': Course.GYM_ELECTIVE,
@@ -346,14 +346,14 @@ courses = [
                     }
                 ],
             'course': {
-                'name': '体育-网球',
+                'name': '体育-网球-TEST',
                 'academic_year': '2012-2013',
                 'semester': 1,
                 'from_week': 2,
                 'to_week': 16,
                 'teacher': Teacher.objects.get(teacher_name='2000003'),
                 'credit': 2,
-                'capacity': 35,
+                'capacity': 1,
                 'hastaken': 0,
                 'exam_method': '考察',
                 'course_type': Course.GYM_ELECTIVE,
@@ -370,14 +370,14 @@ courses = [
                     }
                 ],
             'course': {
-                'name': '体育-足球',
+                'name': '体育-足球-TEST',
                 'academic_year': '2012-2013',
                 'semester': 1,
                 'from_week': 2,
                 'to_week': 16,
                 'teacher': Teacher.objects.get(teacher_name='2000004'),
                 'credit': 2,
-                'capacity': 35,
+                'capacity': 1,
                 'hastaken': 0,
                 'exam_method': '考察',
                 'course_type': Course.GYM_ELECTIVE,
@@ -394,14 +394,14 @@ courses = [
                     }
                 ],
             'course': {
-                'name': '体育-羽毛球',
+                'name': '体育-羽毛球-TEST',
                 'academic_year': '2012-2013',
                 'semester': 1,
                 'from_week': 2,
                 'to_week': 16,
                 'teacher': Teacher.objects.get(teacher_name='2000005'),
                 'credit': 2,
-                'capacity': 35,
+                'capacity': 1,
                 'hastaken': 0,
                 'exam_method': '考察',
                 'course_type': Course.GYM_ELECTIVE,

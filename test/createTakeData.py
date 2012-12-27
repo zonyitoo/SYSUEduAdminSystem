@@ -36,6 +36,102 @@ takes = [
                 'student': Student.objects.get(student_name='崔成浩')
             },
             {
+                'course': Course.objects.get(name='体育-篮球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200001'),
+                'rank': 10001
+            },
+            {
+                'course': Course.objects.get(name='体育-羽毛球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200001'),
+                'rank': 10002
+            },
+            {
+                'course': Course.objects.get(name='体育-网球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200001'),
+                'rank': 10003
+            },
+            {
+                'course': Course.objects.get(name='体育-足球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200001'),
+                'rank': 10004
+            },
+            {
+                'course': Course.objects.get(name='体育-篮球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200002'),
+                'rank': 10002
+            },
+            {
+                'course': Course.objects.get(name='体育-羽毛球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200002'),
+                'rank': 10001
+            },
+            {
+                'course': Course.objects.get(name='体育-网球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200002'),
+                'rank': 10003
+            },
+            {
+                'course': Course.objects.get(name='体育-足球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200002'),
+                'rank': 10004
+            },
+            {
+                'course': Course.objects.get(name='体育-篮球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200003'),
+                'rank': 10001
+            },
+            {
+                'course': Course.objects.get(name='体育-羽毛球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200003'),
+                'rank': 10002
+            },
+            {
+                'course': Course.objects.get(name='体育-网球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200003'),
+                'rank': 10004
+            },
+            {
+                'course': Course.objects.get(name='体育-足球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200003'),
+                'rank': 10003
+            },
+            {
+                'course': Course.objects.get(name='体育-篮球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200004'),
+                'rank': 10002
+            },
+            {
+                'course': Course.objects.get(name='体育-羽毛球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200004'),
+                'rank': 10003
+            },
+            {
+                'course': Course.objects.get(name='体育-网球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200004'),
+                'rank': 10001
+            },
+            {
+                'course': Course.objects.get(name='体育-足球-TEST',
+                    academic_year='2012-2013'),
+                'student': Student.objects.get(student_name='1200004'),
+                'rank': 10004
+            },
+            {
                 'course': Course.objects.get(name='数学分析II'),
                 'student': Student.objects.get(student_name='钟宇腾'),
                 'usual_score': 80.0,
@@ -58,7 +154,7 @@ takes = [
     ]
 for i in range(1200001, 1200011):
     d = {
-            'course': Course.objects.get(name='主体思想'),
+            'course': Course.objects.get(name='科学发展观'),
             'student': Student.objects.get(student_name=str(i))
             }
     takes.append(d)

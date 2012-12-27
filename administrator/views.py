@@ -282,6 +282,7 @@ def toggle_GYMcourse_screen(course):
         c.save()
 
     for c in course:
+        print 'ok!-rank = 2'
         already_taken = Takes.objects.filter(course=c, screened=True)
         already_taken_num = already_taken.count()
         # second choice, rank == 10002
@@ -293,6 +294,7 @@ def toggle_GYMcourse_screen(course):
             take = take.order_by('?')[:screen_num]
             for t in take:
                 t.screened = True
+                print 'one guy'
                 t.save()
                 other_choice = Takes.objects.filter(student=t.student,
                         course__course_type__exact='GymE',screened=False)
