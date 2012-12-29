@@ -17,12 +17,24 @@ function validate()
     {
         var username = $("#username").val();
         var passwd = $("#passwd").val();
-        for (var i = 0;i < username.length;i++)
-          if (username[i] < '0' || username[i] > '9' && username[i] < 'A' || username[i] > 'Z' && username[i] < 'a' || username[i] > 'z')
-          {
-              alert("用户名非法！");
-              return false;
-          }
+        if (!(/\w/.test(username)))
+        {
+            $("#prompt").hide();
+            $("#alert").hide();
+            $("#alert").text("用户名非法！");
+            $("#alert").fadeIn();
+            $("#username")[0].focus();
+            return false;
+        }
+        if (!(/[a-zA-Z_!0-9]{6,}/.test(passwd)))
+        {
+            $("#prompt").hide();
+            $("#alert").hide();
+            $("#alert").text("密码非法！");
+            $("#alert").fadeIn();
+            $("#passwd")[0].focus();
+            return false;
+        }
         $.ajax({
             url: '/user/login/',
             data: 'username=' + username + '&passwd=' + passwd,
