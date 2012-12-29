@@ -64,7 +64,7 @@ students = [
         "password": "123456"
     },
     "student": {
-        "student_name": "ABC",
+        "student_name": "丁振帅",
         "student_meta": StudentMeta.objects.get(
             major=Class.objects.get(name='计算机A班'), year=2010)
         }
@@ -75,7 +75,7 @@ students = [
         "password": "123456",
         },
     "student": {
-        "student_name": "BCD",
+        "student_name": "马少杰",
         "student_meta": StudentMeta.objects.get(
             major=Class.objects.get(name='计算机A班'), year=2010)
         }
@@ -86,7 +86,7 @@ students = [
         "password": "123456",
         },
     "student": {
-        "student_name": "崔成浩",
+        "student_name": "马大帅",
         "student_meta": StudentMeta.objects.get(
             major=Class.objects.get(name='计算机A班'), year=2010)
         }
@@ -97,7 +97,7 @@ students = [
         "password": "123456",
         },
     "student": {
-        "student_name": "金正恩",
+        "student_name": "安正金",
         "student_meta": StudentMeta.objects.get(
             major=Class.objects.get(name='计算机B班'), year=2010)
         }

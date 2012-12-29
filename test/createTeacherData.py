@@ -25,7 +25,7 @@ teachers = [
                 'password': 'jqg',
                 },
             'teacher': {
-                'teacher_name': '激情哥',
+                'teacher_name': '纪庆革',
                 'title': Teacher.TITLE[1][0],
                 'department': Department.objects.get(name='计算机科学系')
                 }
@@ -47,7 +47,7 @@ teachers = [
                 'password': 'qdw',
                 },
             'teacher': {
-                'teacher_name': '丘道长',
+                'teacher_name': '邱道文',
                 'title': Teacher.TITLE[2][0],
                 'department': Department.objects.get(name='计算机科学系')
                 }
@@ -58,7 +58,7 @@ teachers = [
                 'password': 'naive',
                 },
             'teacher': {
-                'teacher_name': 'Naive Bayes',
+                'teacher_name': '贝叶斯',
                 'title': Teacher.TITLE[2][0],
                 'department': Department.objects.get(name='计算机科学系')
                 }
@@ -98,11 +98,11 @@ teachers = [
 	    },
 	{
 	    'user': {
-		'username': 'xjp',
-		'password': 'xjp',
+		'username': 'mks',
+		'password': 'mks',
 		},
 	    'teacher': {
-		'teacher_name': '谨平',
+		'teacher_name': '马克思',
 		'title': Teacher.TITLE[2][0],
 		'department': Department.objects.get(name='TEST')
 		}

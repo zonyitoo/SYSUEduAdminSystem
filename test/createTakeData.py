@@ -23,7 +23,7 @@ takes = [
             {
                 'course': Course.objects.get(name='计算机图形学',
                     academic_year='2012-2013'),
-                'student': Student.objects.get(student_name='ABC')
+                'student': Student.objects.get(student_name='丁振帅')
             },
             {
                 'course': Course.objects.get(name='计算机图形学',
@@ -33,7 +33,7 @@ takes = [
             {
                 'course': Course.objects.get(name='Test_Capacity1',
                     academic_year='2012-2013'),
-                'student': Student.objects.get(student_name='崔成浩')
+                'student': Student.objects.get(student_name='马大帅')
             },
             {
                 'course': Course.objects.get(name='体育-篮球-TEST',
@@ -143,7 +143,7 @@ takes = [
             },
             {
                 'course': Course.objects.get(name='数学分析II'),
-                'student': Student.objects.get(student_name='ABC'),
+                'student': Student.objects.get(student_name='丁振帅'),
                 'usual_score': 90.0,
                 'final_score': 95.0,
                 'score': 95.0 * 0.7 + 90.0 * 0.3,
