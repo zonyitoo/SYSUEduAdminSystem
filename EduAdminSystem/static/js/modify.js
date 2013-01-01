@@ -5,29 +5,37 @@ function check()
     var oldpasswd = $("#oldpasswd").val();
     var newpasswd = $("#newpasswd").val();
     var confirmpasswd = $("#confirmpasswd").val();
-    if (newpasswd != confirmpasswd)
+    if (!(/[a-zA-Z_!0-9]{6,}/.test(oldpasswd)))
+    {
+        $("#success").hide();
+        $("#error").hide();
+        $("#error-content").text("密码非法！");
+        $("#error").fadeIn();
+        $("#oldpasswd").focus();
+    }
+    else if (!(/[a-zA-Z_!0-9]{6,}/.test(newpasswd)))
+    {
+        $("#success").hide();
+        $("#error").hide();
+        $("#error-content").text("密码非法！");
+        $("#error").fadeIn();
+        $("#newpasswd").focus();
+    }
+    else if (!(/[a-zA-Z_!0-9]{6,}/.test(confirmpasswd)))
+    {
+        $("#success").hide();
+        $("#error").hide();
+        $("#error-content").text("密码非法！");
+        $("#error").fadeIn();
+        $("#confirmpasswd").focus();
+    }
+    else if (newpasswd != confirmpasswd)
     {
         $("#success").hide();
         $("#error").hide();
         $("#error-content").text("确认密码必须与新密码相同！");
         $("#error").fadeIn();
         $("#confirmpasswd").focus();
-    }
-    else if (oldpasswd == "")
-    {
-        $("#success").hide();
-        $("#error").hide()
-        $("#error-content").text("旧密码错误！");
-        $("#error").fadeIn();
-        $("#oldpasswd").focus();
-    }
-    else if (newpasswd.length < 6)
-    {
-        $("#success").hide();
-        $("#error").hide();
-        $("#error-content").text("密码不得少于6位！");
-        $("#error").fadeIn();
-        $("#newpasswd").focus();
     }
     else
     {
