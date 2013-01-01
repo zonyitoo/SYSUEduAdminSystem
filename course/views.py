@@ -28,7 +28,7 @@ def get_available_list(request):
     t = time.localtime(time.time())
     year = t.tm_year
     month = t.tm_mon
-    if month >= 9 or month <= 1:
+    if month >= 9 and month <= 12:
         year = str(year) + '-' + str(year + 1)
     else:
         year = str(year - 1) + '-' + str(year)
