@@ -58,7 +58,7 @@ sudo pip install psycopg2 dj-database-url
 Create tables and generate testing data.
 
 ```bash
-python manage.py syncdb && ./createTestData.py
+python manage.py syncdb && ./test/run.py
 ```
 
 Delete database
